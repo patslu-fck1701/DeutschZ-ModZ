@@ -1,0 +1,19 @@
+{
+  "Locations": [
+    {
+      "Enabled": 1,
+      "Name": "Vybor Airfield",
+      "Center": [4514.432129, 339.373108, 10285.067383],
+      "Position": [4514.432129, 339.373108, 10285.067383],
+      "Radius": 35.0,
+      "FlagPosition": [4514.432129, 339.373108, 10285.067383],
+      "FlagOrientation": [143.979202, 0.0, 0.0],
+      "ChestPosition": [4517.643555, 339.332092, 10288.263672],
+      "ChestOrientation": [-30.634066, 0.0, 0.0],
+      "TerminalPosition": [4517.643555, 339.332092, 10288.263672],
+      "BossSpawnPosition": [4527.5, 0.0, 10272.5],
+      "RewardCratePosition": [4517.643555, 339.332092, 10288.263672],
+      "RewardCrateOrientation": [-30.634066, 0.0, 0.0]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "RewardCrateLoot": [
+    {
+      "ClassName": "M4A1",
+      "Chance": 100.0,
+      "Min": 1,
+      "Max": 1
+    },
+    {
+      "ClassName": "Mag_STANAG_30Rnd",
+      "Chance": 100.0,
+      "Min": 3,
+      "Max": 3
+    },
+    {
+      "ClassName": "Ammo_556x45",
+      "Chance": 100.0,
+      "Min": 2,
+      "Max": 2
+    }
+  ],
+  "BossCorpseLoot": [
+    {
+      "ClassName": "DZKOTH_BattlegroundZ_Keycard",
+      "Chance": 100.0,
+      "Min": 1,
+      "Max": 1
+    }
+  ]
+}

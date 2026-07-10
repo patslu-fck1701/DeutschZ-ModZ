@@ -1,0 +1,6 @@
+FrameWidgetClass root
+{
+	position 0 0
+	size 1 1
+	visible 1
+}

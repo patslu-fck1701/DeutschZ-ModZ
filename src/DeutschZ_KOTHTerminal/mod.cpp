@@ -1,0 +1,10 @@
+name = "DeutschZ KOTH Terminal";
+picture = "";
+logo = "";
+logoSmall = "";
+logoOver = "";
+tooltip = "DeutschZ KOTH Terminal";
+overview = "PreStart terminal gate for FoXyKOTH.";
+action = "";
+author = "DeutschZ";
+version = "1.0.0";

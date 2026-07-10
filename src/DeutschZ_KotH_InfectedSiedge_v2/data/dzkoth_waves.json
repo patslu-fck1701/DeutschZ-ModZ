@@ -1,0 +1,44 @@
+{
+  "WaveOne": {
+    "TriggerProgress": 0.0,
+    "InfectedCountMin": 5,
+    "InfectedCountMax": 5,
+    "HealthMultiplier": 1.0,
+    "DamageMultiplier": 1.0,
+    "VisualEyes": "",
+    "DisableRunning": false,
+    "Types": [
+      "ZmbM_SoldierNormal_Base",
+      "ZmbM_PatrolNormal_Autumn",
+      "ZmbM_PatrolNormal_Flat"
+    ]
+  },
+  "WaveTwo": {
+    "TriggerProgress": 33.0,
+    "InfectedCountMin": 3,
+    "InfectedCountMax": 3,
+    "HealthMultiplier": 2.0,
+    "DamageMultiplier": 2.0,
+    "VisualEyes": "",
+    "DisableRunning": false,
+    "Types": [
+      "ZmbM_SoldierNormal_Base",
+      "ZmbM_PatrolNormal_Autumn",
+      "ZmbM_PatrolNormal_Flat"
+    ]
+  },
+  "WaveThree": {
+    "TriggerProgress": 66.0,
+    "InfectedCountMin": 3,
+    "InfectedCountMax": 3,
+    "HealthMultiplier": 5.0,
+    "DamageMultiplier": 5.0,
+    "VisualEyes": "Red",
+    "DisableRunning": true,
+    "Types": [
+      "ZmbM_SoldierNormal_Base",
+      "ZmbM_PatrolNormal_Autumn",
+      "ZmbM_PatrolNormal_Flat"
+    ]
+  }
+}

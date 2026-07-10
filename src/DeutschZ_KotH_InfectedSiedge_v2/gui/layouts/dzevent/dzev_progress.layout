@@ -1,0 +1,77 @@
+FrameWidgetClass DZEV_ProgressRoot {
+ visible 0
+ position 0 48
+ size 420 84
+ halign center_ref
+ valign top_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ priority 9500
+ {
+  PanelWidgetClass DZEV_Background {
+   color 0 0 0 0.55
+   position 0 0
+   size 420 84
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style rover_sim_colorable
+  }
+  TextWidgetClass DZEV_Title {
+   position 18 10
+   size 384 26
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "DeutschZ K.o.t.H"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 20
+   "text halign" center
+   "text valign" center
+   color 1 1 1 1
+  }
+  ProgressBarWidgetClass DZEV_ProgressBar {
+   position 24 43
+   size 372 12
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+    style Quantity
+   current 0
+   vertical 0
+   flipped 0
+  }
+  TextWidgetClass DZEV_Value {
+   position 18 58
+   size 384 20
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text ""
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 16
+   "text halign" center
+   "text valign" center
+   color 1 1 1 1
+  }
+  PanelWidgetClass DZEV_RedFlash {
+   visible 0
+   color 1 0 0 0.38
+   position -400 -80
+   size 1220 680
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style rover_sim_colorable
+  }
+ }
+}

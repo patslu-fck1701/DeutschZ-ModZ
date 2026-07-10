@@ -1,0 +1,939 @@
+FrameWidgetClass main_menu_root {
+ visible 1
+ ignorepointer 1
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 0
+ vexactsize 0
+ priority 951
+ {
+  ImageWidgetClass dz_background {
+   visible 0
+   ignorepointer 1
+   color 1 1 1 1
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/background/00_background_main.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  PanelWidgetClass dz_darkener {
+   ignorepointer 1
+   color 0 0 0 0.12
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   style blank
+  }
+  ImageWidgetClass dz_left_panel {
+   ignorepointer 1
+   position 64 70
+   size 560 860
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/panels/panel_side_darkglass_green_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass dz_logo {
+   ignorepointer 1
+   position 142 92
+   size 400 400
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/logos/Logo_Dark.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass dz_emblem {
+   ignorepointer 1
+   position 80 84
+   size 86 86
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/logos/Emblem.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass dz_tagline_text {
+   ignorepointer 1
+   position 108 430
+   size 470 34
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "DeutschZ"
+   font "gui/fonts/sdf_MetronLight30"
+   "text halign" center
+   "text valign" center
+   color 0.86 0.92 0.82 1
+  }
+  TextWidgetClass dz_status_text {
+   ignorepointer 1
+   position 126 468
+   size 430 28
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "Direct Connect"
+   font "gui/fonts/sdf_MetronLight24"
+   "text halign" center
+   "text valign" center
+   color 0.65 0.95 0.20 1
+  }
+  ButtonWidgetClass play {
+   position 132 524
+   size 420 108
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass play_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/buttons/13_button_play_now_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  ButtonWidgetClass choose_server {
+   position 142 640
+   size 400 70
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass choose_server_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/buttons/button_wide_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass choose_server_label {
+     ignorepointer 1
+     position 0 11
+     size 1 40
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "SERVER SUCHEN"
+     font "gui/fonts/sdf_MetronLight24"
+     "text halign" center
+     "text valign" center
+     color 0.85 1 0.58 1
+    }
+   }
+  }
+  ButtonWidgetClass customize_character {
+   position 142 716
+   size 400 70
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass customize_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/buttons/button_wide_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass customize_label {
+     ignorepointer 1
+     position 0 11
+     size 1 40
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "CHARAKTER"
+     font "gui/fonts/sdf_MetronLight24"
+     "text halign" center
+     "text valign" center
+     color 0.85 1 0.58 1
+    }
+   }
+  }
+  ButtonWidgetClass custom_button1 {
+   position 142 792
+   size 196 74
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass vote_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/buttons/button_secondary_normal_ca.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass vote_label {
+     ignorepointer 1
+     position 0 16
+     size 1 32
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 1
+     text "VOTE"
+     font "gui/fonts/sdf_MetronLight24"
+     "text halign" center
+     "text valign" center
+     color 0.85 1 0.58 1
+    }
+   }
+  }
+  ButtonWidgetClass settings_button {
+   position 356 792
+   size 84 74
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass settings_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_settings_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  ButtonWidgetClass exit_button {
+   position 458 792
+   size 84 74
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass exit_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_power_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  ButtonWidgetClass custom_button2 {
+   position 96 905
+   size 220 92
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass discord_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/bottom_buttons/21_button_discord_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  ButtonWidgetClass message_button {
+   position 332 905
+   size 230 92
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass website_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/bottom_buttons/22_button_website_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  ImageWidgetClass dz_center_frame {
+   visible 0
+   ignorepointer 1
+   position 672 178
+   size 560 620
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/center/09_frame_main_center.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass dz_ground_ring {
+   ignorepointer 1
+   position 716 728
+   size 470 96
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/center/09_player_ground_ring.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  FrameWidgetClass character_rotation_frame {
+   visible 1
+   ignorepointer 0
+   position 650 95
+   size 620 760
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  ButtonWidgetClass prev_character {
+   position 680 824
+   size 86 86
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass prev_img {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/arrows/19_arrow_left_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  ButtonWidgetClass next_character {
+   position 1148 824
+   size 86 86
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+   "no focus" 0
+   {
+    ImageWidgetClass next_img {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic/gui/menu_assets/arrows/20_arrow_right_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
+  }
+  TextWidgetClass character_name_text {
+   ignorepointer 1
+   position 770 838
+   size 360 44
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "Survivor"
+   font "gui/fonts/sdf_MetronLight30"
+   "text halign" center
+   "text valign" center
+   color 0.9 0.93 0.86 1
+  }
+  ImageWidgetClass dz_news_panel {
+   ignorepointer 1
+   position 1300 104
+   size 520 230
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/panels/panel_main_large_darkglass_green_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass dz_news_title {
+   ignorepointer 1
+   position 1348 130
+   size 424 30
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "SERVER INFO"
+   font "gui/fonts/sdf_MetronLight24"
+   "text halign" center
+   "text valign" center
+   color 0.85 1 0.58 1
+  }
+  MultilineTextWidgetClass dz_news_body {
+   ignorepointer 1
+   position 1344 174
+   size 432 132
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text ""
+   font "gui/fonts/MetronLight16"
+   "text halign" left
+   "text valign" top
+   color 0.86 0.90 0.82 1
+  }
+  ImageWidgetClass dz_stats_panel {
+   ignorepointer 1
+   position 1300 360
+   size 520 330
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/panels/11_panel_statistics_frame.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  FrameWidgetClass character_stats_root {
+   visible 1
+   ignorepointer 1
+   position 1344 408
+   size 432 224
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    TextWidgetClass stats_title {
+     ignorepointer 1
+     position 0 0
+     size 432 34
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     text "STATISTIKEN"
+     font "gui/fonts/sdf_MetronLight30"
+     "text halign" center
+     "text valign" center
+     color 0.85 1 0.58 1
+    }
+    PanelWidgetClass TimeSurvived {
+     ignorepointer 1
+     position 0 46
+     size 432 28
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style blank
+     {
+      TextWidgetClass TimeSurvivedLabel {
+       ignorepointer 1
+       position 0 0
+       size 240 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Am Leben"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" left
+       "text valign" center
+       color 0.82 0.86 0.78 1
+      }
+      TextWidgetClass TimeSurvivedValue {
+       ignorepointer 1
+       position 248 0
+       size 184 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "0"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" right
+       "text valign" center
+       color 0.9 0.95 0.88 1
+      }
+     }
+    }
+    PanelWidgetClass PlayersKilled {
+     ignorepointer 1
+     position 0 82
+     size 432 28
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style blank
+     {
+      TextWidgetClass PlayersKilledLabel {
+       ignorepointer 1
+       position 0 0
+       size 240 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Spieler Kills"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" left
+       "text valign" center
+       color 0.82 0.86 0.78 1
+      }
+      TextWidgetClass PlayersKilledValue {
+       ignorepointer 1
+       position 248 0
+       size 184 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "0"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" right
+       "text valign" center
+       color 0.9 0.95 0.88 1
+      }
+     }
+    }
+    PanelWidgetClass InfectedKilled {
+     ignorepointer 1
+     position 0 118
+     size 432 28
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style blank
+     {
+      TextWidgetClass InfectedKilledLabel {
+       ignorepointer 1
+       position 0 0
+       size 240 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Infizierte Kills"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" left
+       "text valign" center
+       color 0.82 0.86 0.78 1
+      }
+      TextWidgetClass InfectedKilledValue {
+       ignorepointer 1
+       position 248 0
+       size 184 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "0"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" right
+       "text valign" center
+       color 0.9 0.95 0.88 1
+      }
+     }
+    }
+    PanelWidgetClass DistanceTraveled {
+     ignorepointer 1
+     position 0 154
+     size 432 28
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style blank
+     {
+      TextWidgetClass DistanceTraveledLabel {
+       ignorepointer 1
+       position 0 0
+       size 240 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Reisedistanz"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" left
+       "text valign" center
+       color 0.82 0.86 0.78 1
+      }
+      TextWidgetClass DistanceTraveledValue {
+       ignorepointer 1
+       position 248 0
+       size 184 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "0 m"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" right
+       "text valign" center
+       color 0.9 0.95 0.88 1
+      }
+     }
+    }
+    PanelWidgetClass LongRangeShot {
+     ignorepointer 1
+     position 0 190
+     size 432 28
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style blank
+     {
+      TextWidgetClass LongRangeShotLabel {
+       ignorepointer 1
+       position 0 0
+       size 240 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Weitester Treffer"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" left
+       "text valign" center
+       color 0.82 0.86 0.78 1
+      }
+      TextWidgetClass LongRangeShotValue {
+       ignorepointer 1
+       position 248 0
+       size 184 28
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "0 m"
+       font "gui/fonts/sdf_MetronLight24"
+       "text halign" right
+       "text valign" center
+       color 0.9 0.95 0.88 1
+      }
+     }
+    }
+   }
+  }
+  ImageWidgetClass dz_events_panel {
+   ignorepointer 1
+   position 1300 714
+   size 520 206
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/panels/panel_main_large_darkglass_green_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass dz_events_title {
+   ignorepointer 1
+   position 1348 736
+   size 424 32
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "EVENTS"
+   font "gui/fonts/sdf_MetronLight30"
+   "text halign" center
+   "text valign" center
+   color 0.85 1 0.58 1
+  }
+  ImageWidgetClass dz_event_koth {
+   ignorepointer 1
+   position 1332 784
+   size 88 128
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/cards/14_card_kothz.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass dz_event_convoy {
+   ignorepointer 1
+   position 1432 784
+   size 88 128
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/cards/15_card_convoyz.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass dz_event_groundzero {
+   ignorepointer 1
+   position 1532 784
+   size 88 128
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/cards/17_card_groundzero.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass dz_event_operation {
+   ignorepointer 1
+   position 1632 784
+   size 88 128
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/cards/18_card_operationdeutschz.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass dz_online_badge {
+   ignorepointer 1
+   position 1328 936
+   size 210 76
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/badges/04_badge_online.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass version {
+   ignorepointer 1
+   position 70 1016
+   size 620 28
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "DeutschZ"
+   font "gui/fonts/sdf_MetronLight24"
+   "text halign" left
+   "text valign" center
+   color 0.65 0.68 0.62 1
+  }
+  TextWidgetClass ModdedWarning {
+   visible 0
+   ignorepointer 1
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 0
+   vexactsize 0
+   text ""
+  }
+  ButtonWidgetClass feedback_button {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+  }
+  ButtonWidgetClass play_video {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+  }
+  ButtonWidgetClass tutorials {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+  }
+  ButtonWidgetClass tutorial_button {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Empty
+  }
+  FrameWidgetClass dlc_Frame {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  FrameWidgetClass carousel_Frame {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  FrameWidgetClass ModsSimple {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  FrameWidgetClass ModsDetailed {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  FrameWidgetClass last_server_info {
+   visible 0
+   position 0 0
+   size 1 1
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   {
+    TextWidgetClass last_server_info_name { text "" }
+    TextWidgetClass last_server_info_ip { text "" }
+    TextWidgetClass last_server_info_port { text "" }
+    TextWidgetClass last_server_info_label { text "" }
+   }
+  }
+ }
+}

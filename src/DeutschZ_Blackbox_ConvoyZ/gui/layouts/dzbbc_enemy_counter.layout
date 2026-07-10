@@ -1,0 +1,61 @@
+FrameWidgetClass DZBBC_EnemyCounterRoot
+{
+	name "DZBBC_EnemyCounterRoot"
+	position 0 132
+	size 500 76
+	halign center_ref
+	valign top_ref
+	hexactpos 1
+	vexactpos 1
+	hexactsize 1
+	vexactsize 1
+	visible 0
+	priority 9500
+	{
+		PanelWidgetClass DZBBC_EnemyCounterBackground
+		{
+			ignorepointer 1
+			color 0.02 0.02 0.02 0.9
+			position 0 0
+			size 500 76
+			halign center_ref
+			valign center_ref
+			hexactpos 1
+			vexactpos 1
+			hexactsize 1
+			vexactsize 1
+			{
+				TextWidgetClass DZBBC_EnemyCounterText
+				{
+					ignorepointer 1
+					position 18 8
+					size 464 30
+					hexactpos 1
+					vexactpos 1
+					hexactsize 1
+					vexactsize 1
+					text "Verbleibende AI: 0"
+					font "gui/fonts/sdf_MetronBook24"
+					color 1 1 1 1
+					"text halign" center
+					"text valign" center
+				}
+				ProgressBarWidgetClass DZBBC_EnemyCounterBar
+				{
+					ignorepointer 1
+					position 18 46
+					size 464 18
+					hexactpos 1
+					vexactpos 1
+					hexactsize 1
+					vexactsize 1
+					style Quantity
+					min 0
+					max 100
+					current 100
+					color 0.95 0.64 0.16 1
+				}
+			}
+		}
+	}
+}

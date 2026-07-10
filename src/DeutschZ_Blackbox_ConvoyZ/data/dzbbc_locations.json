@@ -1,0 +1,58 @@
+{
+    "CrashSites": [
+        {
+            "Name": "Airfield Convoy Test",
+            "Position": [4520.0, 0.0, 10280.0],
+            "BlackboxPosition": [4528.0, 0.0, 10272.0],
+            "ContainerPosition": [4545.0, 0.0, 10292.0],
+            "Radius": 95.0,
+            "WreckObjects": [],
+            "EffectObjects": [],
+            "SceneObjects": [
+                {"ClassName": "Wreck_Mi8_Crashed", "Offset": [0.0, 0.0, 0.0], "Orientation": [315.0, 0.0, 0.0], "AlignToGround": true, "Required": true},
+                {"ClassName": "StaticObj_Wreck_Decal_Big", "Offset": [0.0, 0.0, 0.0], "Orientation": [315.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_Ural_DE", "Offset": [-18.0, 0.0, 8.0], "Orientation": [268.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_Uaz_DE", "Offset": [-4.0, 0.0, 24.0], "Orientation": [288.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_HMMWV_DE", "Offset": [20.0, 1.65, 15.0], "Orientation": [55.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_T72_Chassis", "Offset": [31.0, 2.05, -9.0], "Orientation": [25.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_Trailer_Flat", "Offset": [-28.0, 0.0, -14.0], "Orientation": [258.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_Decal_Small1", "Offset": [10.0, 0.0, -13.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_Decal_Small2", "Offset": [-12.0, 0.0, 18.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_T72_Chassis", "Offset": [7.0, 2.05, 9.0], "Orientation": [12.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_BMP1_DE", "Offset": [-10.0, 0.0, -11.0], "Orientation": [165.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "M18SmokeGrenade_White", "Offset": [5.0, 0.0, 5.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "M18SmokeGrenade_White", "Offset": [-9.0, 0.0, -4.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "M18SmokeGrenade_White", "Offset": [17.0, 0.0, 2.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "Roadflare", "Offset": [-6.0, 0.0, 16.0], "Orientation": [80.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "Roadflare", "Offset": [14.0, 0.0, -3.0], "Orientation": [140.0, 0.0, 0.0], "AlignToGround": true, "Required": false}
+            ]
+        },
+        {
+            "Name": "VMC Convoy Test",
+            "Position": [4490.0, 0.0, 8280.0],
+            "BlackboxPosition": [4500.0, 0.0, 8272.0],
+            "ContainerPosition": [4518.0, 0.0, 8292.0],
+            "Radius": 95.0,
+            "WreckObjects": [],
+            "EffectObjects": [],
+            "SceneObjects": [
+                {"ClassName": "Wreck_UH1Y", "Offset": [0.0, 0.0, 0.0], "Orientation": [42.0, 0.0, 0.0], "AlignToGround": true, "Required": true},
+                {"ClassName": "StaticObj_Wreck_Decal_Big", "Offset": [0.0, 0.0, 0.0], "Orientation": [42.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_Ural", "Offset": [-20.0, 0.0, -7.0], "Orientation": [82.0, 0.0, 0.0], "AlignToGround": true, "Required": true},
+                {"ClassName": "Land_Wreck_Uaz", "Offset": [-8.0, 0.0, -20.0], "Orientation": [118.0, 0.0, 0.0], "AlignToGround": true, "Required": true},
+                {"ClassName": "StaticObj_Wreck_HMMWV", "Offset": [18.0, 1.65, -14.0], "Orientation": [240.0, 0.0, 0.0], "AlignToGround": true, "Required": true},
+                {"ClassName": "StaticObj_Wreck_Trailer_Flat", "Offset": [-30.0, 0.0, 8.0], "Orientation": [74.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_BRDM", "Offset": [30.0, 1.15, 13.0], "Orientation": [285.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_Decal_Small1", "Offset": [12.0, 0.0, 5.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_Decal_Small2", "Offset": [-14.0, 0.0, 15.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_T72_Chassis", "Offset": [8.0, 2.05, 10.0], "Orientation": [25.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "StaticObj_Wreck_BMP1", "Offset": [-12.0, 1.35, 9.0], "Orientation": [170.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "M18SmokeGrenade_White", "Offset": [6.0, 0.0, 4.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "M18SmokeGrenade_White", "Offset": [-7.0, 0.0, 7.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "M18SmokeGrenade_White", "Offset": [15.0, 0.0, -6.0], "Orientation": [0.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "Roadflare", "Offset": [-4.0, 0.0, 14.0], "Orientation": [35.0, 0.0, 0.0], "AlignToGround": true, "Required": false},
+                {"ClassName": "Roadflare", "Offset": [14.0, 0.0, -2.0], "Orientation": [125.0, 0.0, 0.0], "AlignToGround": true, "Required": false}
+            ]
+        }
+    ]
+}
