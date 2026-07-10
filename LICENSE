@@ -1,0 +1,32 @@
+DeutschZ ModZ Proprietary License
+Copyright (c) 2026 Patrick Sluzalek / DeutschZ
+All rights reserved.
+
+The source code, scripts, original artwork, models, textures, audio, documentation,
+and other original material contained in this repository may not be copied,
+redistributed, republished, sold, sublicensed, uploaded to the Steam Workshop,
+repacked, reverse engineered for redistribution, or used in another server or mod
+without prior written permission from the copyright holder.
+
+Permission is granted to authorized DeutschZ contributors to view, modify, build,
+and test the material solely for development, operation, maintenance, and release
+of the DeutschZ DayZ server and its official mods.
+
+No permission is granted to use the DeutschZ name, logo, branding, mod names, or
+release packages outside the official DeutschZ project.
+
+Third-party libraries, APIs, examples, assets, and dependencies remain subject to
+their own licenses and terms. Their inclusion or mention does not transfer any
+rights to DeutschZ. Material from third-party DayZ Workshop mods must not be
+committed unless its license explicitly permits that use and the required notices
+are retained.
+
+THE MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE
+MATERIAL OR ITS USE.
+
+DayZ and Bohemia Interactive are trademarks of their respective owners. This is
+an independent community project and is not endorsed by or affiliated with
+Bohemia Interactive.

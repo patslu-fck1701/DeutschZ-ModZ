@@ -1,0 +1,40 @@
+class CfgPatches
+{
+    class DeutschZ_Example
+    {
+        units[] = {};
+        weapons[] = {};
+        requiredVersion = 0.1;
+        requiredAddons[] = {"DZ_Data"};
+    };
+};
+
+class CfgMods
+{
+    class DeutschZ_Example
+    {
+        dir = "DeutschZ_Example";
+        name = "DeutschZ Example";
+        type = "mod";
+        dependencies[] = {"Game", "World", "Mission"};
+
+        class defs
+        {
+            class gameScriptModule
+            {
+                value = "";
+                files[] = {"DeutschZ/Example/scripts/3_Game"};
+            };
+            class worldScriptModule
+            {
+                value = "";
+                files[] = {"DeutschZ/Example/scripts/4_World"};
+            };
+            class missionScriptModule
+            {
+                value = "";
+                files[] = {"DeutschZ/Example/scripts/5_Mission"};
+            };
+        };
+    };
+};

@@ -1,0 +1,46 @@
+name: Mod-Fehler
+description: Reproduzierbaren Fehler in einer DeutschZ-Mod melden
+title: "[BUG] "
+labels: [bug]
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Bereich
+      options:
+        - KotHZ
+        - ConvoyZ
+        - Screen_Menu
+        - KillReward
+        - EventItems
+        - Shared/Build
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Beobachtetes Verhalten
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Erwartetes Verhalten
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduktion
+      description: Genaue Schritte, Startart des Events und relevante Positionen.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevante Logs
+      description: Keine Passwörter, Tokens oder privaten Daten einfügen.
+  - type: input
+    id: version
+    attributes:
+      label: Commit, Tag oder Build

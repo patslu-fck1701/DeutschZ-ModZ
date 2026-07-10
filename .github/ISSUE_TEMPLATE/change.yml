@@ -1,0 +1,35 @@
+name: Änderung / Feature
+description: Geplante Mod-Funktion oder technische Änderung
+title: "[CHANGE] "
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: component
+    attributes:
+      label: Bereich
+      options:
+        - KotHZ
+        - ConvoyZ
+        - Screen_Menu
+        - KillReward
+        - EventItems
+        - Shared/Build
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: Ziel
+      description: Messbares Endergebnis beschreiben.
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Anforderungen
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Abnahmetests

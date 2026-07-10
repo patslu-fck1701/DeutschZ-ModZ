@@ -1,0 +1,139 @@
+# ============================================================
+# DeutschZ ModZ - DayZ Mod Source Repository
+# ============================================================
+
+# Build- und Packaging-Ausgaben
+/build/
+/Build/
+/dist/
+/Dist/
+/output/
+/Output/
+/packed/
+/Packed/
+/release/
+/Release/
+/PBO_Output/
+/PBOs/
+/bin/
+/obj/
+/temp/
+/Temp/
+/tmp/
+/.cache/
+
+# Gepackte DayZ-/Arma-Dateien und Signaturen
+*.pbo
+*.ebo
+*.bisign
+*.bikey
+*.biprivatekey
+*.pem
+*.pfx
+*.p12
+*.key
+
+# DayZ Tools / Workbench / Workdrive
+P:/
+/[Pp][-_ ]?[Dd]rive/
+/workdrive/
+/WorkDrive/
+/Buldozer/
+/Extracted/
+/DePbo/
+/Unpacked/
+/AddonBuilder/
+/ImageToPAA/
+/ObjectBuilder/
+/TexView2/
+
+# Lokale DayZ-, Server-, Steam- und Workshop-Installationen
+/DayZ/
+/DayZServer/
+/DayZ Tools/
+/steamapps/
+/Steam/
+/Workshop/
+/!Workshop/
+/@*/
+
+# Lokaler Serverzustand und Logs
+/profiles/
+/storage_*/
+/logs/
+/crashlogs/
+/cache/
+/server_cache/
+/localserver/
+/testserver/
+*.log
+*.rpt
+*.ADM
+*.mdmp
+*.bidmp
+*.dmp
+*.tmp
+*.bak
+*.old
+
+# Geheimnisse und lokale Konfiguration
+.env
+.env.*
+!.env.example
+credentials.*
+steam_credentials.*
+secrets.*
+serverDZ.cfg
+serverDZ_*.cfg
+*.secret.json
+*.local.json
+
+# Lokale Start-/Builddateien, sofern sie echte Pfade oder Zugangsdaten enthalten
+start.bat
+start_*.bat
+restart.bat
+update_server.bat
+build_local.bat
+pack_local.bat
+
+# Archive und Sicherungen
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.tgz
+/backup/
+/backups/
+/archive/
+/old/
+
+# IDE und Betriebssystem
+.vscode/
+.idea/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+Thumbs.db
+Desktop.ini
+.DS_Store
+$RECYCLE.BIN/
+*.lnk
+
+# Python-Hilfswerkzeuge
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Lokale Agent-/Arbeitsausgaben
+/CodexChanged/
+/CodexOutput/
+/agent_output/
+/scratch/
+
+# Git-LFS temporär
+.lfsconfig.local

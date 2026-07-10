@@ -1,0 +1,27 @@
+* text=auto
+
+*.c text eol=crlf
+*.cpp text eol=crlf
+*.hpp text eol=crlf
+*.h text eol=crlf
+*.json text eol=lf
+*.xml text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+$PBOPREFIX$ text eol=crlf
+
+*.paa binary
+*.edds binary
+*.p3d binary
+*.ogg binary
+*.wss binary
+*.wav binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.psd binary
