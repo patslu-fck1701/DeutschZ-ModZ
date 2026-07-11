@@ -219,25 +219,47 @@ class DZKOTHG_Manager
 	bool CanHackTerminal(PlayerBase player, Object terminal)
 	{
 		if (!player || !terminal || !m_Settings)
+		{
+			Print("[DZKOTHG] CanHackTerminal rejected: missing player, terminal or settings.");
 			return false;
+		}
 
 		if (!player.IsAlive() || player.IsUnconscious())
+		{
+			Print("[DZKOTHG] CanHackTerminal rejected: player not alive or unconscious.");
 			return false;
+		}
 
 		if (terminal != m_Terminal)
+		{
+			Print("[DZKOTHG] CanHackTerminal rejected: target is not active terminal.");
 			return false;
+		}
 
 		if (m_State != DZKOTHG_State.WAITING_FOR_TERMINAL && m_State != DZKOTHG_State.HACKING)
+		{
+			Print("[DZKOTHG] CanHackTerminal rejected: state=" + m_State.ToString());
 			return false;
+		}
 
 		if (m_Settings.AllowOnlyOneHacker == 1 && m_State == DZKOTHG_State.HACKING && m_CurrentHacker && m_CurrentHacker != player)
+		{
+			Print("[DZKOTHG] CanHackTerminal rejected: another hacker is active.");
 			return false;
+		}
 
 		float maxDistance = m_Settings.TerminalDistanceCheck;
-		if (maxDistance < 1.0)
-			maxDistance = 3.0;
+		if (maxDistance < 5.0)
+			maxDistance = 5.0;
 
-		return vector.Distance(player.GetPosition(), terminal.GetPosition()) <= maxDistance;
+		float distance = vector.Distance(player.GetPosition(), terminal.GetPosition());
+		if (distance > maxDistance)
+		{
+			Print("[DZKOTHG] CanHackTerminal rejected: distance=" + distance.ToString() + " max=" + maxDistance.ToString());
+			return false;
+		}
+
+		return true;
 	}
 
 	void OnHackStarted(PlayerBase player, Object terminal)

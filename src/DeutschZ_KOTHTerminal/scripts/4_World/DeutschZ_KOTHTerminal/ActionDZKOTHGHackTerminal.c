@@ -15,15 +15,15 @@ class ActionDZKOTHGHackTerminal : ActionContinuousBase
 	void ActionDZKOTHGHackTerminal()
 	{
 		m_CallbackClass = ActionDZKOTHGHackTerminalCB;
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONFB_HACKTREE;
+		m_CommandUID = DayZPlayerConstants.CMD_ACTIONFB_INTERACT;
 		m_FullBody = true;
-		m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT;
+		m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
 		m_Text = "KOTH-Terminal hacken";
 	}
 
 	override void CreateConditionComponents()
 	{
-		m_ConditionTarget = new CCTCursorNoRuinCheck(UAMaxDistances.DEFAULT);
+		m_ConditionTarget = new CCTNone;
 		m_ConditionItem = new CCINone;
 	}
 
@@ -53,11 +53,14 @@ class ActionDZKOTHGHackTerminal : ActionContinuousBase
 		Object targetObject = DZKOTHG_GetTerminalTarget(target);
 
 		DZ_KOTHTerminal terminal = DZ_KOTHTerminal.Cast(targetObject);
-		if (!terminal || !terminal.DZKOTHG_IsGateTerminal())
+		if (!terminal)
 			return false;
 
 		if (GetGame() && GetGame().IsServer())
 			return DZKOTHG_Manager.GetInstance().CanHackTerminal(player, targetObject);
+
+		if (!DZKOTHG_IsClientInReach(player, target, targetObject))
+			return false;
 
 		return true;
 	}
@@ -112,5 +115,21 @@ class ActionDZKOTHGHackTerminal : ActionContinuousBase
 			return parentObject;
 
 		return targetObject;
+	}
+
+	protected bool DZKOTHG_IsClientInReach(PlayerBase player, ActionTarget target, Object targetObject)
+	{
+		if (!player || !target || !targetObject)
+			return false;
+
+		vector playerPos = player.GetPosition();
+		vector targetPos = target.GetCursorHitPos();
+		if (targetPos[0] == 0.0 && targetPos[1] == 0.0 && targetPos[2] == 0.0)
+			targetPos = targetObject.GetPosition();
+
+		if (vector.Distance(playerPos, targetPos) <= 5.0)
+			return true;
+
+		return vector.Distance(playerPos, targetObject.GetPosition()) <= 5.0;
 	}
 }
