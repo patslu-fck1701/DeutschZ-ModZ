@@ -9,8 +9,8 @@ modded class LoadingMenu
 		ImageWidget background = ImageWidget.Cast(root.FindAnyWidget("ImageBackground"));
 		if (background)
 		{
-			DZKOTHG_LoadingScreenStore.Ensure();
-			background.LoadImageFile(0, DZKOTHG_LoadingScreenStore.GetRandomScreen());
+			background.LoadImageFile(0, DZKOTHG_MenuContentStore.GetNextScreen(), true);
+			background.SetImage(0);
 		}
 
 		Widget hintFrame = root.FindAnyWidget("hint_frame");
@@ -24,8 +24,13 @@ modded class LoadingMenu
 		TextWidget title = TextWidget.Cast(root.FindAnyWidget("TextWidget"));
 		if (title)
 		{
-			title.SetPos(0, 0.005);
-			title.SetText("DeutschZ Jokes");
+			title.SetPos(0, 0.125);
+			DZKOTHG_LoadingEntry entry = DZKOTHG_MenuContentStore.GetNextLoadingEntry();
+			string titleText = "DEUTSCHZ";
+			if (entry)
+				titleText = "DEUTSCHZ " + entry.Category;
+			title.SetText(titleText);
+			title.SetColor(ARGB(255, 195, 0, 24));
 		}
 
 		return root;

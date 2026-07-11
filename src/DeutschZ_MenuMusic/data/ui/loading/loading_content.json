@@ -1,0 +1,41 @@
+{
+  "SlideshowSeconds": 2.75,
+  "LogoPath": "DeutschZ_MenuMusic/gui/menu_assets/logos/Logo_Dark.paa",
+  "HintIconPath": "DeutschZ_MenuMusic/gui/menu_assets/icons/icon_status_ca.paa",
+  "Screens": [
+    "DeutschZ_MenuMusic/data/ui/loading/loading_0.paa",
+    "DeutschZ_MenuMusic/data/ui/loading/loading_1.paa",
+    "DeutschZ_MenuMusic/data/ui/loading/loading_2.paa"
+  ],
+  "LoadingEntries": [
+    {"Category": "JOKE", "Text": "Wenn der Loot leer ist, war der Nachbar nur schneller."},
+    {"Category": "JOKE", "Text": "Ein Auto ohne Reifen bleibt ein emotionales Investment."},
+    {"Category": "JOKE", "Text": "Wenn es klickt, war es hoffentlich nur die Tuer."},
+    {"Category": "JOKE", "Text": "Der perfekte Base-Plan beginnt mit: nur kurz provisorisch."},
+    {"Category": "REGEL", "Text": "Fairplay, kein Exploit und kein Hacking."},
+    {"Category": "REGEL", "Text": "Respektiere andere Spieler und die Eventregeln."},
+    {"Category": "REGEL", "Text": "Kein Base Raid ausserhalb der festgelegten Zeiten."},
+    {"Category": "EVENT", "Text": "KOTH startet am markierten Fahnenmast. Halte die Zone."},
+    {"Category": "EVENT", "Text": "Patrol, ConvoyZ und KOTH koennen wertvollen Eventloot liefern."},
+    {"Category": "EVENT", "Text": "Der BosZ erscheint erst nach erfolgreicher KOTH-Eroberung."},
+    {"Category": "TIPP", "Text": "Erst nachladen, dann Held spielen."},
+    {"Category": "TIPP", "Text": "Plane Fluchtweg und Deckung, bevor du ein Event startest."},
+    {"Category": "TIPP", "Text": "Ein voller Tank ersetzt keinen guten Plan, hilft aber."},
+    {"Category": "TIPP", "Text": "Marker, Rauchfarbe und Progressbar zeigen den Eventstatus."}
+  ],
+  "ServerMessages": [
+    "DeutschZ verbindet dich mit Chernarus.",
+    "Events werden serverautoritativ gesteuert.",
+    "Discord: discord.gg/FHzZ7BykFk",
+    "Website: project23947.websitepublisher.ai",
+    "Fairplay. Kein Cheat. Kein Exploit.",
+    "KOTH, ConvoyZ und Patrol warten auf dich."
+  ],
+  "MenuNews": [
+    {"Title": "DEUTSCHZ LIVE", "Body": "GUNZ | HELIZ | CARZ | TRADERZ\nDirekt verbinden und loslegen."},
+    {"Title": "KOTH INFECTED SIEGE", "Body": "Sechs Eskalationsstufen, DeutschZ Reward-Fass und BosZ Mumie."},
+    {"Title": "EVENTZ", "Body": "KOTH | CONVOYZ | PATROL\nMarker und Hinweise erscheinen nur bei aktiven Events."},
+    {"Title": "COMMUNITY", "Body": "Discord, Website und Vote erreichst du direkt ueber das Menue."},
+    {"Title": "FAIRPLAY", "Body": "Kein Cheat. Kein Exploit. Respektiere Spieler und Regeln."}
+  ]
+}

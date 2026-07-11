@@ -2,11 +2,13 @@ class DZKOTH_WaveManager
 {
 	protected ref array<EntityAI> m_Spawned;
 	protected ref array<float> m_DamageMultipliers;
+	protected ref array<vector> m_SpawnPositions;
 
 	void DZKOTH_WaveManager()
 	{
 		m_Spawned = new array<EntityAI>;
 		m_DamageMultipliers = new array<float>;
+		m_SpawnPositions = new array<vector>;
 	}
 
 	void SpawnWaveForPlayers(array<PlayerBase> players, DZKOTH_WaveConfig wave, DZKOTH_MainConfig mainConfig, vector fallbackCenter, int totalGoal = 0)
@@ -44,6 +46,7 @@ class DZKOTH_WaveManager
 
 		m_Spawned.Clear();
 		m_DamageMultipliers.Clear();
+		m_SpawnPositions.Clear();
 	}
 
 	bool IsManagedInfected(Object object)
@@ -136,6 +139,7 @@ class DZKOTH_WaveManager
 		ApplyWaveStats(infected, wave);
 		m_Spawned.Insert(infected);
 		m_DamageMultipliers.Insert(NormalizeMultiplier(wave.DamageMultiplier));
+		m_SpawnPositions.Insert(spawnPos);
 		if (totalGoal > 0)
 			DZKOTH_Utils.Log("Zombie spawned " + m_Spawned.Count().ToString() + "/" + totalGoal.ToString());
 		else
@@ -144,10 +148,11 @@ class DZKOTH_WaveManager
 
 	protected vector FindSpawnPosition(vector origin, float minDistance, float maxDistance, vector eventCenter, float exclusionRadius)
 	{
-		if (minDistance < 8.0)
-			minDistance = 8.0;
+		float minimumOutsideDistance = exclusionRadius + 2.0;
+		if (minDistance < minimumOutsideDistance)
+			minDistance = minimumOutsideDistance;
 		if (maxDistance < minDistance)
-			maxDistance = minDistance + 10.0;
+			maxDistance = minDistance + 15.0;
 
 		vector pos = origin;
 		for (int attempt = 0; attempt < 20; attempt++)
@@ -157,12 +162,24 @@ class DZKOTH_WaveManager
 			pos = origin + Vector(Math.Cos(angle) * distance, 0, Math.Sin(angle) * distance);
 			pos = DZKOTH_Utils.Grounded(pos);
 
-			if (!GetGame().SurfaceIsSea(pos[0], pos[2]) && vector.Distance(pos, eventCenter) > exclusionRadius)
+			if (!GetGame().SurfaceIsSea(pos[0], pos[2]) && vector.Distance(pos, eventCenter) > exclusionRadius && IsSeparatedFromOtherSpawns(pos, 7.0))
 				return pos;
 		}
 
 		float fallbackDistance = exclusionRadius + 5.0;
-		return DZKOTH_Utils.Grounded(eventCenter + Vector(fallbackDistance, 0, 0));
+		float fallbackAngle = m_SpawnPositions.Count() * 0.9;
+		return DZKOTH_Utils.Grounded(eventCenter + Vector(Math.Cos(fallbackAngle) * fallbackDistance, 0, Math.Sin(fallbackAngle) * fallbackDistance));
+	}
+
+	protected bool IsSeparatedFromOtherSpawns(vector position, float minimumDistance)
+	{
+		foreach (vector existing: m_SpawnPositions)
+		{
+			if (vector.Distance(position, existing) < minimumDistance)
+				return false;
+		}
+
+		return true;
 	}
 
 	protected void ApplyWaveStats(EntityAI infected, DZKOTH_WaveConfig wave)

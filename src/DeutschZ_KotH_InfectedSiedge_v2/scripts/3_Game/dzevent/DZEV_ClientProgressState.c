@@ -6,6 +6,7 @@ class DZEV_ClientProgressState
 	protected static float s_Current;
 	protected static float s_Max;
 	protected static int s_Revision;
+	protected static float s_LastUpdateTime;
 
 	static void Set(int mode, string label, float current, float max)
 	{
@@ -20,6 +21,8 @@ class DZEV_ClientProgressState
 		s_Label = label;
 		s_Current = current;
 		s_Max = max;
+		if (GetGame())
+			s_LastUpdateTime = GetGame().GetTickTime();
 		s_Revision++;
 	}
 
@@ -30,6 +33,7 @@ class DZEV_ClientProgressState
 		s_Label = "";
 		s_Current = 0.0;
 		s_Max = 0.0;
+		s_LastUpdateTime = 0.0;
 		s_Revision++;
 	}
 
@@ -61,5 +65,13 @@ class DZEV_ClientProgressState
 	static int GetRevision()
 	{
 		return s_Revision;
+	}
+
+	static bool IsStale(float maximumAgeSeconds)
+	{
+		if (!s_Visible || !GetGame() || s_LastUpdateTime <= 0.0)
+			return false;
+
+		return (GetGame().GetTickTime() - s_LastUpdateTime) > maximumAgeSeconds;
 	}
 }

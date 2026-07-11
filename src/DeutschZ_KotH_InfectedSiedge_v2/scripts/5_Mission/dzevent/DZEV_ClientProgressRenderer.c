@@ -21,8 +21,10 @@ class DZEV_ClientProgressRenderer
 		if (!GetGame() || GetGame().IsDedicatedServer())
 			return;
 
-		if (!DZEV_ClientProgressState.IsVisible())
+		if (!DZEV_ClientProgressState.IsVisible() || DZEV_ClientProgressState.IsStale(8.0))
 		{
+			if (DZEV_ClientProgressState.IsStale(8.0))
+				DZEV_ClientProgressState.Hide();
 			Hide();
 			return;
 		}
@@ -70,7 +72,10 @@ class DZEV_ClientProgressRenderer
 		if (m_Value)
 			m_Value.SetText(valueText);
 		if (m_Progress)
+		{
+			m_Progress.SetColor(ARGB(255, 190, 0, 20));
 			m_Progress.SetCurrent(percent);
+		}
 	}
 
 	protected void EnsureWidgets()

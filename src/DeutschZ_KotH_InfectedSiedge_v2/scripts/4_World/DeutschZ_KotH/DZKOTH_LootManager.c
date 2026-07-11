@@ -23,6 +23,9 @@ class DZKOTH_LootManager
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
 
+		EnsureRewardFallbackLoot(m_RewardCrate);
+		LogRewardContents(m_RewardCrate);
+
 		if (m_BossCorpse && lootConfig)
 			FillContainer(m_BossCorpse, lootConfig.BossCorpseLoot);
 
@@ -49,6 +52,9 @@ class DZKOTH_LootManager
 
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
+
+		EnsureRewardFallbackLoot(m_RewardCrate);
+		LogRewardContents(m_RewardCrate);
 
 		ScheduleRewardCleanup(mainConfig);
 	}
@@ -141,11 +147,73 @@ class DZKOTH_LootManager
 			int count = GetEntryCount(entry);
 			for (int i = 0; i < count; i++)
 			{
+				if (!GetGame().ConfigIsExisting("CfgVehicles " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgWeapons " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgMagazines " + entry.ClassName))
+				{
+					DZKOTH_Utils.Warn("Reward loot classname missing: " + entry.ClassName);
+					break;
+				}
+
 				EntityAI item = container.GetInventory().CreateInInventory(entry.ClassName);
 				if (!item)
 					DZKOTH_Utils.Warn("Could not place loot " + entry.ClassName + " in " + container.GetType());
 			}
 		}
+	}
+
+	protected void EnsureRewardFallbackLoot(EntityAI container)
+	{
+		if (!container || CountInventoryItems(container) > 0)
+			return;
+
+		DZKOTH_Utils.Warn("Configured reward pool produced no cargo. Adding guaranteed vanilla fallback loot.");
+		CreateGuaranteedItems(container, "M4A1", 2);
+		CreateGuaranteedItems(container, "AKM", 2);
+		CreateGuaranteedItems(container, "Mag_STANAG_30Rnd", 8);
+		CreateGuaranteedItems(container, "Mag_AKM_30Rnd", 8);
+		CreateGuaranteedItems(container, "AmmoBox_556x45_20Rnd", 6);
+		CreateGuaranteedItems(container, "AmmoBox_762x39_20Rnd", 6);
+		CreateGuaranteedItems(container, "M67Grenade", 2);
+	}
+
+	protected void CreateGuaranteedItems(EntityAI container, string className, int count)
+	{
+		if (!container || !container.GetInventory())
+			return;
+
+		for (int i = 0; i < count; i++)
+		{
+			EntityAI item = container.GetInventory().CreateInInventory(className);
+			if (!item)
+				DZKOTH_Utils.Warn("Guaranteed reward item failed: " + className);
+		}
+	}
+
+	protected int CountInventoryItems(EntityAI container)
+	{
+		if (!container || !container.GetInventory())
+			return 0;
+
+		array<EntityAI> items = new array<EntityAI>;
+		container.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+		int count = 0;
+		foreach (EntityAI item: items)
+		{
+			if (item && item != container)
+				count++;
+		}
+
+		return count;
+	}
+
+	protected void LogRewardContents(EntityAI container)
+	{
+		if (!container)
+		{
+			DZKOTH_Utils.Error("DeutschZ reward barrel was not created.");
+			return;
+		}
+
+		DZKOTH_Utils.Log("DeutschZ reward barrel contains " + CountInventoryItems(container).ToString() + " inventory items.");
 	}
 
 	protected int GetEntryCount(DZKOTH_LootEntry entry)

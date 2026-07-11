@@ -16,7 +16,7 @@ class DZKOTH_Const
 
 	static const string MAIN_MARKER_UID = "DZKOTH_MAIN_EVENT";
 	static const string BOSS_NAME = "BosZ Zombie";
-	static const string BOSS_CLASSNAME = "ZmbM_Mummy";
+	static const string BOSS_CLASSNAME = "DZKOTH_BosZZombie";
 	static const string KEYCARD_CLASSNAME = "DZKOTH_BattlegroundZ_Keycard";
 	static const string REWARD_CRATE_CLASSNAME = "DZKOTH_RewardBarrel";
 	static const string FIREWORKS_BATTERY_CLASSNAME = "DeutschZ_FireworksLauncher";
@@ -24,8 +24,8 @@ class DZKOTH_Const
 	static const string FLAGPOLE_CLASSNAME = "DZKOTH_EventFlagpole";
 	static const string FLAG_CLASSNAME = "DZKOTH_EventFlag";
 	static const string TERMINAL_CLASSNAME = "DZKOTH_EventTerminal";
-	static const string MARKER_ICON_NAME = "Flag";
-	static const string MARKER_ICON_PATH = "\\DeutschZ_KOTH_InfectedSiege\\data\\textures\\infectedsiedge\\KothZFlag_flag_white_co.paa";
+	static const string MARKER_ICON_NAME = "Territory";
+	static const string MARKER_ICON_PATH = "";
 	static const string ADMIN_COMMAND_PREFIX = "!dzkoth";
 	static const string ADMIN_COMMAND_PREFIX_ALT = "/dzkoth";
 }

@@ -52,9 +52,13 @@ class DZKOTH_BossManager
 		if (m_DamageMultiplier < 1.0)
 			m_DamageMultiplier = 1.0;
 
-		m_Boss.SetHealth("", "Health", m_MaxHealth);
 		DisableRunning(m_Boss);
-		DZKOTH_Utils.Log("BosZ Zombie spawned with " + m_MaxHealth.ToString() + " HP at " + bossPos.ToString());
+		m_Boss.SetHealth("", "Health", m_MaxHealth);
+		float appliedHealth = m_Boss.GetHealth("", "Health");
+		float configuredMaximum = m_Boss.GetMaxHealth("", "Health");
+		DZKOTH_Utils.Log("BosZ Zombie health applied=" + appliedHealth.ToString() + " configuredMax=" + configuredMaximum.ToString() + " target=" + m_MaxHealth.ToString() + " at " + bossPos.ToString());
+		if (appliedHealth < m_MaxHealth)
+			DZKOTH_Utils.Error("BosZ Zombie health was clamped below the configured 7500 HP target.");
 		return true;
 	}
 

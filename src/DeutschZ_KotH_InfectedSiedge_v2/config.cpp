@@ -6,8 +6,15 @@ class CfgPatches
 		{
 			"DZKOTH_EventFlagpole",
 			"DZKOTH_EventFlag",
+			"DeutschZ_Barrel_Green",
+			"DeutschZ_FireworksLauncher",
 			"DZKOTH_RewardBarrel",
 			"DZKOTH_EliteInfected",
+			"DZKOTH_Infected_250",
+			"DZKOTH_Infected_400",
+			"DZKOTH_Infected_600",
+			"DZKOTH_Infected_800",
+			"DZKOTH_Infected_1000",
 			"DZKOTH_BosZZombie"
 		};
 		weapons[] = {};
@@ -21,9 +28,9 @@ class CfgPatches
 			"DZ_Gear_Navigation",
 			"DZ_Gear_Tools",
 			"DZ_Gear_Consumables",
+			"DZ_Weapons_Explosives",
 			"DZ_Characters_Zombies",
-			"DZ_Sounds_Effects",
-			"DeutschZ_KOTHTerminal"
+			"DZ_Sounds_Effects"
 		};
 	};
 };
@@ -103,10 +110,44 @@ class CfgVehicles
 	class Flag_Base;
 	class PunchedCard;
 	class SeaChest;
+	class Barrel_Green;
+	class FireworksLauncher;
 	class GPSReceiver;
 	class ZmbM_PolicemanSpecForce_Heavy;
+	class ZmbM_HunterOld_Autumn;
+	class ZmbM_SoldierNormal_Base;
 	class ZmbM_Mummy;
-	class DeutschZ_Barrel_Green;
+
+	class DeutschZ_Barrel_Green : Barrel_Green
+	{
+		scope = 2;
+		displayName = "DeutschZ Fass";
+		descriptionShort = "DeutschZ Lagerfass mit 500 Plaetzen.";
+		hiddenSelectionsTextures[] =
+		{
+			"\\DeutschZ_KOTH_InfectedSiege\\data\\items\\deutschz_barrel_green_co.paa"
+		};
+		itemSize[] = {10, 15};
+		weight = 10000;
+		class Cargo
+		{
+			itemsCargoSize[] = {10, 50};
+			openable = 0;
+			allowOwnedCargoManipulation = 1;
+		};
+	};
+
+	class DeutschZ_FireworksLauncher : FireworksLauncher
+	{
+		scope = 2;
+		displayName = "DeutschZ Feuerwerkswerfer";
+		descriptionShort = "DeutschZ Feuerwerkswerfer mit 25-m-Nebelsignal.";
+		hiddenSelectionsTextures[] =
+		{
+			"\\DeutschZ_KOTH_InfectedSiege\\data\\items\\deutschz_fireworkslauncher_co.paa",
+			"\\DeutschZ_KOTH_InfectedSiege\\data\\items\\deutschz_fireworkslauncher_co.paa"
+		};
+	};
 
 	class DZKOTH_RewardBarrel : DeutschZ_Barrel_Green
 	{
@@ -154,10 +195,82 @@ class CfgVehicles
 		displayName = "DeutschZ KotH Elite Infected";
 	};
 
+	class DZKOTH_Infected_250 : ZmbM_HunterOld_Autumn
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Hunter 250";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 250; };
+			};
+		};
+	};
+
+	class DZKOTH_Infected_400 : ZmbM_PolicemanSpecForce_Heavy
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Police 400";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 400; };
+			};
+		};
+	};
+
+	class DZKOTH_Infected_600 : ZmbM_SoldierNormal_Base
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Military 600";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 600; };
+			};
+		};
+	};
+
+	class DZKOTH_Infected_800 : ZmbM_SoldierNormal_Base
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Military 800";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 800; };
+			};
+		};
+	};
+
+	class DZKOTH_Infected_1000 : ZmbM_SoldierNormal_Base
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Military 1000";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 1000; };
+			};
+		};
+	};
+
 	class DZKOTH_BosZZombie : ZmbM_Mummy
 	{
 		scope = 2;
 		displayName = "BosZ Zombie";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 7500; };
+			};
+		};
 	};
 
 	class DZKOTH_EventFlagpole : StaticFlagPole

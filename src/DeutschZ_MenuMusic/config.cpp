@@ -26,27 +26,21 @@ class CfgNoxZPhoneMusic
 
 class CfgSoundShaders
 {
-	class DZKOTHG_MenuMusic_SoundShader
+	class DZKOTHG_MenuMusic_Base_SoundShader
 	{
-		samples[] =
-		{
-			{"\DeutschZ_MenuMusic\sounds\music01", 1},
-			{"\DeutschZ_MenuMusic\sounds\music02", 1},
-			{"\DeutschZ_MenuMusic\sounds\music03", 1},
-			{"\DeutschZ_MenuMusic\sounds\music04", 1},
-			{"\DeutschZ_MenuMusic\sounds\music05", 1},
-			{"\DeutschZ_MenuMusic\sounds\music06", 1},
-			{"\DeutschZ_MenuMusic\sounds\music07", 1},
-			{"\DeutschZ_MenuMusic\sounds\music08", 1},
-			{"\DeutschZ_MenuMusic\sounds\music09", 1},
-			{"\DeutschZ_MenuMusic\sounds\music10", 1},
-			{"\DeutschZ_MenuMusic\sounds\music11", 1}
-		};
 		volume = 0.75;
 	};
-
-	class DZ_Menu_Shader: DZKOTHG_MenuMusic_SoundShader {};
-	class GC_Menu_Shader: DZKOTHG_MenuMusic_SoundShader {};
+	class DZKOTHG_MenuMusic01_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music01", 1}}; };
+	class DZKOTHG_MenuMusic02_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music02", 1}}; };
+	class DZKOTHG_MenuMusic03_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music03", 1}}; };
+	class DZKOTHG_MenuMusic04_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music04", 1}}; };
+	class DZKOTHG_MenuMusic05_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music05", 1}}; };
+	class DZKOTHG_MenuMusic06_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music06", 1}}; };
+	class DZKOTHG_MenuMusic07_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music07", 1}}; };
+	class DZKOTHG_MenuMusic08_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music08", 1}}; };
+	class DZKOTHG_MenuMusic09_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music09", 1}}; };
+	class DZKOTHG_MenuMusic10_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music10", 1}}; };
+	class DZKOTHG_MenuMusic11_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music11", 1}}; };
 
 	class DZKOTHG_Speaker_King_SoundShader
 	{
@@ -72,19 +66,23 @@ class CfgSoundShaders
 
 class CfgSoundSets
 {
-	class DZKOTHG_MenuMusic_SoundSet
+	class DZKOTHG_MenuMusic_Base_SoundSet
 	{
-		soundShaders[] =
-		{
-			"DZKOTHG_MenuMusic_SoundShader"
-		};
 		volumeFactor = 1;
 		frequencyFactor = 1;
 		spatial = 0;
 	};
-
-	class DZ_Menu_SoundSet: DZKOTHG_MenuMusic_SoundSet {};
-	class GC_Menu_SoundSet: DZKOTHG_MenuMusic_SoundSet {};
+	class DZKOTHG_MenuMusic01_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic01_SoundShader"}; };
+	class DZKOTHG_MenuMusic02_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic02_SoundShader"}; };
+	class DZKOTHG_MenuMusic03_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic03_SoundShader"}; };
+	class DZKOTHG_MenuMusic04_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic04_SoundShader"}; };
+	class DZKOTHG_MenuMusic05_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic05_SoundShader"}; };
+	class DZKOTHG_MenuMusic06_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic06_SoundShader"}; };
+	class DZKOTHG_MenuMusic07_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic07_SoundShader"}; };
+	class DZKOTHG_MenuMusic08_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic08_SoundShader"}; };
+	class DZKOTHG_MenuMusic09_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic09_SoundShader"}; };
+	class DZKOTHG_MenuMusic10_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic10_SoundShader"}; };
+	class DZKOTHG_MenuMusic11_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic11_SoundShader"}; };
 
 	class DZKOTHG_Speaker_King_SoundSet
 	{

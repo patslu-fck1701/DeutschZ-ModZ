@@ -132,7 +132,7 @@ class DZKOTH_EventManager
 		if (!zombie || !m_Instance)
 			return false;
 
-		return m_Instance.IsPositionInsideActiveZone(zombie.GetPosition());
+		return m_Instance.IsManagedInfected(zombie) && m_Instance.IsPositionInsideActiveZone(zombie.GetPosition());
 	}
 
 	float GetDamageMultiplierForSource(EntityAI source)

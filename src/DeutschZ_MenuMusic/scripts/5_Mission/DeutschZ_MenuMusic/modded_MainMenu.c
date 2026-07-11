@@ -13,6 +13,7 @@ modded class MainMenu
 	protected TextWidget m_DZKOTHG_StatusText;
 	protected TextWidget m_DZKOTHG_NewsTitle;
 	protected MultilineTextWidget m_DZKOTHG_NewsBody;
+	protected float m_DZKOTHG_ContentTimer;
 
 	override Widget Init()
 	{
@@ -144,13 +145,27 @@ modded class MainMenu
 			m_DZKOTHG_Tagline.SetText("GUNZ | HELIZ | CARZ | TRADERZ");
 
 		if (m_DZKOTHG_StatusText)
-			m_DZKOTHG_StatusText.SetText("ONLINE " + DZKOTHG_SERVER_IP + ":" + DZKOTHG_SERVER_PORT.ToString());
+			m_DZKOTHG_StatusText.SetText("ONLINE " + DZKOTHG_SERVER_IP + ":" + DZKOTHG_SERVER_PORT.ToString() + " | " + DZKOTHG_MenuContentStore.GetNextServerMessage());
 
-		if (m_DZKOTHG_NewsTitle)
-			m_DZKOTHG_NewsTitle.SetText("DEUTSCHZ LIVE");
+		DZKOTHG_NewsEntry news = DZKOTHG_MenuContentStore.GetNextNews();
+		if (news)
+		{
+			if (m_DZKOTHG_NewsTitle)
+				m_DZKOTHG_NewsTitle.SetText(news.Title);
+			if (m_DZKOTHG_NewsBody)
+				m_DZKOTHG_NewsBody.SetText(news.Body);
+		}
+	}
 
-		if (m_DZKOTHG_NewsBody)
-			m_DZKOTHG_NewsBody.SetText("KOTH | CONVOYZ | EVENTS\nDiscord, Website und Vote\nlinks ueber die Buttons.\nFairplay. Kein Exploit.");
+	override void Update(float timeslice)
+	{
+		super.Update(timeslice);
+		m_DZKOTHG_ContentTimer += timeslice;
+		if (m_DZKOTHG_ContentTimer >= 8.0)
+		{
+			m_DZKOTHG_ContentTimer = 0.0;
+			DZKOTHG_UpdateCustomText();
+		}
 	}
 
 	protected void DZKOTHG_ConnectToServer()

@@ -23,6 +23,9 @@ class DZKOTH_EventInstance
 	protected PlayerBase m_CaptureStarter;
 	protected bool m_WaveOneSpawned;
 	protected bool m_WaveTwoSpawned;
+	protected bool m_WaveThreeSpawned;
+	protected bool m_WaveFourSpawned;
+	protected bool m_WaveFiveSpawned;
 	protected bool m_BossWarningSent;
 	protected bool m_BossDeathHandled;
 
@@ -155,7 +158,10 @@ class DZKOTH_EventInstance
 
 	bool IsManagedInfected(Object object)
 	{
-		return m_Waves && m_Waves.IsManagedInfected(object);
+		if (m_Waves && m_Waves.IsManagedInfected(object))
+			return true;
+
+		return m_Boss && m_Boss.IsBoss(EntityAI.Cast(object));
 	}
 
 	float GetDamageMultiplierForSource(EntityAI source)
@@ -455,6 +461,9 @@ class DZKOTH_EventInstance
 		m_LastLoggedCaptureTen = -1;
 		m_WaveOneSpawned = false;
 		m_WaveTwoSpawned = false;
+		m_WaveThreeSpawned = false;
+		m_WaveFourSpawned = false;
+		m_WaveFiveSpawned = false;
 		m_BossWarningSent = false;
 		m_BossDeathHandled = false;
 
@@ -666,7 +675,28 @@ class DZKOTH_EventInstance
 		{
 			m_WaveTwoSpawned = true;
 			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveTwo);
-			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Militaerische Infizierte ruecken an.", 6.0);
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Polizei-Infizierte ruecken an.", 6.0);
+		}
+
+		if (!m_WaveThreeSpawned && m_Config.Waves.WaveThree && m_CaptureProgress >= m_Config.Waves.WaveThree.TriggerProgress)
+		{
+			m_WaveThreeSpawned = true;
+			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveThree);
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Verstaerkte Militaer-Infizierte greifen an.", 6.0);
+		}
+
+		if (!m_WaveFourSpawned && m_Config.Waves.WaveFour && m_CaptureProgress >= m_Config.Waves.WaveFour.TriggerProgress)
+		{
+			m_WaveFourSpawned = true;
+			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveFour);
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Schwere Militaer-Infizierte umstellen die Zone.", 6.0);
+		}
+
+		if (!m_WaveFiveSpawned && m_Config.Waves.WaveFive && m_CaptureProgress >= m_Config.Waves.WaveFive.TriggerProgress)
+		{
+			m_WaveFiveSpawned = true;
+			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveFive);
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Die letzte Infiziertenwelle ist da.", 6.0);
 		}
 
 		if (!m_BossWarningSent && m_CaptureProgress >= 80.0)
@@ -867,6 +897,9 @@ class DZKOTH_EventInstance
 		m_CaptureStarter = null;
 		m_WaveOneSpawned = false;
 		m_WaveTwoSpawned = false;
+		m_WaveThreeSpawned = false;
+		m_WaveFourSpawned = false;
+		m_WaveFiveSpawned = false;
 		m_BossWarningSent = false;
 		m_BossDeathHandled = false;
 	}

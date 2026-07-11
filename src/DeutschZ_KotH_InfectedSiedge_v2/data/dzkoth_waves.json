@@ -1,47 +1,57 @@
 {
-    "WaveOne":  {
-                    "TriggerProgress":  0,
-                    "InfectedCountMin":  5,
-                    "InfectedCountMax":  5,
-                    "HealthMultiplier":  1,
-                    "DamageMultiplier":  1,
-                    "VisualEyes":  "",
-                    "DisableRunning":  false,
-                    "Types":  [
-                                  "ZmbM_HunterOld_Autumn",
-                                  "ZmbM_HunterOld_Spring",
-                                  "ZmbM_HunterOld_Winter",
-                                  "ZmbM_HermitSkinny_Beige"
-                              ],
-                    "ForcedHealth":  0
-                },
-    "WaveTwo":  {
-                    "TriggerProgress":  45,
-                    "InfectedCountMin":  4,
-                    "InfectedCountMax":  4,
-                    "HealthMultiplier":  1,
-                    "DamageMultiplier":  2,
-                    "VisualEyes":  "",
-                    "DisableRunning":  true,
-                    "Types":  [
-                                  "ZmbM_SoldierNormal_Base",
-                                  "ZmbM_PatrolNormal_Autumn",
-                                  "ZmbM_PatrolNormal_Flat",
-                                  "ZmbM_usSoldier_normal_Woodland"
-                              ],
-                    "ForcedHealth":  1000
-                },
-    "WaveThree":  {
-                      "TriggerProgress":  80,
-                      "InfectedCountMin":  1,
-                      "InfectedCountMax":  1,
-                      "HealthMultiplier":  1,
-                      "DamageMultiplier":  1,
-                      "VisualEyes":  "Red",
-                      "DisableRunning":  false,
-                      "Types":  [
-                                    "ZmbM_Mummy"
-                                ],
-                      "ForcedHealth":  0
-                  }
+  "WaveOne": {
+    "TriggerProgress": 0,
+    "InfectedCountMin": 3,
+    "InfectedCountMax": 3,
+    "HealthMultiplier": 1,
+    "DamageMultiplier": 1,
+    "ForcedHealth": 250,
+    "VisualEyes": "",
+    "DisableRunning": false,
+    "Types": ["DZKOTH_Infected_250"]
+  },
+  "WaveTwo": {
+    "TriggerProgress": 20,
+    "InfectedCountMin": 2,
+    "InfectedCountMax": 2,
+    "HealthMultiplier": 1,
+    "DamageMultiplier": 1.25,
+    "ForcedHealth": 400,
+    "VisualEyes": "",
+    "DisableRunning": false,
+    "Types": ["DZKOTH_Infected_400"]
+  },
+  "WaveThree": {
+    "TriggerProgress": 40,
+    "InfectedCountMin": 2,
+    "InfectedCountMax": 2,
+    "HealthMultiplier": 1,
+    "DamageMultiplier": 1.5,
+    "ForcedHealth": 600,
+    "VisualEyes": "",
+    "DisableRunning": true,
+    "Types": ["DZKOTH_Infected_600"]
+  },
+  "WaveFour": {
+    "TriggerProgress": 60,
+    "InfectedCountMin": 3,
+    "InfectedCountMax": 3,
+    "HealthMultiplier": 1,
+    "DamageMultiplier": 1.75,
+    "ForcedHealth": 800,
+    "VisualEyes": "",
+    "DisableRunning": true,
+    "Types": ["DZKOTH_Infected_800"]
+  },
+  "WaveFive": {
+    "TriggerProgress": 80,
+    "InfectedCountMin": 2,
+    "InfectedCountMax": 2,
+    "HealthMultiplier": 1,
+    "DamageMultiplier": 2,
+    "ForcedHealth": 1000,
+    "VisualEyes": "Red",
+    "DisableRunning": true,
+    "Types": ["DZKOTH_Infected_1000"]
+  }
 }
