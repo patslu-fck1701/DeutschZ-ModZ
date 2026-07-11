@@ -11,7 +11,11 @@ class DZBBC_BlackboxManager
 		m_Blackbox = ItemBase.Cast(DZBBC_Utils.CreateObjectSafe(DZBBC_BLACKBOX_CLASSNAME, site.GetBlackboxPosition()));
 		m_Unlocked = m_Blackbox != null;
 		if (m_Unlocked)
-			DZBBC_Utils.Log("Blackbox spawned at " + m_Blackbox.GetPosition().ToString());
+		{
+			m_Blackbox.SetOrientation(site.GetBlackboxOrientation());
+			m_Blackbox.SetPosition(DZBBC_Utils.Grounded(site.GetBlackboxPosition()));
+			DZBBC_Utils.Log("Blackbox spawned type=" + m_Blackbox.GetType() + " at " + m_Blackbox.GetPosition().ToString() + " orientation=" + m_Blackbox.GetOrientation().ToString());
+		}
 		else
 			DZBBC_Utils.Warn("Blackbox spawn failed.");
 	}

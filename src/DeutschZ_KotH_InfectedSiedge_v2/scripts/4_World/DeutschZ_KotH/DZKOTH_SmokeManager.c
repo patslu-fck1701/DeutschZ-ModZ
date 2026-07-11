@@ -168,11 +168,12 @@ class DZKOTH_SmokeManager
 		if (!GetGame() || m_Flagpole)
 			return;
 
-		vector pos = flagPosition;
-		if (pos[1] <= 0.0)
-			pos = DZKOTH_Utils.Grounded(pos);
-
-		m_Flagpole = DZKOTH_EventFlagpole.Cast(GetGame().CreateObjectEx(DZKOTH_Const.FLAGPOLE_CLASSNAME, pos, ECE_CREATEPHYSICS));
+		vector pos = DZKOTH_Utils.Grounded(flagPosition);
+		m_Flagpole = TrySpawnFlagpole(pos, ECE_SETUP | ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE);
+		if (!m_Flagpole)
+			m_Flagpole = TrySpawnFlagpole(pos, ECE_SETUP | ECE_PLACE_ON_SURFACE);
+		if (!m_Flagpole)
+			m_Flagpole = TrySpawnFlagpole(pos, ECE_NONE);
 		if (!m_Flagpole)
 		{
 			DZKOTH_Utils.Warn("Could not spawn event flagpole at " + pos.ToString());
@@ -184,6 +185,19 @@ class DZKOTH_SmokeManager
 		m_Flagpole.DZKOTH_EnsureEventFlag();
 		SetReady();
 		DZKOTH_Utils.Log("Flagpole spawned at " + pos.ToString() + " orientation " + flagOrientation.ToString());
+	}
+
+	protected DZKOTH_EventFlagpole TrySpawnFlagpole(vector pos, int flags)
+	{
+		Object object = GetGame().CreateObjectEx(DZKOTH_Const.FLAGPOLE_CLASSNAME, pos, flags);
+		DZKOTH_EventFlagpole flagpole = DZKOTH_EventFlagpole.Cast(object);
+		if (!flagpole && object)
+			GetGame().ObjectDelete(object);
+
+		if (flagpole)
+			DZKOTH_Utils.Log("Flagpole spawn path accepted flags=" + flags.ToString() + " at " + pos.ToString());
+
+		return flagpole;
 	}
 
 	void SetReady()

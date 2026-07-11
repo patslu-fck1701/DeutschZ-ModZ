@@ -128,6 +128,14 @@ class DZBBC_MapMarkerManager
 		ShowMarker(DZBBC_CRASHSITE_MARKER_UID, "ConvoyZ Crashsite - " + site.Name, site.GetPosition(), ARGB(255, 220, 20, 20), DZBBC_DEFAULT_MARKER_ICON);
 	}
 
+	void ShowBlackbox(DZBBC_CrashSiteConfig site)
+	{
+		if (!site)
+			return;
+
+		ShowMarker(DZBBC_CRASHSITE_MARKER_UID, "ConvoyZ Blackbox - " + site.Name, site.GetBlackboxPosition(), ARGB(255, 132, 240, 20), DZBBC_DEFAULT_MARKER_ICON);
+	}
+
 	void ShowTerminal(DZBBC_TerminalLocationConfig terminal)
 	{
 		if (!terminal)

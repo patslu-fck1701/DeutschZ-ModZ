@@ -431,7 +431,7 @@ class DZKOTH_EventInstance
 		m_LastZombieKilledCount = 0;
 		m_ZombieGoal = m_Config.Main.ZombieCount;
 		m_Waves.Cleanup();
-		m_Waves.SpawnWaveForPlayers(null, m_Config.Waves.WaveOne, m_Config.Main, m_Location.GetPosition(), m_ZombieGoal);
+		m_Waves.SpawnWaveForPlayers(null, m_Config.Waves.WaveOne, m_Config.Main, m_Location.GetFlagPosition(), m_ZombieGoal);
 
 		int spawned = m_Waves.CountSpawned();
 		if (spawned > 0)
@@ -759,11 +759,7 @@ class DZKOTH_EventInstance
 		if (!m_Waves || !wave)
 			return;
 
-		ref array<PlayerBase> players = new array<PlayerBase>;
-		if (IsValidPlayer(player))
-			players.Insert(player);
-
-		m_Waves.SpawnWaveForPlayers(players, wave, m_Config.Main, m_Location.GetPosition());
+		m_Waves.SpawnWaveForPlayers(null, wave, m_Config.Main, m_Location.GetFlagPosition());
 	}
 
 	protected PlayerBase GetBestCapturePlayer()

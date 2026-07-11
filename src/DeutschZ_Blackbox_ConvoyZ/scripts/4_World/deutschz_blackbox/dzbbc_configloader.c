@@ -52,9 +52,9 @@ class DZBBC_Config
 		{
 			JsonFileLoader<ref DZBBC_LocationsConfig>.SaveFile(DZBBC_LOCATIONS_JSON, config, errorMessage);
 		}
-		if (config && config.CrashSites)
+		if (config)
 		{
-			bool migrated = false;
+			bool migrated = config.EnsureRequiredLocations();
 			foreach (DZBBC_CrashSiteConfig site: config.CrashSites)
 			{
 				if (site)

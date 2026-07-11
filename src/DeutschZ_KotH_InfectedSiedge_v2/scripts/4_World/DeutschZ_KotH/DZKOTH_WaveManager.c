@@ -1,5 +1,7 @@
 class DZKOTH_WaveManager
 {
+	protected static const float SPAWN_RADIUS_MIN = 6.0;
+	protected static const float SPAWN_RADIUS_MAX = 15.0;
 	protected ref array<EntityAI> m_Spawned;
 	protected ref array<float> m_DamageMultipliers;
 	protected ref array<vector> m_SpawnPositions;
@@ -16,21 +18,9 @@ class DZKOTH_WaveManager
 		if (!GetGame() || !wave || !mainConfig || !wave.Types || wave.Types.Count() == 0)
 			return;
 
-		bool spawnedForPlayer = false;
-		if (players)
-		{
-			foreach (PlayerBase player: players)
-			{
-				if (!IsValidPlayer(player))
-					continue;
-
-				spawnedForPlayer = true;
-				SpawnWaveAround(player.GetPosition(), wave, mainConfig, fallbackCenter, totalGoal);
-			}
-		}
-
-		if (!spawnedForPlayer)
-			SpawnWaveAround(fallbackCenter, wave, mainConfig, fallbackCenter, totalGoal);
+		// Every wave is centered on the event mast. This keeps all infected within
+		// the configured event area even when the capturing player moves around.
+		SpawnWaveAround(fallbackCenter, wave, mainConfig, fallbackCenter, totalGoal);
 	}
 
 	void Cleanup()
@@ -128,7 +118,7 @@ class DZKOTH_WaveManager
 	protected void SpawnOne(vector origin, DZKOTH_WaveConfig wave, DZKOTH_MainConfig mainConfig, vector eventCenter, int totalGoal = 0)
 	{
 		string type = wave.Types.Get(Math.RandomIntInclusive(0, wave.Types.Count() - 1));
-		vector spawnPos = FindSpawnPosition(origin, mainConfig.SpawnMinDistance, mainConfig.SpawnMaxDistance, eventCenter, mainConfig.CaptureRadius);
+		vector spawnPos = FindSpawnPosition(origin, mainConfig.SpawnMinDistance, mainConfig.SpawnMaxDistance);
 		EntityAI infected = EntityAI.Cast(GetGame().CreateObjectEx(type, spawnPos, ECE_PLACE_ON_SURFACE | ECE_INITAI | ECE_EQUIP_ATTACHMENTS));
 		if (!infected)
 		{
@@ -146,13 +136,14 @@ class DZKOTH_WaveManager
 			DZKOTH_Utils.Log("Zombie spawned " + m_Spawned.Count().ToString());
 	}
 
-	protected vector FindSpawnPosition(vector origin, float minDistance, float maxDistance, vector eventCenter, float exclusionRadius)
+	protected vector FindSpawnPosition(vector origin, float minDistance, float maxDistance)
 	{
-		float minimumOutsideDistance = exclusionRadius + 2.0;
-		if (minDistance < minimumOutsideDistance)
-			minDistance = minimumOutsideDistance;
+		if (minDistance < SPAWN_RADIUS_MIN)
+			minDistance = SPAWN_RADIUS_MIN;
+		if (maxDistance > SPAWN_RADIUS_MAX || maxDistance <= 0.0)
+			maxDistance = SPAWN_RADIUS_MAX;
 		if (maxDistance < minDistance)
-			maxDistance = minDistance + 15.0;
+			minDistance = Math.Max(3.0, maxDistance - 4.0);
 
 		vector pos = origin;
 		for (int attempt = 0; attempt < 20; attempt++)
@@ -162,13 +153,13 @@ class DZKOTH_WaveManager
 			pos = origin + Vector(Math.Cos(angle) * distance, 0, Math.Sin(angle) * distance);
 			pos = DZKOTH_Utils.Grounded(pos);
 
-			if (!GetGame().SurfaceIsSea(pos[0], pos[2]) && vector.Distance(pos, eventCenter) > exclusionRadius && IsSeparatedFromOtherSpawns(pos, 7.0))
+			if (!GetGame().SurfaceIsSea(pos[0], pos[2]) && IsSeparatedFromOtherSpawns(pos, 4.0))
 				return pos;
 		}
 
-		float fallbackDistance = exclusionRadius + 5.0;
+		float fallbackDistance = Math.Min(maxDistance, minDistance + 2.0);
 		float fallbackAngle = m_SpawnPositions.Count() * 0.9;
-		return DZKOTH_Utils.Grounded(eventCenter + Vector(Math.Cos(fallbackAngle) * fallbackDistance, 0, Math.Sin(fallbackAngle) * fallbackDistance));
+		return DZKOTH_Utils.Grounded(origin + Vector(Math.Cos(fallbackAngle) * fallbackDistance, 0, Math.Sin(fallbackAngle) * fallbackDistance));
 	}
 
 	protected bool IsSeparatedFromOtherSpawns(vector position, float minimumDistance)
@@ -204,12 +195,17 @@ class DZKOTH_WaveManager
 		}
 
 		infected.SetHealth("", "Health", targetHealth);
+		float actualHealth = infected.GetHealth("", "Health");
+		float actualMaxHealth = infected.GetMaxHealth("", "Health");
 
 		if (wave.DisableRunning)
 		{
-			infected.SetHealth("LeftLeg", "Health", 0.0);
-			infected.SetHealth("RightLeg", "Health", 0.0);
+			DayZInfected infectedAgent = DayZInfected.Cast(infected);
+			if (infectedAgent && infectedAgent.GetInputController())
+				infectedAgent.GetInputController().OverrideMovementSpeed(true, 0.75);
 		}
+
+		DZKOTH_Utils.Log("Applied zombie stats type=" + infected.GetType() + " health=" + actualHealth.ToString() + "/" + actualMaxHealth.ToString() + " walkOnly=" + wave.DisableRunning.ToString());
 	}
 
 	protected float NormalizeMultiplier(float multiplier)

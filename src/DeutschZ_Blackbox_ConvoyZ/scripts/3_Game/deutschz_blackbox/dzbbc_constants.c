@@ -1,4 +1,4 @@
-const string DZBBC_VERSION = "0.2.1-livefix";
+const string DZBBC_VERSION = "0.2.2-livefix";
 const string DZBBC_LOG_PREFIX = "[DZBBC] ";
 const string DZBBC_PROFILE_DIR = "$profile:DZBBC";
 const string DZBBC_CONFIG_JSON = "$profile:DZBBC/dzbbc_config.json";

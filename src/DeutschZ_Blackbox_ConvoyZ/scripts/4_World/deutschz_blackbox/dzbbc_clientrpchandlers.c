@@ -19,7 +19,6 @@ class DZBBC_ClientHUD
 		if (mode == DZBBC_HUD_HIDE)
 		{
 			DZBBC_ClientHudState.Hide();
-			Print(DZBBC_LOG_PREFIX + "HUD hide");
 			return;
 		}
 

@@ -89,6 +89,7 @@ class DZBBC_CrashSiteConfig
 	string Name;
 	ref array<float> Position;
 	ref array<float> BlackboxPosition;
+	ref array<float> BlackboxOrientation;
 	ref array<float> ContainerPosition;
 	float Radius;
 	ref array<string> WreckObjects;
@@ -100,6 +101,7 @@ class DZBBC_CrashSiteConfig
 		Name = "Airfield Convoy Test";
 		Position = DZBBC_Utils.MakeVectorArray(4520.0, 0.0, 10280.0);
 		BlackboxPosition = DZBBC_Utils.MakeVectorArray(4528.0, 0.0, 10272.0);
+		BlackboxOrientation = DZBBC_Utils.MakeVectorArray(0.0, 0.0, 0.0);
 		ContainerPosition = DZBBC_Utils.MakeVectorArray(4545.0, 0.0, 10292.0);
 		Radius = 95.0;
 		WreckObjects = new array<string>;
@@ -120,6 +122,11 @@ class DZBBC_CrashSiteConfig
 		return DZBBC_Utils.ArrayToVector(BlackboxPosition, GetPosition());
 	}
 
+	vector GetBlackboxOrientation()
+	{
+		return DZBBC_Utils.ArrayToVector(BlackboxOrientation);
+	}
+
 	vector GetContainerPosition()
 	{
 		return DZBBC_Utils.ArrayToVector(ContainerPosition, GetPosition());
@@ -128,6 +135,11 @@ class DZBBC_CrashSiteConfig
 	bool EnsureDefaultScene()
 	{
 		bool changed = false;
+		if (!BlackboxOrientation || BlackboxOrientation.Count() < 3)
+		{
+			BlackboxOrientation = DZBBC_Utils.MakeVectorArray(0.0, 0.0, 0.0);
+			changed = true;
+		}
 
 		if (!WreckObjects)
 		{
@@ -203,13 +215,13 @@ class DZBBC_CrashSiteConfig
 				changed = true;
 			}
 
-			if (sceneObject.ClassName.IndexOf("HMMWV") >= 0 && sceneObject.Offset && sceneObject.Offset.Count() >= 3 && sceneObject.Offset.Get(1) < 1.6)
+			if (sceneObject.AlignToGround && sceneObject.ClassName.IndexOf("HMMWV") >= 0 && sceneObject.Offset && sceneObject.Offset.Count() >= 3 && sceneObject.Offset.Get(1) < 1.6)
 			{
 				sceneObject.Offset = DZBBC_Utils.MakeVectorArray(sceneObject.Offset.Get(0), 1.65, sceneObject.Offset.Get(2));
 				changed = true;
 			}
 
-			if (sceneObject.ClassName.IndexOf("T72_Chassis") >= 0 && sceneObject.Offset && sceneObject.Offset.Count() >= 3 && sceneObject.Offset.Get(1) < 2.0)
+			if (sceneObject.AlignToGround && sceneObject.ClassName.IndexOf("T72_Chassis") >= 0 && sceneObject.Offset && sceneObject.Offset.Count() >= 3 && sceneObject.Offset.Get(1) < 2.0)
 			{
 				sceneObject.Offset = DZBBC_Utils.MakeVectorArray(sceneObject.Offset.Get(0), 2.05, sceneObject.Offset.Get(2));
 				changed = true;
@@ -219,7 +231,7 @@ class DZBBC_CrashSiteConfig
 		return changed;
 	}
 
-	protected void AddSceneObject(string className, float x, float y, float z, float yaw, float pitch, float roll, bool required)
+	void AddSceneObject(string className, float x, float y, float z, float yaw, float pitch, float roll, bool required)
 	{
 		DZBBC_SceneObjectConfig objectConfig = new DZBBC_SceneObjectConfig;
 		objectConfig.ClassName = className;
@@ -228,6 +240,34 @@ class DZBBC_CrashSiteConfig
 		objectConfig.AlignToGround = true;
 		objectConfig.Required = required;
 		SceneObjects.Insert(objectConfig);
+	}
+
+	void AddSceneObjectExact(string className, vector absolutePosition, vector orientation, bool required)
+	{
+		vector sitePosition = GetPosition();
+		DZBBC_SceneObjectConfig objectConfig = new DZBBC_SceneObjectConfig;
+		objectConfig.ClassName = className;
+		objectConfig.Offset = DZBBC_Utils.MakeVectorArray(absolutePosition[0] - sitePosition[0], absolutePosition[1] - sitePosition[1], absolutePosition[2] - sitePosition[2]);
+		objectConfig.Orientation = DZBBC_Utils.MakeVectorArray(orientation[0], orientation[1], orientation[2]);
+		objectConfig.AlignToGround = false;
+		objectConfig.Required = required;
+		SceneObjects.Insert(objectConfig);
+	}
+
+	bool EnsureSceneObjectExact(string className, vector absolutePosition, vector orientation, bool required)
+	{
+		if (!SceneObjects)
+			SceneObjects = new array<ref DZBBC_SceneObjectConfig>;
+
+		vector expectedOffset = absolutePosition - GetPosition();
+		foreach (DZBBC_SceneObjectConfig sceneObject: SceneObjects)
+		{
+			if (sceneObject && sceneObject.ClassName == className && vector.Distance(sceneObject.GetOffset(), expectedOffset) < 0.25)
+				return false;
+		}
+
+		AddSceneObjectExact(className, absolutePosition, orientation, required);
+		return true;
 	}
 }
 
@@ -247,6 +287,142 @@ class DZBBC_LocationsConfig
 		vmcSite.ContainerPosition = DZBBC_Utils.MakeVectorArray(4518.0, 0.0, 8292.0);
 		vmcSite.Radius = 95.0;
 		CrashSites.Insert(vmcSite);
+
+		CrashSites.Insert(BuildTriKrestaSite());
+		CrashSites.Insert(BuildTriKrestaWestSite());
+		CrashSites.Insert(BuildKamenskWestSite());
+		CrashSites.Insert(BuildKamenskEastSite());
+		EnsureAirfieldBRDM();
+	}
+
+	bool EnsureRequiredLocations()
+	{
+		bool changed = false;
+		if (!CrashSites)
+		{
+			CrashSites = new array<ref DZBBC_CrashSiteConfig>;
+			changed = true;
+		}
+
+		changed = EnsureSite(BuildTriKrestaSite()) || changed;
+		changed = EnsureSite(BuildTriKrestaWestSite()) || changed;
+		changed = EnsureSite(BuildKamenskWestSite()) || changed;
+		changed = EnsureSite(BuildKamenskEastSite()) || changed;
+		changed = EnsureAirfieldBRDM() || changed;
+
+		foreach (DZBBC_CrashSiteConfig site: CrashSites)
+		{
+			if (site)
+				changed = site.EnsureDefaultScene() || changed;
+		}
+
+		return changed;
+	}
+
+	protected bool EnsureSite(DZBBC_CrashSiteConfig candidate)
+	{
+		if (!candidate || FindSite(candidate.Name))
+			return false;
+
+		CrashSites.Insert(candidate);
+		return true;
+	}
+
+	protected DZBBC_CrashSiteConfig FindSite(string name)
+	{
+		foreach (DZBBC_CrashSiteConfig site: CrashSites)
+		{
+			if (site && site.Name == name)
+				return site;
+		}
+
+		return null;
+	}
+
+	protected bool EnsureAirfieldBRDM()
+	{
+		DZBBC_CrashSiteConfig airfield = FindSite("Airfield Convoy Test");
+		if (!airfield)
+			return false;
+
+		return airfield.EnsureSceneObjectExact("StaticObj_Wreck_BRDM", Vector(4446.887695, 338.927277, 10296.633789), Vector(36.443153, 0.0, 0.0), false);
+	}
+
+	protected DZBBC_CrashSiteConfig BuildTriKrestaSite()
+	{
+		DZBBC_CrashSiteConfig site = CreateEmptySite("Tri Kresta Convoy", Vector(450.677673, 293.246582, 9431.185547), Vector(294.277313, 295.107788, 9316.286133), Vector(-96.307762, 0.0, 0.0), Vector(468.677673, 293.246582, 9443.185547));
+
+		site.AddSceneObjectExact("Land_Wreck_Uaz", Vector(438.763275, 291.023895, 9420.252930), Vector(-155.625824, 0.0, 0.0), true);
+		site.AddSceneObjectExact("StaticObj_Wreck_Ural", Vector(450.677673, 293.246582, 9431.185547), Vector(152.133408, 0.0, 0.0), true);
+		site.AddSceneObjectExact("StaticObj_Wreck_BMP2", Vector(473.891968, 294.778442, 9446.760742), Vector(36.443157, 0.0, 0.0), true);
+		site.AddSceneObjectExact("StaticObj_Wreck_HMMWV", Vector(463.719116, 296.274017, 9451.163086), Vector(120.065880, 0.0, 0.0), true);
+		site.AddSceneObjectExact("Land_Wreck_V3S", Vector(436.167877, 294.386902, 9451.475586), Vector(36.443153, 0.0, 0.0), true);
+		site.AddSceneObjectExact("StaticObj_Wreck_BMP1", Vector(440.783661, 299.964600, 9489.972656), Vector(36.443153, 0.0, 0.0), true);
+		site.AddSceneObjectExact("StaticObj_Wreck_HMMWV", Vector(477.080627, 294.821808, 9459.090820), Vector(36.443153, 0.0, 0.0), true);
+		site.AddSceneObjectExact("RFFSHeli_CH53e_wreck", Vector(440.783661, 299.964600, 9489.972656), Vector(36.443153, 0.0, 0.0), false);
+		AddCrashEffects(site);
+		return site;
+	}
+
+	protected DZBBC_CrashSiteConfig BuildTriKrestaWestSite()
+	{
+		vector center = Vector(347.892303, 294.774872, 9359.527344);
+		DZBBC_CrashSiteConfig site = CreateEmptySite("Tri Kresta West Crash", center, center + Vector(-8.0, 0.0, -7.0), Vector(-91.420685, 0.0, 0.0), center + Vector(17.0, 0.0, 12.0));
+		site.AddSceneObject("Wreck_UH1Y", 0.0, 0.0, 0.0, -91.420685, 0.0, 0.0, true);
+		site.AddSceneObject("StaticObj_Wreck_HMMWV", 15.0, 1.65, 11.0, 46.0, 0.0, 0.0, true);
+		site.AddSceneObject("Land_Wreck_Uaz", -14.0, 0.0, -10.0, 138.0, 0.0, 0.0, true);
+		site.AddSceneObject("StaticObj_Wreck_BMP1", 20.0, 1.35, -13.0, 12.0, 0.0, 0.0, false);
+		AddCrashEffects(site);
+		return site;
+	}
+
+	protected DZBBC_CrashSiteConfig BuildKamenskWestSite()
+	{
+		vector center = Vector(8483.358398, 223.918228, 14197.457031);
+		DZBBC_CrashSiteConfig site = CreateEmptySite("Kamensk West Convoy", center, center + Vector(8.0, 0.0, -7.0), Vector(85.747742, 0.0, 0.0), center + Vector(20.0, 0.0, 12.0));
+		site.AddSceneObject("Wreck_UH1Y", 0.0, 0.0, 0.0, 85.747742, 0.0, 0.0, true);
+		site.AddSceneObject("StaticObj_Wreck_HMMWV", 16.0, 1.65, 10.0, 42.0, 0.0, 0.0, true);
+		site.AddSceneObject("Land_Wreck_Uaz", -13.0, 0.0, -9.0, 128.0, 0.0, 0.0, true);
+		site.AddSceneObject("StaticObj_Wreck_BRDM", -22.0, 1.15, 15.0, 205.0, 0.0, 0.0, false);
+		AddCrashEffects(site);
+		return site;
+	}
+
+	protected DZBBC_CrashSiteConfig BuildKamenskEastSite()
+	{
+		vector center = Vector(8403.467773, 232.038162, 14246.509766);
+		DZBBC_CrashSiteConfig site = CreateEmptySite("Kamensk East Convoy", center, center + Vector(-9.0, 0.0, 8.0), Vector(-91.151955, 0.0, 0.0), center + Vector(18.0, 0.0, -13.0));
+		site.AddSceneObject("Wreck_Mi8_Crashed", 0.0, 0.0, 0.0, -91.151955, 0.0, 0.0, true);
+		site.AddSceneObject("StaticObj_Wreck_Ural", -17.0, 0.8, 9.0, 235.0, 0.0, 0.0, true);
+		site.AddSceneObject("StaticObj_Wreck_BMP2", 19.0, 1.35, -12.0, 33.0, 0.0, 0.0, true);
+		site.AddSceneObject("Land_Wreck_V3S", 24.0, 0.0, 14.0, 142.0, 0.0, 0.0, true);
+		AddCrashEffects(site);
+		return site;
+	}
+
+	protected DZBBC_CrashSiteConfig CreateEmptySite(string name, vector center, vector blackboxPosition, vector blackboxOrientation, vector containerPosition)
+	{
+		DZBBC_CrashSiteConfig site = new DZBBC_CrashSiteConfig;
+		site.Name = name;
+		site.Position = DZBBC_Utils.MakeVectorArray(center[0], center[1], center[2]);
+		site.BlackboxPosition = DZBBC_Utils.MakeVectorArray(blackboxPosition[0], blackboxPosition[1], blackboxPosition[2]);
+		site.BlackboxOrientation = DZBBC_Utils.MakeVectorArray(blackboxOrientation[0], blackboxOrientation[1], blackboxOrientation[2]);
+		site.ContainerPosition = DZBBC_Utils.MakeVectorArray(containerPosition[0], containerPosition[1], containerPosition[2]);
+		site.Radius = 120.0;
+		site.WreckObjects.Clear();
+		site.EffectObjects.Clear();
+		site.SceneObjects.Clear();
+		return site;
+	}
+
+	protected void AddCrashEffects(DZBBC_CrashSiteConfig site)
+	{
+		if (!site)
+			return;
+
+		site.AddSceneObject("M18SmokeGrenade_White", 5.0, 0.0, 5.0, 0.0, 0.0, 0.0, false);
+		site.AddSceneObject("M18SmokeGrenade_White", -8.0, 0.0, -4.0, 0.0, 0.0, 0.0, false);
+		site.AddSceneObject("Roadflare", 12.0, 0.0, -6.0, 120.0, 0.0, 0.0, false);
 	}
 }
 
@@ -256,6 +432,8 @@ class DZBBC_AIFactionConfig
 	int Count;
 	float HealthMultiplier;
 	float DamageMultiplier;
+	float AccuracyMin;
+	float AccuracyMax;
 	ref array<string> Types;
 	ref array<string> Loadout;
 	bool UseExpansionAI;
@@ -271,6 +449,8 @@ class DZBBC_AIFactionConfig
 		Count = 2;
 		HealthMultiplier = 1.0;
 		DamageMultiplier = 1.0;
+		AccuracyMin = 0.10;
+		AccuracyMax = 0.30;
 		Types = new array<string>;
 		Types.Insert("ZmbM_SoldierNormal");
 		Types.Insert("ZmbM_usSoldier_normal_Woodland");
@@ -309,6 +489,11 @@ class DZBBC_AIFactionConfig
 		if (ExpansionFaction == "")
 			ExpansionFaction = expansionFaction;
 
+		if (AccuracyMin <= 0.0 || AccuracyMin > 1.0)
+			AccuracyMin = 0.10;
+		if (AccuracyMax < AccuracyMin || AccuracyMax > 1.0)
+			AccuracyMax = 0.30;
+
 		if (ExpansionLoadoutFile == "")
 			ExpansionLoadoutFile = GetDefaultExpansionLoadoutFile(ExpansionFaction);
 
@@ -340,6 +525,20 @@ class DZBBC_AIFactionConfig
 
 		return "BanditLoadout";
 	}
+
+	void ApplyConvoyDifficulty(float accuracyMin, float accuracyMax, bool addMorphine = false)
+	{
+		DamageMultiplier = 1.0;
+		AccuracyMin = accuracyMin;
+		AccuracyMax = accuracyMax;
+		ExpansionLoadoutFile = "DZBBC_ConvoyWeakLoadout";
+		if (!ExpansionLoadout)
+			ExpansionLoadout = new array<string>;
+		ExpansionLoadout.Clear();
+		ExpansionLoadout.Insert("BandageDressing");
+		if (addMorphine)
+			ExpansionLoadout.Insert("Morphine");
+	}
 }
 
 class DZBBC_AIWavesConfig
@@ -362,9 +561,9 @@ class DZBBC_AIWavesConfig
 		RussianZ.Loadout.Insert("TacticalBaconCan");
 		RussianZ.ExpansionCount = 3;
 		RussianZ.ExpansionFaction = "RussianZ";
-		RussianZ.ExpansionLoadoutFile = "EastLoadout";
-		RussianZ.ExpansionLoadout.Insert("Mag_AKM_30Rnd");
-		RussianZ.ExpansionLoadout.Insert("Ammo_762x39");
+		RussianZ.ExpansionLoadoutFile = "DZBBC_ConvoyWeakLoadout";
+		RussianZ.AccuracyMin = 0.10;
+		RussianZ.AccuracyMax = 0.28;
 		RussianZ.ExpansionLoadout.Insert("BandageDressing");
 		RussianZ.ExpansionLoadout.Insert("TacticalBaconCan");
 
@@ -379,15 +578,18 @@ class DZBBC_AIWavesConfig
 		AmericanZ.Loadout.Insert("UnknownFoodCan");
 		AmericanZ.ExpansionCount = 3;
 		AmericanZ.ExpansionFaction = "AmericanZ";
-		AmericanZ.ExpansionLoadoutFile = "WestLoadout";
-		AmericanZ.ExpansionLoadout.Insert("Mag_STANAG_30Rnd");
-		AmericanZ.ExpansionLoadout.Insert("Ammo_556x45");
+		AmericanZ.ExpansionLoadoutFile = "DZBBC_ConvoyWeakLoadout";
+		AmericanZ.AccuracyMin = 0.10;
+		AmericanZ.AccuracyMax = 0.28;
 		AmericanZ.ExpansionLoadout.Insert("BandageDressing");
 
 		RecoveryUnit90 = new DZBBC_AIFactionConfig;
 		RecoveryUnit90.FactionName = "Special recovery unit";
 		RecoveryUnit90.Count = 1;
 		RecoveryUnit90.HealthMultiplier = 1.5;
+		RecoveryUnit90.DamageMultiplier = 1.0;
+		RecoveryUnit90.AccuracyMin = 0.14;
+		RecoveryUnit90.AccuracyMax = 0.34;
 		RecoveryUnit90.Types.Clear();
 		RecoveryUnit90.Types.Insert("ZmbM_PolicemanSpecForce_Heavy");
 		RecoveryUnit90.Loadout.Insert("BandageDressing");
@@ -395,8 +597,7 @@ class DZBBC_AIWavesConfig
 		RecoveryUnit90.Loadout.Insert("Ammo_12gaPellets");
 		RecoveryUnit90.ExpansionCount = 2;
 		RecoveryUnit90.ExpansionFaction = "Mercenaries";
-		RecoveryUnit90.ExpansionLoadoutFile = "PoliceLoadout";
-		RecoveryUnit90.ExpansionLoadout.Insert("Ammo_762x54");
+		RecoveryUnit90.ExpansionLoadoutFile = "DZBBC_ConvoyWeakLoadout";
 		RecoveryUnit90.ExpansionLoadout.Insert("BandageDressing");
 		RecoveryUnit90.ExpansionLoadout.Insert("Morphine");
 
@@ -404,6 +605,9 @@ class DZBBC_AIWavesConfig
 		FinalDefense.FactionName = "Final defense wave";
 		FinalDefense.Count = 2;
 		FinalDefense.HealthMultiplier = 2.0;
+		FinalDefense.DamageMultiplier = 1.0;
+		FinalDefense.AccuracyMin = 0.18;
+		FinalDefense.AccuracyMax = 0.40;
 		FinalDefense.Types.Clear();
 		FinalDefense.Types.Insert("ZmbM_PolicemanSpecForce_Heavy");
 		FinalDefense.Types.Insert("ZmbM_usSoldier_Heavy_Woodland");
@@ -412,8 +616,7 @@ class DZBBC_AIWavesConfig
 		FinalDefense.Loadout.Insert("Ammo_308Win");
 		FinalDefense.ExpansionCount = 4;
 		FinalDefense.ExpansionFaction = "Raiders";
-		FinalDefense.ExpansionLoadoutFile = "BanditLoadout";
-		FinalDefense.ExpansionLoadout.Insert("Ammo_762x39");
+		FinalDefense.ExpansionLoadoutFile = "DZBBC_ConvoyWeakLoadout";
 		FinalDefense.ExpansionLoadout.Insert("BandageDressing");
 		FinalDefense.ExpansionLoadout.Insert("Morphine");
 	}
@@ -427,6 +630,7 @@ class DZBBC_AIWavesConfig
 			if (RussianZ.ExpansionFaction == "Russians" || RussianZ.ExpansionFaction == "East" || RussianZ.ExpansionFaction == "east")
 				RussianZ.ExpansionFaction = "RussianZ";
 			RussianZ.EnsureDefaults(2, 3, "RussianZ");
+			RussianZ.ApplyConvoyDifficulty(0.10, 0.28);
 		}
 
 		if (AmericanZ)
@@ -436,13 +640,20 @@ class DZBBC_AIWavesConfig
 			if (AmericanZ.ExpansionFaction == "Americans" || AmericanZ.ExpansionFaction == "West" || AmericanZ.ExpansionFaction == "west")
 				AmericanZ.ExpansionFaction = "AmericanZ";
 			AmericanZ.EnsureDefaults(2, 3, "AmericanZ");
+			AmericanZ.ApplyConvoyDifficulty(0.10, 0.28);
 		}
 
 		if (RecoveryUnit90)
+		{
 			RecoveryUnit90.EnsureDefaults(1, 2, "Mercenaries");
+			RecoveryUnit90.ApplyConvoyDifficulty(0.14, 0.34, true);
+		}
 
 		if (FinalDefense)
+		{
 			FinalDefense.EnsureDefaults(2, 4, "Raiders");
+			FinalDefense.ApplyConvoyDifficulty(0.18, 0.40, true);
+		}
 	}
 }
 

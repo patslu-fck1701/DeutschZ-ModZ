@@ -144,10 +144,11 @@ class DZBBC_ExpansionBridge
 			if (group)
 				ai.SetGroup(group);
 
+			ai.eAI_SetAccuracy(faction.AccuracyMin, faction.AccuracyMax);
 			ApplyExpansionLoadout(ai, faction);
 			spawnedUnits.Insert(ai);
 			spawned++;
-			DZBBC_Utils.Log("Spawned Expansion AI " + typeName + " at " + ai.GetPosition().ToString());
+			DZBBC_Utils.Log("Spawned Expansion AI " + typeName + " at " + ai.GetPosition().ToString() + " accuracy=" + faction.AccuracyMin.ToString() + "-" + faction.AccuracyMax.ToString());
 		}
 
 		if (spawned > 0)

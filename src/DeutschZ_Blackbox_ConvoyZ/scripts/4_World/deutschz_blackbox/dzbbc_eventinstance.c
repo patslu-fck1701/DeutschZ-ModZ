@@ -61,10 +61,7 @@ class DZBBC_EventInstance
 
 		m_CrashSite.Spawn(m_Site);
 		DZBBC_ServerRPC.BroadcastFX(DZBBC_FX_CRASHSITE, m_Site.GetPosition());
-		m_Terminals.SpawnTerminals(m_Config.Terminals);
 		m_Markers.ShowCrashsite(m_Site);
-		if (m_Terminals.GetActiveTerminalConfig())
-			m_Markers.ShowTerminal(m_Terminals.GetActiveTerminalConfig());
 
 		CreateCombatZone();
 		SpawnInitialFactions();
@@ -195,6 +192,12 @@ class DZBBC_EventInstance
 		m_DataCore.Begin(player, m_Config.Main.DataCoreLifetimeSeconds);
 		SetState(DZBBC_DATACORE_EXTRACTED);
 		DZBBC_ServerRPC.BroadcastNotification(m_Config.Main.EventName, m_Config.Messages.DatacoreExtracted, 8.0);
+		m_Markers.Remove(DZBBC_CRASHSITE_MARKER_UID);
+		m_Terminals.SpawnTerminals(m_Config.Terminals);
+		if (m_Terminals.GetActiveTerminalConfig())
+			m_Markers.ShowTerminal(m_Terminals.GetActiveTerminalConfig());
+		else
+			DZBBC_Utils.Error("No decrypt terminal could be spawned after blackbox hack.");
 		SetState(DZBBC_DATACORE_TRANSPORT_ACTIVE);
 	}
 
@@ -400,6 +403,7 @@ class DZBBC_EventInstance
 		}
 
 		SetState(DZBBC_BLACKBOX_SIGNAL_FOUND);
+		m_Markers.ShowBlackbox(m_Site);
 		DZBBC_Utils.Log("Blackbox phase active: interaction unlocked at " + m_Blackbox.GetPosition().ToString());
 	}
 
