@@ -547,9 +547,13 @@ class DZKOTHG_Manager
 
 		if (m_Settings && m_Settings.UseExpansionNotify == 1)
 		{
+#ifdef EXPANSIONMOD
 			NotificationSystem.Create_Expansion("DeutschZ KOTH", message, "Trader", ARGB(255, 255, 196, 0), 10.0);
 			Print("[DZKOTHG] Expansion notify: " + message);
 			return;
+#else
+			Print("[DZKOTHG][WARN] Expansion notify requested but Expansion is not loaded. Using vanilla notify.");
+#endif
 		}
 
 		array<Man> players = new array<Man>;
@@ -596,6 +600,7 @@ class DZKOTHG_Manager
 
 	protected bool BroadcastExpansionMarker(DZKOTHG_ZoneSettings zone, bool remove)
 	{
+#ifdef EXPANSIONMODNAVIGATION
 		if (!zone)
 			return false;
 
@@ -629,6 +634,10 @@ class DZKOTHG_Manager
 
 		Print("[DZKOTHG][WARN] Expansion 3D marker could not be created for " + zone.ZoneName);
 		return false;
+#else
+		Print("[DZKOTHG][WARN] Expansion 3D marker requested but Expansion navigation is not loaded.");
+		return false;
+#endif
 	}
 
 	protected DZKOTHG_ZoneSettings GetZoneByFoXyName(string zoneName)

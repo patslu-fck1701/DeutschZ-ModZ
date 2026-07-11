@@ -18,8 +18,6 @@ class CfgPatches
 			"DZ_Gear_Containers",
 			"DZ_Gear_Tools",
 			"DZ_Weapons_Explosives",
-			"DayZExpansion_Core_Scripts",
-			"DayZExpansion_Navigation_Scripts",
 			"FoXyKOTH_Core"
 		};
 	};

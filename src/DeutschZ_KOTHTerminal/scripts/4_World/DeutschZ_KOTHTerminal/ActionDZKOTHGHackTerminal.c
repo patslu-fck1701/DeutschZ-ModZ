@@ -50,9 +50,7 @@ class ActionDZKOTHGHackTerminal : ActionContinuousBase
 		if (!player.IsAlive() || player.IsUnconscious())
 			return false;
 
-		Object targetObject = target.GetObject();
-		if (!targetObject && target.GetParent())
-			targetObject = target.GetParent();
+		Object targetObject = DZKOTHG_GetTerminalTarget(target);
 
 		DZ_KOTHTerminal terminal = DZ_KOTHTerminal.Cast(targetObject);
 		if (!terminal || !terminal.DZKOTHG_IsGateTerminal())
@@ -71,9 +69,7 @@ class ActionDZKOTHGHackTerminal : ActionContinuousBase
 		if (!action_data || !action_data.m_Player || !action_data.m_Target)
 			return;
 
-		Object terminal = action_data.m_Target.GetObject();
-		if (!terminal && action_data.m_Target.GetParent())
-			terminal = action_data.m_Target.GetParent();
+		Object terminal = DZKOTHG_GetTerminalTarget(action_data.m_Target);
 
 		DZKOTHG_Manager.GetInstance().OnHackStarted(action_data.m_Player, terminal);
 	}
@@ -87,11 +83,7 @@ class ActionDZKOTHGHackTerminal : ActionContinuousBase
 
 		Object terminal;
 		if (action_data.m_Target)
-		{
-			terminal = action_data.m_Target.GetObject();
-			if (!terminal && action_data.m_Target.GetParent())
-				terminal = action_data.m_Target.GetParent();
-		}
+			terminal = DZKOTHG_GetTerminalTarget(action_data.m_Target);
 
 		DZKOTHG_Manager.GetInstance().OnHackEnded(action_data.m_Player, terminal);
 	}
@@ -101,10 +93,24 @@ class ActionDZKOTHGHackTerminal : ActionContinuousBase
 		if (!action_data || !action_data.m_Player || !action_data.m_Target)
 			return;
 
-		Object terminal = action_data.m_Target.GetObject();
-		if (!terminal && action_data.m_Target.GetParent())
-			terminal = action_data.m_Target.GetParent();
+		Object terminal = DZKOTHG_GetTerminalTarget(action_data.m_Target);
 
 		DZKOTHG_Manager.GetInstance().CompleteTerminalHack(action_data.m_Player, terminal);
+	}
+
+	protected Object DZKOTHG_GetTerminalTarget(ActionTarget target)
+	{
+		if (!target)
+			return null;
+
+		Object targetObject = target.GetObject();
+		if (DZ_KOTHTerminal.Cast(targetObject))
+			return targetObject;
+
+		Object parentObject = target.GetParent();
+		if (DZ_KOTHTerminal.Cast(parentObject))
+			return parentObject;
+
+		return targetObject;
 	}
 }
