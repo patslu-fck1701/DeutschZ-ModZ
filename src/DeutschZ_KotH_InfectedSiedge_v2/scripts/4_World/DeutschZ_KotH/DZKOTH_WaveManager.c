@@ -23,12 +23,12 @@ class DZKOTH_WaveManager
 					continue;
 
 				spawnedForPlayer = true;
-				SpawnWaveAround(player.GetPosition(), wave, mainConfig, totalGoal);
+				SpawnWaveAround(player.GetPosition(), wave, mainConfig, fallbackCenter, totalGoal);
 			}
 		}
 
 		if (!spawnedForPlayer)
-			SpawnWaveAround(fallbackCenter, wave, mainConfig, totalGoal);
+			SpawnWaveAround(fallbackCenter, wave, mainConfig, fallbackCenter, totalGoal);
 	}
 
 	void Cleanup()
@@ -102,11 +102,11 @@ class DZKOTH_WaveManager
 		return multiplier;
 	}
 
-	protected void SpawnWaveAround(vector origin, DZKOTH_WaveConfig wave, DZKOTH_MainConfig mainConfig, int totalGoal = 0)
+	protected void SpawnWaveAround(vector origin, DZKOTH_WaveConfig wave, DZKOTH_MainConfig mainConfig, vector eventCenter, int totalGoal = 0)
 	{
 		int count = GetWaveCount(wave);
 		for (int i = 0; i < count; i++)
-			SpawnOne(origin, wave, mainConfig, totalGoal);
+			SpawnOne(origin, wave, mainConfig, eventCenter, totalGoal);
 	}
 
 	protected int GetWaveCount(DZKOTH_WaveConfig wave)
@@ -122,10 +122,10 @@ class DZKOTH_WaveManager
 		return Math.RandomIntInclusive(min, max);
 	}
 
-	protected void SpawnOne(vector origin, DZKOTH_WaveConfig wave, DZKOTH_MainConfig mainConfig, int totalGoal = 0)
+	protected void SpawnOne(vector origin, DZKOTH_WaveConfig wave, DZKOTH_MainConfig mainConfig, vector eventCenter, int totalGoal = 0)
 	{
 		string type = wave.Types.Get(Math.RandomIntInclusive(0, wave.Types.Count() - 1));
-		vector spawnPos = FindSpawnPosition(origin, mainConfig.SpawnMinDistance, mainConfig.SpawnMaxDistance);
+		vector spawnPos = FindSpawnPosition(origin, mainConfig.SpawnMinDistance, mainConfig.SpawnMaxDistance, eventCenter, mainConfig.CaptureRadius + 3.0);
 		EntityAI infected = EntityAI.Cast(GetGame().CreateObjectEx(type, spawnPos, ECE_PLACE_ON_SURFACE | ECE_INITAI | ECE_EQUIP_ATTACHMENTS));
 		if (!infected)
 		{
@@ -142,7 +142,7 @@ class DZKOTH_WaveManager
 			DZKOTH_Utils.Log("Zombie spawned " + m_Spawned.Count().ToString());
 	}
 
-	protected vector FindSpawnPosition(vector origin, float minDistance, float maxDistance)
+	protected vector FindSpawnPosition(vector origin, float minDistance, float maxDistance, vector eventCenter, float exclusionRadius)
 	{
 		if (minDistance < 8.0)
 			minDistance = 8.0;
@@ -150,18 +150,19 @@ class DZKOTH_WaveManager
 			maxDistance = minDistance + 10.0;
 
 		vector pos = origin;
-		for (int attempt = 0; attempt < 10; attempt++)
+		for (int attempt = 0; attempt < 20; attempt++)
 		{
 			float angle = Math.RandomFloatInclusive(0.0, 6.28318);
 			float distance = Math.RandomFloatInclusive(minDistance, maxDistance);
 			pos = origin + Vector(Math.Cos(angle) * distance, 0, Math.Sin(angle) * distance);
 			pos = DZKOTH_Utils.Grounded(pos);
 
-			if (!GetGame().SurfaceIsSea(pos[0], pos[2]))
+			if (!GetGame().SurfaceIsSea(pos[0], pos[2]) && vector.Distance(pos, eventCenter) > exclusionRadius)
 				return pos;
 		}
 
-		return DZKOTH_Utils.Grounded(origin);
+		float fallbackDistance = exclusionRadius + 5.0;
+		return DZKOTH_Utils.Grounded(eventCenter + Vector(fallbackDistance, 0, 0));
 	}
 
 	protected void ApplyWaveStats(EntityAI infected, DZKOTH_WaveConfig wave)
@@ -175,11 +176,17 @@ class DZKOTH_WaveManager
 		if (baseHealth <= 0.0)
 			baseHealth = 100.0;
 
-		float healthMultiplier = wave.HealthMultiplier;
-		if (healthMultiplier <= 0.0)
-			healthMultiplier = 1.0;
+		float targetHealth = wave.ForcedHealth;
+		if (targetHealth <= 0.0)
+		{
+			float healthMultiplier = wave.HealthMultiplier;
+			if (healthMultiplier <= 0.0)
+				healthMultiplier = 1.0;
 
-		infected.SetHealth("", "Health", baseHealth * healthMultiplier);
+			targetHealth = baseHealth * healthMultiplier;
+		}
+
+		infected.SetHealth("", "Health", targetHealth);
 
 		if (wave.DisableRunning)
 		{

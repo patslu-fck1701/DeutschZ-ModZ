@@ -104,7 +104,7 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 		if (particleId <= 0)
 			return;
 
-		m_DZKOTH_SmokeParticle = ParticleManager.GetInstance().PlayOnObject(particleId, this, "0 5.5 0", vector.Zero, true);
+		m_DZKOTH_SmokeParticle = ParticleManager.GetInstance().PlayOnObject(particleId, this, "0 13 0", vector.Zero, true);
 	}
 
 	protected int DZKOTH_GetSmokeParticleId()
@@ -156,6 +156,7 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 class DZKOTH_SmokeManager
 {
 	static const int SMOKE_REFRESH_MS = 45000;
+	static const float SMOKE_HEIGHT_OFFSET = 13.0;
 
 	protected DZKOTH_EventFlagpole m_Flagpole;
 	protected Object m_ServerSmoke;
@@ -252,11 +253,14 @@ class DZKOTH_SmokeManager
 		if (!GetGame() || !m_Flagpole)
 			return;
 
-		vector smokePos = m_Flagpole.GetPosition() + "0 5.5 0";
-		m_ServerSmoke = GetGame().CreateObjectEx(smokeType, smokePos, ECE_PLACE_ON_SURFACE);
+		vector smokePos = m_Flagpole.GetPosition() + Vector(0, SMOKE_HEIGHT_OFFSET, 0);
+		m_ServerSmoke = GetGame().CreateObjectEx(smokeType, smokePos, ECE_NONE);
 		SmokeGrenadeBase smoke = SmokeGrenadeBase.Cast(m_ServerSmoke);
 		if (smoke)
+		{
+			smoke.SetPosition(smokePos);
 			smoke.SetSmokeGrenadeState(ESmokeGrenadeState.START);
+		}
 	}
 
 	protected void StartSmokeRefresh()

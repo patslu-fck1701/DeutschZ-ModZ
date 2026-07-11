@@ -33,7 +33,7 @@ class DZKOTH_EventManager
 		StartEvent();
 	}
 
-	bool StartEvent(int locationIndex = 0)
+	bool StartEvent(int locationIndex = -1)
 	{
 		if (!m_Config || !m_Config.Main || m_Config.Main.Enabled == 0)
 		{
@@ -54,11 +54,30 @@ class DZKOTH_EventManager
 		}
 
 		if (locationIndex < 0 || locationIndex >= m_Config.Locations.Locations.Count())
-			locationIndex = 0;
+			locationIndex = Math.RandomInt(0, m_Config.Locations.Locations.Count());
 
 		DZKOTH_LocationConfig location = m_Config.Locations.Locations.Get(locationIndex);
 		m_Instance = new DZKOTH_EventInstance(m_Config, location);
 		return m_Instance.Start();
+	}
+
+	void ScheduleNextEvent()
+	{
+		if (!GetGame() || !m_Config || !m_Config.Main)
+			return;
+
+		int delayMs = m_Config.Main.EventCooldownMinutes * 60000;
+		if (delayMs < 60000)
+			delayMs = 60000;
+
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(StartNextEvent);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(StartNextEvent, delayMs, false);
+		DZKOTH_Utils.Log("Next event scheduled in " + m_Config.Main.EventCooldownMinutes.ToString() + " minute(s).");
+	}
+
+	protected void StartNextEvent()
+	{
+		StartEvent(-1);
 	}
 
 	void StopEvent()

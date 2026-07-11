@@ -7,4 +7,4 @@ tooltip = "DeutschZ KotH Infected Siege v2";
 overview = "Server-authoritative Vybor Airfield King of the Hill event with optional Expansion notify and marker support, zombie prephase, SeaChest action, statusbar and vanilla fallback.";
 action = "";
 author = "DeutschZ";
-version = "0.3.0";
+version = "0.4.0";

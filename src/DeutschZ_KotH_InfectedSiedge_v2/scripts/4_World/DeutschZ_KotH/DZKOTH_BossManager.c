@@ -12,6 +12,28 @@ class DZKOTH_BossManager
 		Cleanup();
 
 		vector bossPos = DZKOTH_Utils.Grounded(location.GetBossSpawnPosition());
+		return SpawnBossAt(bossPos, mainConfig);
+	}
+
+	bool SpawnBossNearPlayer(PlayerBase player, DZKOTH_LocationConfig location, DZKOTH_MainConfig mainConfig)
+	{
+		if (!GetGame() || !mainConfig)
+			return false;
+
+		Cleanup();
+
+		vector origin = "0 0 0";
+		if (player)
+			origin = player.GetPosition();
+		else if (location)
+			origin = location.GetPosition();
+
+		vector bossPos = FindSpawnPosition(origin, mainConfig.BossSpawnMinDistance, mainConfig.BossSpawnMaxDistance);
+		return SpawnBossAt(bossPos, mainConfig);
+	}
+
+	protected bool SpawnBossAt(vector bossPos, DZKOTH_MainConfig mainConfig)
+	{
 		m_Boss = CreateBossEntity(DZKOTH_Const.BOSS_CLASSNAME, bossPos);
 		if (!m_Boss)
 			m_Boss = CreateBossEntity("DZKOTH_BosZZombie", bossPos);
@@ -31,8 +53,40 @@ class DZKOTH_BossManager
 			m_DamageMultiplier = 1.0;
 
 		m_Boss.SetHealth("", "Health", m_MaxHealth);
+		DisableRunning(m_Boss);
 		DZKOTH_Utils.Log("BosZ Zombie spawned with " + m_MaxHealth.ToString() + " HP at " + bossPos.ToString());
 		return true;
+	}
+
+	protected vector FindSpawnPosition(vector origin, float minDistance, float maxDistance)
+	{
+		if (minDistance < 8.0)
+			minDistance = 8.0;
+		if (maxDistance < minDistance)
+			maxDistance = minDistance + 6.0;
+
+		vector pos = origin;
+		for (int attempt = 0; attempt < 12; attempt++)
+		{
+			float angle = Math.RandomFloatInclusive(0.0, 6.28318);
+			float distance = Math.RandomFloatInclusive(minDistance, maxDistance);
+			pos = origin + Vector(Math.Cos(angle) * distance, 0, Math.Sin(angle) * distance);
+			pos = DZKOTH_Utils.Grounded(pos);
+
+			if (!GetGame().SurfaceIsSea(pos[0], pos[2]))
+				return pos;
+		}
+
+		return DZKOTH_Utils.Grounded(origin);
+	}
+
+	protected void DisableRunning(EntityAI boss)
+	{
+		if (!boss)
+			return;
+
+		boss.SetHealth("LeftLeg", "Health", 0.0);
+		boss.SetHealth("RightLeg", "Health", 0.0);
 	}
 
 	protected EntityAI CreateBossEntity(string className, vector bossPos)

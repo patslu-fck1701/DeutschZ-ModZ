@@ -25,4 +25,5 @@ class DZKOTH_FXIds
 	static const int KEYCARD_SIGNAL = 4;
 	static const int CLEAR = 5;
 	static const int FIREWORKS = 6;
+	static const int BOSS_SPAWN = 7;
 }

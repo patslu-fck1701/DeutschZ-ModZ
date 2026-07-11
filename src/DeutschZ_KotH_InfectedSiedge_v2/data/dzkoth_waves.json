@@ -1,44 +1,47 @@
 {
-  "WaveOne": {
-    "TriggerProgress": 0.0,
-    "InfectedCountMin": 5,
-    "InfectedCountMax": 5,
-    "HealthMultiplier": 1.0,
-    "DamageMultiplier": 1.0,
-    "VisualEyes": "",
-    "DisableRunning": false,
-    "Types": [
-      "ZmbM_SoldierNormal_Base",
-      "ZmbM_PatrolNormal_Autumn",
-      "ZmbM_PatrolNormal_Flat"
-    ]
-  },
-  "WaveTwo": {
-    "TriggerProgress": 33.0,
-    "InfectedCountMin": 3,
-    "InfectedCountMax": 3,
-    "HealthMultiplier": 2.0,
-    "DamageMultiplier": 2.0,
-    "VisualEyes": "",
-    "DisableRunning": false,
-    "Types": [
-      "ZmbM_SoldierNormal_Base",
-      "ZmbM_PatrolNormal_Autumn",
-      "ZmbM_PatrolNormal_Flat"
-    ]
-  },
-  "WaveThree": {
-    "TriggerProgress": 66.0,
-    "InfectedCountMin": 3,
-    "InfectedCountMax": 3,
-    "HealthMultiplier": 5.0,
-    "DamageMultiplier": 5.0,
-    "VisualEyes": "Red",
-    "DisableRunning": true,
-    "Types": [
-      "ZmbM_SoldierNormal_Base",
-      "ZmbM_PatrolNormal_Autumn",
-      "ZmbM_PatrolNormal_Flat"
-    ]
-  }
+    "WaveOne":  {
+                    "TriggerProgress":  0,
+                    "InfectedCountMin":  5,
+                    "InfectedCountMax":  5,
+                    "HealthMultiplier":  1,
+                    "DamageMultiplier":  1,
+                    "VisualEyes":  "",
+                    "DisableRunning":  false,
+                    "Types":  [
+                                  "ZmbM_HunterOld_Autumn",
+                                  "ZmbM_HunterOld_Spring",
+                                  "ZmbM_HunterOld_Winter",
+                                  "ZmbM_HermitSkinny_Beige"
+                              ],
+                    "ForcedHealth":  0
+                },
+    "WaveTwo":  {
+                    "TriggerProgress":  45,
+                    "InfectedCountMin":  4,
+                    "InfectedCountMax":  4,
+                    "HealthMultiplier":  1,
+                    "DamageMultiplier":  2,
+                    "VisualEyes":  "",
+                    "DisableRunning":  true,
+                    "Types":  [
+                                  "ZmbM_SoldierNormal_Base",
+                                  "ZmbM_PatrolNormal_Autumn",
+                                  "ZmbM_PatrolNormal_Flat",
+                                  "ZmbM_usSoldier_normal_Woodland"
+                              ],
+                    "ForcedHealth":  1000
+                },
+    "WaveThree":  {
+                      "TriggerProgress":  80,
+                      "InfectedCountMin":  1,
+                      "InfectedCountMax":  1,
+                      "HealthMultiplier":  1,
+                      "DamageMultiplier":  1,
+                      "VisualEyes":  "Red",
+                      "DisableRunning":  false,
+                      "Types":  [
+                                    "ZmbM_Mummy"
+                                ],
+                      "ForcedHealth":  0
+                  }
 }

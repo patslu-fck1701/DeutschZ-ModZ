@@ -20,12 +20,16 @@ class DZKOTH_MainConfig
 	int EventDurationMinutes;
 	int EventCooldownMinutes;
 	int CleanupDelayMinutes;
+	int RewardDespawnMinutes;
+	float ProgressHudRadius;
 	float TickSeconds;
 	float SpawnMinDistance;
 	float SpawnMaxDistance;
 	float BossWarningSeconds;
 	float BossHealth;
 	float BossDamageMultiplier;
+	float BossSpawnMinDistance;
+	float BossSpawnMaxDistance;
 	float KeycardChancePercent;
 	bool GlobalKeycardAnnouncement;
 	bool PermanentTracking;
@@ -43,7 +47,7 @@ class DZKOTH_MainConfig
 		UseExpansionNotify = true;
 		UseExpansionMarkers = true;
 		EventName = "DeutschZ KotH";
-		CaptureRadius = 35.0;
+		CaptureRadius = 25.0;
 		CaptureTimeSeconds = 300;
 		ChestActionDurationSeconds = 60;
 		ZombieCount = 5;
@@ -57,18 +61,22 @@ class DZKOTH_MainConfig
 		EventIntervalMinutes = 60;
 		EventDurationMinutes = 45;
 		EventCooldownMinutes = 60;
-		CleanupDelayMinutes = 5;
+		CleanupDelayMinutes = 10;
+		RewardDespawnMinutes = 10;
+		ProgressHudRadius = 500.0;
 		TickSeconds = 1.0;
 		SpawnMinDistance = 8.0;
 		SpawnMaxDistance = 25.0;
 		BossWarningSeconds = 4.0;
 		BossHealth = 7500.0;
-		BossDamageMultiplier = 8.0;
+		BossDamageMultiplier = 10.0;
+		BossSpawnMinDistance = 12.0;
+		BossSpawnMaxDistance = 18.0;
 		KeycardChancePercent = 100.0;
 		GlobalKeycardAnnouncement = true;
 		PermanentTracking = false;
 		DebugCommandsEnabled = true;
-		RequireTerminalHackBeforeCapture = true;
+		RequireTerminalHackBeforeCapture = false;
 		TerminalHackSeconds = 60;
 		TerminalHackDecayEnabled = false;
 		TerminalHackDecayPerSecond = 0.5;
@@ -183,6 +191,7 @@ class DZKOTH_WaveConfig
 	int InfectedCountMax;
 	float HealthMultiplier;
 	float DamageMultiplier;
+	float ForcedHealth;
 	string VisualEyes;
 	bool DisableRunning;
 	ref array<string> Types;
@@ -194,6 +203,7 @@ class DZKOTH_WaveConfig
 		InfectedCountMax = 5;
 		HealthMultiplier = 1.0;
 		DamageMultiplier = 1.0;
+		ForcedHealth = 0.0;
 		VisualEyes = "";
 		DisableRunning = false;
 		Types = new array<string>;
@@ -219,6 +229,8 @@ class DZKOTH_WavesConfig
 		WaveTwo.InfectedCountMax = 3;
 		WaveTwo.HealthMultiplier = 2.0;
 		WaveTwo.DamageMultiplier = 2.0;
+		WaveTwo.ForcedHealth = 1000.0;
+		WaveTwo.DisableRunning = true;
 
 		WaveThree = new DZKOTH_WaveConfig;
 		WaveThree.TriggerProgress = 66.0;
@@ -497,7 +509,7 @@ class DZKOTH_Config
 		bundle.Main.ProgressLossWhenEmpty = profile.ProgressLossWhenEmpty;
 		bundle.Main.ProgressLossPerSecond = profile.ProgressLossPerSecond;
 		bundle.Main.EnemyPlayersBlockCapture = profile.EnemyPlayersBlockCapture;
-		bundle.Main.RequireTerminalHackBeforeCapture = true;
+		bundle.Main.RequireTerminalHackBeforeCapture = false;
 		bundle.Main.TerminalHackDecayEnabled = false;
 
 		if (bundle.Main.CaptureTimeSeconds < 1)
@@ -509,7 +521,19 @@ class DZKOTH_Config
 		if (bundle.Main.ZombieCount < 1)
 			bundle.Main.ZombieCount = 5;
 		if (bundle.Main.CaptureRadius <= 0.0)
-			bundle.Main.CaptureRadius = 35.0;
+			bundle.Main.CaptureRadius = 25.0;
+		if (bundle.Main.ProgressHudRadius <= 0.0)
+			bundle.Main.ProgressHudRadius = 500.0;
+		if (bundle.Main.RewardDespawnMinutes < 1)
+			bundle.Main.RewardDespawnMinutes = 10;
+		if (bundle.Main.CleanupDelayMinutes < 1)
+			bundle.Main.CleanupDelayMinutes = 10;
+		if (bundle.Main.BossDamageMultiplier < 1.0)
+			bundle.Main.BossDamageMultiplier = 10.0;
+		if (bundle.Main.BossSpawnMinDistance <= 0.0)
+			bundle.Main.BossSpawnMinDistance = 12.0;
+		if (bundle.Main.BossSpawnMaxDistance < bundle.Main.BossSpawnMinDistance)
+			bundle.Main.BossSpawnMaxDistance = bundle.Main.BossSpawnMinDistance + 6.0;
 		if (bundle.Main.ZombieSpawnRadius <= 0.0)
 			bundle.Main.ZombieSpawnRadius = 25.0;
 		if (bundle.Main.SpawnMaxDistance < bundle.Main.SpawnMinDistance)
@@ -563,6 +587,7 @@ class DZKOTH_Config
 		bundle.Waves.WaveOne.TriggerProgress = 0.0;
 		bundle.Waves.WaveOne.HealthMultiplier = 1.0;
 		bundle.Waves.WaveOne.DamageMultiplier = 1.0;
+		bundle.Waves.WaveOne.ForcedHealth = 0.0;
 		bundle.Waves.WaveOne.DisableRunning = false;
 
 		if (profile.ZombieTypes && profile.ZombieTypes.Count() > 0)

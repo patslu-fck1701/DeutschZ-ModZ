@@ -1,6 +1,6 @@
 class DZKOTH_Const
 {
-	static const string VERSION = "0.3.0-koth-vybor";
+	static const string VERSION = "0.4.0-koth-event";
 	static const string LOG_PREFIX = "[DeutschZ_KotH] ";
 	static const string MOD_PREFIX = "DeutschZ_KOTH_InfectedSiege";
 
@@ -18,7 +18,8 @@ class DZKOTH_Const
 	static const string BOSS_NAME = "BosZ Zombie";
 	static const string BOSS_CLASSNAME = "ZmbM_Mummy";
 	static const string KEYCARD_CLASSNAME = "DZKOTH_BattlegroundZ_Keycard";
-	static const string REWARD_CRATE_CLASSNAME = "DZKOTH_RewardCrate";
+	static const string REWARD_CRATE_CLASSNAME = "DZKOTH_RewardBarrel";
+	static const string FIREWORKS_BATTERY_CLASSNAME = "DeutschZ_FireworksLauncher";
 	static const string BOSS_CORPSE_CLASSNAME = "DZKOTH_BossCorpse";
 	static const string FLAGPOLE_CLASSNAME = "DZKOTH_EventFlagpole";
 	static const string FLAG_CLASSNAME = "DZKOTH_EventFlag";

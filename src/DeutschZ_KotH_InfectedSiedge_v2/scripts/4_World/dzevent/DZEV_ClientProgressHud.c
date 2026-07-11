@@ -69,7 +69,39 @@ class DZEV_ClientProgressHud
 			return;
 
 		StopMusic();
-		m_Music = SEffectManager.PlaySound("Music_Menu_SoundSet", pos, 0, 0, true);
+		m_Music = SEffectManager.PlaySound("DZKOTH_EventMusic_SoundSet", pos, 0, 0, true);
+	}
+
+	void PlayEventStart(vector pos)
+	{
+		PlayMusic(pos);
+		PlayStartSiren(pos);
+	}
+
+	void PlayStartSiren(vector pos)
+	{
+		if (!GetGame())
+			return;
+
+		StopSiren();
+		m_Siren = SEffectManager.PlaySound("UndergroundDoor_Alarm_Loop_SoundSet", pos, 0, 0, true);
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(StopSiren, 7000, false);
+	}
+
+	void PlayAncientScream(vector pos)
+	{
+		if (!GetGame())
+			return;
+
+		StopSiren();
+		m_Siren = SEffectManager.PlaySound("ZmbM_Mummy_DisturbedIdle_Soundset", pos, 0, 0, false);
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(StopSiren, 7000, false);
+	}
+
+	void PlayBossSpawnEffect(vector pos)
+	{
+		FlashRed();
+		PlayBossAlarm(pos);
 	}
 
 	void StopMusic()

@@ -2,13 +2,15 @@ class DZKOTH_LootManager
 {
 	protected EntityAI m_RewardCrate;
 	protected EntityAI m_BossCorpse;
+	protected int m_RewardDespawnMs;
 
 	void SpawnRewards(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig, DZKOTH_MainConfig mainConfig)
 	{
 		if (!GetGame() || !location)
 			return;
 
-		Cleanup();
+		CleanupRewardCrate();
+		CleanupBossCorpse();
 
 		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetRewardCratePosition());
 		m_BossCorpse = SpawnContainer(DZKOTH_Const.BOSS_CORPSE_CLASSNAME, location.GetBossSpawnPosition() + "1.2 0 1.2");
@@ -26,14 +28,17 @@ class DZKOTH_LootManager
 
 		if (m_BossCorpse && mainConfig && !HasInventoryItem(m_BossCorpse, DZKOTH_Const.KEYCARD_CLASSNAME))
 			TryCreateKeycard(m_BossCorpse, mainConfig.KeycardChancePercent);
+
+		ScheduleRewardCleanup(mainConfig);
 	}
 
-	void SpawnRewardCrate(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig)
+	void SpawnRewardCrate(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig, DZKOTH_MainConfig mainConfig = null)
 	{
 		if (!GetGame() || !location)
 			return;
 
-		Cleanup();
+		CleanupRewardCrate();
+		CleanupBossCorpse();
 
 		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetRewardCratePosition());
 		if (m_RewardCrate)
@@ -44,6 +49,8 @@ class DZKOTH_LootManager
 
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
+
+		ScheduleRewardCleanup(mainConfig);
 	}
 
 	void Cleanup()
@@ -51,12 +58,60 @@ class DZKOTH_LootManager
 		if (!GetGame())
 			return;
 
-		if (m_RewardCrate)
+		CleanupBossCorpse();
+	}
+
+	protected void ScheduleRewardCleanup(DZKOTH_MainConfig mainConfig)
+	{
+		if (!GetGame() || !m_RewardCrate)
+			return;
+
+		int minutes = 10;
+		if (mainConfig && mainConfig.RewardDespawnMinutes > 0)
+			minutes = mainConfig.RewardDespawnMinutes;
+
+		m_RewardDespawnMs = minutes * 60000;
+		if (m_RewardDespawnMs < 60000)
+			m_RewardDespawnMs = 60000;
+
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CheckRewardCrateEmpty);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CleanupRewardCrate);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CheckRewardCrateEmpty, 10000, true);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupRewardCrate, m_RewardDespawnMs, false);
+	}
+
+	protected void CheckRewardCrateEmpty()
+	{
+		if (!m_RewardCrate)
+		{
+			if (GetGame())
+				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CheckRewardCrateEmpty);
+			return;
+		}
+
+		if (IsContainerEmpty(m_RewardCrate))
+			CleanupRewardCrate();
+	}
+
+	protected void CleanupRewardCrate()
+	{
+		if (GetGame())
+		{
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CheckRewardCrateEmpty);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CleanupRewardCrate);
+		}
+
+		if (m_RewardCrate && GetGame())
 			GetGame().ObjectDelete(m_RewardCrate);
-		if (m_BossCorpse)
-			GetGame().ObjectDelete(m_BossCorpse);
 
 		m_RewardCrate = null;
+	}
+
+	protected void CleanupBossCorpse()
+	{
+		if (m_BossCorpse && GetGame())
+			GetGame().ObjectDelete(m_BossCorpse);
+
 		m_BossCorpse = null;
 	}
 
@@ -138,5 +193,21 @@ class DZKOTH_LootManager
 		}
 
 		return false;
+	}
+
+	protected bool IsContainerEmpty(EntityAI container)
+	{
+		if (!container || !container.GetInventory())
+			return true;
+
+		array<EntityAI> items = new array<EntityAI>;
+		container.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+		foreach (EntityAI item: items)
+		{
+			if (item && item != container)
+				return false;
+		}
+
+		return true;
 	}
 }

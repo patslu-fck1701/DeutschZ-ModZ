@@ -69,14 +69,14 @@ modded class LoadingScreen
 		if (m_TextWidgetTitle)
 		{
 			m_TextWidgetTitle.Show(true);
-			m_TextWidgetTitle.SetPos(0, 0.175);
+			m_TextWidgetTitle.SetPos(0, 0.225);
 			m_TextWidgetTitle.SetText("DeutschZ Jokes");
 		}
 
 		if (m_TextWidgetStatus)
 		{
 			m_TextWidgetStatus.Show(true);
-			m_TextWidgetStatus.SetPos(0, 0.147);
+			m_TextWidgetStatus.SetPos(0, 0.197);
 			m_TextWidgetStatus.SetText(DZKOTHG_GetCurrentJoke());
 		}
 	}
@@ -151,7 +151,7 @@ modded class LoadingScreen
 	}
 };
 
-modded class LoginTimeBase extends UIScriptedMenu
+modded class LoginTimeBase
 {
 	override void Show()
 	{
@@ -196,7 +196,7 @@ modded class LoginTimeBase extends UIScriptedMenu
 	}
 };
 
-modded class LoginQueueBase extends UIScriptedMenu
+modded class LoginQueueBase
 {
 	override void Show()
 	{
