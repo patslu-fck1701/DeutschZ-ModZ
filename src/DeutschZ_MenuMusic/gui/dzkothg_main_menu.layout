@@ -361,6 +361,7 @@ FrameWidgetClass main_menu_root {
    "stretch mode" stretch_w_h
   }
   ImageWidgetClass dz_ground_ring {
+   visible 0
    ignorepointer 1
    position 716 728
    size 470 96

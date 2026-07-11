@@ -18,6 +18,7 @@ class DZ_KOTHTerminal : Land_Radio_PanelBig
 
 	override void SetActions()
 	{
+		super.SetActions();
 		AddAction(ActionDZKOTHGHackTerminal);
 	}
 

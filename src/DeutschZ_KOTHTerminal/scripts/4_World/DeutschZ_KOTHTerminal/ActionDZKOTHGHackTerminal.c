@@ -23,7 +23,7 @@ class ActionDZKOTHGHackTerminal : ActionContinuousBase
 
 	override void CreateConditionComponents()
 	{
-		m_ConditionTarget = new CCTNone;
+		m_ConditionTarget = new CCTObject(UAMaxDistances.DEFAULT);
 		m_ConditionItem = new CCINone;
 	}
 
