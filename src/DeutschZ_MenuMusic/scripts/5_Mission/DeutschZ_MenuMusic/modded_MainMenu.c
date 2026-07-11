@@ -70,6 +70,15 @@ modded class MainMenu
 		m_DZKOTHG_NewsTitle      = TextWidget.Cast(layoutRoot.FindAnyWidget("dz_news_title"));
 		m_DZKOTHG_NewsBody       = MultilineTextWidget.Cast(layoutRoot.FindAnyWidget("dz_news_body"));
 
+		if (m_DZKOTHG_Tagline)
+			m_DZKOTHG_Tagline.SetColor(DZKOTHG_UITheme.PrimaryText());
+		if (m_DZKOTHG_StatusText)
+			m_DZKOTHG_StatusText.SetColor(DZKOTHG_UITheme.BrandGreen());
+		if (m_DZKOTHG_NewsTitle)
+			m_DZKOTHG_NewsTitle.SetColor(DZKOTHG_UITheme.BrandGreen());
+		if (m_DZKOTHG_NewsBody)
+			m_DZKOTHG_NewsBody.SetColor(DZKOTHG_UITheme.PrimaryText());
+
 		m_Version                = TextWidget.Cast(layoutRoot.FindAnyWidget("version"));
 		m_ModdedWarning          = TextWidget.Cast(layoutRoot.FindAnyWidget("ModdedWarning"));
 		m_PlayerName             = TextWidget.Cast(layoutRoot.FindAnyWidget("character_name_text"));
@@ -142,7 +151,7 @@ modded class MainMenu
 	protected void DZKOTHG_UpdateCustomText()
 	{
 		if (m_DZKOTHG_Tagline)
-			m_DZKOTHG_Tagline.SetText("GUNZ | HELIZ | CARZ | TRADERZ");
+			m_DZKOTHG_Tagline.SetText("DeutschZ - GunZ | HeliZ | TraderZ discord.gg/FHzZ7BykFk");
 
 		if (m_DZKOTHG_StatusText)
 			m_DZKOTHG_StatusText.SetText("ONLINE " + DZKOTHG_SERVER_IP + ":" + DZKOTHG_SERVER_PORT.ToString() + " | " + DZKOTHG_MenuContentStore.GetNextServerMessage());
@@ -175,6 +184,71 @@ modded class MainMenu
 
 		Print("[DZKOTHG][CLIENT] Direct Connect -> " + DZKOTHG_SERVER_IP + ":" + DZKOTHG_SERVER_PORT.ToString());
 		GetGame().ConnectFromServerBrowser(DZKOTHG_SERVER_IP, DZKOTHG_SERVER_PORT, "");
+	}
+
+	protected void DZKOTHG_SetMenuImage(string widgetName, string imagePath)
+	{
+		if (!layoutRoot)
+			return;
+
+		ImageWidget image = ImageWidget.Cast(layoutRoot.FindAnyWidget(widgetName));
+		if (!image)
+			return;
+
+		image.LoadImageFile(0, imagePath);
+		image.SetImage(0);
+	}
+
+	override bool OnMouseEnter(Widget w, int x, int y)
+	{
+		if (w == m_Play)
+			DZKOTHG_SetMenuImage("play_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/play_now_hover.paa");
+		else if (w == m_ChooseServer)
+			DZKOTHG_SetMenuImage("choose_server_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/server_suchen_hover.paa");
+		else if (w == m_CustomizeCharacter)
+			DZKOTHG_SetMenuImage("customize_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/charakter_hover.paa");
+		else if (w == m_DZKOTHG_VoteButton)
+			DZKOTHG_SetMenuImage("vote_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/vote_hover.paa");
+		else if (w == m_SettingsButton)
+			DZKOTHG_SetMenuImage("settings_image", "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_settings_hover.paa");
+		else if (w == m_Exit)
+			DZKOTHG_SetMenuImage("exit_image", "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_power_hover.paa");
+		else if (w == m_DZKOTHG_DiscordButton)
+			DZKOTHG_SetMenuImage("discord_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/discord_hover.paa");
+		else if (w == m_MessageButton)
+			DZKOTHG_SetMenuImage("website_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/website_hover.paa");
+		else if (w == m_PrevCharacter)
+			DZKOTHG_SetMenuImage("prev_img", "DeutschZ_MenuMusic/gui/menu_assets/arrows/19_arrow_left_hover.paa");
+		else if (w == m_NextCharacter)
+			DZKOTHG_SetMenuImage("next_img", "DeutschZ_MenuMusic/gui/menu_assets/arrows/20_arrow_right_hover.paa");
+
+		return super.OnMouseEnter(w, x, y);
+	}
+
+	override bool OnMouseLeave(Widget w, Widget enterW, int x, int y)
+	{
+		if (w == m_Play)
+			DZKOTHG_SetMenuImage("play_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/play_now_normal.paa");
+		else if (w == m_ChooseServer)
+			DZKOTHG_SetMenuImage("choose_server_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/server_suchen_normal.paa");
+		else if (w == m_CustomizeCharacter)
+			DZKOTHG_SetMenuImage("customize_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/charakter_normal.paa");
+		else if (w == m_DZKOTHG_VoteButton)
+			DZKOTHG_SetMenuImage("vote_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/vote_normal.paa");
+		else if (w == m_SettingsButton)
+			DZKOTHG_SetMenuImage("settings_image", "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_settings_normal.paa");
+		else if (w == m_Exit)
+			DZKOTHG_SetMenuImage("exit_image", "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_power_normal.paa");
+		else if (w == m_DZKOTHG_DiscordButton)
+			DZKOTHG_SetMenuImage("discord_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/discord_normal.paa");
+		else if (w == m_MessageButton)
+			DZKOTHG_SetMenuImage("website_image", "DeutschZ_MenuMusic/gui/darkglass_v1/02_buttons_text/website_normal.paa");
+		else if (w == m_PrevCharacter)
+			DZKOTHG_SetMenuImage("prev_img", "DeutschZ_MenuMusic/gui/menu_assets/arrows/19_arrow_left_normal.paa");
+		else if (w == m_NextCharacter)
+			DZKOTHG_SetMenuImage("next_img", "DeutschZ_MenuMusic/gui/menu_assets/arrows/20_arrow_right_normal.paa");
+
+		return super.OnMouseLeave(w, enterW, x, y);
 	}
 
 	override bool OnMouseButtonDown(Widget w, int x, int y, int button)

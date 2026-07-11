@@ -1,0 +1,97 @@
+FrameWidgetClass DZKOTHG_LoadingOverlay {
+ visible 1
+ ignorepointer 1
+ position 0 0
+ size 1 1
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ priority 9800
+ {
+  PanelWidgetClass DZKOTHG_LoadingBottomPanel {
+   color 0.025 0.03 0.027 0.88
+   position 0 0.79
+   size 1 0.21
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+  }
+  PanelWidgetClass DZKOTHG_LoadingAccent {
+   color 0.76 0 0.09 1
+   position 0 0.79
+   size 1 0.006
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+  }
+  ImageWidgetClass DZKOTHG_LoadingLogo {
+   position 0.035 0.812
+   size 0.085 0.16
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/logos/Logo_Dark.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass DZKOTHG_LoadingTitle {
+   position 0.14 0.815
+   size 0.72 0.045
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text "DEUTSCHZ"
+   font "gui/fonts/sdf_MetronBook24"
+   "text halign" center
+   "text valign" center
+   color 0.76 0 0.09 1
+  }
+  TextWidgetClass DZKOTHG_LoadingStatus {
+   position 0.14 0.858
+   size 0.72 0.06
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text ""
+   font "gui/fonts/sdf_MetronBook24"
+   "text halign" center
+   "text valign" center
+   color 0.95 0.95 0.93 1
+  }
+  TextWidgetClass DZKOTHG_LoadingProgressText {
+   position 0.14 0.925
+   size 0.72 0.045
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text "DEUTSCHZ LAEDT"
+   font "gui/fonts/sdf_MetronBook24"
+   "text halign" center
+   "text valign" center
+   color 0.94 0.94 0.92 1
+  }
+  ProgressBarWidgetClass DZKOTHG_LoadingBar {
+   position 0 0.985
+   size 1 0.015
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Stamina
+   current 0
+   vertical 0
+   flipped 0
+   color 0.76 0 0.09 1
+  }
+ }
+}

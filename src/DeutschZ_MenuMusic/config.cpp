@@ -111,7 +111,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "1.0.0";
+		version = "1.1.0";
 		type = "mod";
 		dependencies[] =
 		{

@@ -3,6 +3,34 @@ modded class LoadingScreen
 	protected float m_DZKOTHG_SlideshowTime;
 	protected string m_DZKOTHG_CurrentImage;
 	protected ref DZKOTHG_LoadingEntry m_DZKOTHG_CurrentEntry;
+	protected Widget m_DZKOTHG_LoadingOverlay;
+	protected ImageWidget m_DZKOTHG_LoadingLogo;
+
+	void LoadingScreen(DayZGame game)
+	{
+		if (!game || !game.GetLoadingWorkspace() || !m_WidgetRoot)
+			return;
+
+		m_DZKOTHG_LoadingOverlay = game.GetLoadingWorkspace().CreateWidgets("DeutschZ_MenuMusic/gui/dzkothg_loading_overlay.layout", m_WidgetRoot);
+		if (!m_DZKOTHG_LoadingOverlay)
+			return;
+
+		if (m_TextWidgetTitle)
+			m_TextWidgetTitle.Show(false);
+		if (m_TextWidgetStatus)
+			m_TextWidgetStatus.Show(false);
+		if (m_ProgressLoading)
+			m_ProgressLoading.Show(false);
+		if (m_ProgressText)
+			m_ProgressText.Show(false);
+
+		m_TextWidgetTitle = TextWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingTitle"));
+		m_TextWidgetStatus = TextWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingStatus"));
+		m_ProgressLoading = ProgressBarWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingBar"));
+		m_ProgressText = TextWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingProgressText"));
+		m_DZKOTHG_LoadingLogo = ImageWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingLogo"));
+		ProgressAsync.SetProgressData(m_ProgressLoading);
+	}
 
 	override void Show()
 	{
@@ -84,12 +112,14 @@ modded class LoadingScreen
 
 		if (m_ImageLogoMid)
 			m_ImageLogoMid.Show(false);
-
 		if (m_ImageLogoCorner)
+			m_ImageLogoCorner.Show(false);
+
+		if (m_DZKOTHG_LoadingLogo)
 		{
-			m_ImageLogoCorner.LoadImageFile(0, config.LogoPath);
-			m_ImageLogoCorner.SetImage(0);
-			m_ImageLogoCorner.Show(true);
+			m_DZKOTHG_LoadingLogo.LoadImageFile(0, config.LogoPath);
+			m_DZKOTHG_LoadingLogo.SetImage(0);
+			m_DZKOTHG_LoadingLogo.Show(true);
 		}
 
 		if (m_ModdedWarning)
@@ -115,37 +145,33 @@ modded class LoadingScreen
 		if (m_TextWidgetTitle)
 		{
 			m_TextWidgetTitle.Show(true);
-			m_TextWidgetTitle.SetPos(0, 0.125);
 			string title = "DEUTSCHZ";
 			if (m_DZKOTHG_CurrentEntry)
 				title = "DEUTSCHZ " + m_DZKOTHG_CurrentEntry.Category;
 			m_TextWidgetTitle.SetText(title);
-			m_TextWidgetTitle.SetColor(ARGB(255, 195, 0, 24));
+			m_TextWidgetTitle.SetColor(DZKOTHG_UITheme.BrandRed());
 		}
 
 		if (m_TextWidgetStatus)
 		{
 			m_TextWidgetStatus.Show(true);
-			m_TextWidgetStatus.SetPos(0, 0.097);
 			string status = "Willkommen bei DeutschZ.";
 			if (m_DZKOTHG_CurrentEntry)
 				status = m_DZKOTHG_CurrentEntry.Text;
 			m_TextWidgetStatus.SetText(status);
-			m_TextWidgetStatus.SetColor(ARGB(255, 235, 235, 235));
+			m_TextWidgetStatus.SetColor(DZKOTHG_UITheme.PrimaryText());
 		}
 	}
 
 	protected void DZKOTHG_StyleProgress()
 	{
 		if (m_ProgressLoading)
-			m_ProgressLoading.SetColor(ARGB(255, 195, 0, 24));
+			m_ProgressLoading.SetColor(DZKOTHG_UITheme.BrandRed());
 
 		if (m_ProgressText && m_ProgressLoading)
 		{
 			m_ProgressText.Show(true);
-			m_ProgressText.SetPos(0, 0.90);
-			m_ProgressText.SetSize(1, 0.055);
-			m_ProgressText.SetColor(ARGB(255, 235, 235, 235));
+			m_ProgressText.SetColor(DZKOTHG_UITheme.PrimaryText());
 			m_ProgressText.SetText("DEUTSCHZ LAEDT  " + Math.Round(m_ProgressLoading.GetCurrent()).ToString() + "%");
 		}
 	}
@@ -324,6 +350,6 @@ class DZKOTHG_DialogStyler
 
 		Widget separator = root.FindAnyWidget("SeparatorPanel");
 		if (separator)
-			separator.SetColor(ARGB(255, 195, 0, 24));
+			separator.SetColor(DZKOTHG_UITheme.BrandRed());
 	}
 }
