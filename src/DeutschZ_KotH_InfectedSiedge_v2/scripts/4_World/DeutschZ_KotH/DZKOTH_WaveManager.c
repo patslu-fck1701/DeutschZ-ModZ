@@ -128,7 +128,7 @@ class DZKOTH_WaveManager
 	protected void SpawnOne(vector origin, DZKOTH_WaveConfig wave, DZKOTH_MainConfig mainConfig, vector eventCenter, int totalGoal = 0)
 	{
 		string type = wave.Types.Get(Math.RandomIntInclusive(0, wave.Types.Count() - 1));
-		vector spawnPos = FindSpawnPosition(origin, mainConfig.SpawnMinDistance, mainConfig.SpawnMaxDistance, eventCenter, mainConfig.CaptureRadius + 3.0);
+		vector spawnPos = FindSpawnPosition(origin, mainConfig.SpawnMinDistance, mainConfig.SpawnMaxDistance, eventCenter, mainConfig.CaptureRadius);
 		EntityAI infected = EntityAI.Cast(GetGame().CreateObjectEx(type, spawnPos, ECE_PLACE_ON_SURFACE | ECE_INITAI | ECE_EQUIP_ATTACHMENTS));
 		if (!infected)
 		{

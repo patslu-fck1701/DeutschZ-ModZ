@@ -45,6 +45,9 @@ class DZKOTH_ClientHUD
 		else if (fx == DZKOTH_FXIds.KEYCARD_SIGNAL)
 			DZEV_ClientProgressHud.Get().PlayBossAlarm(pos);
 		else if (fx == DZKOTH_FXIds.CLEAR)
+		{
 			DZEV_ClientProgressHud.Get().StopMusic();
+			DZEV_ClientProgressHud.Get().StopSiren();
+		}
 	}
 }

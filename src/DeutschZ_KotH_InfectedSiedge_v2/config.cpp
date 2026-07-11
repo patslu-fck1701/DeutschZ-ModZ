@@ -40,7 +40,7 @@ class CfgSoundShaders
 	class DZKOTH_EventMusic_SoundShader
 	{
 		samples[] = {{"\DeutschZ_KOTH_InfectedSiege\sounds\dzkoth_anthem", 1}};
-		volume = 0.85;
+		volume = 0.425;
 	};
 };
 
@@ -125,7 +125,7 @@ class CfgVehicles
 		descriptionShort = "DeutschZ Lagerfass mit 500 Plaetzen.";
 		hiddenSelectionsTextures[] =
 		{
-			"\\DeutschZ_KOTH_InfectedSiege\\data\\items\\deutschz_barrel_green_co.paa"
+			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_barrel_green_co.paa"
 		};
 		itemSize[] = {10, 15};
 		weight = 10000;
@@ -144,8 +144,8 @@ class CfgVehicles
 		descriptionShort = "DeutschZ Feuerwerkswerfer mit 25-m-Nebelsignal.";
 		hiddenSelectionsTextures[] =
 		{
-			"\\DeutschZ_KOTH_InfectedSiege\\data\\items\\deutschz_fireworkslauncher_co.paa",
-			"\\DeutschZ_KOTH_InfectedSiege\\data\\items\\deutschz_fireworkslauncher_co.paa"
+			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_fireworkslauncher_co.paa",
+			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_fireworkslauncher_co.paa"
 		};
 	};
 

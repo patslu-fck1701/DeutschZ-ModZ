@@ -73,7 +73,7 @@ class DZEV_ClientProgressRenderer
 			m_Value.SetText(valueText);
 		if (m_Progress)
 		{
-			m_Progress.SetColor(ARGB(255, 190, 0, 20));
+			m_Progress.SetColor(ARGB(255, 46, 184, 46));
 			m_Progress.SetCurrent(percent);
 		}
 	}

@@ -463,31 +463,31 @@ FrameWidgetClass main_menu_root {
   }
   TextWidgetClass dz_news_title {
    ignorepointer 1
-   position 1348 130
-   size 424 30
+   position 1332 122
+   size 456 44
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
    text "SERVER INFO"
-   font "gui/fonts/sdf_MetronLight24"
+   font "gui/fonts/sdf_MetronBook24"
    "text halign" center
    "text valign" center
-   color 0.85 1 0.58 1
+   color 0.38 0.95 0.16 1
   }
   MultilineTextWidgetClass dz_news_body {
    ignorepointer 1
-   position 1344 174
-   size 432 132
+   position 1332 170
+   size 456 146
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
    text ""
-   font "gui/fonts/MetronLight16"
+   font "gui/fonts/sdf_MetronBook24"
    "text halign" left
    "text valign" top
-   color 0.86 0.90 0.82 1
+   color 0.96 0.97 0.94 1
   }
   ImageWidgetClass dz_stats_panel {
    ignorepointer 1

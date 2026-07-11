@@ -184,6 +184,11 @@ class DZKOTH_EventInstance
 
 	void CleanupEvent(bool returnToReady = false)
 	{
+		vector cleanupPos = vector.Zero;
+		if (m_Location)
+			cleanupPos = m_Location.GetPosition();
+		DZKOTH_ServerRPC.BroadcastFXGlobal(DZKOTH_FXIds.CLEAR, cleanupPos);
+
 		if (GetGame())
 		{
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(Tick);

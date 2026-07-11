@@ -51,7 +51,7 @@ class DZKOTH_MainConfig
 		CaptureTimeSeconds = 300;
 		ChestActionDurationSeconds = 60;
 		ZombieCount = 5;
-		ZombieSpawnRadius = 25.0;
+		ZombieSpawnRadius = 35.0;
 		MarkerName = "DeutschZ KotH";
 		EnemyPlayersBlockCapture = true;
 		ProgressLossWhenEmpty = false;
@@ -65,8 +65,8 @@ class DZKOTH_MainConfig
 		RewardDespawnMinutes = 10;
 		ProgressHudRadius = 500.0;
 		TickSeconds = 1.0;
-		SpawnMinDistance = 8.0;
-		SpawnMaxDistance = 25.0;
+		SpawnMinDistance = 28.0;
+		SpawnMaxDistance = 35.0;
 		BossWarningSeconds = 4.0;
 		BossHealth = 7500.0;
 		BossDamageMultiplier = 10.0;
@@ -532,8 +532,8 @@ class DZKOTH_Config
 		bundle.Main.ZombieCount = profile.ZombieCount;
 		bundle.Main.CaptureRadius = profile.CaptureRadius;
 		bundle.Main.ZombieSpawnRadius = profile.ZombieSpawnRadius;
-		bundle.Main.SpawnMinDistance = bundle.Main.CaptureRadius + 5.0;
-		bundle.Main.SpawnMaxDistance = bundle.Main.CaptureRadius + 20.0;
+		bundle.Main.SpawnMinDistance = bundle.Main.CaptureRadius + 3.0;
+		bundle.Main.SpawnMaxDistance = bundle.Main.CaptureRadius + 10.0;
 		bundle.Main.MarkerName = profile.MarkerName;
 		bundle.Main.ProgressLossWhenEmpty = profile.ProgressLossWhenEmpty;
 		bundle.Main.ProgressLossPerSecond = profile.ProgressLossPerSecond;

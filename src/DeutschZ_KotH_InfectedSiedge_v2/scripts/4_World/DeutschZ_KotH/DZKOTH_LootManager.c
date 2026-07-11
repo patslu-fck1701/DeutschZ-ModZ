@@ -3,6 +3,7 @@ class DZKOTH_LootManager
 	protected EntityAI m_RewardCrate;
 	protected EntityAI m_BossCorpse;
 	protected int m_RewardDespawnMs;
+	protected bool m_RewardWasFilled;
 
 	void SpawnRewards(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig, DZKOTH_MainConfig mainConfig)
 	{
@@ -24,6 +25,7 @@ class DZKOTH_LootManager
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
 
 		EnsureRewardFallbackLoot(m_RewardCrate);
+		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
 		LogRewardContents(m_RewardCrate);
 
 		if (m_BossCorpse && lootConfig)
@@ -54,6 +56,7 @@ class DZKOTH_LootManager
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
 
 		EnsureRewardFallbackLoot(m_RewardCrate);
+		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
 		LogRewardContents(m_RewardCrate);
 
 		ScheduleRewardCleanup(mainConfig);
@@ -82,7 +85,7 @@ class DZKOTH_LootManager
 
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CheckRewardCrateEmpty);
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CleanupRewardCrate);
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CheckRewardCrateEmpty, 10000, true);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CheckRewardCrateEmpty, 30000, true);
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupRewardCrate, m_RewardDespawnMs, false);
 	}
 
@@ -95,7 +98,7 @@ class DZKOTH_LootManager
 			return;
 		}
 
-		if (IsContainerEmpty(m_RewardCrate))
+		if (m_RewardWasFilled && IsContainerEmpty(m_RewardCrate))
 			CleanupRewardCrate();
 	}
 
@@ -111,6 +114,7 @@ class DZKOTH_LootManager
 			GetGame().ObjectDelete(m_RewardCrate);
 
 		m_RewardCrate = null;
+		m_RewardWasFilled = false;
 	}
 
 	protected void CleanupBossCorpse()
@@ -124,9 +128,21 @@ class DZKOTH_LootManager
 	protected EntityAI SpawnContainer(string type, vector position)
 	{
 		vector pos = DZKOTH_Utils.Grounded(position);
-		EntityAI container = EntityAI.Cast(GetGame().CreateObjectEx(type, pos, ECE_PLACE_ON_SURFACE));
+		EntityAI container = EntityAI.Cast(GetGame().CreateObjectEx(type, pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
+		if (!container && type == DZKOTH_Const.REWARD_CRATE_CLASSNAME)
+		{
+			DZKOTH_Utils.Warn("Primary reward barrel failed. Retrying DeutschZ_Barrel_Green.");
+			container = EntityAI.Cast(GetGame().CreateObjectEx("DeutschZ_Barrel_Green", pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
+		}
+		if (!container && type == DZKOTH_Const.REWARD_CRATE_CLASSNAME)
+		{
+			DZKOTH_Utils.Warn("DeutschZ reward barrel fallback failed. Retrying Barrel_Green.");
+			container = EntityAI.Cast(GetGame().CreateObjectEx("Barrel_Green", pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
+		}
 		if (!container)
 			DZKOTH_Utils.Warn("Could not spawn loot container " + type + " at " + pos.ToString());
+		else
+			DZKOTH_Utils.Log("Loot container created: " + container.GetType() + " at " + pos.ToString());
 
 		return container;
 	}

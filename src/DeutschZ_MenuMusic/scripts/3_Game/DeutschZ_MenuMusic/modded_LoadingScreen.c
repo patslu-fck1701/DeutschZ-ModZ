@@ -143,6 +143,8 @@ modded class LoadingScreen
 		if (m_ProgressText && m_ProgressLoading)
 		{
 			m_ProgressText.Show(true);
+			m_ProgressText.SetPos(0, 0.90);
+			m_ProgressText.SetSize(1, 0.055);
 			m_ProgressText.SetColor(ARGB(255, 235, 235, 235));
 			m_ProgressText.SetText("DEUTSCHZ LAEDT  " + Math.Round(m_ProgressLoading.GetCurrent()).ToString() + "%");
 		}

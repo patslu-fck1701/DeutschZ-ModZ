@@ -24,7 +24,7 @@ class DZKOTH_Const
 	static const string FLAGPOLE_CLASSNAME = "DZKOTH_EventFlagpole";
 	static const string FLAG_CLASSNAME = "DZKOTH_EventFlag";
 	static const string TERMINAL_CLASSNAME = "DZKOTH_EventTerminal";
-	static const string MARKER_ICON_NAME = "Territory";
+	static const string MARKER_ICON_NAME = "Skull 1";
 	static const string MARKER_ICON_PATH = "";
 	static const string ADMIN_COMMAND_PREFIX = "!dzkoth";
 	static const string ADMIN_COMMAND_PREFIX_ALT = "/dzkoth";
