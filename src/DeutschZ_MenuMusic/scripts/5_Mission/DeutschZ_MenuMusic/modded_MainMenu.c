@@ -5,6 +5,9 @@ modded class MainMenu
 	static const string DZKOTHG_WEBSITE_URL = "https://project23947.websitepublisher.ai/";
 	static const string DZKOTHG_DISCORD_URL = "https://discord.gg/FHzZ7BykFk";
 	static const string DZKOTHG_VOTE_URL = "https://de.top-games.net/dayz/vote/deutschz-gunz-heliz-carz-traderz-httpsdiscordggfhzz7bykfk";
+	static const string DZKOTHG_RULES_URL = "https://project23947.websitepublisher.ai/wiki.html";
+	static const string DZKOTHG_EVENTS_URL = "https://project23947.websitepublisher.ai/kothz.html";
+	static const string DZKOTHG_SHOP_URL = "https://project23947.websitepublisher.ai/shop.html";
 	static const string DZKOTHG_MENU_LAYOUT = "DeutschZ_MenuMusic/gui/dzkothg_main_menu.layout";
 
 	protected Widget m_DZKOTHG_VoteButton;
@@ -14,6 +17,15 @@ modded class MainMenu
 	protected TextWidget m_DZKOTHG_NewsTitle;
 	protected MultilineTextWidget m_DZKOTHG_NewsBody;
 	protected float m_DZKOTHG_ContentTimer;
+	protected Widget m_DZKOTHG_NavHome;
+	protected Widget m_DZKOTHG_NavServer;
+	protected Widget m_DZKOTHG_NavRules;
+	protected Widget m_DZKOTHG_NavSupport;
+	protected Widget m_DZKOTHG_NavEvents;
+	protected Widget m_DZKOTHG_NavShop;
+	protected Widget m_DZKOTHG_NavSettings;
+	protected Widget m_DZKOTHG_NavProfile;
+	protected Widget m_DZKOTHG_NavExit;
 
 	override Widget Init()
 	{
@@ -69,6 +81,15 @@ modded class MainMenu
 		m_DZKOTHG_StatusText     = TextWidget.Cast(layoutRoot.FindAnyWidget("dz_status_text"));
 		m_DZKOTHG_NewsTitle      = TextWidget.Cast(layoutRoot.FindAnyWidget("dz_news_title"));
 		m_DZKOTHG_NewsBody       = MultilineTextWidget.Cast(layoutRoot.FindAnyWidget("dz_news_body"));
+		m_DZKOTHG_NavHome        = layoutRoot.FindAnyWidget("dz_nav_home");
+		m_DZKOTHG_NavServer      = layoutRoot.FindAnyWidget("dz_nav_server");
+		m_DZKOTHG_NavRules       = layoutRoot.FindAnyWidget("dz_nav_rules");
+		m_DZKOTHG_NavSupport     = layoutRoot.FindAnyWidget("dz_nav_support");
+		m_DZKOTHG_NavEvents      = layoutRoot.FindAnyWidget("dz_nav_events");
+		m_DZKOTHG_NavShop        = layoutRoot.FindAnyWidget("dz_nav_shop");
+		m_DZKOTHG_NavSettings    = layoutRoot.FindAnyWidget("dz_nav_settings");
+		m_DZKOTHG_NavProfile     = layoutRoot.FindAnyWidget("dz_nav_profile");
+		m_DZKOTHG_NavExit        = layoutRoot.FindAnyWidget("dz_nav_exit");
 
 		if (m_DZKOTHG_Tagline)
 			m_DZKOTHG_Tagline.SetColor(DZKOTHG_UITheme.PrimaryText());
@@ -199,6 +220,16 @@ modded class MainMenu
 		image.SetImage(0);
 	}
 
+	protected void DZKOTHG_SetNavIcon(Widget button, string name, bool hovered)
+	{
+		if (!button)
+			return;
+		string state = "normal";
+		if (hovered)
+			state = "hover";
+		DZKOTHG_SetMenuImage("dz_nav_" + name + "_icon", "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_" + name + "_" + state + ".paa");
+	}
+
 	override bool OnMouseEnter(Widget w, int x, int y)
 	{
 		if (w == m_Play)
@@ -221,6 +252,24 @@ modded class MainMenu
 			DZKOTHG_SetMenuImage("prev_img", "DeutschZ_MenuMusic/gui/menu_assets/arrows/19_arrow_left_hover.paa");
 		else if (w == m_NextCharacter)
 			DZKOTHG_SetMenuImage("next_img", "DeutschZ_MenuMusic/gui/menu_assets/arrows/20_arrow_right_hover.paa");
+		else if (w == m_DZKOTHG_NavHome)
+			DZKOTHG_SetNavIcon(w, "home", true);
+		else if (w == m_DZKOTHG_NavServer)
+			DZKOTHG_SetNavIcon(w, "server", true);
+		else if (w == m_DZKOTHG_NavRules)
+			DZKOTHG_SetNavIcon(w, "rules", true);
+		else if (w == m_DZKOTHG_NavSupport)
+			DZKOTHG_SetNavIcon(w, "support", true);
+		else if (w == m_DZKOTHG_NavEvents)
+			DZKOTHG_SetNavIcon(w, "events", true);
+		else if (w == m_DZKOTHG_NavShop)
+			DZKOTHG_SetNavIcon(w, "shop", true);
+		else if (w == m_DZKOTHG_NavSettings)
+			DZKOTHG_SetNavIcon(w, "settings", true);
+		else if (w == m_DZKOTHG_NavProfile)
+			DZKOTHG_SetNavIcon(w, "profile", true);
+		else if (w == m_DZKOTHG_NavExit)
+			DZKOTHG_SetMenuImage("dz_nav_exit_icon", "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_power_hover.paa");
 
 		return super.OnMouseEnter(w, x, y);
 	}
@@ -247,6 +296,24 @@ modded class MainMenu
 			DZKOTHG_SetMenuImage("prev_img", "DeutschZ_MenuMusic/gui/menu_assets/arrows/19_arrow_left_normal.paa");
 		else if (w == m_NextCharacter)
 			DZKOTHG_SetMenuImage("next_img", "DeutschZ_MenuMusic/gui/menu_assets/arrows/20_arrow_right_normal.paa");
+		else if (w == m_DZKOTHG_NavHome)
+			DZKOTHG_SetNavIcon(w, "home", false);
+		else if (w == m_DZKOTHG_NavServer)
+			DZKOTHG_SetNavIcon(w, "server", false);
+		else if (w == m_DZKOTHG_NavRules)
+			DZKOTHG_SetNavIcon(w, "rules", false);
+		else if (w == m_DZKOTHG_NavSupport)
+			DZKOTHG_SetNavIcon(w, "support", false);
+		else if (w == m_DZKOTHG_NavEvents)
+			DZKOTHG_SetNavIcon(w, "events", false);
+		else if (w == m_DZKOTHG_NavShop)
+			DZKOTHG_SetNavIcon(w, "shop", false);
+		else if (w == m_DZKOTHG_NavSettings)
+			DZKOTHG_SetNavIcon(w, "settings", false);
+		else if (w == m_DZKOTHG_NavProfile)
+			DZKOTHG_SetNavIcon(w, "profile", false);
+		else if (w == m_DZKOTHG_NavExit)
+			DZKOTHG_SetMenuImage("dz_nav_exit_icon", "DeutschZ_MenuMusic/gui/menu_assets/icons/03_icon_power_normal.paa");
 
 		return super.OnMouseLeave(w, enterW, x, y);
 	}
@@ -357,6 +424,60 @@ modded class MainMenu
 			return true;
 		}
 
+		if (w == m_DZKOTHG_NavHome)
+		{
+			DZKOTHG_UpdateCustomText();
+			return true;
+		}
+
+		if (w == m_DZKOTHG_NavServer)
+		{
+			OpenMenuServerBrowser();
+			return true;
+		}
+
+		if (w == m_DZKOTHG_NavRules)
+		{
+			GetGame().OpenURL(DZKOTHG_RULES_URL);
+			return true;
+		}
+
+		if (w == m_DZKOTHG_NavSupport)
+		{
+			GetGame().OpenURL(DZKOTHG_DISCORD_URL);
+			return true;
+		}
+
+		if (w == m_DZKOTHG_NavEvents)
+		{
+			GetGame().OpenURL(DZKOTHG_EVENTS_URL);
+			return true;
+		}
+
+		if (w == m_DZKOTHG_NavShop)
+		{
+			GetGame().OpenURL(DZKOTHG_SHOP_URL);
+			return true;
+		}
+
+		if (w == m_DZKOTHG_NavSettings)
+		{
+			OpenSettings();
+			return true;
+		}
+
+		if (w == m_DZKOTHG_NavProfile)
+		{
+			OpenMenuCustomizeCharacter();
+			return true;
+		}
+
+		if (w == m_DZKOTHG_NavExit)
+		{
+			Exit();
+			return true;
+		}
+
 		return super.OnClick(w, x, y, button);
 	}
 
@@ -372,6 +493,9 @@ modded class MainMenu
 			return true;
 
 		if (w == m_NewsMain || w == m_NewsSec1 || w == m_NewsSec2 || w == m_PrevCharacter || w == m_NextCharacter)
+			return true;
+
+		if (w == m_DZKOTHG_NavHome || w == m_DZKOTHG_NavServer || w == m_DZKOTHG_NavRules || w == m_DZKOTHG_NavSupport || w == m_DZKOTHG_NavEvents || w == m_DZKOTHG_NavShop || w == m_DZKOTHG_NavSettings || w == m_DZKOTHG_NavProfile || w == m_DZKOTHG_NavExit)
 			return true;
 
 		return super.IsFocusable(w);

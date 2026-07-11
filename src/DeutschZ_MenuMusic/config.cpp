@@ -116,6 +116,7 @@ class CfgMods
 		dependencies[] =
 		{
 			"Game",
+			"World",
 			"Mission"
 		};
 
@@ -127,6 +128,14 @@ class CfgMods
 				files[] =
 				{
 					"DeutschZ_MenuMusic/scripts/3_Game"
+				};
+			};
+			class worldScriptModule
+			{
+				value = "";
+				files[] =
+				{
+					"DeutschZ_MenuMusic/scripts/4_World"
 				};
 			};
 			class missionScriptModule

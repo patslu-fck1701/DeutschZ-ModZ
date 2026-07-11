@@ -8,6 +8,7 @@ class CfgPatches
 			"DZKOTH_EventFlag",
 			"DeutschZ_Barrel_Green",
 			"DeutschZ_FireworksLauncher",
+			"DeutschZ_Regeln",
 			"DZKOTH_RewardBarrel",
 			"DZKOTH_EliteInfected",
 			"DZKOTH_Infected_250",
@@ -109,6 +110,7 @@ class CfgVehicles
 	class BaseBuildingBase;
 	class Flag_Base;
 	class PunchedCard;
+	class Paper;
 	class SeaChest;
 	class Barrel_Green;
 	class FireworksLauncher;
@@ -146,6 +148,36 @@ class CfgVehicles
 		{
 			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_fireworkslauncher_co.paa",
 			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_fireworkslauncher_co.paa"
+		};
+	};
+
+	class DeutschZ_Regeln : Paper
+	{
+		scope = 2;
+		displayName = "DeutschZ Regeln";
+		descriptionShort = "Die wichtigsten Regeln fuer DeutschZ. Lesen, verstehen und fair ueberleben.";
+		hiddenSelections[] = {"zbytek"};
+		hiddenSelectionsTextures[] =
+		{
+			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln_loot_paper_co.paa"
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 15;
+					healthLevels[] =
+					{
+						{1, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
+						{0.7, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
+						{0.5, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
+						{0.3, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
+						{0, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}}
+					};
+				};
+			};
 		};
 	};
 

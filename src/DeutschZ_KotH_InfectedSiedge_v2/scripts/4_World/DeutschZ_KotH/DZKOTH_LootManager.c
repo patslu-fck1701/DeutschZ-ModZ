@@ -24,7 +24,7 @@ class DZKOTH_LootManager
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
 
-		EnsureRewardFallbackLoot(m_RewardCrate);
+		EnsureRewardMinimumLoot(m_RewardCrate);
 		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
 		LogRewardContents(m_RewardCrate);
 
@@ -55,7 +55,7 @@ class DZKOTH_LootManager
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
 
-		EnsureRewardFallbackLoot(m_RewardCrate);
+		EnsureRewardMinimumLoot(m_RewardCrate);
 		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
 		LogRewardContents(m_RewardCrate);
 
@@ -176,25 +176,41 @@ class DZKOTH_LootManager
 		}
 	}
 
-	protected void EnsureRewardFallbackLoot(EntityAI container)
+	protected void EnsureRewardMinimumLoot(EntityAI container)
 	{
-		if (!container || CountInventoryItems(container) > 0)
+		if (!container)
 			return;
 
-		DZKOTH_Utils.Warn("Configured reward pool produced no cargo. Adding guaranteed vanilla fallback loot.");
-		CreateGuaranteedItems(container, "M4A1", 2);
-		CreateGuaranteedItems(container, "AKM", 2);
-		CreateGuaranteedItems(container, "Mag_STANAG_30Rnd", 8);
-		CreateGuaranteedItems(container, "Mag_AKM_30Rnd", 8);
-		CreateGuaranteedItems(container, "AmmoBox_556x45_20Rnd", 6);
-		CreateGuaranteedItems(container, "AmmoBox_762x39_20Rnd", 6);
-		CreateGuaranteedItems(container, "M67Grenade", 2);
+		int before = CountInventoryItems(container);
+		if (before < 60)
+		{
+			DZKOTH_Utils.Warn("Reward pool created only " + before.ToString() + " items. Adding guaranteed minimum stock.");
+			CreateGuaranteedItems(container, "M4A1", 4);
+			CreateGuaranteedItems(container, "AKM", 4);
+			CreateGuaranteedItems(container, "Mag_STANAG_30Rnd", 12);
+			CreateGuaranteedItems(container, "Mag_AKM_30Rnd", 12);
+			CreateGuaranteedItems(container, "AmmoBox_556x45_20Rnd", 10);
+			CreateGuaranteedItems(container, "AmmoBox_762x39_20Rnd", 10);
+			CreateGuaranteedItems(container, "M67Grenade", 4);
+			CreateGuaranteedItems(container, "M4_Suppressor", 2);
+			CreateGuaranteedItems(container, "AK_Suppressor", 2);
+			CreateGuaranteedItems(container, "ACOGOptic", 2);
+			CreateGuaranteedItems(container, "PSO1Optic", 2);
+		}
+
+		DZKOTH_Utils.Log("Reward minimum check: " + before.ToString() + " -> " + CountInventoryItems(container).ToString() + " items.");
 	}
 
 	protected void CreateGuaranteedItems(EntityAI container, string className, int count)
 	{
 		if (!container || !container.GetInventory())
 			return;
+
+		if (!GetGame().ConfigIsExisting("CfgVehicles " + className) && !GetGame().ConfigIsExisting("CfgWeapons " + className) && !GetGame().ConfigIsExisting("CfgMagazines " + className))
+		{
+			DZKOTH_Utils.Warn("Guaranteed reward classname missing: " + className);
+			return;
+		}
 
 		for (int i = 0; i < count; i++)
 		{
