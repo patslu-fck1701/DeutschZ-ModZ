@@ -4,7 +4,6 @@ class CfgPatches
 	{
 		units[] =
 		{
-			"DZ_KOTHTerminal",
 			"DeutschZ_Barrel_Green",
 			"DeutschZ_FireworksLauncher"
 		};
@@ -14,42 +13,16 @@ class CfgPatches
 		{
 			"DZ_Data",
 			"DZ_Scripts",
-			"DZ_Structures_Specific",
 			"DZ_Gear_Containers",
-			"DZ_Gear_Tools",
-			"DZ_Weapons_Explosives",
-			"DayZExpansion_Core_Scripts",
-			"DayZExpansion_Navigation_Scripts",
-			"FoXyKOTH_Core"
+			"DZ_Weapons_Explosives"
 		};
 	};
 };
 
 class CfgVehicles
 {
-	class Land_radio_panelbig;
 	class Barrel_Green;
 	class FireworksLauncher;
-
-	class DZ_KOTHTerminal: Land_radio_panelbig
-	{
-		scope = 2;
-		displayName = "DeutschZ KotH Terminal";
-		descriptionShort = "Aktivierungsterminal fuer DeutschZ KotH-Zonen.";
-		vehicleClass = "DeutschZ_Static";
-		carveNavmesh = 1;
-		weight = 0;
-		model = "\dz\structures\Specific\Radio\Radio_PanelBig.p3d";
-		hiddenSelections[] = {"control_panel"};
-		hiddenSelectionsTextures[] =
-		{
-			"\DeutschZ_KOTHTerminal\data\radio\dz_koth_terminal_control_panel_big_co.paa"
-		};
-		hiddenSelectionsMaterials[] =
-		{
-			"\DeutschZ_KOTHTerminal\data\radio\dz_koth_terminal_control_panel_big.rvmat"
-		};
-	};
 
 	class DeutschZ_Barrel_Green: Barrel_Green
 	{
@@ -90,7 +63,7 @@ class CfgMods
 		dir = "DeutschZ_KOTHTerminal";
 		picture = "";
 		action = "";
-		name = "DeutschZ KOTH Terminal";
+		name = "DeutschZ Items";
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
@@ -98,35 +71,17 @@ class CfgMods
 		type = "mod";
 		dependencies[] =
 		{
-			"Game",
-			"World",
-			"Mission"
+			"World"
 		};
 
 		class defs
 		{
-			class gameScriptModule
-			{
-				value = "";
-				files[] =
-				{
-					"DeutschZ_KOTHTerminal/scripts/3_Game"
-				};
-			};
 			class worldScriptModule
 			{
 				value = "";
 				files[] =
 				{
 					"DeutschZ_KOTHTerminal/scripts/4_World"
-				};
-			};
-			class missionScriptModule
-			{
-				value = "";
-				files[] =
-				{
-					"DeutschZ_KOTHTerminal/scripts/5_Mission"
 				};
 			};
 		};

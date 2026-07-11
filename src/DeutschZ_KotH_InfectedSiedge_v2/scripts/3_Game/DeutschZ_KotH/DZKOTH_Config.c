@@ -20,12 +20,16 @@ class DZKOTH_MainConfig
 	int EventDurationMinutes;
 	int EventCooldownMinutes;
 	int CleanupDelayMinutes;
+	int RewardDespawnMinutes;
+	float ProgressHudRadius;
 	float TickSeconds;
 	float SpawnMinDistance;
 	float SpawnMaxDistance;
 	float BossWarningSeconds;
 	float BossHealth;
 	float BossDamageMultiplier;
+	float BossSpawnMinDistance;
+	float BossSpawnMaxDistance;
 	float KeycardChancePercent;
 	bool GlobalKeycardAnnouncement;
 	bool PermanentTracking;
@@ -43,11 +47,11 @@ class DZKOTH_MainConfig
 		UseExpansionNotify = true;
 		UseExpansionMarkers = true;
 		EventName = "DeutschZ KotH";
-		CaptureRadius = 35.0;
+		CaptureRadius = 25.0;
 		CaptureTimeSeconds = 300;
 		ChestActionDurationSeconds = 60;
 		ZombieCount = 5;
-		ZombieSpawnRadius = 25.0;
+		ZombieSpawnRadius = 35.0;
 		MarkerName = "DeutschZ KotH";
 		EnemyPlayersBlockCapture = true;
 		ProgressLossWhenEmpty = false;
@@ -57,18 +61,22 @@ class DZKOTH_MainConfig
 		EventIntervalMinutes = 60;
 		EventDurationMinutes = 45;
 		EventCooldownMinutes = 60;
-		CleanupDelayMinutes = 5;
+		CleanupDelayMinutes = 10;
+		RewardDespawnMinutes = 10;
+		ProgressHudRadius = 500.0;
 		TickSeconds = 1.0;
-		SpawnMinDistance = 8.0;
-		SpawnMaxDistance = 25.0;
+		SpawnMinDistance = 28.0;
+		SpawnMaxDistance = 35.0;
 		BossWarningSeconds = 4.0;
 		BossHealth = 7500.0;
-		BossDamageMultiplier = 8.0;
+		BossDamageMultiplier = 10.0;
+		BossSpawnMinDistance = 12.0;
+		BossSpawnMaxDistance = 18.0;
 		KeycardChancePercent = 100.0;
 		GlobalKeycardAnnouncement = true;
 		PermanentTracking = false;
 		DebugCommandsEnabled = true;
-		RequireTerminalHackBeforeCapture = true;
+		RequireTerminalHackBeforeCapture = false;
 		TerminalHackSeconds = 60;
 		TerminalHackDecayEnabled = false;
 		TerminalHackDecayPerSecond = 0.5;
@@ -183,6 +191,7 @@ class DZKOTH_WaveConfig
 	int InfectedCountMax;
 	float HealthMultiplier;
 	float DamageMultiplier;
+	float ForcedHealth;
 	string VisualEyes;
 	bool DisableRunning;
 	ref array<string> Types;
@@ -194,6 +203,7 @@ class DZKOTH_WaveConfig
 		InfectedCountMax = 5;
 		HealthMultiplier = 1.0;
 		DamageMultiplier = 1.0;
+		ForcedHealth = 0.0;
 		VisualEyes = "";
 		DisableRunning = false;
 		Types = new array<string>;
@@ -208,26 +218,57 @@ class DZKOTH_WavesConfig
 	ref DZKOTH_WaveConfig WaveOne;
 	ref DZKOTH_WaveConfig WaveTwo;
 	ref DZKOTH_WaveConfig WaveThree;
+	ref DZKOTH_WaveConfig WaveFour;
+	ref DZKOTH_WaveConfig WaveFive;
 
 	void DZKOTH_WavesConfig()
 	{
 		WaveOne = new DZKOTH_WaveConfig;
+		WaveOne.TriggerProgress = 0.0;
+		WaveOne.InfectedCountMin = 3;
+		WaveOne.InfectedCountMax = 3;
+		WaveOne.ForcedHealth = 250.0;
+		WaveOne.Types.Clear();
+		WaveOne.Types.Insert("DZKOTH_Infected_250");
 
 		WaveTwo = new DZKOTH_WaveConfig;
-		WaveTwo.TriggerProgress = 33.0;
-		WaveTwo.InfectedCountMin = 3;
-		WaveTwo.InfectedCountMax = 3;
-		WaveTwo.HealthMultiplier = 2.0;
-		WaveTwo.DamageMultiplier = 2.0;
+		WaveTwo.TriggerProgress = 20.0;
+		WaveTwo.InfectedCountMin = 2;
+		WaveTwo.InfectedCountMax = 2;
+		WaveTwo.DamageMultiplier = 1.25;
+		WaveTwo.ForcedHealth = 400.0;
+		WaveTwo.Types.Clear();
+		WaveTwo.Types.Insert("DZKOTH_Infected_400");
 
 		WaveThree = new DZKOTH_WaveConfig;
-		WaveThree.TriggerProgress = 66.0;
-		WaveThree.InfectedCountMin = 3;
-		WaveThree.InfectedCountMax = 3;
-		WaveThree.HealthMultiplier = 5.0;
-		WaveThree.DamageMultiplier = 5.0;
-		WaveThree.VisualEyes = "Red";
+		WaveThree.TriggerProgress = 40.0;
+		WaveThree.InfectedCountMin = 2;
+		WaveThree.InfectedCountMax = 2;
+		WaveThree.DamageMultiplier = 1.5;
+		WaveThree.ForcedHealth = 600.0;
 		WaveThree.DisableRunning = true;
+		WaveThree.Types.Clear();
+		WaveThree.Types.Insert("DZKOTH_Infected_600");
+
+		WaveFour = new DZKOTH_WaveConfig;
+		WaveFour.TriggerProgress = 60.0;
+		WaveFour.InfectedCountMin = 3;
+		WaveFour.InfectedCountMax = 3;
+		WaveFour.DamageMultiplier = 1.75;
+		WaveFour.ForcedHealth = 800.0;
+		WaveFour.DisableRunning = true;
+		WaveFour.Types.Clear();
+		WaveFour.Types.Insert("DZKOTH_Infected_800");
+
+		WaveFive = new DZKOTH_WaveConfig;
+		WaveFive.TriggerProgress = 80.0;
+		WaveFive.InfectedCountMin = 2;
+		WaveFive.InfectedCountMax = 2;
+		WaveFive.DamageMultiplier = 2.0;
+		WaveFive.ForcedHealth = 1000.0;
+		WaveFive.DisableRunning = true;
+		WaveFive.Types.Clear();
+		WaveFive.Types.Insert("DZKOTH_Infected_1000");
 	}
 }
 
@@ -491,13 +532,13 @@ class DZKOTH_Config
 		bundle.Main.ZombieCount = profile.ZombieCount;
 		bundle.Main.CaptureRadius = profile.CaptureRadius;
 		bundle.Main.ZombieSpawnRadius = profile.ZombieSpawnRadius;
-		bundle.Main.SpawnMinDistance = 8.0;
-		bundle.Main.SpawnMaxDistance = profile.ZombieSpawnRadius;
+		bundle.Main.SpawnMinDistance = bundle.Main.CaptureRadius + 3.0;
+		bundle.Main.SpawnMaxDistance = bundle.Main.CaptureRadius + 10.0;
 		bundle.Main.MarkerName = profile.MarkerName;
 		bundle.Main.ProgressLossWhenEmpty = profile.ProgressLossWhenEmpty;
 		bundle.Main.ProgressLossPerSecond = profile.ProgressLossPerSecond;
 		bundle.Main.EnemyPlayersBlockCapture = profile.EnemyPlayersBlockCapture;
-		bundle.Main.RequireTerminalHackBeforeCapture = true;
+		bundle.Main.RequireTerminalHackBeforeCapture = false;
 		bundle.Main.TerminalHackDecayEnabled = false;
 
 		if (bundle.Main.CaptureTimeSeconds < 1)
@@ -509,7 +550,19 @@ class DZKOTH_Config
 		if (bundle.Main.ZombieCount < 1)
 			bundle.Main.ZombieCount = 5;
 		if (bundle.Main.CaptureRadius <= 0.0)
-			bundle.Main.CaptureRadius = 35.0;
+			bundle.Main.CaptureRadius = 25.0;
+		if (bundle.Main.ProgressHudRadius <= 0.0)
+			bundle.Main.ProgressHudRadius = 500.0;
+		if (bundle.Main.RewardDespawnMinutes < 1)
+			bundle.Main.RewardDespawnMinutes = 10;
+		if (bundle.Main.CleanupDelayMinutes < 1)
+			bundle.Main.CleanupDelayMinutes = 10;
+		if (bundle.Main.BossDamageMultiplier < 1.0)
+			bundle.Main.BossDamageMultiplier = 10.0;
+		if (bundle.Main.BossSpawnMinDistance <= 0.0)
+			bundle.Main.BossSpawnMinDistance = 12.0;
+		if (bundle.Main.BossSpawnMaxDistance < bundle.Main.BossSpawnMinDistance)
+			bundle.Main.BossSpawnMaxDistance = bundle.Main.BossSpawnMinDistance + 6.0;
 		if (bundle.Main.ZombieSpawnRadius <= 0.0)
 			bundle.Main.ZombieSpawnRadius = 25.0;
 		if (bundle.Main.SpawnMaxDistance < bundle.Main.SpawnMinDistance)
@@ -558,22 +611,8 @@ class DZKOTH_Config
 		if (!bundle || !bundle.Waves || !bundle.Waves.WaveOne || !profile)
 			return;
 
-		bundle.Waves.WaveOne.InfectedCountMin = bundle.Main.ZombieCount;
-		bundle.Waves.WaveOne.InfectedCountMax = bundle.Main.ZombieCount;
-		bundle.Waves.WaveOne.TriggerProgress = 0.0;
-		bundle.Waves.WaveOne.HealthMultiplier = 1.0;
-		bundle.Waves.WaveOne.DamageMultiplier = 1.0;
-		bundle.Waves.WaveOne.DisableRunning = false;
-
-		if (profile.ZombieTypes && profile.ZombieTypes.Count() > 0)
-		{
-			bundle.Waves.WaveOne.Types.Clear();
-			foreach (string zombieType: profile.ZombieTypes)
-			{
-				if (zombieType != "")
-					bundle.Waves.WaveOne.Types.Insert(zombieType);
-			}
-		}
+		// The staged DeutschZ wave sequence is authoritative. Legacy FoXy profile
+		// counts and zombie types must not overwrite it.
 	}
 
 	protected static void ApplyProfileLoot(DZKOTH_ConfigBundle bundle, DZKOTH_ProfileConfig profile)
@@ -581,7 +620,6 @@ class DZKOTH_Config
 		if (!bundle || !bundle.Loot || !profile || !profile.RewardLoot)
 			return;
 
-		bundle.Loot.RewardCrateLoot.Clear();
 		foreach (DZKOTH_ProfileLootEntry profileEntry: profile.RewardLoot)
 		{
 			if (!profileEntry || profileEntry.ClassName == "")
@@ -596,7 +634,25 @@ class DZKOTH_Config
 				entry.Min = 1;
 			if (entry.Max < entry.Min)
 				entry.Max = entry.Min;
-			bundle.Loot.RewardCrateLoot.Insert(entry);
+			MergeProfileLootEntry(bundle.Loot.RewardCrateLoot, entry);
 		}
+	}
+
+	protected static void MergeProfileLootEntry(array<ref DZKOTH_LootEntry> entries, DZKOTH_LootEntry candidate)
+	{
+		if (!entries || !candidate)
+			return;
+
+		foreach (DZKOTH_LootEntry existing: entries)
+		{
+			if (existing && existing.ClassName == candidate.ClassName)
+			{
+				existing.Min = existing.Min + candidate.Min;
+				existing.Max = existing.Max + candidate.Max;
+				return;
+			}
+		}
+
+		entries.Insert(candidate);
 	}
 }

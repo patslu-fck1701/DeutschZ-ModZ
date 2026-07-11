@@ -30,11 +30,13 @@ class DZKOTH_ClientHUD
 			return;
 
 		if (fx == DZKOTH_FXIds.EVENT_START)
-			DZEV_ClientProgressHud.Get().PlayMusic(pos);
+			DZEV_ClientProgressHud.Get().PlayEventStart(pos);
 		else if (fx == DZKOTH_FXIds.FIREWORKS)
 			DZEV_ClientProgressHud.Get().PlayFireworks(pos);
 		else if (fx == DZKOTH_FXIds.BOSS_WARNING)
-			DZEV_ClientProgressHud.Get().PlayBossAlarm(pos);
+			DZEV_ClientProgressHud.Get().PlayAncientScream(pos);
+		else if (fx == DZKOTH_FXIds.BOSS_SPAWN)
+			DZEV_ClientProgressHud.Get().PlayBossSpawnEffect(pos);
 		else if (fx == DZKOTH_FXIds.BOSS_DEATH)
 		{
 			DZEV_ClientProgressHud.Get().PlayFireworks(pos);
@@ -43,6 +45,9 @@ class DZKOTH_ClientHUD
 		else if (fx == DZKOTH_FXIds.KEYCARD_SIGNAL)
 			DZEV_ClientProgressHud.Get().PlayBossAlarm(pos);
 		else if (fx == DZKOTH_FXIds.CLEAR)
+		{
 			DZEV_ClientProgressHud.Get().StopMusic();
+			DZEV_ClientProgressHud.Get().StopSiren();
+		}
 	}
 }

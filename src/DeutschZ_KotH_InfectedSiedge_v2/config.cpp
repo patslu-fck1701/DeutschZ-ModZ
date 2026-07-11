@@ -4,20 +4,18 @@ class CfgPatches
 	{
 		units[] =
 		{
-			"DZEV_KOTH_Flagpole",
-			"DZEV_KOTH_Flag",
-			"DZEV_KOTH_KeyCard",
-			"DZEV_KOTH_SeaChest",
-			"DZEV_Infected_Stage2",
-			"DZEV_Infected_Stage3",
-			"DZEV_Boss_Mummy",
 			"DZKOTH_EventFlagpole",
 			"DZKOTH_EventFlag",
-			"DZKOTH_EventTerminal",
-			"DZKOTH_RewardCrate",
-			"DZKOTH_BossCorpse",
-			"DZKOTH_BattlegroundZ_Keycard",
+			"DeutschZ_Barrel_Green",
+			"DeutschZ_FireworksLauncher",
+			"DeutschZ_Regeln",
+			"DZKOTH_RewardBarrel",
 			"DZKOTH_EliteInfected",
+			"DZKOTH_Infected_250",
+			"DZKOTH_Infected_400",
+			"DZKOTH_Infected_600",
+			"DZKOTH_Infected_800",
+			"DZKOTH_Infected_1000",
 			"DZKOTH_BosZZombie"
 		};
 		weapons[] = {};
@@ -27,10 +25,34 @@ class CfgPatches
 			"DZ_Data",
 			"DZ_Scripts",
 			"DZ_Gear_Camping",
+			"DZ_Gear_Containers",
 			"DZ_Gear_Navigation",
+			"DZ_Gear_Tools",
 			"DZ_Gear_Consumables",
-			"DZ_Characters_Zombies"
+			"DZ_Weapons_Explosives",
+			"DZ_Characters_Zombies",
+			"DZ_Sounds_Effects"
 		};
+	};
+};
+
+class CfgSoundShaders
+{
+	class DZKOTH_EventMusic_SoundShader
+	{
+		samples[] = {{"\DeutschZ_KOTH_InfectedSiege\sounds\dzkoth_anthem", 1}};
+		volume = 0.425;
+	};
+};
+
+class CfgSoundSets
+{
+	class DZKOTH_EventMusic_SoundSet
+	{
+		soundShaders[] = {"DZKOTH_EventMusic_SoundShader"};
+		volumeFactor = 1;
+		frequencyFactor = 1;
+		spatial = 0;
 	};
 };
 
@@ -43,7 +65,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "0.3.0";
+		version = "0.4.0";
 		type = "mod";
 		dependencies[] =
 		{
@@ -88,14 +110,87 @@ class CfgVehicles
 	class BaseBuildingBase;
 	class Flag_Base;
 	class PunchedCard;
+	class Paper;
 	class SeaChest;
+	class Barrel_Green;
+	class FireworksLauncher;
 	class GPSReceiver;
 	class ZmbM_PolicemanSpecForce_Heavy;
+	class ZmbM_HunterOld_Autumn;
+	class ZmbM_SoldierNormal_Base;
 	class ZmbM_Mummy;
+
+	class DeutschZ_Barrel_Green : Barrel_Green
+	{
+		scope = 2;
+		displayName = "DeutschZ Fass";
+		descriptionShort = "DeutschZ Lagerfass mit 500 Plaetzen.";
+		hiddenSelectionsTextures[] =
+		{
+			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_barrel_green_co.paa"
+		};
+		itemSize[] = {10, 15};
+		weight = 10000;
+		class Cargo
+		{
+			itemsCargoSize[] = {10, 50};
+			openable = 0;
+			allowOwnedCargoManipulation = 1;
+		};
+	};
+
+	class DeutschZ_FireworksLauncher : FireworksLauncher
+	{
+		scope = 2;
+		displayName = "DeutschZ Feuerwerkswerfer";
+		descriptionShort = "DeutschZ Feuerwerkswerfer mit 25-m-Nebelsignal.";
+		hiddenSelectionsTextures[] =
+		{
+			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_fireworkslauncher_co.paa",
+			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_fireworkslauncher_co.paa"
+		};
+	};
+
+	class DeutschZ_Regeln : Paper
+	{
+		scope = 2;
+		displayName = "DeutschZ Regeln";
+		descriptionShort = "Die wichtigsten Regeln fuer DeutschZ. Lesen, verstehen und fair ueberleben.";
+		hiddenSelections[] = {"zbytek"};
+		hiddenSelectionsTextures[] =
+		{
+			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln_loot_paper_co.paa"
+		};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 15;
+					healthLevels[] =
+					{
+						{1, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
+						{0.7, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
+						{0.5, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
+						{0.3, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
+						{0, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}}
+					};
+				};
+			};
+		};
+	};
+
+	class DZKOTH_RewardBarrel : DeutschZ_Barrel_Green
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Reward Fass";
+		descriptionShort = "Unbewegliches 500-Slot-Reward-Fass des DeutschZ KotH Events.";
+	};
 
 	class DZKOTH_RewardCrate : SeaChest
 	{
-		scope = 2;
+		scope = 0;
 		displayName = "DeutschZ KotH Belohnungskiste";
 		descriptionShort = "Belohnungskiste nach erfolgreicher KotH-Eroberung.";
 		itemsCargoSize[] = {10,50};
@@ -108,7 +203,7 @@ class CfgVehicles
 
 	class DZKOTH_BossCorpse : SeaChest
 	{
-		scope = 2;
+		scope = 0;
 		displayName = "BosZ Remains";
 		descriptionShort = "Searchable remains of the BosZ Zombie. Story items can appear here.";
 		itemsCargoSize[] = {10,50};
@@ -121,7 +216,7 @@ class CfgVehicles
 
 	class DZKOTH_BattlegroundZ_Keycard : PunchedCard
 	{
-		scope = 2;
+		scope = 0;
 		displayName = "DeutschZ BattlegroundZ Keycard";
 		descriptionShort = "An unstable story keycard connected to DeutschZ BattlegroundZ.";
 	};
@@ -132,10 +227,82 @@ class CfgVehicles
 		displayName = "DeutschZ KotH Elite Infected";
 	};
 
+	class DZKOTH_Infected_250 : ZmbM_HunterOld_Autumn
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Hunter 250";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 250; };
+			};
+		};
+	};
+
+	class DZKOTH_Infected_400 : ZmbM_PolicemanSpecForce_Heavy
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Police 400";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 400; };
+			};
+		};
+	};
+
+	class DZKOTH_Infected_600 : ZmbM_SoldierNormal_Base
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Military 600";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 600; };
+			};
+		};
+	};
+
+	class DZKOTH_Infected_800 : ZmbM_SoldierNormal_Base
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Military 800";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 800; };
+			};
+		};
+	};
+
+	class DZKOTH_Infected_1000 : ZmbM_SoldierNormal_Base
+	{
+		scope = 2;
+		displayName = "DeutschZ KotH Military 1000";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 1000; };
+			};
+		};
+	};
+
 	class DZKOTH_BosZZombie : ZmbM_Mummy
 	{
 		scope = 2;
 		displayName = "BosZ Zombie";
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health { hitpoints = 7500; };
+			};
+		};
 	};
 
 	class DZKOTH_EventFlagpole : StaticFlagPole
@@ -181,7 +348,7 @@ class CfgVehicles
 
 	class DZKOTH_EventTerminal : SeaChest
 	{
-		scope = 2;
+		scope = 0;
 		displayName = "DeutschZ KotH Versorgungskiste";
 		descriptionShort = "Eventkiste. Nach gesicherter Zone 60 Sekunden aufbrechen, um den Fahnenmast zu aktivieren.";
 		itemsCargoSize[] = {10,50};
@@ -225,14 +392,14 @@ class CfgVehicles
 
 	class DZEV_KOTH_KeyCard : PunchedCard
 	{
-		scope = 2;
+		scope = 0;
 		displayName = "DeutschZ K.o.t.H Keycard";
 		descriptionShort = "Event keycard for the Infected Siege encounter.";
 	};
 
 	class DZEV_KOTH_SeaChest : SeaChest
 	{
-		scope = 2;
+		scope = 0;
 		displayName = "DeutschZ K.o.t.H Siege Chest";
 		descriptionShort = "Reward chest for the Infected Siege event.";
 		itemsCargoSize[] = {10,50};

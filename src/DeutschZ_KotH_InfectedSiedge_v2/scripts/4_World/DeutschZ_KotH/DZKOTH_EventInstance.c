@@ -20,6 +20,14 @@ class DZKOTH_EventInstance
 	protected int m_ZombieGoal;
 	protected int m_LastZombieKilledCount;
 	protected int m_LastLoggedCaptureTen;
+	protected PlayerBase m_CaptureStarter;
+	protected bool m_WaveOneSpawned;
+	protected bool m_WaveTwoSpawned;
+	protected bool m_WaveThreeSpawned;
+	protected bool m_WaveFourSpawned;
+	protected bool m_WaveFiveSpawned;
+	protected bool m_BossWarningSent;
+	protected bool m_BossDeathHandled;
 
 	void DZKOTH_EventInstance(DZKOTH_ConfigBundle config, DZKOTH_LocationConfig location)
 	{
@@ -54,16 +62,13 @@ class DZKOTH_EventInstance
 		float radius = GetCaptureRadius();
 		m_Trigger.Setup(this, radius);
 
-		if (!m_TerminalHack.SpawnTerminal(m_Location))
-		{
-			DZKOTH_Utils.Error("Could not spawn SeaChest event object.");
-			return false;
-		}
+		m_Smoke.Setup(m_Location.GetFlagPosition(), m_Location.GetFlagOrientation());
+		m_Smoke.SetReady();
+		m_Smoke.SetFlagRaiseProgress(0.0);
 
-		m_State = DZKOTH_States.ANNOUNCED;
+		m_State = DZKOTH_States.WAITING_FOR_PLAYER;
 		m_Markers.ShowReady(m_Location);
-		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH wurde aktiviert.", "Sichere die Zone, hacke die Versorgungskiste und hisse die Flagge.", 10.0);
-		StartZombiePrephase();
+		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH wurde aktiviert.", "Betrete die Zone und halte den Mast.", 10.0);
 		StartTick();
 
 		DZKOTH_Utils.Log("Event started: " + m_Location.Name);
@@ -102,8 +107,12 @@ class DZKOTH_EventInstance
 			BroadcastChestHudToOnlinePlayers();
 		else if (m_State == DZKOTH_States.TERMINAL_HACK_ACTIVE)
 			TickTerminalHack();
+		else if (m_State == DZKOTH_States.WAITING_FOR_PLAYER)
+			BroadcastCaptureReadyHudToNearbyPlayers();
 		else if (m_State == DZKOTH_States.CAPTURING)
 			TickCapture();
+		else if (m_State == DZKOTH_States.REWARD_ACTIVE)
+			TickRewardPhase();
 	}
 
 	void SyncStateToPlayer(PlayerBase player)
@@ -149,7 +158,10 @@ class DZKOTH_EventInstance
 
 	bool IsManagedInfected(Object object)
 	{
-		return m_Waves && m_Waves.IsManagedInfected(object);
+		if (m_Waves && m_Waves.IsManagedInfected(object))
+			return true;
+
+		return m_Boss && m_Boss.IsBoss(EntityAI.Cast(object));
 	}
 
 	float GetDamageMultiplierForSource(EntityAI source)
@@ -172,6 +184,11 @@ class DZKOTH_EventInstance
 
 	void CleanupEvent(bool returnToReady = false)
 	{
+		vector cleanupPos = vector.Zero;
+		if (m_Location)
+			cleanupPos = m_Location.GetPosition();
+		DZKOTH_ServerRPC.BroadcastFXGlobal(DZKOTH_FXIds.CLEAR, cleanupPos);
+
 		if (GetGame())
 		{
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(Tick);
@@ -217,6 +234,7 @@ class DZKOTH_EventInstance
 	void ScheduledCleanupEvent()
 	{
 		Destroy();
+		DZKOTH_EventManager.GetInstance().ScheduleNextEvent();
 	}
 
 	int GetState()
@@ -444,14 +462,24 @@ class DZKOTH_EventInstance
 		m_CaptureOwnerUid = DZKOTH_GroupResolver.GetPlayerUid(starter);
 		m_CaptureGroupId = DZKOTH_GroupResolver.GetPlayerGroupId(m_CaptureOwnerUid);
 		m_CaptureExpansionPartyId = DZKOTH_GroupResolver.GetExpansionPartyId(starter);
+		m_CaptureStarter = starter;
 		m_LastLoggedCaptureTen = -1;
+		m_WaveOneSpawned = false;
+		m_WaveTwoSpawned = false;
+		m_WaveThreeSpawned = false;
+		m_WaveFourSpawned = false;
+		m_WaveFiveSpawned = false;
+		m_BossWarningSent = false;
+		m_BossDeathHandled = false;
 
-		m_Smoke.SetCapture();
+		m_Smoke.SetReady();
 		m_Smoke.SetFlagRaiseProgress(0.0);
 		m_Markers.ShowCapture(m_Location);
-		DZKOTH_ServerRPC.BroadcastWarningToPlayers(m_PlayersInside, m_Config.Main.EventName, "Capture laeuft. Flagge wird gehisst.", 7.0);
-		DZKOTH_ServerRPC.BroadcastFX(m_PlayersInside, DZKOTH_FXIds.EVENT_START, m_Location.GetPosition());
-		BroadcastCaptureHudToPlayersInside();
+		SpawnWaveAroundPlayer(starter, m_Config.Waves.WaveOne);
+		m_WaveOneSpawned = true;
+		DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Capture laeuft. Flagge wird gehisst.", 7.0);
+		DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.EVENT_START, m_Location.GetPosition());
+		BroadcastCaptureHudToNearbyPlayers();
 		StartTick();
 	}
 
@@ -523,7 +551,7 @@ class DZKOTH_EventInstance
 				DZKOTH_ServerRPC.BroadcastWarningToPlayers(m_PlayersInside, m_Config.Main.EventName, "Capture pausiert: Gegner in der Zone.", 5.0);
 			}
 
-			DZKOTH_ServerRPC.BroadcastHud(m_PlayersInside, DZKOTH_ProgressModes.CAPTURE, "KotH-Eroberung pausiert: Gegner in der Zone", m_CaptureProgress, 100.0);
+			DZKOTH_ServerRPC.BroadcastHud(CollectPlayersInHudRange(), DZKOTH_ProgressModes.CAPTURE, "KotH-Eroberung pausiert: Gegner in der Zone", m_CaptureProgress, 100.0);
 			return;
 		}
 
@@ -544,7 +572,8 @@ class DZKOTH_EventInstance
 		m_CaptureProgress = Math.Clamp(m_CaptureProgress + ((m_Config.Main.TickSeconds * multiplier / captureSeconds) * 100.0), 0.0, 100.0);
 		m_Smoke.SetFlagRaiseProgress(m_CaptureProgress * 0.01);
 		LogCaptureProgress();
-		BroadcastCaptureHudToPlayersInside();
+		HandleProgressMilestones();
+		BroadcastCaptureHudToNearbyPlayers();
 
 		if (m_CaptureProgress >= 100.0)
 			CompleteCapturePhase();
@@ -558,8 +587,7 @@ class DZKOTH_EventInstance
 			m_Smoke.SetFlagRaiseProgress(m_CaptureProgress * 0.01);
 		}
 
-		if (m_PlayersInside.Count() > 0)
-			DZKOTH_ServerRPC.BroadcastHud(m_PlayersInside, DZKOTH_ProgressModes.CAPTURE, "KotH-Eroberung pausiert: Kein Spieler", m_CaptureProgress, 100.0);
+		DZKOTH_ServerRPC.BroadcastHud(CollectPlayersInHudRange(), DZKOTH_ProgressModes.CAPTURE, "KotH-Eroberung pausiert: Kein Spieler", m_CaptureProgress, 100.0);
 	}
 
 	protected void CompleteCapturePhase()
@@ -572,12 +600,17 @@ class DZKOTH_EventInstance
 		m_Smoke.SetFlagRaiseProgress(1.0);
 		m_Smoke.SetCompleted();
 		m_Markers.ShowCompleted(m_Location);
-		DZKOTH_ServerRPC.BroadcastHud(m_PlayersInside, DZKOTH_ProgressModes.CAPTURE, "KotH abgeschlossen", 100.0, 100.0);
-		DZKOTH_ServerRPC.BroadcastFX(m_PlayersInside, DZKOTH_FXIds.FIREWORKS, m_Location.GetPosition());
-		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH wurde erobert.", "Belohnung wurde freigeschaltet.", 10.0);
+		ref array<PlayerBase> nearbyPlayers = CollectPlayersInHudRange();
+		DZKOTH_ServerRPC.BroadcastHud(nearbyPlayers, DZKOTH_ProgressModes.CAPTURE, "KotH abgeschlossen", 100.0, 100.0);
+		DZKOTH_ServerRPC.BroadcastFX(nearbyPlayers, DZKOTH_FXIds.FIREWORKS, m_Location.GetPosition());
+		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH", GetWinnerName() + " gewinnt KotH.", 10.0);
 
 		if (m_Loot)
-			m_Loot.SpawnRewardCrate(m_Location, m_Config.Loot);
+			m_Loot.SpawnRewardCrate(m_Location, m_Config.Loot, m_Config.Main);
+
+		vector rewardPos = m_Location.GetRewardCratePosition();
+		SpawnRewardFireworks(rewardPos);
+		SpawnBossForWinner();
 
 		m_State = DZKOTH_States.REWARD_ACTIVE;
 		DZKOTH_Utils.Log("Event completed");
@@ -586,7 +619,7 @@ class DZKOTH_EventInstance
 		if (cleanupMs < 1000)
 			cleanupMs = 1000;
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(ScheduledCleanupEvent, cleanupMs, false);
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(HideHudForOnlinePlayers, 10000, false);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(DeleteFlagpoleAfterWin, 8000, false);
 	}
 
 	protected bool IsCaptureBlockedByEnemy()
@@ -636,6 +669,163 @@ class DZKOTH_EventInstance
 	protected string GetCaptureHudLabel()
 	{
 		return "KotH-Eroberung laeuft: " + Math.Round(m_CaptureProgress).ToString() + "%";
+	}
+
+	protected void HandleProgressMilestones()
+	{
+		if (!m_Config || !m_Config.Waves)
+			return;
+
+		if (!m_WaveTwoSpawned && m_Config.Waves.WaveTwo && m_CaptureProgress >= m_Config.Waves.WaveTwo.TriggerProgress)
+		{
+			m_WaveTwoSpawned = true;
+			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveTwo);
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Polizei-Infizierte ruecken an.", 6.0);
+		}
+
+		if (!m_WaveThreeSpawned && m_Config.Waves.WaveThree && m_CaptureProgress >= m_Config.Waves.WaveThree.TriggerProgress)
+		{
+			m_WaveThreeSpawned = true;
+			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveThree);
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Verstaerkte Militaer-Infizierte greifen an.", 6.0);
+		}
+
+		if (!m_WaveFourSpawned && m_Config.Waves.WaveFour && m_CaptureProgress >= m_Config.Waves.WaveFour.TriggerProgress)
+		{
+			m_WaveFourSpawned = true;
+			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveFour);
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Schwere Militaer-Infizierte umstellen die Zone.", 6.0);
+		}
+
+		if (!m_WaveFiveSpawned && m_Config.Waves.WaveFive && m_CaptureProgress >= m_Config.Waves.WaveFive.TriggerProgress)
+		{
+			m_WaveFiveSpawned = true;
+			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveFive);
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Die letzte Infiziertenwelle ist da.", 6.0);
+		}
+
+		if (!m_BossWarningSent && m_CaptureProgress >= 80.0)
+		{
+			m_BossWarningSent = true;
+			DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.BOSS_WARNING, m_Location.GetPosition());
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), "DeutschZ KotH", "Ein uralter Schrei erschuettert den Huegel.", 7.0);
+		}
+	}
+
+	protected void SpawnWaveAroundPlayer(PlayerBase player, DZKOTH_WaveConfig wave)
+	{
+		if (!m_Waves || !wave)
+			return;
+
+		ref array<PlayerBase> players = new array<PlayerBase>;
+		if (IsValidPlayer(player))
+			players.Insert(player);
+
+		m_Waves.SpawnWaveForPlayers(players, wave, m_Config.Main, m_Location.GetPosition());
+	}
+
+	protected PlayerBase GetBestCapturePlayer()
+	{
+		if (IsValidPlayer(m_CaptureStarter))
+			return m_CaptureStarter;
+
+		foreach (PlayerBase player: m_PlayersInside)
+		{
+			if (IsValidPlayer(player))
+				return player;
+		}
+
+		return null;
+	}
+
+	protected string GetWinnerName()
+	{
+		PlayerBase winner = GetBestCapturePlayer();
+		if (winner && winner.GetIdentity())
+			return winner.GetIdentity().GetName();
+
+		return "Ein Ueberlebender";
+	}
+
+	protected void SpawnBossForWinner()
+	{
+		if (!m_Boss || !m_Config || !m_Config.Main)
+			return;
+
+		PlayerBase winner = GetBestCapturePlayer();
+		bool spawned = false;
+		if (IsValidPlayer(winner))
+			spawned = m_Boss.SpawnBossNearPlayer(winner, m_Location, m_Config.Main);
+		else
+			spawned = m_Boss.SpawnBoss(m_Location, m_Config.Main);
+
+		if (!spawned)
+			return;
+
+		m_Markers.ShowBoss(m_Location);
+		DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.BOSS_SPAWN, m_Boss.GetPosition());
+		DZKOTH_ServerRPC.BroadcastWarning("Achtung!", "BosZ Mumie erschienen.", 10.0);
+		BroadcastBossHudToNearbyPlayers();
+	}
+
+	protected void SpawnRewardFireworks(vector center)
+	{
+		if (!GetGame())
+			return;
+
+		for (int i = 0; i < 3; i++)
+		{
+			float angle = (2.094395 * i) + Math.RandomFloatInclusive(-0.25, 0.25);
+			vector pos = center + Vector(Math.Cos(angle) * 15.0, 0, Math.Sin(angle) * 15.0);
+			pos = DZKOTH_Utils.Grounded(pos);
+			Object object = GetGame().CreateObjectEx(DZKOTH_Const.FIREWORKS_BATTERY_CLASSNAME, pos, ECE_PLACE_ON_SURFACE);
+			EntityAI battery = EntityAI.Cast(object);
+			if (battery)
+			{
+				battery.SetOrientation(Vector(Math.RandomFloatInclusive(0.0, 359.0), 0, 0));
+				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(IgniteRewardFirework, 1200 + (i * 700), false, battery);
+				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupRewardFirework, 120000, false, battery);
+			}
+		}
+	}
+
+	protected void IgniteRewardFirework(EntityAI battery)
+	{
+		if (!battery)
+			return;
+
+		battery.OnIgnitedThis(null);
+	}
+
+	protected void CleanupRewardFirework(EntityAI battery)
+	{
+		if (battery && GetGame())
+			GetGame().ObjectDelete(battery);
+	}
+
+	protected void TickRewardPhase()
+	{
+		if (!m_Boss)
+			return;
+
+		if (m_Boss.IsAlive())
+		{
+			BroadcastBossHudToNearbyPlayers();
+			return;
+		}
+
+		if (!m_BossDeathHandled)
+		{
+			m_BossDeathHandled = true;
+			DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.BOSS_DEATH, m_Location.GetPosition());
+			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), "DeutschZ KotH", "BosZ Mumie wurde erledigt.", 8.0);
+		}
+	}
+
+	protected void DeleteFlagpoleAfterWin()
+	{
+		if (m_Smoke)
+			m_Smoke.DeleteFlagpole();
 	}
 
 	protected void LogCaptureProgress()
@@ -709,6 +899,14 @@ class DZKOTH_EventInstance
 		m_CaptureExpansionPartyId = -1;
 		m_CapturePausedByEnemy = false;
 		m_LastLoggedCaptureTen = -1;
+		m_CaptureStarter = null;
+		m_WaveOneSpawned = false;
+		m_WaveTwoSpawned = false;
+		m_WaveThreeSpawned = false;
+		m_WaveFourSpawned = false;
+		m_WaveFiveSpawned = false;
+		m_BossWarningSent = false;
+		m_BossDeathHandled = false;
 	}
 
 	protected ref array<PlayerBase> CollectOnlinePlayers()
@@ -723,6 +921,27 @@ class DZKOTH_EventInstance
 		{
 			PlayerBase player = PlayerBase.Cast(man);
 			if (player)
+				players.Insert(player);
+		}
+
+		return players;
+	}
+
+	protected ref array<PlayerBase> CollectPlayersInHudRange()
+	{
+		ref array<PlayerBase> players = new array<PlayerBase>;
+		if (!m_Location)
+			return players;
+
+		float radius = 500.0;
+		if (m_Config && m_Config.Main && m_Config.Main.ProgressHudRadius > 0.0)
+			radius = m_Config.Main.ProgressHudRadius;
+
+		vector center = m_Location.GetPosition();
+		ref array<PlayerBase> onlinePlayers = CollectOnlinePlayers();
+		foreach (PlayerBase player: onlinePlayers)
+		{
+			if (player && vector.Distance(player.GetPosition(), center) <= radius)
 				players.Insert(player);
 		}
 
@@ -776,8 +995,13 @@ class DZKOTH_EventInstance
 
 	protected void BroadcastCaptureReadyHudToOnlinePlayers()
 	{
-		ref array<PlayerBase> onlinePlayers = CollectOnlinePlayers();
-		foreach (PlayerBase player: onlinePlayers)
+		BroadcastCaptureReadyHudToNearbyPlayers();
+	}
+
+	protected void BroadcastCaptureReadyHudToNearbyPlayers()
+	{
+		ref array<PlayerBase> nearbyPlayers = CollectPlayersInHudRange();
+		foreach (PlayerBase player: nearbyPlayers)
 		{
 			if (player)
 				DZKOTH_ServerRPC.SendHud(player, DZKOTH_ProgressModes.CAPTURE, "Fahnenmast aktiviert. Zone halten.", 0.0, 100.0);
@@ -786,7 +1010,20 @@ class DZKOTH_EventInstance
 
 	protected void BroadcastCaptureHudToPlayersInside()
 	{
-		DZKOTH_ServerRPC.BroadcastHud(m_PlayersInside, DZKOTH_ProgressModes.CAPTURE, GetCaptureHudLabel(), m_CaptureProgress, 100.0);
+		BroadcastCaptureHudToNearbyPlayers();
+	}
+
+	protected void BroadcastCaptureHudToNearbyPlayers()
+	{
+		DZKOTH_ServerRPC.BroadcastHud(CollectPlayersInHudRange(), DZKOTH_ProgressModes.CAPTURE, GetCaptureHudLabel(), m_CaptureProgress, 100.0);
+	}
+
+	protected void BroadcastBossHudToNearbyPlayers()
+	{
+		if (!m_Boss)
+			return;
+
+		DZKOTH_ServerRPC.BroadcastHud(CollectPlayersInHudRange(), DZKOTH_ProgressModes.BOSS, "BosZ Mumie", m_Boss.GetHealth(), m_Boss.GetMaxHealth());
 	}
 
 	protected void SyncTerminalHudToPlayersInside()

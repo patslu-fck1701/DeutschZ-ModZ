@@ -1,0 +1,10 @@
+name = "DeutschZ Blackbox ConvoyZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ Blackbox ConvoyZ";
+overview = "Vanilla DayZ convoy crashsite event with blackbox hacking, datacore transport, terminal decryption, server-side markers, HUD RPCs and cleanup.";
+action = "";
+author = "DeutschZ";
+version = "0.1.0";

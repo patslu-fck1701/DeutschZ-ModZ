@@ -23,6 +23,7 @@
 /.cache/
 
 # Gepackte DayZ-/Arma-Dateien und Signaturen
+config.bin
 *.pbo
 *.ebo
 *.bisign
@@ -55,7 +56,6 @@ P:/
 /Steam/
 /Workshop/
 /!Workshop/
-/@*/
 
 # Lokaler Serverzustand und Logs
 /profiles/

@@ -1,43 +1,91 @@
 modded class LoadingScreen
 {
-	protected static ref TStringArray DZKOTHG_LoadingImages;
-	protected static ref TStringArray DZKOTHG_LoadingJokes;
-	protected string m_DZKOTHG_CurrentJoke;
+	protected float m_DZKOTHG_SlideshowTime;
+	protected string m_DZKOTHG_CurrentImage;
+	protected ref DZKOTHG_LoadingEntry m_DZKOTHG_CurrentEntry;
+	protected Widget m_DZKOTHG_LoadingOverlay;
+	protected ImageWidget m_DZKOTHG_LoadingLogo;
+
+	void LoadingScreen(DayZGame game)
+	{
+		if (!game || !game.GetLoadingWorkspace() || !m_WidgetRoot)
+			return;
+
+		m_DZKOTHG_LoadingOverlay = game.GetLoadingWorkspace().CreateWidgets("DeutschZ_MenuMusic/gui/dzkothg_loading_overlay.layout", m_WidgetRoot);
+		if (!m_DZKOTHG_LoadingOverlay)
+			return;
+
+		if (m_TextWidgetTitle)
+			m_TextWidgetTitle.Show(false);
+		if (m_TextWidgetStatus)
+			m_TextWidgetStatus.Show(false);
+		if (m_ProgressLoading)
+			m_ProgressLoading.Show(false);
+		if (m_ProgressText)
+			m_ProgressText.Show(false);
+
+		m_TextWidgetTitle = TextWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingTitle"));
+		m_TextWidgetStatus = TextWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingStatus"));
+		m_ProgressLoading = ProgressBarWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingBar"));
+		m_ProgressText = TextWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingProgressText"));
+		m_DZKOTHG_LoadingLogo = ImageWidget.Cast(m_DZKOTHG_LoadingOverlay.FindAnyWidget("DZKOTHG_LoadingLogo"));
+		ProgressAsync.SetProgressData(m_ProgressLoading);
+	}
 
 	override void Show()
 	{
 		super.Show();
-		DZKOTHG_ApplyLoadingScreen();
+		DZKOTHG_ApplyLoadingScreen(true);
 	}
 
 	override void ShowEx(DayZGame game)
 	{
 		super.ShowEx(game);
-		DZKOTHG_ApplyLoadingScreen();
+		DZKOTHG_ApplyLoadingScreen(true);
 	}
 
 	override void SetTitle(string title)
 	{
-		DZKOTHG_ApplyJokeWidgets();
+		DZKOTHG_ApplyContentWidgets();
 	}
 
 	override void SetStatus(string status)
 	{
-		DZKOTHG_ApplyJokeWidgets();
+		DZKOTHG_ApplyContentWidgets();
 	}
 
-	protected void DZKOTHG_ApplyLoadingScreen()
+	override void SetProgress(float val)
 	{
-		DZKOTHG_EnsureLoadingData();
+		super.SetProgress(val);
+		DZKOTHG_StyleProgress();
+	}
 
-		string imagePath = DZKOTHG_LoadingImages.GetRandomElement();
-		m_DZKOTHG_CurrentJoke = DZKOTHG_LoadingJokes.GetRandomElement();
+	override void OnUpdate(float timeslice)
+	{
+		super.OnUpdate(timeslice);
+		m_DZKOTHG_SlideshowTime += timeslice;
+		if (m_DZKOTHG_SlideshowTime >= DZKOTHG_MenuContentStore.GetSlideshowSeconds())
+		{
+			m_DZKOTHG_SlideshowTime = 0.0;
+			DZKOTHG_ApplyLoadingScreen(false);
+		}
+
+		DZKOTHG_StyleProgress();
+	}
+
+	protected void DZKOTHG_ApplyLoadingScreen(bool resetTimer)
+	{
+		if (resetTimer)
+			m_DZKOTHG_SlideshowTime = 0.0;
+
+		m_DZKOTHG_CurrentImage = DZKOTHG_MenuContentStore.GetNextScreen(m_DZKOTHG_CurrentImage);
+		m_DZKOTHG_CurrentEntry = DZKOTHG_MenuContentStore.GetNextLoadingEntry();
 		DZKOTHG_DisableVanillaHintPanel();
 
 		if (m_ImageWidgetBackground)
 		{
 			m_ImageWidgetBackground.LoadMaskTexture("DeutschZ_MenuMusic/data/ui/loading/null.paa");
-			m_ImageWidgetBackground.LoadImageFile(0, imagePath);
+			m_ImageWidgetBackground.LoadImageFile(0, m_DZKOTHG_CurrentImage, true);
 			m_ImageWidgetBackground.SetImage(0);
 			m_ImageWidgetBackground.SetColor(ARGB(255, 255, 255, 255));
 			m_ImageWidgetBackground.Show(true);
@@ -45,215 +93,263 @@ modded class LoadingScreen
 
 		if (m_ImageBackground)
 		{
-			m_ImageBackground.LoadImageFile(0, imagePath);
+			m_ImageBackground.LoadImageFile(0, m_DZKOTHG_CurrentImage, true);
 			m_ImageBackground.SetImage(0);
 			m_ImageBackground.SetColor(ARGB(255, 255, 255, 255));
 		}
 
+		DZKOTHG_ApplyBranding();
+		DZKOTHG_ApplyContentWidgets();
+		DZKOTHG_StyleProgress();
+		Print("[DZKOTHG][CLIENT] Loading image active: " + m_DZKOTHG_CurrentImage);
+	}
+
+	protected void DZKOTHG_ApplyBranding()
+	{
+		DZKOTHG_MenuContentConfig config = DZKOTHG_MenuContentStore.GetConfig();
+		if (!config)
+			return;
+
 		if (m_ImageLogoMid)
 			m_ImageLogoMid.Show(false);
-
 		if (m_ImageLogoCorner)
 			m_ImageLogoCorner.Show(false);
+
+		if (m_DZKOTHG_LoadingLogo)
+		{
+			m_DZKOTHG_LoadingLogo.LoadImageFile(0, config.LogoPath);
+			m_DZKOTHG_LoadingLogo.SetImage(0);
+			m_DZKOTHG_LoadingLogo.Show(true);
+		}
 
 		if (m_ModdedWarning)
 			m_ModdedWarning.Show(false);
 
-		DZKOTHG_ApplyJokeWidgets();
-
-		Print("[DZKOTHG][CLIENT] LoadingScreen image active: " + imagePath);
+		if (m_WidgetRoot)
+		{
+			ImageWidget hintIcon = ImageWidget.Cast(m_WidgetRoot.FindAnyWidget("hintIcon"));
+			if (hintIcon)
+			{
+				hintIcon.LoadImageFile(0, config.HintIconPath);
+				hintIcon.SetImage(0);
+				hintIcon.Show(true);
+			}
+		}
 	}
 
-	protected void DZKOTHG_ApplyJokeWidgets()
+	protected void DZKOTHG_ApplyContentWidgets()
 	{
+		if (!m_DZKOTHG_CurrentEntry)
+			m_DZKOTHG_CurrentEntry = DZKOTHG_MenuContentStore.GetNextLoadingEntry();
+
 		if (m_TextWidgetTitle)
 		{
 			m_TextWidgetTitle.Show(true);
-			m_TextWidgetTitle.SetPos(0, 0.175);
-			m_TextWidgetTitle.SetText("DeutschZ Jokes");
+			string title = "DEUTSCHZ";
+			if (m_DZKOTHG_CurrentEntry)
+				title = "DEUTSCHZ " + m_DZKOTHG_CurrentEntry.Category;
+			m_TextWidgetTitle.SetText(title);
+			m_TextWidgetTitle.SetColor(DZKOTHG_UITheme.BrandRed());
 		}
 
 		if (m_TextWidgetStatus)
 		{
 			m_TextWidgetStatus.Show(true);
-			m_TextWidgetStatus.SetPos(0, 0.147);
-			m_TextWidgetStatus.SetText(DZKOTHG_GetCurrentJoke());
+			string status = "Willkommen bei DeutschZ.";
+			if (m_DZKOTHG_CurrentEntry)
+				status = m_DZKOTHG_CurrentEntry.Text;
+			m_TextWidgetStatus.SetText(status);
+			m_TextWidgetStatus.SetColor(DZKOTHG_UITheme.PrimaryText());
+		}
+	}
+
+	protected void DZKOTHG_StyleProgress()
+	{
+		if (m_ProgressLoading)
+			m_ProgressLoading.SetColor(DZKOTHG_UITheme.BrandRed());
+
+		if (m_ProgressText && m_ProgressLoading)
+		{
+			m_ProgressText.Show(true);
+			m_ProgressText.SetColor(DZKOTHG_UITheme.PrimaryText());
+			m_ProgressText.SetText("DEUTSCHZ LAEDT  " + Math.Round(m_ProgressLoading.GetCurrent()).ToString() + "%");
 		}
 	}
 
 	protected void DZKOTHG_DisableVanillaHintPanel()
 	{
-		if (m_WidgetRoot)
-		{
-			Widget hintFrame = m_WidgetRoot.FindAnyWidget("hint_frame");
-			if (hintFrame)
-				hintFrame.Show(false);
+		if (!m_WidgetRoot)
+			return;
 
-			Widget hintFrameAlt = m_WidgetRoot.FindAnyWidget("hint_frame0");
-			if (hintFrameAlt)
-				hintFrameAlt.Show(false);
-		}
+		Widget hintFrame = m_WidgetRoot.FindAnyWidget("hint_frame");
+		if (hintFrame)
+			hintFrame.Show(false);
 
+		Widget hintFrameAlt = m_WidgetRoot.FindAnyWidget("hint_frame0");
+		if (hintFrameAlt)
+			hintFrameAlt.Show(false);
 	}
+}
 
-	protected string DZKOTHG_GetCurrentJoke()
-	{
-		DZKOTHG_EnsureLoadingData();
-
-		if (m_DZKOTHG_CurrentJoke == "")
-			m_DZKOTHG_CurrentJoke = DZKOTHG_LoadingJokes.GetRandomElement();
-
-		return m_DZKOTHG_CurrentJoke;
-	}
-
-	protected static void DZKOTHG_EnsureLoadingData()
-	{
-		if (!DZKOTHG_LoadingImages)
-		{
-			DZKOTHG_LoadingImages = new TStringArray;
-			DZKOTHG_LoadingImages.Insert("DeutschZ_MenuMusic/data/ui/loading/loading_0.paa");
-			DZKOTHG_LoadingImages.Insert("DeutschZ_MenuMusic/data/ui/loading/loading_1.paa");
-			DZKOTHG_LoadingImages.Insert("DeutschZ_MenuMusic/data/ui/loading/loading_2.paa");
-		}
-
-		if (!DZKOTHG_LoadingJokes)
-		{
-			DZKOTHG_LoadingJokes = new TStringArray;
-			DZKOTHG_LoadingJokes.Insert("Wenn der Loot leer ist, war es bestimmt nur ein sehr schneller Nachbar.");
-			DZKOTHG_LoadingJokes.Insert("Chernarus-Regel 1: Wer rennt, hat entweder Hunger oder schlechte Freunde.");
-			DZKOTHG_LoadingJokes.Insert("Der perfekte Base-Plan beginnt immer mit: Das ist nur kurz provisorisch.");
-			DZKOTHG_LoadingJokes.Insert("Ein Auto ohne Reifen ist in DayZ immer noch ein emotionales Investment.");
-			DZKOTHG_LoadingJokes.Insert("Wenn es klickt, war es hoffentlich nur die Tuer.");
-			DZKOTHG_LoadingJokes.Insert("DeutschZ Tipp: Erst nachladen, dann Held spielen.");
-			DZKOTHG_LoadingJokes.Insert("Der Wald macht keine Geraeusche. Ausser er macht doch welche.");
-			DZKOTHG_LoadingJokes.Insert("Jede Abkuerzung ist sicher, bis sie es nicht mehr ist.");
-			DZKOTHG_LoadingJokes.Insert("Wer in Cherno hupt, unterschreibt meistens nur schneller.");
-			DZKOTHG_LoadingJokes.Insert("Ein leerer Magen macht keinen Laerm. Dein Magen schon.");
-			DZKOTHG_LoadingJokes.Insert("Wenn die Tuer offen war, war es nie der Wind.");
-			DZKOTHG_LoadingJokes.Insert("Base-Regel: Erst abschliessen, dann angeben.");
-			DZKOTHG_LoadingJokes.Insert("Der beste Fluchtplan beginnt mit vollen Schuhen.");
-			DZKOTHG_LoadingJokes.Insert("Wer den Heli hoert, sollte den Kopf benutzen.");
-			DZKOTHG_LoadingJokes.Insert("Loot ist wie Vertrauen: selten da, wenn man es braucht.");
-			DZKOTHG_LoadingJokes.Insert("Wenn der Trader laechelt, hast du zu billig verkauft.");
-			DZKOTHG_LoadingJokes.Insert("Eine volle Mag ist besser als ein guter Vorsatz.");
-			DZKOTHG_LoadingJokes.Insert("DeutschZ Regel: Freundlich sein, aber nachladen.");
-			DZKOTHG_LoadingJokes.Insert("Wer am Feuer singt, leuchtet auch fuer andere.");
-			DZKOTHG_LoadingJokes.Insert("KOTH beginnt nicht am Huegel. KOTH beginnt im Kopf.");
-			DZKOTHG_LoadingJokes.Insert("Ein Code Lock schuetzt nur vor Leuten ohne Geduld.");
-			DZKOTHG_LoadingJokes.Insert("Die beste Tarnung ist manchmal einfach nicht reden.");
-			DZKOTHG_LoadingJokes.Insert("Ein Plan ohne Benzin ist nur Wanddeko.");
-			DZKOTHG_LoadingJokes.Insert("Wenn es zu ruhig ist, fehlt dir nur die Information.");
-			DZKOTHG_LoadingJokes.Insert("Rote Zone, gruene Hoffnung, leere Taschen.");
-			DZKOTHG_LoadingJokes.Insert("Wer Wasser sucht, findet meistens erst Probleme.");
-			DZKOTHG_LoadingJokes.Insert("Bei DeutschZ gilt: Erst ueberleben, dann diskutieren.");
-			DZKOTHG_LoadingJokes.Insert("Der letzte Reifen ist immer der teuerste.");
-		}
-	}
-};
-
-modded class LoginTimeBase extends UIScriptedMenu
+modded class LoginTimeBase
 {
+	protected float m_DZKOTHG_SlideshowTime;
+	protected string m_DZKOTHG_CurrentImage;
+	protected string m_DZKOTHG_ServerStatus;
+
 	override void Show()
 	{
 		super.Show();
-		DZKOTHG_ApplyLoginBackground();
+		DZKOTHG_RefreshLoginScreen(true);
 	}
 
-	protected void DZKOTHG_ApplyLoginBackground()
+	override void Update(float timeslice)
+	{
+		super.Update(timeslice);
+		m_DZKOTHG_SlideshowTime += timeslice;
+		if (m_DZKOTHG_SlideshowTime >= DZKOTHG_MenuContentStore.GetSlideshowSeconds())
+		{
+			m_DZKOTHG_SlideshowTime = 0.0;
+			DZKOTHG_RefreshLoginScreen(false);
+		}
+	}
+
+	override void SetStatus(string status)
+	{
+		m_DZKOTHG_ServerStatus = status;
+		DZKOTHG_UpdateLoginMessage();
+	}
+
+	protected void DZKOTHG_RefreshLoginScreen(bool resetTimer)
 	{
 		if (!layoutRoot)
 			return;
 
-		DZKOTHG_DisableLoginHintPanel();
-		DZKOTHG_EnsureLoginScreens();
-		ImageWidget background = ImageWidget.Cast(layoutRoot.FindAnyWidget("Background"));
-		if (!background)
-			background = ImageWidget.Cast(layoutRoot.FindAnyWidget("ImageBackground"));
+		if (resetTimer)
+			m_DZKOTHG_SlideshowTime = 0.0;
 
+		m_DZKOTHG_CurrentImage = DZKOTHG_MenuContentStore.GetNextScreen(m_DZKOTHG_CurrentImage);
+		DZKOTHG_ApplyLoginBranding(layoutRoot, m_DZKOTHG_CurrentImage);
+		DZKOTHG_UpdateLoginMessage();
+	}
+
+	protected void DZKOTHG_UpdateLoginMessage()
+	{
+		if (!m_txtDescription)
+			return;
+
+		string text = m_DZKOTHG_ServerStatus;
+		if (text != "")
+			text = text + "\n";
+		m_txtDescription.SetText(text + DZKOTHG_MenuContentStore.GetNextServerMessage());
+	}
+
+	protected void DZKOTHG_ApplyLoginBranding(Widget root, string imagePath)
+	{
+		ImageWidget background = ImageWidget.Cast(root.FindAnyWidget("Background"));
+		if (!background)
+			background = ImageWidget.Cast(root.FindAnyWidget("ImageBackground"));
 		if (background)
 		{
-			string imagePath = DZKOTHG_LoadingScreenStore.GetRandomScreen();
-			background.LoadImageFile(0, imagePath);
-			Print("[DZKOTHG][CLIENT] LoginTime image active: " + imagePath);
+			background.LoadImageFile(0, imagePath, true);
+			background.SetImage(0);
 		}
+
+		DZKOTHG_DialogStyler.Apply(root);
 	}
+}
 
-	protected void DZKOTHG_EnsureLoginScreens()
-	{
-		DZKOTHG_LoadingScreenStore.Ensure();
-	}
-
-	protected void DZKOTHG_DisableLoginHintPanel()
-	{
-		Widget hintFrame = layoutRoot.FindAnyWidget("hint_frame0");
-		if (hintFrame)
-			hintFrame.Show(false);
-
-		Widget hintFrameAlt = layoutRoot.FindAnyWidget("hint_frame");
-		if (hintFrameAlt)
-			hintFrameAlt.Show(false);
-
-	}
-};
-
-modded class LoginQueueBase extends UIScriptedMenu
+modded class LoginQueueBase
 {
+	protected float m_DZKOTHG_SlideshowTime;
+	protected string m_DZKOTHG_CurrentImage;
+	protected string m_DZKOTHG_CurrentMessage;
+
 	override void Show()
 	{
 		super.Show();
-		DZKOTHG_ApplyQueueBackground();
+		DZKOTHG_RefreshQueueScreen(true);
 	}
 
-	protected void DZKOTHG_ApplyQueueBackground()
+	override void Update(float timeslice)
+	{
+		super.Update(timeslice);
+		m_DZKOTHG_SlideshowTime += timeslice;
+		if (m_DZKOTHG_SlideshowTime >= DZKOTHG_MenuContentStore.GetSlideshowSeconds())
+		{
+			m_DZKOTHG_SlideshowTime = 0.0;
+			DZKOTHG_RefreshQueueScreen(false);
+		}
+	}
+
+	override void SetPosition(int position)
+	{
+		super.SetPosition(position);
+		DZKOTHG_UpdateQueueMessage();
+	}
+
+	protected void DZKOTHG_RefreshQueueScreen(bool resetTimer)
 	{
 		if (!layoutRoot)
 			return;
 
-		DZKOTHG_DisableQueueHintPanel();
-		DZKOTHG_LoadingScreenStore.Ensure();
+		if (resetTimer)
+			m_DZKOTHG_SlideshowTime = 0.0;
+
+		m_DZKOTHG_CurrentImage = DZKOTHG_MenuContentStore.GetNextScreen(m_DZKOTHG_CurrentImage);
+		m_DZKOTHG_CurrentMessage = DZKOTHG_MenuContentStore.GetNextServerMessage();
 		ImageWidget background = ImageWidget.Cast(layoutRoot.FindAnyWidget("Background"));
 		if (!background)
 			background = ImageWidget.Cast(layoutRoot.FindAnyWidget("ImageBackground"));
-
 		if (background)
 		{
-			string imagePath = DZKOTHG_LoadingScreenStore.GetRandomScreen();
-			background.LoadImageFile(0, imagePath);
-			Print("[DZKOTHG][CLIENT] LoginQueue image active: " + imagePath);
+			background.LoadImageFile(0, m_DZKOTHG_CurrentImage, true);
+			background.SetImage(0);
 		}
+
+		DZKOTHG_DialogStyler.Apply(layoutRoot);
+		DZKOTHG_UpdateQueueMessage();
 	}
 
-	protected void DZKOTHG_DisableQueueHintPanel()
+	protected void DZKOTHG_UpdateQueueMessage()
 	{
-		Widget hintFrame = layoutRoot.FindAnyWidget("hint_frame0");
+		if (!m_txtNote)
+			return;
+
+		string text = "WARTESCHLANGE";
+		if (m_iPosition >= 0)
+			text = text + " | PLATZ " + m_iPosition.ToString();
+		if (m_DZKOTHG_CurrentMessage != "")
+			text = text + "\n" + m_DZKOTHG_CurrentMessage;
+		m_txtNote.SetText(text);
+	}
+}
+
+class DZKOTHG_DialogStyler
+{
+	static void Apply(Widget root)
+	{
+		if (!root)
+			return;
+
+		DZKOTHG_MenuContentConfig config = DZKOTHG_MenuContentStore.GetConfig();
+		Widget hintFrame = root.FindAnyWidget("hint_frame0");
 		if (hintFrame)
 			hintFrame.Show(false);
-
-		Widget hintFrameAlt = layoutRoot.FindAnyWidget("hint_frame");
+		Widget hintFrameAlt = root.FindAnyWidget("hint_frame");
 		if (hintFrameAlt)
 			hintFrameAlt.Show(false);
 
+		ImageWidget hintIcon = ImageWidget.Cast(root.FindAnyWidget("hintIcon"));
+		if (hintIcon && config)
+		{
+			hintIcon.LoadImageFile(0, config.HintIconPath);
+			hintIcon.SetImage(0);
+			hintIcon.Show(true);
+		}
+
+		Widget separator = root.FindAnyWidget("SeparatorPanel");
+		if (separator)
+			separator.SetColor(DZKOTHG_UITheme.BrandRed());
 	}
-};
-
-class DZKOTHG_LoadingScreenStore
-{
-	protected static ref TStringArray s_Screens;
-
-	static void Ensure()
-	{
-		if (s_Screens)
-			return;
-
-		s_Screens = new TStringArray;
-		s_Screens.Insert("DeutschZ_MenuMusic/data/ui/loading/loading_0.paa");
-		s_Screens.Insert("DeutschZ_MenuMusic/data/ui/loading/loading_1.paa");
-		s_Screens.Insert("DeutschZ_MenuMusic/data/ui/loading/loading_2.paa");
-	}
-
-	static string GetRandomScreen()
-	{
-		Ensure();
-		return s_Screens.GetRandomElement();
-	}
-};
+}

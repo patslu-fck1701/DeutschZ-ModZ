@@ -1,76 +1,108 @@
 FrameWidgetClass DZEV_ProgressRoot {
  visible 0
- position 0 48
- size 420 84
- halign center_ref
- valign top_ref
- hexactpos 1
- vexactpos 1
- hexactsize 1
- vexactsize 1
+ position 0.018 0.16
+ size 0.29 0.105
+ halign right_ref
+ valign bottom_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
  priority 9500
+ ignorepointer 1
  {
-  PanelWidgetClass DZEV_Background {
-   color 0 0 0 0.55
-   position 0 0
-   size 420 84
+  PanelWidgetClass DZEV_Shadow {
+   color 0 0 0 0.78
+   position 4 4
+   size 100 100
    hexactpos 1
    vexactpos 1
-   hexactsize 1
-   vexactsize 1
+   hexactsize 0
+   vexactsize 0
    style rover_sim_colorable
   }
+  PanelWidgetClass DZEV_Background {
+   color 0.025 0.025 0.025 0.92
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+  }
+  PanelWidgetClass DZEV_RedAccent {
+   color 0.18 0.72 0.18 1
+   position 0 0
+   size 0.012 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_colorable
+  }
+  ImageWidgetClass DZEV_Logo {
+   position 0.035 0.16
+   size 0.11 0.68
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "DeutschZ_KOTH_InfectedSiege/data/ui/dzkoth_logo_dark.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" 1
+  }
   TextWidgetClass DZEV_Title {
-   position 18 10
-   size 384 26
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
-   text "DeutschZ K.o.t.H"
+   position 0.16 0.09
+   size 0.78 0.3
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text "DEUTSCHZ KOTH"
    font "gui/fonts/sdf_MetronBook24"
-   "exact text" 1
-   "exact text size" 20
-   "text halign" center
+   "exact text" 0
+   "text halign" left
    "text valign" center
-   color 1 1 1 1
+   color 0.95 0.95 0.95 1
   }
   ProgressBarWidgetClass DZEV_ProgressBar {
-   position 24 43
-   size 372 12
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
-    style Quantity
+   position 0.16 0.46
+   size 0.78 0.16
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Quantity
    current 0
    vertical 0
    flipped 0
+   color 0.18 0.72 0.18 1
   }
   TextWidgetClass DZEV_Value {
-   position 18 58
-   size 384 20
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
+   position 0.16 0.65
+   size 0.78 0.23
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
    text ""
    font "gui/fonts/sdf_MetronBook24"
-   "exact text" 1
-   "exact text size" 16
-   "text halign" center
+   "exact text" 0
+   "text halign" right
    "text valign" center
-   color 1 1 1 1
+   color 0.85 0.85 0.85 1
   }
   PanelWidgetClass DZEV_RedFlash {
    visible 0
    color 1 0 0 0.38
-   position -400 -80
-   size 1220 680
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
+   position -4 -8
+   size 8 10
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
    style rover_sim_colorable
   }
  }

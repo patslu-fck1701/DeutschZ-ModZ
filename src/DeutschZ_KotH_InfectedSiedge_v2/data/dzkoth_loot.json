@@ -1,30 +1,121 @@
 {
-  "RewardCrateLoot": [
-    {
-      "ClassName": "M4A1",
-      "Chance": 100.0,
-      "Min": 1,
-      "Max": 1
-    },
-    {
-      "ClassName": "Mag_STANAG_30Rnd",
-      "Chance": 100.0,
-      "Min": 3,
-      "Max": 3
-    },
-    {
-      "ClassName": "Ammo_556x45",
-      "Chance": 100.0,
-      "Min": 2,
-      "Max": 2
-    }
-  ],
-  "BossCorpseLoot": [
-    {
-      "ClassName": "DZKOTH_BattlegroundZ_Keycard",
-      "Chance": 100.0,
-      "Min": 1,
-      "Max": 1
-    }
-  ]
+    "RewardCrateLoot":  [
+                            {
+                                "ClassName":  "SNAFU_Agram_GUN",
+                                "Chance":  100,
+                                "Min":  2,
+                                "Max":  2
+                            },
+                            {
+                                "ClassName":  "SNAFU_Fort12_GUN",
+                                "Chance":  100,
+                                "Min":  2,
+                                "Max":  2
+                            },
+                            {
+                                "ClassName":  "SNAFU_AR15_Modular16_GUN",
+                                "Chance":  100,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "SNAFU_AEK545_Gun",
+                                "Chance":  100,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "SNAFU_AS50_GUN",
+                                "Chance":  55,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "SNAFU_Agram_32rnd_Mag",
+                                "Chance":  100,
+                                "Min":  4,
+                                "Max":  6
+                            },
+                            {
+                                "ClassName":  "SNAFU_AK12_Mag",
+                                "Chance":  100,
+                                "Min":  4,
+                                "Max":  6
+                            },
+                            {
+                                "ClassName":  "SNAFU_AS50_Mag",
+                                "Chance":  75,
+                                "Min":  2,
+                                "Max":  3
+                            },
+                            {
+                                "ClassName":  "SNAFU_MD_Ammo_556x45mm_M855A1",
+                                "Chance":  100,
+                                "Min":  4,
+                                "Max":  6
+                            },
+                            {
+                                "ClassName":  "SNAFU_Ammo_127x55mm",
+                                "Chance":  85,
+                                "Min":  2,
+                                "Max":  4
+                            },
+                            {
+                                "ClassName":  "SNAFU_Normalized_Suppressor_Black",
+                                "Chance":  100,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "SNAFU_Standardized_Suppressor_Black",
+                                "Chance":  100,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "SNAFU_HuntingOptic",
+                                "Chance":  100,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "SNAFU_MAimpoint_ACO",
+                                "Chance":  100,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "SNAFU_MElcan",
+                                "Chance":  85,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "SNAFU_MNightforce",
+                                "Chance":  75,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "M67Grenade",
+                                "Chance":  80,
+                                "Min":  1,
+                                "Max":  2
+                            },
+                            {
+                                "ClassName":  "ClaymoreMine",
+                                "Chance":  35,
+                                "Min":  1,
+                                "Max":  1
+                            },
+                            {
+                                "ClassName":  "DeutschZ_FireworksLauncher",
+                                "Chance":  10,
+                                "Min":  1,
+                                "Max":  1
+                            }
+                        ],
+    "BossCorpseLoot":  [
+
+                       ]
 }

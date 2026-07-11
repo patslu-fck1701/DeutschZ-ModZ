@@ -2,13 +2,16 @@ class DZKOTH_LootManager
 {
 	protected EntityAI m_RewardCrate;
 	protected EntityAI m_BossCorpse;
+	protected int m_RewardDespawnMs;
+	protected bool m_RewardWasFilled;
 
 	void SpawnRewards(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig, DZKOTH_MainConfig mainConfig)
 	{
 		if (!GetGame() || !location)
 			return;
 
-		Cleanup();
+		CleanupRewardCrate();
+		CleanupBossCorpse();
 
 		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetRewardCratePosition());
 		m_BossCorpse = SpawnContainer(DZKOTH_Const.BOSS_CORPSE_CLASSNAME, location.GetBossSpawnPosition() + "1.2 0 1.2");
@@ -21,19 +24,26 @@ class DZKOTH_LootManager
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
 
+		EnsureRewardMinimumLoot(m_RewardCrate);
+		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
+		LogRewardContents(m_RewardCrate);
+
 		if (m_BossCorpse && lootConfig)
 			FillContainer(m_BossCorpse, lootConfig.BossCorpseLoot);
 
 		if (m_BossCorpse && mainConfig && !HasInventoryItem(m_BossCorpse, DZKOTH_Const.KEYCARD_CLASSNAME))
 			TryCreateKeycard(m_BossCorpse, mainConfig.KeycardChancePercent);
+
+		ScheduleRewardCleanup(mainConfig);
 	}
 
-	void SpawnRewardCrate(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig)
+	void SpawnRewardCrate(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig, DZKOTH_MainConfig mainConfig = null)
 	{
 		if (!GetGame() || !location)
 			return;
 
-		Cleanup();
+		CleanupRewardCrate();
+		CleanupBossCorpse();
 
 		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetRewardCratePosition());
 		if (m_RewardCrate)
@@ -44,6 +54,12 @@ class DZKOTH_LootManager
 
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
+
+		EnsureRewardMinimumLoot(m_RewardCrate);
+		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
+		LogRewardContents(m_RewardCrate);
+
+		ScheduleRewardCleanup(mainConfig);
 	}
 
 	void Cleanup()
@@ -51,21 +67,82 @@ class DZKOTH_LootManager
 		if (!GetGame())
 			return;
 
-		if (m_RewardCrate)
+		CleanupBossCorpse();
+	}
+
+	protected void ScheduleRewardCleanup(DZKOTH_MainConfig mainConfig)
+	{
+		if (!GetGame() || !m_RewardCrate)
+			return;
+
+		int minutes = 10;
+		if (mainConfig && mainConfig.RewardDespawnMinutes > 0)
+			minutes = mainConfig.RewardDespawnMinutes;
+
+		m_RewardDespawnMs = minutes * 60000;
+		if (m_RewardDespawnMs < 60000)
+			m_RewardDespawnMs = 60000;
+
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CheckRewardCrateEmpty);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CleanupRewardCrate);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CheckRewardCrateEmpty, 30000, true);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupRewardCrate, m_RewardDespawnMs, false);
+	}
+
+	protected void CheckRewardCrateEmpty()
+	{
+		if (!m_RewardCrate)
+		{
+			if (GetGame())
+				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CheckRewardCrateEmpty);
+			return;
+		}
+
+		if (m_RewardWasFilled && IsContainerEmpty(m_RewardCrate))
+			CleanupRewardCrate();
+	}
+
+	protected void CleanupRewardCrate()
+	{
+		if (GetGame())
+		{
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CheckRewardCrateEmpty);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CleanupRewardCrate);
+		}
+
+		if (m_RewardCrate && GetGame())
 			GetGame().ObjectDelete(m_RewardCrate);
-		if (m_BossCorpse)
-			GetGame().ObjectDelete(m_BossCorpse);
 
 		m_RewardCrate = null;
+		m_RewardWasFilled = false;
+	}
+
+	protected void CleanupBossCorpse()
+	{
+		if (m_BossCorpse && GetGame())
+			GetGame().ObjectDelete(m_BossCorpse);
+
 		m_BossCorpse = null;
 	}
 
 	protected EntityAI SpawnContainer(string type, vector position)
 	{
 		vector pos = DZKOTH_Utils.Grounded(position);
-		EntityAI container = EntityAI.Cast(GetGame().CreateObjectEx(type, pos, ECE_PLACE_ON_SURFACE));
+		EntityAI container = EntityAI.Cast(GetGame().CreateObjectEx(type, pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
+		if (!container && type == DZKOTH_Const.REWARD_CRATE_CLASSNAME)
+		{
+			DZKOTH_Utils.Warn("Primary reward barrel failed. Retrying DeutschZ_Barrel_Green.");
+			container = EntityAI.Cast(GetGame().CreateObjectEx("DeutschZ_Barrel_Green", pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
+		}
+		if (!container && type == DZKOTH_Const.REWARD_CRATE_CLASSNAME)
+		{
+			DZKOTH_Utils.Warn("DeutschZ reward barrel fallback failed. Retrying Barrel_Green.");
+			container = EntityAI.Cast(GetGame().CreateObjectEx("Barrel_Green", pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
+		}
 		if (!container)
 			DZKOTH_Utils.Warn("Could not spawn loot container " + type + " at " + pos.ToString());
+		else
+			DZKOTH_Utils.Log("Loot container created: " + container.GetType() + " at " + pos.ToString());
 
 		return container;
 	}
@@ -86,11 +163,89 @@ class DZKOTH_LootManager
 			int count = GetEntryCount(entry);
 			for (int i = 0; i < count; i++)
 			{
+				if (!GetGame().ConfigIsExisting("CfgVehicles " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgWeapons " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgMagazines " + entry.ClassName))
+				{
+					DZKOTH_Utils.Warn("Reward loot classname missing: " + entry.ClassName);
+					break;
+				}
+
 				EntityAI item = container.GetInventory().CreateInInventory(entry.ClassName);
 				if (!item)
 					DZKOTH_Utils.Warn("Could not place loot " + entry.ClassName + " in " + container.GetType());
 			}
 		}
+	}
+
+	protected void EnsureRewardMinimumLoot(EntityAI container)
+	{
+		if (!container)
+			return;
+
+		int before = CountInventoryItems(container);
+		if (before < 60)
+		{
+			DZKOTH_Utils.Warn("Reward pool created only " + before.ToString() + " items. Adding guaranteed minimum stock.");
+			CreateGuaranteedItems(container, "M4A1", 4);
+			CreateGuaranteedItems(container, "AKM", 4);
+			CreateGuaranteedItems(container, "Mag_STANAG_30Rnd", 12);
+			CreateGuaranteedItems(container, "Mag_AKM_30Rnd", 12);
+			CreateGuaranteedItems(container, "AmmoBox_556x45_20Rnd", 10);
+			CreateGuaranteedItems(container, "AmmoBox_762x39_20Rnd", 10);
+			CreateGuaranteedItems(container, "M67Grenade", 4);
+			CreateGuaranteedItems(container, "M4_Suppressor", 2);
+			CreateGuaranteedItems(container, "AK_Suppressor", 2);
+			CreateGuaranteedItems(container, "ACOGOptic", 2);
+			CreateGuaranteedItems(container, "PSO1Optic", 2);
+		}
+
+		DZKOTH_Utils.Log("Reward minimum check: " + before.ToString() + " -> " + CountInventoryItems(container).ToString() + " items.");
+	}
+
+	protected void CreateGuaranteedItems(EntityAI container, string className, int count)
+	{
+		if (!container || !container.GetInventory())
+			return;
+
+		if (!GetGame().ConfigIsExisting("CfgVehicles " + className) && !GetGame().ConfigIsExisting("CfgWeapons " + className) && !GetGame().ConfigIsExisting("CfgMagazines " + className))
+		{
+			DZKOTH_Utils.Warn("Guaranteed reward classname missing: " + className);
+			return;
+		}
+
+		for (int i = 0; i < count; i++)
+		{
+			EntityAI item = container.GetInventory().CreateInInventory(className);
+			if (!item)
+				DZKOTH_Utils.Warn("Guaranteed reward item failed: " + className);
+		}
+	}
+
+	protected int CountInventoryItems(EntityAI container)
+	{
+		if (!container || !container.GetInventory())
+			return 0;
+
+		array<EntityAI> items = new array<EntityAI>;
+		container.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+		int count = 0;
+		foreach (EntityAI item: items)
+		{
+			if (item && item != container)
+				count++;
+		}
+
+		return count;
+	}
+
+	protected void LogRewardContents(EntityAI container)
+	{
+		if (!container)
+		{
+			DZKOTH_Utils.Error("DeutschZ reward barrel was not created.");
+			return;
+		}
+
+		DZKOTH_Utils.Log("DeutschZ reward barrel contains " + CountInventoryItems(container).ToString() + " inventory items.");
 	}
 
 	protected int GetEntryCount(DZKOTH_LootEntry entry)
@@ -138,5 +293,21 @@ class DZKOTH_LootManager
 		}
 
 		return false;
+	}
+
+	protected bool IsContainerEmpty(EntityAI container)
+	{
+		if (!container || !container.GetInventory())
+			return true;
+
+		array<EntityAI> items = new array<EntityAI>;
+		container.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+		foreach (EntityAI item: items)
+		{
+			if (item && item != container)
+				return false;
+		}
+
+		return true;
 	}
 }
