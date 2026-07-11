@@ -1,4 +1,4 @@
-class DZBBC_Blackbox : ItemBase
+class DZBBC_Blackbox : ScientificBriefcase
 {
 	override void SetActions()
 	{

@@ -112,9 +112,9 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 		switch (m_DZKOTH_SmokeStateLocal)
 		{
 			case 0:
-				return ParticleList.GRENADE_M18_GREEN_LOOP;
+				return ParticleList.GRENADE_M18_WHITE_LOOP;
 			case 1:
-				return ParticleList.GRENADE_M18_YELLOW_LOOP;
+				return ParticleList.GRENADE_M18_GREEN_LOOP;
 			case 2:
 				return ParticleList.GRENADE_M18_RED_LOOP;
 		}
@@ -188,12 +188,12 @@ class DZKOTH_SmokeManager
 
 	void SetReady()
 	{
-		SetSmoke("M18SmokeGrenade_Green");
+		SetSmoke("M18SmokeGrenade_White");
 	}
 
 	void SetCapture()
 	{
-		SetSmoke("M18SmokeGrenade_Yellow");
+		SetSmoke("M18SmokeGrenade_Green");
 	}
 
 	void SetCompleted()
@@ -235,9 +235,9 @@ class DZKOTH_SmokeManager
 
 		m_CurrentSmokeType = smokeType;
 
-		if (smokeType == "M18SmokeGrenade_Green")
+		if (smokeType == "M18SmokeGrenade_White")
 			m_Flagpole.DZKOTH_SetSmokeState(0);
-		else if (smokeType == "M18SmokeGrenade_Yellow")
+		else if (smokeType == "M18SmokeGrenade_Green")
 			m_Flagpole.DZKOTH_SetSmokeState(1);
 		else if (smokeType == "M18SmokeGrenade_Red")
 			m_Flagpole.DZKOTH_SetSmokeState(2);

@@ -6,6 +6,8 @@ class CfgPatches
 		{
 			"DZBBC_Blackbox",
 			"DZBBC_DataCore",
+			"DZBBC_Coded9VBattery",
+			"DZBBC_SignalMatches",
 			"DZBBC_MilitaryTerminal",
 			"DZBBC_SecureSupplyContainer",
 			"DZBBC_GasZoneFlare",
@@ -38,7 +40,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "0.1.1-livefix";
+		version = "0.2.0-storyitems";
 		type = "mod";
 		dependencies[] =
 		{
@@ -85,6 +87,8 @@ class CfgVehicles
 	class SmallProtectorCase;
 	class ScientificBriefcase;
 	class PunchedCard;
+	class Battery9V;
+	class Matchbox;
 	class HouseNoDestruct;
 
 	class DZBBC_Blackbox : ScientificBriefcase
@@ -104,18 +108,69 @@ class CfgVehicles
 		scope = 2;
 		displayName = "#STR_DZBBC_DATACORE_NAME";
 		descriptionShort = "#STR_DZBBC_DATACORE_DESC";
+		hiddenSelections[] = {"component01"};
+		hiddenSelectionsTextures[] =
+		{
+			"deutschz_blackbox_convoyz\data\textures\convoyz\datacore_punchedcard_co.paa"
+		};
 	};
 
-	class DZBBC_MilitaryTerminal : SeaChest
+	class DZBBC_Coded9VBattery : Battery9V
+	{
+		scope = 2;
+		displayName = "#STR_DZBBC_9V_NAME";
+		descriptionShort = "#STR_DZBBC_9V_DESC";
+		hiddenSelections[] = {"zbytek"};
+		hiddenSelectionsTextures[] =
+		{
+			"deutschz_blackbox_convoyz\data\textures\convoyz\deutschz_9v_co.paa"
+		};
+	};
+
+	class DZBBC_SignalMatches : Matchbox
+	{
+		scope = 2;
+		displayName = "#STR_DZBBC_MATCHES_NAME";
+		descriptionShort = "#STR_DZBBC_MATCHES_DESC";
+		hiddenSelections[] = {"zbytek"};
+		hiddenSelectionsTextures[] =
+		{
+			"deutschz_blackbox_convoyz\data\textures\convoyz\deutschz_matchbox_co.paa"
+		};
+	};
+
+	class DZBBC_MilitaryTerminal : GPSReceiver
 	{
 		scope = 2;
 		displayName = "#STR_DZBBC_TERMINAL_NAME";
 		descriptionShort = "#STR_DZBBC_TERMINAL_DESC";
-		itemsCargoSize[] = {10,50};
-		hiddenSelections[] = {"camoGround"};
+		hiddenSelections[] =
+		{
+			"gpsreceiver",
+			"grid_1_0",
+			"grid_1_1",
+			"grid_1_2",
+			"grid_2_0",
+			"grid_2_1",
+			"grid_2_2",
+			"alt_0",
+			"alt_1",
+			"alt_2",
+			"alt_3"
+		};
 		hiddenSelectionsTextures[] =
 		{
-			"deutschz_blackbox_convoyz\data\textures\convoyz\logogreen_sea_chest_co.paa"
+			"deutschz_blackbox_convoyz\data\textures\convoyz\cardreader_gpsreceiver_co.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa"
 		};
 	};
 

@@ -65,7 +65,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "0.4.0";
+		version = "0.4.1-livefix";
 		type = "mod";
 		dependencies[] =
 		{
@@ -231,78 +231,36 @@ class CfgVehicles
 	{
 		scope = 2;
 		displayName = "DeutschZ KotH Hunter 250";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health { hitpoints = 250; };
-			};
-		};
 	};
 
 	class DZKOTH_Infected_400 : ZmbM_PolicemanSpecForce_Heavy
 	{
 		scope = 2;
 		displayName = "DeutschZ KotH Police 400";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health { hitpoints = 400; };
-			};
-		};
 	};
 
 	class DZKOTH_Infected_600 : ZmbM_SoldierNormal_Base
 	{
 		scope = 2;
 		displayName = "DeutschZ KotH Military 600";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health { hitpoints = 600; };
-			};
-		};
 	};
 
 	class DZKOTH_Infected_800 : ZmbM_SoldierNormal_Base
 	{
 		scope = 2;
 		displayName = "DeutschZ KotH Military 800";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health { hitpoints = 800; };
-			};
-		};
 	};
 
 	class DZKOTH_Infected_1000 : ZmbM_SoldierNormal_Base
 	{
 		scope = 2;
 		displayName = "DeutschZ KotH Military 1000";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health { hitpoints = 1000; };
-			};
-		};
 	};
 
 	class DZKOTH_BosZZombie : ZmbM_Mummy
 	{
 		scope = 2;
 		displayName = "BosZ Zombie";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health { hitpoints = 7500; };
-			};
-		};
 	};
 
 	class DZKOTH_EventFlagpole : StaticFlagPole

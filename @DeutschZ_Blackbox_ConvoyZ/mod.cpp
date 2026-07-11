@@ -7,4 +7,4 @@ tooltip = "DeutschZ Blackbox ConvoyZ";
 overview = "Vanilla DayZ convoy crashsite event with blackbox hacking, datacore transport, terminal decryption, server-side markers, HUD RPCs and cleanup.";
 action = "";
 author = "DeutschZ";
-version = "0.1.0";
+version = "0.2.0-storyitems";

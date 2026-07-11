@@ -18,6 +18,7 @@ class DZKOTH_LootManager
 		if (m_RewardCrate)
 		{
 			m_RewardCrate.SetOrientation(location.GetRewardCrateOrientation());
+			OpenRewardBarrelForCargo(m_RewardCrate);
 			DZKOTH_Utils.Log("Reward crate spawned at " + m_RewardCrate.GetPosition().ToString() + " orientation " + location.GetRewardCrateOrientation().ToString());
 		}
 
@@ -49,6 +50,7 @@ class DZKOTH_LootManager
 		if (m_RewardCrate)
 		{
 			m_RewardCrate.SetOrientation(location.GetRewardCrateOrientation());
+			OpenRewardBarrelForCargo(m_RewardCrate);
 			DZKOTH_Utils.Log("Reward crate spawned at " + m_RewardCrate.GetPosition().ToString() + " orientation " + location.GetRewardCrateOrientation().ToString());
 		}
 
@@ -60,6 +62,18 @@ class DZKOTH_LootManager
 		LogRewardContents(m_RewardCrate);
 
 		ScheduleRewardCleanup(mainConfig);
+	}
+
+	protected void OpenRewardBarrelForCargo(EntityAI container)
+	{
+		Barrel_ColorBase barrel = Barrel_ColorBase.Cast(container);
+		if (!barrel)
+			return;
+
+		if (!barrel.IsOpen())
+			barrel.Open();
+
+		DZKOTH_Utils.Log("Reward barrel cargo state open=" + barrel.IsOpen().ToString());
 	}
 
 	void Cleanup()

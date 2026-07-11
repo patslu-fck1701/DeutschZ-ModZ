@@ -1,4 +1,4 @@
-const string DZBBC_VERSION = "0.1.2-livefix";
+const string DZBBC_VERSION = "0.2.0-storyitems";
 const string DZBBC_LOG_PREFIX = "[DZBBC] ";
 const string DZBBC_PROFILE_DIR = "$profile:DZBBC";
 const string DZBBC_CONFIG_JSON = "$profile:DZBBC/dzbbc_config.json";
@@ -19,6 +19,8 @@ const string DZBBC_DATACORE_CLASSNAME = "DZBBC_DataCore";
 const string DZBBC_TERMINAL_CLASSNAME = "DZBBC_MilitaryTerminal";
 const string DZBBC_CONTAINER_CLASSNAME = "DZBBC_SecureSupplyContainer";
 const string DZBBC_GASZONE_FLARE_CLASSNAME = "GasZonen_Leuchtfackel";
+const string DZBBC_SIGNAL_MATCHES_CLASSNAME = "DZBBC_SignalMatches";
+const string DZBBC_CODED_9V_CLASSNAME = "DZBBC_Coded9VBattery";
 const string DZBBC_MARKER_OBJECT_CLASSNAME = "DZBBC_EventMarkerObject";
 const string DZBBC_WRECK_PROXY_CLASSNAME = "DZBBC_WreckProxy";
 

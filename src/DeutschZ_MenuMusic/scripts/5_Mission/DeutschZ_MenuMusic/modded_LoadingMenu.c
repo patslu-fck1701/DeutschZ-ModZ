@@ -30,7 +30,7 @@ modded class LoadingMenu
 			if (entry)
 				titleText = "DEUTSCHZ " + entry.Category;
 			title.SetText(titleText);
-			title.SetColor(ARGB(255, 195, 0, 24));
+			title.SetColor(ARGB(255, 132, 240, 20));
 		}
 
 		return root;

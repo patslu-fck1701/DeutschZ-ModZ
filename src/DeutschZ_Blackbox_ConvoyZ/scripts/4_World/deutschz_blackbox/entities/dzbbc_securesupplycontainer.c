@@ -1,3 +1,3 @@
-class DZBBC_SecureSupplyContainer : ItemBase
+class DZBBC_SecureSupplyContainer : SeaChest
 {
 }

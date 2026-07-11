@@ -101,6 +101,11 @@ class DZBBC_Config
 		{
 			JsonFileLoader<ref DZBBC_LootConfig>.SaveFile(DZBBC_LOOT_JSON, config, errorMessage);
 		}
+		if (config && config.EnsureStoryLootDefaults())
+		{
+			JsonFileLoader<ref DZBBC_LootConfig>.SaveFile(DZBBC_LOOT_JSON, config, errorMessage);
+			DZBBC_Utils.Log("Added SignalMatches and Coded9VBattery to the existing ConvoyZ loot profile.");
+		}
 		return config;
 	}
 

@@ -6,7 +6,44 @@ class DZBBC_MissionServer
 			return;
 
 		DZBBC_EventManager.GetInstance().InitServer();
+
+#ifdef DIAG_DEVELOPER
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(DiagSpawnStoryItems, 2500, false);
+#endif
 	}
+
+#ifdef DIAG_DEVELOPER
+	static void DiagSpawnStoryItems()
+	{
+		if (!GetGame() || !GetGame().IsServer())
+			return;
+
+		ref array<string> classNames = {
+			"DZBBC_SignalMatches",
+			"DZBBC_Coded9VBattery",
+			"DZBBC_DataCore",
+			"DZBBC_MilitaryTerminal",
+			"DZBBC_SecureSupplyContainer"
+		};
+
+		vector testPosition = "7500 0 7500";
+		testPosition[1] = GetGame().SurfaceY(testPosition[0], testPosition[2]) + 0.25;
+
+		foreach (string className: classNames)
+		{
+			Object spawnedObject = GetGame().CreateObjectEx(className, testPosition, ECE_PLACE_ON_SURFACE);
+			if (spawnedObject)
+			{
+				DZBBC_Utils.Log("DIAG spawn test OK: " + className);
+				GetGame().ObjectDelete(spawnedObject);
+			}
+			else
+			{
+				DZBBC_Utils.Warn("DIAG spawn test FAILED: " + className);
+			}
+		}
+	}
+#endif
 
 	static void SyncPlayerState(PlayerBase player)
 	{

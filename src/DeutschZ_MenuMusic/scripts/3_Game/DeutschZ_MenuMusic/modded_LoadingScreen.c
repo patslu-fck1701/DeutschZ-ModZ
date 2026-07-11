@@ -149,7 +149,7 @@ modded class LoadingScreen
 			if (m_DZKOTHG_CurrentEntry)
 				title = "DEUTSCHZ " + m_DZKOTHG_CurrentEntry.Category;
 			m_TextWidgetTitle.SetText(title);
-			m_TextWidgetTitle.SetColor(DZKOTHG_UITheme.BrandRed());
+			m_TextWidgetTitle.SetColor(DZKOTHG_UITheme.BrandGreen());
 		}
 
 		if (m_TextWidgetStatus)
@@ -166,7 +166,7 @@ modded class LoadingScreen
 	protected void DZKOTHG_StyleProgress()
 	{
 		if (m_ProgressLoading)
-			m_ProgressLoading.SetColor(DZKOTHG_UITheme.BrandRed());
+			m_ProgressLoading.SetColor(DZKOTHG_UITheme.BrandGreen());
 
 		if (m_ProgressText && m_ProgressLoading)
 		{
@@ -350,6 +350,6 @@ class DZKOTHG_DialogStyler
 
 		Widget separator = root.FindAnyWidget("SeparatorPanel");
 		if (separator)
-			separator.SetColor(DZKOTHG_UITheme.BrandRed());
+			separator.SetColor(DZKOTHG_UITheme.BrandGreen());
 	}
 }

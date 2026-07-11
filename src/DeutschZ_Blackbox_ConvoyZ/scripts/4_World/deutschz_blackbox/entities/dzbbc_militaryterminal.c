@@ -1,4 +1,4 @@
-class DZBBC_MilitaryTerminal : SeaChest
+class DZBBC_MilitaryTerminal : GPSReceiver
 {
 	override void SetActions()
 	{
@@ -7,6 +7,11 @@ class DZBBC_MilitaryTerminal : SeaChest
 	}
 
 	override bool CanPutIntoHands(EntityAI parent)
+	{
+		return false;
+	}
+
+	override bool CanPutInCargo(EntityAI parent)
 	{
 		return false;
 	}

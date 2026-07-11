@@ -1,3 +1,3 @@
-class DZBBC_DataCore : ItemBase
+class DZBBC_DataCore : PunchedCard
 {
 }

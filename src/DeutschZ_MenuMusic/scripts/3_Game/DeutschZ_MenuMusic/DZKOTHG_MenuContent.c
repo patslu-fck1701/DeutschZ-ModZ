@@ -22,7 +22,7 @@ class DZKOTHG_MenuContentConfig
 
 	void DZKOTHG_MenuContentConfig()
 	{
-		SlideshowSeconds = 2.75;
+		SlideshowSeconds = 8.0;
 		LogoPath = "DeutschZ_MenuMusic/gui/menu_assets/logos/Logo_Dark.paa";
 		HintIconPath = "DeutschZ_MenuMusic/gui/menu_assets/icons/icon_status_ca.paa";
 		Screens = new array<string>;
@@ -60,10 +60,10 @@ class DZKOTHG_MenuContentStore
 	static float GetSlideshowSeconds()
 	{
 		Ensure();
-		if (s_Config.SlideshowSeconds < 2.5)
-			return 2.5;
-		if (s_Config.SlideshowSeconds > 3.0)
-			return 3.0;
+		if (s_Config.SlideshowSeconds < 6.0)
+			return 6.0;
+		if (s_Config.SlideshowSeconds > 12.0)
+			return 12.0;
 		return s_Config.SlideshowSeconds;
 	}
 

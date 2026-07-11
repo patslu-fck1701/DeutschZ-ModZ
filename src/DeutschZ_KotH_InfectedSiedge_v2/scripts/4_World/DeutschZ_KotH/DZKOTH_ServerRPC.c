@@ -115,6 +115,34 @@ class DZKOTH_ServerRPC
 		}
 	}
 
+	static void SendPlayerUIMessage(PlayerBase player, string title, string text, float time = 5.0)
+	{
+		if (!player || !GetGame())
+			return;
+
+		PlayerIdentity identity = player.GetIdentity();
+		if (!identity)
+			return;
+
+		ScriptRPC rpc = new ScriptRPC;
+		rpc.Write(title);
+		rpc.Write(text);
+		rpc.Write(time);
+		rpc.Send(player, DZKOTH_RPCIds.WARNING, true, identity);
+	}
+
+	static void BroadcastPlayerUIMessage(array<PlayerBase> players, string title, string text, float time = 5.0)
+	{
+		if (!players)
+			return;
+
+		foreach (PlayerBase player: players)
+		{
+			if (player)
+				SendPlayerUIMessage(player, title, text, time);
+		}
+	}
+
 	static void SendFX(PlayerBase player, int fx, vector pos)
 	{
 		if (!player || !GetGame())

@@ -61,6 +61,7 @@ class DZKOTH_EventInstance
 
 		float radius = GetCaptureRadius();
 		m_Trigger.Setup(this, radius);
+		RemoveLegacySpeakersNear(center);
 
 		m_Smoke.Setup(m_Location.GetFlagPosition(), m_Location.GetFlagOrientation());
 		m_Smoke.SetReady();
@@ -73,6 +74,33 @@ class DZKOTH_EventInstance
 
 		DZKOTH_Utils.Log("Event started: " + m_Location.Name);
 		return true;
+	}
+
+	protected void RemoveLegacySpeakersNear(vector center)
+	{
+		if (!GetGame() || !GetGame().IsServer())
+			return;
+
+		array<Object> objects = new array<Object>;
+		array<CargoBase> proxies = new array<CargoBase>;
+		GetGame().GetObjectsAtPosition3D(center, 100.0, objects, proxies);
+
+		int removed = 0;
+		foreach (Object object: objects)
+		{
+			if (!object)
+				continue;
+
+			string typeName = object.GetType();
+			if (typeName != "NoxZ_Static_Speaker" && typeName != "NoxZ_Speaker")
+				continue;
+
+			GetGame().ObjectDelete(object);
+			removed++;
+		}
+
+		if (removed > 0)
+			DZKOTH_Utils.Log("Removed " + removed.ToString() + " legacy NoxZ speaker(s) from the active KotH area.");
 	}
 
 	void OnPlayerEntered(PlayerBase player)
@@ -184,6 +212,10 @@ class DZKOTH_EventInstance
 
 	void CleanupEvent(bool returnToReady = false)
 	{
+		bool notifyAbort = m_State != DZKOTH_States.INACTIVE && m_State != DZKOTH_States.COMPLETED && m_State != DZKOTH_States.REWARD_ACTIVE;
+		if (notifyAbort)
+			DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH", "Event abgebrochen.", 7.0);
+
 		vector cleanupPos = vector.Zero;
 		if (m_Location)
 			cleanupPos = m_Location.GetPosition();
@@ -389,7 +421,7 @@ class DZKOTH_EventInstance
 			return;
 
 		m_State = DZKOTH_States.TERMINAL_HACK_COMPLETE;
-		DZKOTH_ServerRPC.BroadcastWarning("Fahnenmast aktiviert.", "Halte die Stellung und hisse die Flagge.", 8.0);
+		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), "Fahnenmast aktiviert.", "Halte die Stellung und hisse die Flagge.", 5.0);
 		ActivateCaptureGate(hacker);
 	}
 
@@ -442,7 +474,7 @@ class DZKOTH_EventInstance
 		m_State = DZKOTH_States.WAITING_FOR_TERMINAL_HACK;
 		m_TerminalHack.SetActionUnlocked(true);
 		DZKOTH_Utils.Log("Chest action unlocked");
-		DZKOTH_ServerRPC.BroadcastWarning(m_Config.Main.EventName, "Zone gesichert. Hacke die Versorgungskiste, um den Fahnenmast zu aktivieren.", 8.0);
+		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), m_Config.Main.EventName, "Zone gesichert. Hacke die Versorgungskiste, um den Fahnenmast zu aktivieren.", 5.0);
 		BroadcastChestHudToOnlinePlayers();
 	}
 
@@ -453,7 +485,7 @@ class DZKOTH_EventInstance
 
 		if (RequiresTerminalHack() && m_State < DZKOTH_States.WAITING_FOR_PLAYER)
 		{
-			DZKOTH_ServerRPC.SendWarning(starter, m_Config.Main.EventName, "Kiste zuerst aufbrechen.", 5.0);
+			DZKOTH_ServerRPC.SendPlayerUIMessage(starter, m_Config.Main.EventName, "Kiste zuerst aufbrechen.", 4.0);
 			return;
 		}
 
@@ -548,7 +580,7 @@ class DZKOTH_EventInstance
 			if (!m_CapturePausedByEnemy)
 			{
 				m_CapturePausedByEnemy = true;
-				DZKOTH_ServerRPC.BroadcastWarningToPlayers(m_PlayersInside, m_Config.Main.EventName, "Capture pausiert: Gegner in der Zone.", 5.0);
+				DZKOTH_ServerRPC.BroadcastPlayerUIMessage(m_PlayersInside, m_Config.Main.EventName, "Capture pausiert: Gegner in der Zone.", 4.0);
 			}
 
 			DZKOTH_ServerRPC.BroadcastHud(CollectPlayersInHudRange(), DZKOTH_ProgressModes.CAPTURE, "KotH-Eroberung pausiert: Gegner in der Zone", m_CaptureProgress, 100.0);
@@ -558,7 +590,7 @@ class DZKOTH_EventInstance
 		if (m_CapturePausedByEnemy)
 		{
 			m_CapturePausedByEnemy = false;
-			DZKOTH_ServerRPC.BroadcastWarningToPlayers(m_PlayersInside, m_Config.Main.EventName, "Capture laeuft weiter.", 4.0);
+			DZKOTH_ServerRPC.BroadcastPlayerUIMessage(m_PlayersInside, m_Config.Main.EventName, "Capture laeuft weiter.", 4.0);
 		}
 
 		float multiplier = 1.0;
@@ -680,35 +712,35 @@ class DZKOTH_EventInstance
 		{
 			m_WaveTwoSpawned = true;
 			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveTwo);
-			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Polizei-Infizierte ruecken an.", 6.0);
+			DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), m_Config.Main.EventName, "Polizei-Infizierte ruecken an.", 4.0);
 		}
 
 		if (!m_WaveThreeSpawned && m_Config.Waves.WaveThree && m_CaptureProgress >= m_Config.Waves.WaveThree.TriggerProgress)
 		{
 			m_WaveThreeSpawned = true;
 			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveThree);
-			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Verstaerkte Militaer-Infizierte greifen an.", 6.0);
+			DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), m_Config.Main.EventName, "Verstaerkte Militaer-Infizierte greifen an.", 4.0);
 		}
 
 		if (!m_WaveFourSpawned && m_Config.Waves.WaveFour && m_CaptureProgress >= m_Config.Waves.WaveFour.TriggerProgress)
 		{
 			m_WaveFourSpawned = true;
 			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveFour);
-			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Schwere Militaer-Infizierte umstellen die Zone.", 6.0);
+			DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), m_Config.Main.EventName, "Schwere Militaer-Infizierte umstellen die Zone.", 4.0);
 		}
 
 		if (!m_WaveFiveSpawned && m_Config.Waves.WaveFive && m_CaptureProgress >= m_Config.Waves.WaveFive.TriggerProgress)
 		{
 			m_WaveFiveSpawned = true;
 			SpawnWaveAroundPlayer(GetBestCapturePlayer(), m_Config.Waves.WaveFive);
-			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), m_Config.Main.EventName, "Die letzte Infiziertenwelle ist da.", 6.0);
+			DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), m_Config.Main.EventName, "Die letzte Infiziertenwelle ist da.", 4.0);
 		}
 
 		if (!m_BossWarningSent && m_CaptureProgress >= 80.0)
 		{
 			m_BossWarningSent = true;
 			DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.BOSS_WARNING, m_Location.GetPosition());
-			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), "DeutschZ KotH", "Ein uralter Schrei erschuettert den Huegel.", 7.0);
+			DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), "DeutschZ KotH", "Ein uralter Schrei erschuettert den Huegel.", 5.0);
 		}
 	}
 
@@ -764,7 +796,7 @@ class DZKOTH_EventInstance
 
 		m_Markers.ShowBoss(m_Location);
 		DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.BOSS_SPAWN, m_Boss.GetPosition());
-		DZKOTH_ServerRPC.BroadcastWarning("Achtung!", "BosZ Mumie erschienen.", 10.0);
+		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), "Achtung!", "BosZ Mumie erschienen.", 6.0);
 		BroadcastBossHudToNearbyPlayers();
 	}
 
@@ -818,7 +850,7 @@ class DZKOTH_EventInstance
 		{
 			m_BossDeathHandled = true;
 			DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.BOSS_DEATH, m_Location.GetPosition());
-			DZKOTH_ServerRPC.BroadcastWarningToPlayers(CollectPlayersInHudRange(), "DeutschZ KotH", "BosZ Mumie wurde erledigt.", 8.0);
+			DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), "DeutschZ KotH", "BosZ Mumie wurde erledigt.", 5.0);
 		}
 	}
 

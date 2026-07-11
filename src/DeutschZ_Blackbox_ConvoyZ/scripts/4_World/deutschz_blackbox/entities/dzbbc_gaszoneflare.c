@@ -1,4 +1,4 @@
-class DZBBC_GasZoneFlare : ItemBase
+class DZBBC_GasZoneFlare : Roadflare
 {
 }
 

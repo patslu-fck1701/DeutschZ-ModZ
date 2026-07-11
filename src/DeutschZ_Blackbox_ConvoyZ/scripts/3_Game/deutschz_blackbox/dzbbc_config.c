@@ -470,6 +470,8 @@ class DZBBC_LootConfig
 	{
 		RewardContainerLoot = new array<ref DZBBC_LootEntry>;
 		AddGuaranteed(DZBBC_GASZONE_FLARE_CLASSNAME);
+		AddChance(DZBBC_SIGNAL_MATCHES_CLASSNAME, 75.0, 1, 1);
+		AddChance(DZBBC_CODED_9V_CLASSNAME, 50.0, 1, 1);
 		AddChance("M4A1", 25.0, 1, 1);
 		AddChance("Ammo_556x45", 75.0, 2, 6);
 		AddChance("PlateCarrierVest", 35.0, 1, 1);
@@ -489,6 +491,35 @@ class DZBBC_LootConfig
 		entry.Min = min;
 		entry.Max = max;
 		RewardContainerLoot.Insert(entry);
+	}
+
+	bool EnsureStoryLootDefaults()
+	{
+		bool changed = false;
+		if (!HasClassName(DZBBC_SIGNAL_MATCHES_CLASSNAME))
+		{
+			AddChance(DZBBC_SIGNAL_MATCHES_CLASSNAME, 75.0, 1, 1);
+			changed = true;
+		}
+		if (!HasClassName(DZBBC_CODED_9V_CLASSNAME))
+		{
+			AddChance(DZBBC_CODED_9V_CLASSNAME, 50.0, 1, 1);
+			changed = true;
+		}
+		return changed;
+	}
+
+	protected bool HasClassName(string className)
+	{
+		if (!RewardContainerLoot)
+			return false;
+
+		foreach (DZBBC_LootEntry entry: RewardContainerLoot)
+		{
+			if (entry && entry.ClassName == className)
+				return true;
+		}
+		return false;
 	}
 }
 
