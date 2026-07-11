@@ -38,7 +38,7 @@ class DZBBC_ExpansionBridge
 		if (!markerModule)
 			return false;
 
-		bool marker3D = marker.UID == DZBBC_CRASHSITE_MARKER_UID;
+		bool marker3D = marker.UID == DZBBC_CRASHSITE_MARKER_UID || marker.UID == DZBBC_TERMINAL_MARKER_UID;
 		markerModule.RemoveServerMarker(marker.UID);
 		ExpansionMarkerData expansionMarker = markerModule.CreateServerMarker(GetExpansionLabel(marker), GetExpansionIcon(marker), marker.Pos, marker.Color, marker3D, marker.UID);
 		if (!expansionMarker)
@@ -47,7 +47,7 @@ class DZBBC_ExpansionBridge
 		if (marker3D)
 			expansionMarker.SetVisibility(EXPANSION_MARKER_VIS_WORLD | EXPANSION_MARKER_VIS_MAP);
 
-		DZBBC_Utils.Log("Expansion marker synced " + marker.UID);
+		DZBBC_Utils.Log("Expansion marker synced " + marker.UID + " 3D=" + marker3D.ToString());
 		return true;
 #endif
 		return false;

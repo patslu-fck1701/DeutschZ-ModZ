@@ -1,5 +1,6 @@
 class DZBBC_EventInstance
 {
+	protected static const float HUD_RANGE_METERS = 500.0;
 	protected ref DZBBC_ConfigBundle m_Config;
 	protected DZBBC_CrashSiteConfig m_Site;
 	protected ref DZBBC_CrashSiteManager m_CrashSite;
@@ -258,10 +259,10 @@ class DZBBC_EventInstance
 		if (m_Site && IsActive())
 			DZBBC_ServerRPC.SendFX(player, DZBBC_FX_CRASHSITE, m_Site.GetPosition());
 
-		if (m_State == DZBBC_COMBAT_ACTIVE || m_State == DZBBC_FACTION_FIGHT_ACTIVE || m_State == DZBBC_PLAYER_DETECTED)
+		if ((m_State == DZBBC_COMBAT_ACTIVE || m_State == DZBBC_FACTION_FIGHT_ACTIVE || m_State == DZBBC_PLAYER_DETECTED) && IsPlayerInHudRange(player))
 			DZBBC_ServerRPC.SendHud(player, DZBBC_HUD_ENEMIES, "Verbleibende AI", m_AI.CountAliveObjective(), m_AI.CountObjectiveTotal());
-		else if (m_State == DZBBC_BLACKBOX_SIGNAL_FOUND || m_State == DZBBC_COMBAT_COMPLETE)
-			DZBBC_ServerRPC.SendHud(player, DZBBC_HUD_WARNING, "Blackbox-Signal freigegeben", 100.0, 0.0);
+		else
+			DZBBC_ServerRPC.SendHud(player, DZBBC_HUD_HIDE, "", 0.0, 0.0);
 	}
 
 	void StopAsFailed()
@@ -377,7 +378,7 @@ class DZBBC_EventInstance
 	{
 		int alive = m_AI.CountAliveObjective();
 		int total = m_AI.CountObjectiveTotal();
-		DZBBC_ServerRPC.BroadcastHud(DZBBC_HUD_ENEMIES, "Verbleibende AI", alive, total);
+		SendCombatHudInRange(alive, total);
 		DZBBC_Utils.Log("Combat HUD update: objectiveAI=" + alive.ToString() + "/" + total.ToString());
 		if (alive <= 0)
 			CompleteCombat();
@@ -389,7 +390,7 @@ class DZBBC_EventInstance
 			return;
 
 		SetState(DZBBC_COMBAT_COMPLETE);
-		DZBBC_ServerRPC.BroadcastHud(DZBBC_HUD_WARNING, "Blackbox-Signal freigegeben", 100.0, 0.0);
+		DZBBC_ServerRPC.BroadcastHud(DZBBC_HUD_HIDE, "", 0.0, 0.0);
 		DZBBC_ServerRPC.BroadcastNotification(m_Config.Main.EventName, m_Config.Messages.CombatComplete, 8.0);
 		m_Blackbox.Spawn(m_Site);
 		if (!m_Blackbox.IsSpawned())
@@ -400,6 +401,26 @@ class DZBBC_EventInstance
 
 		SetState(DZBBC_BLACKBOX_SIGNAL_FOUND);
 		DZBBC_Utils.Log("Blackbox phase active: interaction unlocked at " + m_Blackbox.GetPosition().ToString());
+	}
+
+	protected void SendCombatHudInRange(float current, float max)
+	{
+		ref array<PlayerBase> players = DZBBC_PlayerUtils.GetOnlinePlayers();
+		foreach (PlayerBase player: players)
+		{
+			if (IsPlayerInHudRange(player))
+				DZBBC_ServerRPC.SendHud(player, DZBBC_HUD_ENEMIES, "Verbleibende AI", current, max);
+			else
+				DZBBC_ServerRPC.SendHud(player, DZBBC_HUD_HIDE, "", 0.0, 0.0);
+		}
+	}
+
+	protected bool IsPlayerInHudRange(PlayerBase player)
+	{
+		if (!DZBBC_PlayerUtils.IsValidPlayer(player) || !player.IsAlive() || player.IsUnconscious() || !m_Site)
+			return false;
+
+		return vector.Distance(player.GetPosition(), m_Site.GetPosition()) <= HUD_RANGE_METERS;
 	}
 
 	protected void TickDataCore(float delta)

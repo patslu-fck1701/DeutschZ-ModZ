@@ -40,7 +40,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "0.2.0-storyitems";
+		version = "0.2.1-livefix";
 		type = "mod";
 		dependencies[] =
 		{
@@ -91,12 +91,12 @@ class CfgVehicles
 	class Matchbox;
 	class HouseNoDestruct;
 
-	class DZBBC_Blackbox : ScientificBriefcase
+	class DZBBC_Blackbox : SmallProtectorCase
 	{
 		scope = 2;
 		displayName = "#STR_DZBBC_BLACKBOX_NAME";
 		descriptionShort = "#STR_DZBBC_BLACKBOX_DESC";
-		hiddenSelections[] = {"camoGround"};
+		hiddenSelections[] = {"zbytek"};
 		hiddenSelectionsTextures[] =
 		{
 			"deutschz_blackbox_convoyz\data\textures\convoyz\convoyblackbox_loot_protectorcase_co.paa"

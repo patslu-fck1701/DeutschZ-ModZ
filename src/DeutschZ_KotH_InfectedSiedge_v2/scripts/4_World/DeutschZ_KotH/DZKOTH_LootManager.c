@@ -13,7 +13,7 @@ class DZKOTH_LootManager
 		CleanupRewardCrate();
 		CleanupBossCorpse();
 
-		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetRewardCratePosition());
+		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetFlagPosition());
 		m_BossCorpse = SpawnContainer(DZKOTH_Const.BOSS_CORPSE_CLASSNAME, location.GetBossSpawnPosition() + "1.2 0 1.2");
 		if (m_RewardCrate)
 		{
@@ -46,7 +46,7 @@ class DZKOTH_LootManager
 		CleanupRewardCrate();
 		CleanupBossCorpse();
 
-		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetRewardCratePosition());
+		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetFlagPosition());
 		if (m_RewardCrate)
 		{
 			m_RewardCrate.SetOrientation(location.GetRewardCrateOrientation());

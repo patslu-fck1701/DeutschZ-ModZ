@@ -43,6 +43,13 @@ class DZBBC_ClientHudRenderer
 		if (!GetGame() || GetGame().IsDedicatedServer())
 			return;
 
+		PlayerBase localPlayer = PlayerBase.Cast(GetGame().GetPlayer());
+		if (!localPlayer || !localPlayer.IsAlive() || localPlayer.IsUnconscious())
+		{
+			Hide();
+			return;
+		}
+
 		if (!DZBBC_ClientHudState.IsVisible())
 		{
 			Hide();
@@ -76,7 +83,7 @@ class DZBBC_ClientHudRenderer
 
 		float percent = Math.Clamp(current / max, 0.0, 1.0);
 
-		string text = DZBBC_Utils.Localize(DZBBC_ClientHudState.GetLabel());
+		string text = "CONVOYZ | " + DZBBC_Utils.Localize(DZBBC_ClientHudState.GetLabel());
 		if (showValue)
 			text = text + ": " + Math.Round(current).ToString();
 

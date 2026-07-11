@@ -1,4 +1,4 @@
-class DZBBC_Blackbox : ScientificBriefcase
+class DZBBC_Blackbox : SmallProtectorCase
 {
 	override void SetActions()
 	{

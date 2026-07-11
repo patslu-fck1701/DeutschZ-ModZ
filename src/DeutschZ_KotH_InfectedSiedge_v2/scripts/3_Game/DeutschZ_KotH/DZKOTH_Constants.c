@@ -1,6 +1,6 @@
 class DZKOTH_Const
 {
-	static const string VERSION = "0.4.1-livefix";
+	static const string VERSION = "0.4.2-livefix";
 	static const string LOG_PREFIX = "[DeutschZ_KotH] ";
 	static const string MOD_PREFIX = "DeutschZ_KOTH_InfectedSiege";
 

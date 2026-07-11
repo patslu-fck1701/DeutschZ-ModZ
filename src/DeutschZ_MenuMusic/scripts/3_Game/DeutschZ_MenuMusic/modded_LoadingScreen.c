@@ -170,9 +170,11 @@ modded class LoadingScreen
 
 		if (m_ProgressText && m_ProgressLoading)
 		{
+			float normalizedProgress = Math.Clamp(m_ProgressLoading.GetCurrent(), 0.0, 1.0);
+			int progressPercent = Math.Round(normalizedProgress * 100.0);
 			m_ProgressText.Show(true);
-			m_ProgressText.SetColor(DZKOTHG_UITheme.PrimaryText());
-			m_ProgressText.SetText("DEUTSCHZ LAEDT  " + Math.Round(m_ProgressLoading.GetCurrent()).ToString() + "%");
+			m_ProgressText.SetColor(DZKOTHG_UITheme.BrandGreen());
+			m_ProgressText.SetText("DEUTSCHZ LAEDT  " + progressPercent.ToString() + "%");
 		}
 	}
 

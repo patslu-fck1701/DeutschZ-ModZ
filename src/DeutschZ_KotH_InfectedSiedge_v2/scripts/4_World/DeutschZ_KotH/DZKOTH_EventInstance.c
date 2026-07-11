@@ -637,21 +637,31 @@ class DZKOTH_EventInstance
 		DZKOTH_ServerRPC.BroadcastFX(nearbyPlayers, DZKOTH_FXIds.FIREWORKS, m_Location.GetPosition());
 		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH", GetWinnerName() + " gewinnt KotH.", 10.0);
 
-		if (m_Loot)
-			m_Loot.SpawnRewardCrate(m_Location, m_Config.Loot, m_Config.Main);
-
-		vector rewardPos = m_Location.GetRewardCratePosition();
-		SpawnRewardFireworks(rewardPos);
-		SpawnBossForWinner();
-
 		m_State = DZKOTH_States.REWARD_ACTIVE;
 		DZKOTH_Utils.Log("Event completed");
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(SpawnRewardSequenceAtFlag, 3000, false);
 
 		int cleanupMs = m_Config.Main.CleanupDelayMinutes * 60000;
 		if (cleanupMs < 1000)
 			cleanupMs = 1000;
 		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(ScheduledCleanupEvent, cleanupMs, false);
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(DeleteFlagpoleAfterWin, 8000, false);
+	}
+
+	protected void SpawnRewardSequenceAtFlag()
+	{
+		if (!m_Location || m_State != DZKOTH_States.REWARD_ACTIVE)
+			return;
+
+		if (m_Smoke)
+			m_Smoke.DeleteFlagpole();
+
+		if (m_Loot)
+			m_Loot.SpawnRewardCrate(m_Location, m_Config.Loot, m_Config.Main);
+
+		vector rewardPos = m_Location.GetFlagPosition();
+		SpawnRewardFireworks(rewardPos);
+		SpawnBossForWinner();
+		DZKOTH_Utils.Log("Reward sequence spawned at former flagpole position " + rewardPos.ToString());
 	}
 
 	protected bool IsCaptureBlockedByEnemy()

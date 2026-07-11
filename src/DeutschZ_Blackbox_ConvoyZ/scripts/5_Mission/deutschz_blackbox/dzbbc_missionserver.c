@@ -19,6 +19,7 @@ class DZBBC_MissionServer
 			return;
 
 		ref array<string> classNames = {
+			"DZBBC_Blackbox",
 			"DZBBC_SignalMatches",
 			"DZBBC_Coded9VBattery",
 			"DZBBC_DataCore",

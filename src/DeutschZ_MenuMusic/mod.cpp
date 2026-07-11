@@ -7,4 +7,4 @@ tooltip = "DeutschZ Menu Music";
 overview = "DeutschZ menu, loading screen and music.";
 action = "";
 author = "DeutschZ";
-version = "1.2.1";
+version = "1.2.2-livefix";

@@ -1,10 +1,10 @@
 FrameWidgetClass DZBBC_EnemyCounterRoot
 {
 	name "DZBBC_EnemyCounterRoot"
-	position 0 132
-	size 500 76
-	halign center_ref
-	valign top_ref
+	position -22 -176
+	size 420 68
+	halign right_ref
+	valign bottom_ref
 	hexactpos 1
 	vexactpos 1
 	hexactsize 1
@@ -15,9 +15,9 @@ FrameWidgetClass DZBBC_EnemyCounterRoot
 		PanelWidgetClass DZBBC_EnemyCounterBackground
 		{
 			ignorepointer 1
-			color 0.02 0.02 0.02 0.9
+			color 0.015 0.025 0.018 0.94
 			position 0 0
-			size 500 76
+			size 420 68
 			halign center_ref
 			valign center_ref
 			hexactpos 1
@@ -28,23 +28,23 @@ FrameWidgetClass DZBBC_EnemyCounterRoot
 				TextWidgetClass DZBBC_EnemyCounterText
 				{
 					ignorepointer 1
-					position 18 8
-					size 464 30
+					position 16 6
+					size 388 28
 					hexactpos 1
 					vexactpos 1
 					hexactsize 1
 					vexactsize 1
-					text "Verbleibende AI: 0"
-					font "gui/fonts/sdf_MetronBook24"
-					color 1 1 1 1
+					text "CONVOYZ | VERBLEIBENDE AI: 0"
+					font "gui/fonts/sdf_MetronBook20"
+					color 0.52 0.94 0.08 1
 					"text halign" center
 					"text valign" center
 				}
 				ProgressBarWidgetClass DZBBC_EnemyCounterBar
 				{
 					ignorepointer 1
-					position 18 46
-					size 464 18
+					position 16 43
+					size 388 14
 					hexactpos 1
 					vexactpos 1
 					hexactsize 1
@@ -53,7 +53,7 @@ FrameWidgetClass DZBBC_EnemyCounterRoot
 					min 0
 					max 100
 					current 100
-					color 0.95 0.64 0.16 1
+					color 0.52 0.94 0.08 1
 				}
 			}
 		}

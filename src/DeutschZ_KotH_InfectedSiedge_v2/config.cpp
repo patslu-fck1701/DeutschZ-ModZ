@@ -65,7 +65,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "0.4.1-livefix";
+		version = "0.4.2-livefix";
 		type = "mod";
 		dependencies[] =
 		{
