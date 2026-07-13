@@ -45,14 +45,13 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 			return;
 
 		FullyBuild();
+		AnimateFlagEx(1.0);
 
 		EntityAI current = FindAttachmentBySlotName("Material_FPole_Flag");
 		if (!current)
-			current = GetInventory().CreateInInventory(DZKOTH_Const.FLAG_CLASSNAME);
+			current = GetInventory().CreateAttachment(DZKOTH_Const.FLAG_CLASSNAME);
 
 		DZKOTH_SetRaisedAmount(0.0);
-		AnimateFlagEx(1.0);
-		AddRefresherTime01(1.0);
 		DZKOTH_Utils.Log("Flagpole visual state forced: built=yes flag=" + BoolText(current != null) + " raised=no");
 	}
 
@@ -169,6 +168,7 @@ class DZKOTH_SmokeManager
 			return;
 
 		vector pos = DZKOTH_Utils.Grounded(flagPosition);
+		RemoveStaleEventFlagpoles(pos);
 		m_Flagpole = TrySpawnFlagpole(pos, ECE_SETUP | ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE);
 		if (!m_Flagpole)
 			m_Flagpole = TrySpawnFlagpole(pos, ECE_SETUP | ECE_PLACE_ON_SURFACE);
@@ -185,6 +185,23 @@ class DZKOTH_SmokeManager
 		m_Flagpole.DZKOTH_EnsureEventFlag();
 		SetReady();
 		DZKOTH_Utils.Log("Flagpole spawned at " + pos.ToString() + " orientation " + flagOrientation.ToString());
+	}
+
+	protected void RemoveStaleEventFlagpoles(vector pos)
+	{
+		array<Object> objects = new array<Object>;
+		array<CargoBase> proxies = new array<CargoBase>;
+		GetGame().GetObjectsAtPosition3D(pos, 6.0, objects, proxies);
+
+		foreach (Object object: objects)
+		{
+			if (!object)
+				continue;
+
+			string typeName = object.GetType();
+			if (typeName == DZKOTH_Const.FLAGPOLE_CLASSNAME || typeName == "DZEV_KOTH_Flagpole")
+				GetGame().ObjectDelete(object);
+		}
 	}
 
 	protected DZKOTH_EventFlagpole TrySpawnFlagpole(vector pos, int flags)
@@ -213,6 +230,15 @@ class DZKOTH_SmokeManager
 	void SetCompleted()
 	{
 		SetSmoke("M18SmokeGrenade_Red");
+	}
+
+	void StopSmokeOnly()
+	{
+		if (m_Flagpole)
+			m_Flagpole.DZKOTH_ClearSmoke();
+
+		StopSmokeRefresh();
+		ClearServerSmoke();
 	}
 
 	void SetFlagRaiseProgress(float progress)

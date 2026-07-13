@@ -38,4 +38,30 @@ class DZBBC_PlayerUtils
 
 		return result;
 	}
+
+	static EntityAI FindInventoryItem(PlayerBase player, string className)
+	{
+		if (!player || !player.GetInventory() || className == "")
+			return null;
+
+		array<EntityAI> items = new array<EntityAI>;
+		player.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+		foreach (EntityAI item: items)
+		{
+			if (item && item.GetType() == className)
+				return item;
+		}
+
+		return null;
+	}
+
+	static bool ContainsInventoryItem(PlayerBase player, EntityAI item)
+	{
+		if (!player || !player.GetInventory() || !item)
+			return false;
+
+		array<EntityAI> items = new array<EntityAI>;
+		player.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+		return items.Find(item) >= 0;
+	}
 }

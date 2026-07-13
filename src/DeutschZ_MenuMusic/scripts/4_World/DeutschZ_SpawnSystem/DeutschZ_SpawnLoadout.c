@@ -61,14 +61,14 @@ class DeutschZ_SpawnLoadout
 				continue;
 			if (!GetGame().ConfigIsExisting("CfgVehicles " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgWeapons " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgMagazines " + entry.ClassName))
 			{
-				Print("[DeutschZ SpawnSystem][WARN] Loadout classname missing: " + entry.ClassName);
+				DZSPAWN_Log.Warn("Loadout classname missing: " + entry.ClassName);
 				continue;
 			}
 
 			EntityAI created = player.GetInventory().CreateInInventory(entry.ClassName);
 			if (!created)
 			{
-				Print("[DeutschZ SpawnSystem][WARN] Could not create loadout item: " + entry.ClassName);
+				DZSPAWN_Log.Warn("Could not create loadout item: " + entry.ClassName);
 				continue;
 			}
 
@@ -86,7 +86,7 @@ class DeutschZ_SpawnLoadout
 			}
 		}
 
-		Print("[DeutschZ SpawnSystem] Applied loadout " + selected.Id);
+		DZSPAWN_Log.Info("Applied loadout " + selected.Id);
 		return true;
 	}
 
@@ -136,12 +136,12 @@ class DeutschZ_SpawnLoadoutsFile
 		if (!FileExist(DZSPAWN_Paths.LOADOUTS))
 		{
 			JsonFileLoader<ref DeutschZ_SpawnLoadoutsFile>.SaveFile(DZSPAWN_Paths.LOADOUTS, config, error);
-			Print("[DeutschZ SpawnSystem] Created Loadouts.json");
+			DZSPAWN_Log.Info("Created Loadouts.json");
 			return config;
 		}
 
 		if (!JsonFileLoader<ref DeutschZ_SpawnLoadoutsFile>.LoadFile(DZSPAWN_Paths.LOADOUTS, config, error))
-			Print("[DeutschZ SpawnSystem][ERROR] Loadouts.json invalid, defaults active: " + error);
+			DZSPAWN_Log.Error("Loadouts.json invalid, defaults active: " + error);
 
 		return config;
 	}

@@ -36,25 +36,17 @@ class DeutschZ_FireworksLauncher: FireworksLauncher
 
 		vector center = GetPosition();
 		DZKOTHG_SpawnSmokeAt(center);
-		DZKOTHG_SpawnSmokeAt(center + Vector(25.0, 0.0, 0.0));
-		DZKOTHG_SpawnSmokeAt(center + Vector(-25.0, 0.0, 0.0));
-		DZKOTHG_SpawnSmokeAt(center + Vector(0.0, 0.0, 25.0));
-		DZKOTHG_SpawnSmokeAt(center + Vector(0.0, 0.0, -25.0));
-		DZKOTHG_SpawnSmokeAt(center + Vector(18.0, 0.0, 18.0));
-		DZKOTHG_SpawnSmokeAt(center + Vector(-18.0, 0.0, 18.0));
-		DZKOTHG_SpawnSmokeAt(center + Vector(18.0, 0.0, -18.0));
-		DZKOTHG_SpawnSmokeAt(center + Vector(-18.0, 0.0, -18.0));
 
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(this.DZKOTHG_CleanupSmokeField);
-		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.DZKOTHG_CleanupSmokeField, 90000, false);
-		Print("[DZKOTHG] DeutschZ_FireworksLauncher spawned 25m smoke field.");
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(this.DZKOTHG_CleanupSmokeField, 10000, false);
+		Print("[DZKOTHG] DeutschZ_FireworksLauncher spawned one short red smoke marker.");
 	}
 
 	protected void DZKOTHG_SpawnSmokeAt(vector position)
 	{
 		position[1] = GetGame().SurfaceY(position[0], position[2]) + 0.05;
 
-		Object smokeObject = GetGame().CreateObjectEx("M18SmokeGrenade_White", position, ECE_PLACE_ON_SURFACE);
+		Object smokeObject = GetGame().CreateObjectEx("M18SmokeGrenade_Red", position, ECE_PLACE_ON_SURFACE);
 		if (!smokeObject)
 		{
 			Print("[DZKOTHG][WARN] Failed to spawn firework smoke at " + position.ToString());

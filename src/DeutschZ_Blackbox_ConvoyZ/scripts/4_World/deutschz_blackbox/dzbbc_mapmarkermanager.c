@@ -146,7 +146,7 @@ class DZBBC_MapMarkerManager
 
 	void ShowTransportHint(string text, vector sectorCenter)
 	{
-		ShowMarker(DZBBC_TRANSPORT_MARKER_UID, text, sectorCenter, ARGB(220, 220, 20, 20), DZBBC_DEFAULT_MARKER_ICON);
+		ShowMarker(DZBBC_TRANSPORT_MARKER_UID, text, sectorCenter, ARGB(255, 220, 20, 20), DZBBC_DEFAULT_MARKER_ICON);
 	}
 
 	void Remove(string uid)

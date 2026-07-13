@@ -10,6 +10,7 @@ class DZKOTH_EventInstance
 	protected ref DZKOTH_LootManager m_Loot;
 	protected ref DZKOTH_KeycardTracker m_KeycardTracker;
 	protected ref DZKOTH_TerminalHackManager m_TerminalHack;
+	protected ref array<EntityAI> m_RewardFireworks;
 	protected DZKOTH_CaptureZone m_Trigger;
 	protected int m_State;
 	protected float m_CaptureProgress;
@@ -41,6 +42,7 @@ class DZKOTH_EventInstance
 		m_Loot = new DZKOTH_LootManager;
 		m_KeycardTracker = new DZKOTH_KeycardTracker;
 		m_TerminalHack = new DZKOTH_TerminalHackManager;
+		m_RewardFireworks = new array<EntityAI>;
 		m_State = DZKOTH_States.INACTIVE;
 		m_CaptureExpansionPartyId = -1;
 		m_LastLoggedCaptureTen = -1;
@@ -61,7 +63,6 @@ class DZKOTH_EventInstance
 
 		float radius = GetCaptureRadius();
 		m_Trigger.Setup(this, radius);
-		RemoveLegacySpeakersNear(center);
 
 		m_Smoke.Setup(m_Location.GetFlagPosition(), m_Location.GetFlagOrientation());
 		m_Smoke.SetReady();
@@ -74,33 +75,6 @@ class DZKOTH_EventInstance
 
 		DZKOTH_Utils.Log("Event started: " + m_Location.Name);
 		return true;
-	}
-
-	protected void RemoveLegacySpeakersNear(vector center)
-	{
-		if (!GetGame() || !GetGame().IsServer())
-			return;
-
-		array<Object> objects = new array<Object>;
-		array<CargoBase> proxies = new array<CargoBase>;
-		GetGame().GetObjectsAtPosition3D(center, 100.0, objects, proxies);
-
-		int removed = 0;
-		foreach (Object object: objects)
-		{
-			if (!object)
-				continue;
-
-			string typeName = object.GetType();
-			if (typeName != "NoxZ_Static_Speaker" && typeName != "NoxZ_Speaker")
-				continue;
-
-			GetGame().ObjectDelete(object);
-			removed++;
-		}
-
-		if (removed > 0)
-			DZKOTH_Utils.Log("Removed " + removed.ToString() + " legacy NoxZ speaker(s) from the active KotH area.");
 	}
 
 	void OnPlayerEntered(PlayerBase player)
@@ -139,8 +113,8 @@ class DZKOTH_EventInstance
 			BroadcastCaptureReadyHudToNearbyPlayers();
 		else if (m_State == DZKOTH_States.CAPTURING)
 			TickCapture();
-		else if (m_State == DZKOTH_States.REWARD_ACTIVE)
-			TickRewardPhase();
+		else if (m_State == DZKOTH_States.BOSS_ACTIVE && m_Boss)
+			TickBossPhase();
 	}
 
 	void SyncStateToPlayer(PlayerBase player)
@@ -161,6 +135,10 @@ class DZKOTH_EventInstance
 		else if (IsCaptureState())
 		{
 			DZKOTH_ServerRPC.SendHud(player, DZKOTH_ProgressModes.CAPTURE, GetCaptureHudLabel(), m_CaptureProgress, 100.0);
+		}
+		else if (m_State == DZKOTH_States.BOSS_ACTIVE)
+		{
+			DZKOTH_ServerRPC.SendHud(player, DZKOTH_ProgressModes.BOSS, "BosZ Mumie", m_Boss.GetHealth(), m_Boss.GetMaxHealth());
 		}
 		else if (m_State == DZKOTH_States.REWARD_ACTIVE || m_State == DZKOTH_States.COMPLETED)
 		{
@@ -226,6 +204,9 @@ class DZKOTH_EventInstance
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(Tick);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(ScheduledCleanupEvent);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(HideHudForOnlinePlayers);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(SpawnRewardFireworks);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(StartBossPhaseAfterCapture);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CleanupArenaAfterBossDefeat);
 		}
 
 		HideHudForOnlinePlayers();
@@ -239,6 +220,7 @@ class DZKOTH_EventInstance
 			m_TerminalHack.Cleanup();
 		if (m_KeycardTracker)
 			m_KeycardTracker.Reset();
+		CleanupRewardFireworks();
 		if (m_Smoke)
 			m_Smoke.DeleteFlagpole();
 		if (m_Markers)
@@ -504,7 +486,7 @@ class DZKOTH_EventInstance
 		m_BossWarningSent = false;
 		m_BossDeathHandled = false;
 
-		m_Smoke.SetReady();
+		m_Smoke.SetCapture();
 		m_Smoke.SetFlagRaiseProgress(0.0);
 		m_Markers.ShowCapture(m_Location);
 		SpawnWaveAroundPlayer(starter, m_Config.Waves.WaveOne);
@@ -624,44 +606,37 @@ class DZKOTH_EventInstance
 
 	protected void CompleteCapturePhase()
 	{
-		if (m_State == DZKOTH_States.REWARD_ACTIVE || m_State == DZKOTH_States.COMPLETED || m_State == DZKOTH_States.CLEANUP)
+		if (m_State == DZKOTH_States.BOSS_WARNING || m_State == DZKOTH_States.BOSS_ACTIVE || m_State == DZKOTH_States.REWARD_ACTIVE || m_State == DZKOTH_States.COMPLETED || m_State == DZKOTH_States.CLEANUP)
 			return;
 
 		m_CaptureProgress = 100.0;
-		m_State = DZKOTH_States.CAPTURE_COMPLETE;
+		m_State = DZKOTH_States.BOSS_WARNING;
 		m_Smoke.SetFlagRaiseProgress(1.0);
-		m_Smoke.SetCompleted();
 		m_Markers.ShowCompleted(m_Location);
 		ref array<PlayerBase> nearbyPlayers = CollectPlayersInHudRange();
-		DZKOTH_ServerRPC.BroadcastHud(nearbyPlayers, DZKOTH_ProgressModes.CAPTURE, "KotH abgeschlossen", 100.0, 100.0);
-		DZKOTH_ServerRPC.BroadcastFX(nearbyPlayers, DZKOTH_FXIds.FIREWORKS, m_Location.GetPosition());
-		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH", GetWinnerName() + " gewinnt KotH.", 10.0);
+		DZKOTH_ServerRPC.BroadcastHud(nearbyPlayers, DZKOTH_ProgressModes.CAPTURE, "Capture abgeschlossen - Bossphase startet", 100.0, 100.0);
+		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH", "Capture abgeschlossen. BosZ Zombie betritt gleich die Zone.", 10.0);
 
-		m_State = DZKOTH_States.REWARD_ACTIVE;
-		DZKOTH_Utils.Log("Event completed");
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(SpawnRewardSequenceAtFlag, 3000, false);
-
-		int cleanupMs = m_Config.Main.CleanupDelayMinutes * 60000;
-		if (cleanupMs < 1000)
-			cleanupMs = 1000;
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(ScheduledCleanupEvent, cleanupMs, false);
+		DZKOTH_Utils.Log("Capture complete; boss phase scheduled.");
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(SpawnRewardFireworks, 5000, false, m_Location.GetFlagPosition());
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(StartBossPhaseAfterCapture, 10000, false);
 	}
 
-	protected void SpawnRewardSequenceAtFlag()
+	protected void StartBossPhaseAfterCapture()
 	{
-		if (!m_Location || m_State != DZKOTH_States.REWARD_ACTIVE)
+		if (!m_Location || m_State != DZKOTH_States.BOSS_WARNING)
 			return;
 
-		if (m_Smoke)
-			m_Smoke.DeleteFlagpole();
+		m_State = DZKOTH_States.BOSS_ACTIVE;
+		if (!SpawnBossForWinner())
+		{
+			m_State = DZKOTH_States.FAILED;
+			DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH", "Boss konnte nicht gespawnt werden. Event wird bereinigt.", 8.0);
+			ScheduledCleanupEvent();
+			return;
+		}
 
-		if (m_Loot)
-			m_Loot.SpawnRewardCrate(m_Location, m_Config.Loot, m_Config.Main);
-
-		vector rewardPos = m_Location.GetFlagPosition();
-		SpawnRewardFireworks(rewardPos);
-		SpawnBossForWinner();
-		DZKOTH_Utils.Log("Reward sequence spawned at former flagpole position " + rewardPos.ToString());
+		DZKOTH_Utils.Log("Boss phase started after capture completion.");
 	}
 
 	protected bool IsCaptureBlockedByEnemy()
@@ -785,25 +760,21 @@ class DZKOTH_EventInstance
 		return "Ein Ueberlebender";
 	}
 
-	protected void SpawnBossForWinner()
+	protected bool SpawnBossForWinner()
 	{
 		if (!m_Boss || !m_Config || !m_Config.Main)
-			return;
+			return false;
 
-		PlayerBase winner = GetBestCapturePlayer();
-		bool spawned = false;
-		if (IsValidPlayer(winner))
-			spawned = m_Boss.SpawnBossNearPlayer(winner, m_Location, m_Config.Main);
-		else
-			spawned = m_Boss.SpawnBoss(m_Location, m_Config.Main);
+		bool spawned = m_Boss.SpawnBoss(m_Location, m_Config.Main);
 
 		if (!spawned)
-			return;
+			return false;
 
 		m_Markers.ShowBoss(m_Location);
 		DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.BOSS_SPAWN, m_Boss.GetPosition());
-		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), "Achtung!", "BosZ Mumie erschienen.", 6.0);
+		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), "Achtung!", "BosZ Mumie betritt die Zone.", 6.0);
 		BroadcastBossHudToNearbyPlayers();
+		return true;
 	}
 
 	protected void SpawnRewardFireworks(vector center)
@@ -820,6 +791,7 @@ class DZKOTH_EventInstance
 			EntityAI battery = EntityAI.Cast(object);
 			if (battery)
 			{
+				m_RewardFireworks.Insert(battery);
 				battery.SetOrientation(Vector(Math.RandomFloatInclusive(0.0, 359.0), 0, 0));
 				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(IgniteRewardFirework, 1200 + (i * 700), false, battery);
 				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupRewardFirework, 120000, false, battery);
@@ -839,9 +811,31 @@ class DZKOTH_EventInstance
 	{
 		if (battery && GetGame())
 			GetGame().ObjectDelete(battery);
+
+		if (m_RewardFireworks)
+		{
+			int index = m_RewardFireworks.Find(battery);
+			if (index >= 0)
+				m_RewardFireworks.Remove(index);
+		}
 	}
 
-	protected void TickRewardPhase()
+	protected void CleanupRewardFireworks()
+	{
+		if (!m_RewardFireworks || !GetGame())
+			return;
+
+		for (int i = m_RewardFireworks.Count() - 1; i >= 0; i--)
+		{
+			EntityAI battery = m_RewardFireworks.Get(i);
+			if (battery)
+				GetGame().ObjectDelete(battery);
+		}
+
+		m_RewardFireworks.Clear();
+	}
+
+	protected void TickBossPhase()
 	{
 		if (!m_Boss)
 			return;
@@ -854,16 +848,82 @@ class DZKOTH_EventInstance
 
 		if (!m_BossDeathHandled)
 		{
-			m_BossDeathHandled = true;
-			DZKOTH_ServerRPC.BroadcastFX(CollectPlayersInHudRange(), DZKOTH_FXIds.BOSS_DEATH, m_Location.GetPosition());
-			DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), "DeutschZ KotH", "BosZ Mumie wurde erledigt.", 5.0);
+			HandleBossDefeated();
 		}
 	}
 
-	protected void DeleteFlagpoleAfterWin()
+	protected void HandleBossDefeated()
 	{
+		if (m_BossDeathHandled)
+			return;
+
+		m_BossDeathHandled = true;
+		m_State = DZKOTH_States.BOSS_DEFEATED;
+		vector bossDefeatPosition = m_Location.GetBossSpawnPosition();
+		if (m_Boss)
+			bossDefeatPosition = m_Boss.GetPosition();
+
+		ref array<PlayerBase> nearbyPlayers = CollectPlayersInHudRange();
+		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(nearbyPlayers, "DeutschZ KotH", "BosZ Mumie erledigt. Das Loot-Fass ist freigegeben.", 8.0);
+
+		if (m_Smoke)
+			m_Smoke.SetCompleted();
+
+		if (m_Loot)
+			m_Loot.SpawnRewards(m_Location, m_Config.Loot, m_Config.Main, bossDefeatPosition);
+
+		HideHudForOnlinePlayers();
+		m_State = DZKOTH_States.REWARD_ACTIVE;
+
+		if (GetGame())
+		{
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(Tick);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(ScheduledCleanupEvent);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CleanupArenaAfterBossDefeat);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupArenaAfterBossDefeat, 10000, false);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(ScheduledCleanupEvent, GetRewardCleanupDelayMs(), false);
+		}
+
+		DZKOTH_Utils.Log("Boss defeated; red smoke active. Arena cleanup scheduled in 10 seconds and full reward cleanup within 10 minutes.");
+	}
+
+	protected void CleanupArenaAfterBossDefeat()
+	{
+		if (m_State != DZKOTH_States.REWARD_ACTIVE && m_State != DZKOTH_States.BOSS_DEFEATED)
+			return;
+
+		DZKOTH_ServerRPC.BroadcastFXGlobal(DZKOTH_FXIds.CLEAR, m_Location.GetPosition());
+		if (m_Waves)
+			m_Waves.Cleanup();
+		if (m_Boss)
+			m_Boss.Cleanup();
 		if (m_Smoke)
 			m_Smoke.DeleteFlagpole();
+		if (m_Markers)
+			m_Markers.Remove();
+		if (m_TerminalHack)
+			m_TerminalHack.Cleanup();
+		CleanupRewardFireworks();
+
+		DZKOTH_Utils.Log("Arena cleanup complete; reward barrel, boss remains, loot and keycard preserved.");
+	}
+
+	protected int GetRewardCleanupDelayMs()
+	{
+		int minutes = 10;
+		if (m_Config && m_Config.Main)
+		{
+			if (m_Config.Main.RewardDespawnMinutes > 0 && m_Config.Main.RewardDespawnMinutes < minutes)
+				minutes = m_Config.Main.RewardDespawnMinutes;
+			if (m_Config.Main.CleanupDelayMinutes > 0 && m_Config.Main.CleanupDelayMinutes < minutes)
+				minutes = m_Config.Main.CleanupDelayMinutes;
+		}
+
+		int cleanupMs = minutes * 60000;
+		if (cleanupMs < 60000)
+			cleanupMs = 60000;
+
+		return cleanupMs;
 	}
 
 	protected void LogCaptureProgress()

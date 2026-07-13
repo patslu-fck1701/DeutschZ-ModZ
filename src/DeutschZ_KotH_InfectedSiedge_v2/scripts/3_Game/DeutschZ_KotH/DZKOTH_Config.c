@@ -70,8 +70,8 @@ class DZKOTH_MainConfig
 		BossWarningSeconds = 4.0;
 		BossHealth = 7500.0;
 		BossDamageMultiplier = 10.0;
-		BossSpawnMinDistance = 12.0;
-		BossSpawnMaxDistance = 18.0;
+		BossSpawnMinDistance = 8.0;
+		BossSpawnMaxDistance = 12.0;
 		KeycardChancePercent = 100.0;
 		GlobalKeycardAnnouncement = true;
 		PermanentTracking = false;
@@ -492,8 +492,7 @@ class DZKOTH_Config
 
 	static ref DZKOTH_ProfileConfig LoadProfileConfig()
 	{
-		if (!FileExist(DZKOTH_Const.PROFILE_KOTH_DIR))
-			MakeDirectory(DZKOTH_Const.PROFILE_KOTH_DIR);
+		DZKOTH_ProfilePaths.Ensure();
 
 		ref DZKOTH_ProfileConfig config = new DZKOTH_ProfileConfig;
 		string errorMessage;
@@ -562,9 +561,9 @@ class DZKOTH_Config
 		if (bundle.Main.BossDamageMultiplier < 1.0)
 			bundle.Main.BossDamageMultiplier = 10.0;
 		if (bundle.Main.BossSpawnMinDistance <= 0.0)
-			bundle.Main.BossSpawnMinDistance = 12.0;
+			bundle.Main.BossSpawnMinDistance = 8.0;
 		if (bundle.Main.BossSpawnMaxDistance < bundle.Main.BossSpawnMinDistance)
-			bundle.Main.BossSpawnMaxDistance = bundle.Main.BossSpawnMinDistance + 6.0;
+			bundle.Main.BossSpawnMaxDistance = bundle.Main.BossSpawnMinDistance + 4.0;
 		if (bundle.Main.ZombieSpawnRadius <= 0.0 || bundle.Main.ZombieSpawnRadius > 15.0)
 			bundle.Main.ZombieSpawnRadius = 15.0;
 		if (bundle.Main.SpawnMaxDistance < bundle.Main.SpawnMinDistance)
@@ -596,6 +595,7 @@ class DZKOTH_Config
 			location.Position = profileLocation.Center;
 			location.FlagPosition = profileLocation.FlagPosition;
 			location.FlagOrientation = profileLocation.FlagOrientation;
+			location.BossSpawnPosition = profileLocation.FlagPosition;
 			location.ChestPosition = profileLocation.ChestPosition;
 			location.ChestOrientation = profileLocation.ChestOrientation;
 			location.RewardCratePosition = profileLocation.ChestPosition;

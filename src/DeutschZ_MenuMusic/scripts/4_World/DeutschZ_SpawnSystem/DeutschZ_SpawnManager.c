@@ -35,7 +35,7 @@ class DeutschZ_SpawnManager
 		m_Points = LoadSpawnPoints();
 		m_Loadouts = DeutschZ_SpawnLoadoutsFile.Load();
 		m_Initialized = true;
-		Print("[DeutschZ SpawnSystem] Loaded " + m_Points.SpawnPoints.Count().ToString() + " spawnpoints");
+		DZSPAWN_Log.Info("Loaded " + m_Points.SpawnPoints.Count().ToString() + " spawnpoints");
 		RunSelfTest();
 	}
 
@@ -46,9 +46,9 @@ class DeutschZ_SpawnManager
 		vector testPosition;
 		string testName;
 		if (TryGetRandomValidSpawn(DZSPAWN_Mode.SAFE_RANDOM, testPosition, testName))
-			Print("[DeutschZ SpawnSystem] Self-test OK: " + testName + " at " + testPosition.ToString());
+			DZSPAWN_Log.Info("Self-test OK: " + testName + " at " + testPosition.ToString());
 		else
-			Print("[DeutschZ SpawnSystem][ERROR] Self-test failed: no valid SAFE_RANDOM spawn");
+			DZSPAWN_Log.Error("Self-test failed: no valid SAFE_RANDOM spawn");
 	}
 
 	DeutschZ_SpawnSettings GetSettings()
@@ -103,13 +103,13 @@ class DeutschZ_SpawnManager
 
 		SetPendingSpawnMode(uid, mode);
 		m_LastRequests.Set(uid, now);
-		Print("[DeutschZ SpawnSystem] Player " + uid + " requested mode " + mode);
+		DZSPAWN_Log.Info("Player " + uid + " requested mode " + mode);
 		player.RPCSingleParam(DZSPAWN_RPC.RESPAWN_ACCEPTED, new Param1<string>(mode), true, sender);
 	}
 
 	protected void Deny(PlayerBase player, PlayerIdentity identity, string reason, int remainingSeconds)
 	{
-		Print("[DeutschZ SpawnSystem] Denied request: " + reason);
+		DZSPAWN_Log.Info("Denied request: " + reason);
 		if (player && identity)
 			player.RPCSingleParam(DZSPAWN_RPC.RESPAWN_DENIED, new Param2<string, int>(reason, remainingSeconds), true, identity);
 	}
@@ -249,7 +249,7 @@ class DeutschZ_SpawnManager
 			return;
 
 		DeutschZ_SpawnLoadout.Apply(player, m_Loadouts, m_Loadouts.DefaultLoadout);
-		Print("[DeutschZ SpawnSystem] Spawn completed for " + identity.GetId());
+		DZSPAWN_Log.Info("Spawn completed for " + identity.GetId());
 	}
 
 	protected ref DeutschZ_SpawnPointsFile LoadSpawnPoints()
@@ -260,12 +260,12 @@ class DeutschZ_SpawnManager
 		if (!FileExist(DZSPAWN_Paths.POINTS))
 		{
 			JsonFileLoader<ref DeutschZ_SpawnPointsFile>.SaveFile(DZSPAWN_Paths.POINTS, points, error);
-			Print("[DeutschZ SpawnSystem] Created SpawnPoints_Chernarus.json from Expansion spawn locations");
+			DZSPAWN_Log.Info("Created SpawnPoints_Chernarus.json from Expansion spawn locations");
 			return points;
 		}
 
 		if (!JsonFileLoader<ref DeutschZ_SpawnPointsFile>.LoadFile(DZSPAWN_Paths.POINTS, points, error))
-			Print("[DeutschZ SpawnSystem][ERROR] SpawnPoints_Chernarus.json invalid, Expansion defaults active: " + error);
+			DZSPAWN_Log.Error("SpawnPoints_Chernarus.json invalid, Expansion defaults active: " + error);
 		return points;
 	}
 

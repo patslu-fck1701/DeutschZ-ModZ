@@ -142,6 +142,21 @@ class DZBBC_AIFactionManager
 		return CountExpansionObjectiveTotal() > 0;
 	}
 
+	bool IsManagedUnit(Object unit)
+	{
+		EntityAI entity = EntityAI.Cast(unit);
+		if (!entity)
+			return false;
+
+		foreach (DZBBC_ManagedAI managed: m_Units)
+		{
+			if (managed && managed.Unit == entity)
+				return true;
+		}
+
+		return false;
+	}
+
 	protected int CountAliveExpansionObjective()
 	{
 		int count = 0;

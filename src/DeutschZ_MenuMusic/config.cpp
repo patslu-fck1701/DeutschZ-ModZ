@@ -14,16 +14,6 @@ class CfgPatches
 	};
 };
 
-class CfgNoxZPhoneMusic
-{
-	tracks[] =
-	{
-		"Deutsch Z - Ich Bin Der King|185|DZKOTHG_Speaker_King_SoundSet",
-		"Deutsch Z - DayZ Laeuft|138|DZKOTHG_Speaker_DayZLaeuft_SoundSet",
-		"Deutsch Z - Chernarus Allein|202|DZKOTHG_Speaker_ChernarusAllein_SoundSet"
-	};
-};
-
 class CfgSoundShaders
 {
 	class DZKOTHG_MenuMusic_Base_SoundShader
@@ -41,27 +31,6 @@ class CfgSoundShaders
 	class DZKOTHG_MenuMusic09_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music09", 1}}; };
 	class DZKOTHG_MenuMusic10_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music10", 1}}; };
 	class DZKOTHG_MenuMusic11_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music11", 1}}; };
-
-	class DZKOTHG_Speaker_King_SoundShader
-	{
-		samples[] = {{"\DeutschZ_MenuMusic\sounds\music05", 1}};
-		volume = 1.5;
-		range = 100;
-	};
-
-	class DZKOTHG_Speaker_DayZLaeuft_SoundShader
-	{
-		samples[] = {{"\DeutschZ_MenuMusic\sounds\music03", 1}};
-		volume = 1.5;
-		range = 100;
-	};
-
-	class DZKOTHG_Speaker_ChernarusAllein_SoundShader
-	{
-		samples[] = {{"\DeutschZ_MenuMusic\sounds\music02", 1}};
-		volume = 1.5;
-		range = 100;
-	};
 };
 
 class CfgSoundSets
@@ -83,21 +52,6 @@ class CfgSoundSets
 	class DZKOTHG_MenuMusic09_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic09_SoundShader"}; };
 	class DZKOTHG_MenuMusic10_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic10_SoundShader"}; };
 	class DZKOTHG_MenuMusic11_SoundSet : DZKOTHG_MenuMusic_Base_SoundSet { soundShaders[] = {"DZKOTHG_MenuMusic11_SoundShader"}; };
-
-	class DZKOTHG_Speaker_King_SoundSet
-	{
-		soundShaders[] = {"DZKOTHG_Speaker_King_SoundShader"};
-	};
-
-	class DZKOTHG_Speaker_DayZLaeuft_SoundSet
-	{
-		soundShaders[] = {"DZKOTHG_Speaker_DayZLaeuft_SoundShader"};
-	};
-
-	class DZKOTHG_Speaker_ChernarusAllein_SoundSet
-	{
-		soundShaders[] = {"DZKOTHG_Speaker_ChernarusAllein_SoundShader"};
-	};
 };
 
 class CfgMods

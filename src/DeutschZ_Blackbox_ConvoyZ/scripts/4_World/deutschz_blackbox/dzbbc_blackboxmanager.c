@@ -48,6 +48,11 @@ class DZBBC_BlackboxManager
 		return m_Blackbox != null;
 	}
 
+	bool IsExpectedTarget(Object target)
+	{
+		return m_Blackbox && target && target == m_Blackbox;
+	}
+
 	vector GetPosition()
 	{
 		if (m_Blackbox)

@@ -2,8 +2,7 @@ class DZBBC_Config
 {
 	static void EnsureProfileDirectory()
 	{
-		if (!FileExist(DZBBC_PROFILE_DIR))
-			MakeDirectory(DZBBC_PROFILE_DIR);
+		DZBBC_ProfilePaths.Ensure();
 	}
 
 	static ref DZBBC_ConfigBundle LoadAll()

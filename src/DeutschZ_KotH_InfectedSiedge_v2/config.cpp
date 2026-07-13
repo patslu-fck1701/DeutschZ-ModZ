@@ -41,7 +41,7 @@ class CfgSoundShaders
 	class DZKOTH_EventMusic_SoundShader
 	{
 		samples[] = {{"\DeutschZ_KOTH_InfectedSiege\sounds\dzkoth_anthem", 1}};
-		volume = 0.425;
+		volume = 0.31875;
 	};
 };
 

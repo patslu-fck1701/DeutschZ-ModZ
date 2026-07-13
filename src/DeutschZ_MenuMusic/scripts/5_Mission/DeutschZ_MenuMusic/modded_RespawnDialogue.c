@@ -37,7 +37,7 @@ modded class RespawnDialogue
 		m_DZSPAWN_InfoMode = TextWidget.Cast(layoutRoot.FindAnyWidget("DZSPAWN_InfoMode"));
 		m_DZSPAWN_SelectedMode = DZSPAWN_Mode.SAFE_RANDOM;
 		SetFocus(m_CustomRespawn);
-		Print("[DeutschZ SpawnSystem][CLIENT] Spawn selection active");
+		DZSPAWN_Log.Info("CLIENT Spawn selection active");
 		return layoutRoot;
 	}
 
@@ -81,15 +81,15 @@ modded class RespawnDialogue
 		}
 
 		if (id == DZSPAWN_ID_RANDOM)
-			return DZSPAWN_SelectMode(DZSPAWN_Mode.RANDOM, "Expansion Zufall");
+			return DZSPAWN_SelectMode(DZSPAWN_Mode.RANDOM, "DeutschZ Zufall");
 		if (id == DZSPAWN_ID_COAST)
-			return DZSPAWN_SelectMode(DZSPAWN_Mode.COAST, "Expansion Kueste");
+			return DZSPAWN_SelectMode(DZSPAWN_Mode.COAST, "DeutschZ Kueste");
 		if (id == DZSPAWN_ID_INLAND)
-			return DZSPAWN_ShowDisabled("INLAND ist nicht in Expansion konfiguriert");
+			return DZSPAWN_ShowDisabled("INLAND ist nicht konfiguriert");
 		if (id == DZSPAWN_ID_TRADER)
 			return DZSPAWN_ShowDisabled("TRADER ist serverseitig deaktiviert");
 		if (id == DZSPAWN_ID_SAFE)
-			return DZSPAWN_SelectMode(DZSPAWN_Mode.SAFE_RANDOM, "Sicherer Expansion Spawn");
+			return DZSPAWN_SelectMode(DZSPAWN_Mode.SAFE_RANDOM, "Sicherer DeutschZ Spawn");
 		if (id == DZSPAWN_ID_LOADOUT)
 		{
 			DZSPAWN_SetStatus("LOADOUT: SURVIVOR BASIC");

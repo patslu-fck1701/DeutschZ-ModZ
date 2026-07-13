@@ -100,7 +100,6 @@ class DZEV_ClientProgressHud
 
 	void PlayBossSpawnEffect(vector pos)
 	{
-		FlashRed();
 		PlayBossAlarm(pos);
 	}
 
@@ -117,7 +116,6 @@ class DZEV_ClientProgressHud
 		if (!GetGame())
 			return;
 
-		FlashRed();
 		StopSiren();
 		m_Siren = SEffectManager.PlaySound("UndergroundDoor_Alarm_Loop_SoundSet", pos, 0, 0, true);
 		GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(StopSiren, 9500, false);

@@ -6,7 +6,7 @@
     "TickSeconds": 1.0,
     "CombatRadius": 85.0,
     "MarkerRadius": 420.0,
-    "HackDurationSeconds": 120.0,
+    "HackDurationSeconds": 90.0,
     "TerminalDecryptSeconds": 60.0,
     "DataCoreLifetimeSeconds": 1800.0,
     "CleanupDelaySeconds": 300.0,

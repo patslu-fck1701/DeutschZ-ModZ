@@ -16,7 +16,7 @@ class DZEV_KOTH_Flagpole : TerritoryFlag
 	{
 		string smokeType = "M18SmokeGrenade_White";
 		if (state == DZEV_States.CAPTURING)
-			smokeType = "M18SmokeGrenade_Green";
+			smokeType = "M18SmokeGrenade_White";
 		else if (state == DZEV_States.BOSS || state == DZEV_States.COMPLETED)
 			smokeType = "M18SmokeGrenade_Red";
 

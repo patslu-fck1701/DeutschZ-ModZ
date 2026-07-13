@@ -16,11 +16,11 @@ modded class MissionServer
 		if (customSpawn)
 		{
 			pos = selectedPosition;
-			Print("[DeutschZ SpawnSystem] Selected spawn " + selectedName + " at " + pos.ToString());
+			DZSPAWN_Log.Info("Selected spawn " + selectedName + " at " + pos.ToString());
 		}
 		else
 		{
-			Print("[DeutschZ SpawnSystem][WARN] No valid spawn for " + mode + ", vanilla position active");
+		DZSPAWN_Log.Warn("No valid spawn for " + mode + ", vanilla position active");
 		}
 
 		PlayerBase player = super.CreateCharacter(identity, pos, ctx, characterName);

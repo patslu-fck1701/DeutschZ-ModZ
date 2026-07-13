@@ -5,7 +5,7 @@ class DZKOTH_LootManager
 	protected int m_RewardDespawnMs;
 	protected bool m_RewardWasFilled;
 
-	void SpawnRewards(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig, DZKOTH_MainConfig mainConfig)
+	void SpawnRewards(DZKOTH_LocationConfig location, DZKOTH_LootConfig lootConfig, DZKOTH_MainConfig mainConfig, vector bossPosition)
 	{
 		if (!GetGame() || !location)
 			return;
@@ -13,8 +13,8 @@ class DZKOTH_LootManager
 		CleanupRewardCrate();
 		CleanupBossCorpse();
 
-		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetFlagPosition());
-		m_BossCorpse = SpawnContainer(DZKOTH_Const.BOSS_CORPSE_CLASSNAME, location.GetBossSpawnPosition() + "1.2 0 1.2");
+		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetRewardCratePosition());
+		m_BossCorpse = SpawnContainer(DZKOTH_Const.BOSS_CORPSE_CLASSNAME, bossPosition + "1.2 0 1.2");
 		if (m_RewardCrate)
 		{
 			m_RewardCrate.SetOrientation(location.GetRewardCrateOrientation());
@@ -22,18 +22,18 @@ class DZKOTH_LootManager
 			DZKOTH_Utils.Log("Reward crate spawned at " + m_RewardCrate.GetPosition().ToString() + " orientation " + location.GetRewardCrateOrientation().ToString());
 		}
 
+		EnsureRewardMinimumLoot(m_RewardCrate);
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
-
-		EnsureRewardMinimumLoot(m_RewardCrate);
+		TryCreateEventReward(m_RewardCrate, DZKOTH_Const.FIREWORKS_BATTERY_CLASSNAME, 10.0);
 		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
 		LogRewardContents(m_RewardCrate);
 
 		if (m_BossCorpse && lootConfig)
 			FillContainer(m_BossCorpse, lootConfig.BossCorpseLoot);
 
-		if (m_BossCorpse && mainConfig && !HasInventoryItem(m_BossCorpse, DZKOTH_Const.KEYCARD_CLASSNAME))
-			TryCreateKeycard(m_BossCorpse, mainConfig.KeycardChancePercent);
+		if (m_BossCorpse && !HasInventoryItem(m_BossCorpse, DZKOTH_Const.KEYCARD_CLASSNAME))
+			TryCreateKeycard(m_BossCorpse, 100.0);
 
 		ScheduleRewardCleanup(mainConfig);
 	}
@@ -46,7 +46,7 @@ class DZKOTH_LootManager
 		CleanupRewardCrate();
 		CleanupBossCorpse();
 
-		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetFlagPosition());
+		m_RewardCrate = SpawnContainer(DZKOTH_Const.REWARD_CRATE_CLASSNAME, location.GetRewardCratePosition());
 		if (m_RewardCrate)
 		{
 			m_RewardCrate.SetOrientation(location.GetRewardCrateOrientation());
@@ -54,10 +54,10 @@ class DZKOTH_LootManager
 			DZKOTH_Utils.Log("Reward crate spawned at " + m_RewardCrate.GetPosition().ToString() + " orientation " + location.GetRewardCrateOrientation().ToString());
 		}
 
+		EnsureRewardMinimumLoot(m_RewardCrate);
 		if (m_RewardCrate && lootConfig)
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
-
-		EnsureRewardMinimumLoot(m_RewardCrate);
+		TryCreateEventReward(m_RewardCrate, DZKOTH_Const.FIREWORKS_BATTERY_CLASSNAME, 10.0);
 		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
 		LogRewardContents(m_RewardCrate);
 
@@ -81,6 +81,7 @@ class DZKOTH_LootManager
 		if (!GetGame())
 			return;
 
+		CleanupRewardCrate();
 		CleanupBossCorpse();
 	}
 
@@ -92,6 +93,8 @@ class DZKOTH_LootManager
 		int minutes = 10;
 		if (mainConfig && mainConfig.RewardDespawnMinutes > 0)
 			minutes = mainConfig.RewardDespawnMinutes;
+		if (minutes > 10)
+			minutes = 10;
 
 		m_RewardDespawnMs = minutes * 60000;
 		if (m_RewardDespawnMs < 60000)
@@ -175,6 +178,11 @@ class DZKOTH_LootManager
 				continue;
 
 			int count = GetEntryCount(entry);
+			if (IsUniqueRewardClass(entry.ClassName) && HasInventoryItem(container, entry.ClassName))
+				continue;
+			if (GetGame().ConfigIsExisting("CfgMagazines " + entry.ClassName))
+				count = Math.Min(count, Math.Max(0, 2 - CountInventoryClass(container, entry.ClassName)));
+
 			for (int i = 0; i < count; i++)
 			{
 				if (!GetGame().ConfigIsExisting("CfgVehicles " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgWeapons " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgMagazines " + entry.ClassName))
@@ -186,6 +194,8 @@ class DZKOTH_LootManager
 				EntityAI item = container.GetInventory().CreateInInventory(entry.ClassName);
 				if (!item)
 					DZKOTH_Utils.Warn("Could not place loot " + entry.ClassName + " in " + container.GetType());
+				else
+					DZKOTH_Utils.Log("Reward item added source=pool class=" + entry.ClassName);
 			}
 		}
 	}
@@ -196,28 +206,56 @@ class DZKOTH_LootManager
 			return;
 
 		int before = CountInventoryItems(container);
-		if (before < 60)
+		string weaponClass = "M4A1";
+		string magazineClass = "Mag_STANAG_30Rnd";
+		string ammoClass = "AmmoBox_556x45_20Rnd";
+		int weaponRoll = Math.RandomInt(0, 6);
+		if (weaponRoll == 1)
 		{
-			DZKOTH_Utils.Warn("Reward pool created only " + before.ToString() + " items. Adding guaranteed minimum stock.");
-			CreateGuaranteedItems(container, "M4A1", 4);
-			CreateGuaranteedItems(container, "AKM", 4);
-			CreateGuaranteedItems(container, "Mag_STANAG_30Rnd", 12);
-			CreateGuaranteedItems(container, "Mag_AKM_30Rnd", 12);
-			CreateGuaranteedItems(container, "AmmoBox_556x45_20Rnd", 10);
-			CreateGuaranteedItems(container, "AmmoBox_762x39_20Rnd", 10);
-			CreateGuaranteedItems(container, "M67Grenade", 4);
-			CreateGuaranteedItems(container, "M4_Suppressor", 2);
-			CreateGuaranteedItems(container, "AK_Suppressor", 2);
-			CreateGuaranteedItems(container, "ACOGOptic", 2);
-			CreateGuaranteedItems(container, "PSO1Optic", 2);
+			weaponClass = "AKM";
+			magazineClass = "Mag_AKM_30Rnd";
+			ammoClass = "AmmoBox_762x39_20Rnd";
 		}
+		else if (weaponRoll == 2)
+		{
+			weaponClass = "AK74";
+			magazineClass = "Mag_AK74_30Rnd";
+			ammoClass = "AmmoBox_545x39_20Rnd";
+		}
+		else if (weaponRoll == 3)
+		{
+			weaponClass = "M16A2";
+			magazineClass = "Mag_STANAG_30Rnd";
+			ammoClass = "AmmoBox_556x45_20Rnd";
+		}
+		else if (weaponRoll == 4)
+		{
+			weaponClass = "FAL";
+			magazineClass = "Mag_FAL_20Rnd";
+			ammoClass = "AmmoBox_308Win_20Rnd";
+		}
+		else if (weaponRoll == 5)
+		{
+			weaponClass = "SVD";
+			magazineClass = "Mag_SVD_10Rnd";
+			ammoClass = "AmmoBox_762x54_20Rnd";
+		}
+
+		CreateGuaranteedItems(container, weaponClass, 1, true);
+		CreateGuaranteedItems(container, magazineClass, 2);
+		CreateGuaranteedItems(container, ammoClass, 1);
+		CreateGuaranteedItems(container, "FirstAidKit", 1, true);
+		CreateGuaranteedItems(container, "Epinephrine", 1, true);
+		CreateGuaranteedItems(container, "M67Grenade", 1, true);
 
 		DZKOTH_Utils.Log("Reward minimum check: " + before.ToString() + " -> " + CountInventoryItems(container).ToString() + " items.");
 	}
 
-	protected void CreateGuaranteedItems(EntityAI container, string className, int count)
+	protected void CreateGuaranteedItems(EntityAI container, string className, int count, bool unique = false)
 	{
 		if (!container || !container.GetInventory())
+			return;
+		if (unique && HasInventoryItem(container, className))
 			return;
 
 		if (!GetGame().ConfigIsExisting("CfgVehicles " + className) && !GetGame().ConfigIsExisting("CfgWeapons " + className) && !GetGame().ConfigIsExisting("CfgMagazines " + className))
@@ -231,6 +269,8 @@ class DZKOTH_LootManager
 			EntityAI item = container.GetInventory().CreateInInventory(className);
 			if (!item)
 				DZKOTH_Utils.Warn("Guaranteed reward item failed: " + className);
+			else
+				DZKOTH_Utils.Log("Reward item added source=guaranteed class=" + className);
 		}
 	}
 
@@ -257,6 +297,14 @@ class DZKOTH_LootManager
 		{
 			DZKOTH_Utils.Error("DeutschZ reward barrel was not created.");
 			return;
+		}
+
+		array<EntityAI> items = new array<EntityAI>;
+		container.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+		foreach (EntityAI item: items)
+		{
+			if (item && item != container)
+				DZKOTH_Utils.Log("Reward content class=" + item.GetType());
 		}
 
 		DZKOTH_Utils.Log("DeutschZ reward barrel contains " + CountInventoryItems(container).ToString() + " inventory items.");
@@ -291,6 +339,46 @@ class DZKOTH_LootManager
 		EntityAI keycard = container.GetInventory().CreateInInventory(DZKOTH_Const.KEYCARD_CLASSNAME);
 		if (!keycard)
 			DZKOTH_Utils.Warn("Could not place story keycard in boss corpse.");
+		else
+			DZKOTH_Utils.Log("Boss remains story item added class=" + DZKOTH_Const.KEYCARD_CLASSNAME + " chance=100");
+	}
+
+	protected void TryCreateEventReward(EntityAI container, string className, float chancePercent)
+	{
+		if (!container || !container.GetInventory() || className == "")
+			return;
+		if (Math.RandomFloatInclusive(0.0, 100.0) > chancePercent)
+			return;
+		if (HasInventoryItem(container, className))
+			return;
+
+		EntityAI item = container.GetInventory().CreateInInventory(className);
+		if (!item)
+			DZKOTH_Utils.Warn("Could not place separate event reward " + className);
+		else
+			DZKOTH_Utils.Log("Reward item added source=event class=" + className + " chance=" + chancePercent.ToString());
+	}
+
+	protected bool IsUniqueRewardClass(string className)
+	{
+		return className == "M4A1" || className == "AKM" || className == "AK74" || className == "M16A2" || className == "FAL" || className == "SVD" || className == "ACOGOptic" || className == "M4_T3NRDSOptic" || className == "PSO1Optic" || className == "M4_Suppressor" || className == "AK_Suppressor" || className == DZKOTH_Const.FIREWORKS_BATTERY_CLASSNAME;
+	}
+
+	protected int CountInventoryClass(EntityAI container, string className)
+	{
+		if (!container || !container.GetInventory())
+			return 0;
+
+		array<EntityAI> items = new array<EntityAI>;
+		container.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, items);
+		int count = 0;
+		foreach (EntityAI item: items)
+		{
+			if (item && item.GetType() == className)
+				count++;
+		}
+
+		return count;
 	}
 
 	protected bool HasInventoryItem(EntityAI container, string className)

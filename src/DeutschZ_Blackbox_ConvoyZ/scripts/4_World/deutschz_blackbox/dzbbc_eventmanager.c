@@ -27,7 +27,8 @@ class DZBBC_EventManager
 			int delayMs = m_Config.Main.AutoStartDelaySeconds * 1000;
 			if (delayMs < 1000)
 				delayMs = 1000;
-			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(AutoStartEvent, delayMs, false);
+			GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(AutoStartEvent, delayMs, false);
+			DZBBC_Utils.Log("AutoStart scheduled in " + m_Config.Main.AutoStartDelaySeconds.ToString() + " seconds");
 		}
 	}
 
@@ -80,6 +81,32 @@ class DZBBC_EventManager
 		return m_Instance && m_Instance.StartBlackboxHack(player, blackbox);
 	}
 
+	bool CanUseBlackboxAction(PlayerBase player, Object blackbox)
+	{
+		return m_Instance && m_Instance.CanUseBlackboxAction(player, blackbox);
+	}
+
+	bool CompleteBlackboxHack(PlayerBase player, Object blackbox)
+	{
+		return m_Instance && m_Instance.CompleteBlackboxHack(player, blackbox);
+	}
+
+	bool CancelBlackboxHack(PlayerBase player, Object blackbox, string reasonCode = "INPUT_RELEASED")
+	{
+		return m_Instance && m_Instance.CancelBlackboxHack(player, blackbox, reasonCode);
+	}
+
+	float GetBlackboxHackDuration()
+	{
+		if (!m_Config)
+			m_Config = DZBBC_Config.LoadAll();
+
+		if (!m_Config || !m_Config.Main || m_Config.Main.HackDurationSeconds < 1.0)
+			return 90.0;
+
+		return m_Config.Main.HackDurationSeconds;
+	}
+
 	bool StartTerminalDecrypt(PlayerBase player, Object terminal)
 	{
 		return m_Instance && m_Instance.StartTerminalDecrypt(player, terminal);
@@ -90,12 +117,33 @@ class DZBBC_EventManager
 		return m_Instance && m_Instance.CompleteTerminalDecrypt(player, terminal);
 	}
 
+	bool CancelTerminalDecrypt(PlayerBase player, Object terminal)
+	{
+		return m_Instance && m_Instance.CancelTerminalDecrypt(player, terminal);
+	}
+
+	float GetTerminalDecryptDuration()
+	{
+		if (!m_Config)
+			m_Config = DZBBC_Config.LoadAll();
+
+		if (!m_Config || !m_Config.Main || m_Config.Main.TerminalDecryptSeconds < 1.0)
+			return 60.0;
+
+		return m_Config.Main.TerminalDecryptSeconds;
+	}
+
 	float GetDamageMultiplierForSource(EntityAI source)
 	{
 		if (!m_Instance || !source)
 			return 1.0;
 
 		return m_Instance.GetDamageMultiplierForSource(source);
+	}
+
+	bool ShouldBlockVehicleManagedUnitContact(Object unit)
+	{
+		return m_Instance && m_Instance.ShouldBlockVehicleManagedUnitContact(unit);
 	}
 
 	bool CanUseAdminCommand(PlayerIdentity identity)

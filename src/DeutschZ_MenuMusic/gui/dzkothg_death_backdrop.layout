@@ -10,6 +10,7 @@ FrameWidgetClass DZKOTHG_DeathBackdrop {
  priority -50
  {
   ImageWidgetClass DZKOTHG_DeathBackground {
+   ignorepointer 1
    position 0 0
    size 1 1
    hexactpos 0
@@ -22,6 +23,7 @@ FrameWidgetClass DZKOTHG_DeathBackdrop {
    "stretch mode" stretch_w_h
   }
   ImageWidgetClass DZKOTHG_DeathLogo {
+   ignorepointer 1
    position 0.055 0.08
    size 0.18 0.32
    hexactpos 0
@@ -34,6 +36,7 @@ FrameWidgetClass DZKOTHG_DeathBackdrop {
    "stretch mode" stretch_w_h
   }
   TextWidgetClass DZKOTHG_DeathTitle {
+   ignorepointer 1
    position 0.29 0.12
    size 0.55 0.09
    hexactpos 0
@@ -47,6 +50,7 @@ FrameWidgetClass DZKOTHG_DeathBackdrop {
    "text valign" center
   }
   TextWidgetClass DZKOTHG_DeathSubtitle {
+   ignorepointer 1
    position 0.31 0.215
    size 0.51 0.05
    hexactpos 0

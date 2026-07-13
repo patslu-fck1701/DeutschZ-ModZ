@@ -1,6 +1,7 @@
 class DZBBC_HackManager
 {
 	protected PlayerBase m_Player;
+	protected Object m_Blackbox;
 	protected float m_Progress;
 	protected float m_Duration;
 	protected bool m_Active;
@@ -8,15 +9,16 @@ class DZBBC_HackManager
 	protected bool m_Stage60;
 	protected bool m_Stage90;
 
-	bool Begin(PlayerBase player, float duration)
+	bool Begin(PlayerBase player, Object blackbox, float duration)
 	{
-		if (!DZBBC_PlayerUtils.IsValidPlayer(player) || m_Active)
+		if (!DZBBC_PlayerUtils.IsValidPlayer(player) || !blackbox || m_Active)
 			return false;
 
 		m_Player = player;
+		m_Blackbox = blackbox;
 		m_Duration = duration;
 		if (m_Duration < 1.0)
-			m_Duration = 120.0;
+			m_Duration = 90.0;
 		m_Progress = 0.0;
 		m_Stage30 = false;
 		m_Stage60 = false;
@@ -29,13 +31,6 @@ class DZBBC_HackManager
 	{
 		if (!m_Active || !instance)
 			return;
-
-		if (!DZBBC_PlayerUtils.IsValidPlayer(m_Player))
-		{
-			Cancel();
-			instance.OnHackFailed();
-			return;
-		}
 
 		m_Progress += deltaSeconds;
 		float percent = GetPercent();
@@ -51,16 +46,8 @@ class DZBBC_HackManager
 			m_Stage60 = true;
 			instance.OnHackStage(60, m_Player);
 		}
-		if (m_Progress >= 90.0 && !m_Stage90)
-		{
-			m_Stage90 = true;
-			instance.OnHackStage(90, m_Player);
-		}
-		if (m_Progress >= m_Duration)
-		{
-			m_Active = false;
-			instance.OnHackComplete(m_Player);
-		}
+		if (m_Progress > m_Duration)
+			m_Progress = m_Duration;
 	}
 
 	void SetProgressSeconds(float seconds)
@@ -68,15 +55,53 @@ class DZBBC_HackManager
 		m_Progress = Math.Clamp(seconds, 0.0, m_Duration);
 	}
 
-	void Cancel()
+	bool CanComplete(PlayerBase player)
 	{
+		if (!m_Active || !player || player != m_Player)
+			return false;
+
+		return m_Progress >= (m_Duration - 2.0);
+	}
+
+	bool Complete(PlayerBase player)
+	{
+		if (!CanComplete(player))
+			return false;
+
+		m_Progress = m_Duration;
+		m_Stage90 = true;
+		m_Active = false;
+		return true;
+	}
+
+	bool Cancel(PlayerBase player = null)
+	{
+		if (!m_Active)
+			return false;
+
+		if (player && player != m_Player)
+			return false;
+
 		m_Active = false;
 		m_Player = null;
+		m_Blackbox = null;
+		m_Progress = 0.0;
+		return true;
 	}
 
 	bool IsActive()
 	{
 		return m_Active;
+	}
+
+	PlayerBase GetPlayer()
+	{
+		return m_Player;
+	}
+
+	Object GetBlackbox()
+	{
+		return m_Blackbox;
 	}
 
 	float GetProgressSeconds()

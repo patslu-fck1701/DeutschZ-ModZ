@@ -833,7 +833,7 @@ class DZECZ_EventManager
 	{
 		if (!m_Progress)
 			return;
-		MakeDirectory(DZECZ_PROFILE_DIR);
+		DZECZ_ProfilePaths.Ensure();
 		string errorMessage;
 		if (!JsonFileLoader<ref DZECZ_Progress>.SaveFile(DZECZ_PROGRESS_PATH, m_Progress, errorMessage))
 			DZECZ_Utils.Warn("Progress save failed: " + errorMessage);

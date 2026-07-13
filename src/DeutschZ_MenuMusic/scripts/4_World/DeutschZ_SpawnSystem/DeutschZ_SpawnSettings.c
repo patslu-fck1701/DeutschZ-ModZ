@@ -118,14 +118,14 @@ class DeutschZ_SpawnSettings
 		if (!FileExist(DZSPAWN_Paths.SETTINGS))
 		{
 			JsonFileLoader<ref DeutschZ_SpawnSettings>.SaveFile(DZSPAWN_Paths.SETTINGS, settings, error);
-			Print("[DeutschZ SpawnSystem] Created SpawnSettings.json");
+			DZSPAWN_Log.Info("Created SpawnSettings.json");
 			return settings;
 		}
 
 		if (!JsonFileLoader<ref DeutschZ_SpawnSettings>.LoadFile(DZSPAWN_Paths.SETTINGS, settings, error))
-			Print("[DeutschZ SpawnSystem][ERROR] SpawnSettings.json invalid, defaults active: " + error);
+			DZSPAWN_Log.Error("SpawnSettings.json invalid, defaults active: " + error);
 		else
-			Print("[DeutschZ SpawnSystem] Loaded settings");
+			DZSPAWN_Log.Info("Loaded settings");
 
 		return settings;
 	}
@@ -135,9 +135,6 @@ class DeutschZ_SpawnStorage
 {
 	static void EnsureDirectories()
 	{
-		if (!FileExist(DZSPAWN_Paths.PROFILE_ROOT))
-			MakeDirectory(DZSPAWN_Paths.PROFILE_ROOT);
-		if (!FileExist(DZSPAWN_Paths.PROFILE_DIR))
-			MakeDirectory(DZSPAWN_Paths.PROFILE_DIR);
+		DZMS_ProfilePaths.Ensure();
 	}
 }

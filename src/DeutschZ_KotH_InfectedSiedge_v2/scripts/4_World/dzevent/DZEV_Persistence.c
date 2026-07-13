@@ -2,8 +2,7 @@ class DZEV_Persistence
 {
 	static void EnsureProfileDirectory()
 	{
-		if (!FileExist(DZEV_Paths.PROFILE_DIR))
-			MakeDirectory(DZEV_Paths.PROFILE_DIR);
+		DZKOTH_ProfilePaths.Ensure();
 	}
 
 	static ref DZEV_EventConfig LoadConfig()

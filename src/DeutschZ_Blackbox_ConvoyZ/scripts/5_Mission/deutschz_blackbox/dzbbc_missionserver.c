@@ -60,7 +60,14 @@ modded class MissionServer
 	override void OnInit()
 	{
 		super.OnInit();
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(DZBBC_DeferredInit, 1500, false);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(DZBBC_DeferredInit, 1500, false);
+	}
+
+	override void OnMissionStart()
+	{
+		super.OnMissionStart();
+		DZBBC_MissionServer.InitServer();
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(DZBBC_DeferredInit, 1500, false);
 	}
 
 	override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)

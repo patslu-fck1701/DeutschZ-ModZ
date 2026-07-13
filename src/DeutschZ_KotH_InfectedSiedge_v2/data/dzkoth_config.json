@@ -39,6 +39,6 @@
                   ],
     "RewardDespawnMinutes":  10,
     "ProgressHudRadius":  500,
-    "BossSpawnMinDistance":  12,
-    "BossSpawnMaxDistance":  18
+    "BossSpawnMinDistance":  8,
+    "BossSpawnMaxDistance":  12
 }

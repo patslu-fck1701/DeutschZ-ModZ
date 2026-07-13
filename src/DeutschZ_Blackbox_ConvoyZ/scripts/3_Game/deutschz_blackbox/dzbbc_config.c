@@ -35,7 +35,7 @@ class DZBBC_MainConfig
 		TickSeconds = 1.0;
 		CombatRadius = 85.0;
 		MarkerRadius = 420.0;
-		HackDurationSeconds = 120.0;
+		HackDurationSeconds = 90.0;
 		TerminalDecryptSeconds = 60.0;
 		DataCoreLifetimeSeconds = 1800.0;
 		CleanupDelaySeconds = 300.0;
@@ -630,7 +630,7 @@ class DZBBC_AIWavesConfig
 			if (RussianZ.ExpansionFaction == "Russians" || RussianZ.ExpansionFaction == "East" || RussianZ.ExpansionFaction == "east")
 				RussianZ.ExpansionFaction = "RussianZ";
 			RussianZ.EnsureDefaults(2, 3, "RussianZ");
-			RussianZ.ApplyConvoyDifficulty(0.10, 0.28);
+			RussianZ.ApplyConvoyDifficulty(0.03, 0.12);
 		}
 
 		if (AmericanZ)
@@ -640,19 +640,19 @@ class DZBBC_AIWavesConfig
 			if (AmericanZ.ExpansionFaction == "Americans" || AmericanZ.ExpansionFaction == "West" || AmericanZ.ExpansionFaction == "west")
 				AmericanZ.ExpansionFaction = "AmericanZ";
 			AmericanZ.EnsureDefaults(2, 3, "AmericanZ");
-			AmericanZ.ApplyConvoyDifficulty(0.10, 0.28);
+			AmericanZ.ApplyConvoyDifficulty(0.03, 0.12);
 		}
 
 		if (RecoveryUnit90)
 		{
 			RecoveryUnit90.EnsureDefaults(1, 2, "Mercenaries");
-			RecoveryUnit90.ApplyConvoyDifficulty(0.14, 0.34, true);
+			RecoveryUnit90.ApplyConvoyDifficulty(0.04, 0.14, true);
 		}
 
 		if (FinalDefense)
 		{
 			FinalDefense.EnsureDefaults(2, 4, "Raiders");
-			FinalDefense.ApplyConvoyDifficulty(0.18, 0.40, true);
+			FinalDefense.ApplyConvoyDifficulty(0.05, 0.16, true);
 		}
 	}
 }

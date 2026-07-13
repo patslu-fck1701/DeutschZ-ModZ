@@ -3,16 +3,19 @@ class DZKOTH_Utils
 	static void Log(string message)
 	{
 		Print(DZKOTH_Const.LOG_PREFIX + message);
+		DZKOTH_ProfilePaths.AppendLog(message);
 	}
 
 	static void Warn(string message)
 	{
 		Print(DZKOTH_Const.LOG_PREFIX + "WARN: " + message);
+		DZKOTH_ProfilePaths.AppendLog("WARN: " + message);
 	}
 
 	static void Error(string message)
 	{
 		Print(DZKOTH_Const.LOG_PREFIX + "ERROR: " + message);
+		DZKOTH_ProfilePaths.AppendLog("ERROR: " + message);
 	}
 
 	static vector Grounded(vector pos)

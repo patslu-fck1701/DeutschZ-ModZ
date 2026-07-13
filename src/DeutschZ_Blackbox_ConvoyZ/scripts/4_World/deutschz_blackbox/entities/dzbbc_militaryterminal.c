@@ -21,7 +21,11 @@ class ActionDZBBC_StartTerminalDecryptCB : ActionContinuousBaseCB
 {
 	override void CreateActionComponent()
 	{
-		m_ActionData.m_ActionComponent = new CAContinuousTime(60.0);
+		float duration = DZBBC_EventManager.GetInstance().GetTerminalDecryptDuration();
+		if (duration < 1.0)
+			duration = 60.0;
+
+		m_ActionData.m_ActionComponent = new CAContinuousTime(duration);
 	}
 }
 
@@ -66,11 +70,31 @@ class ActionDZBBC_StartTerminalDecrypt : ActionContinuousBase
 		return DZBBC_MilitaryTerminal.Cast(object) != null;
 	}
 
+	override void OnStartServer(ActionData action_data)
+	{
+		super.OnStartServer(action_data);
+		if (!action_data || !action_data.m_Player || !action_data.m_Target)
+			return;
+
+		if (!DZBBC_EventManager.GetInstance().StartTerminalDecrypt(action_data.m_Player, action_data.m_Target.GetObject()))
+			DZBBC_Utils.Warn("Terminal action start rejected for " + DZBBC_PlayerUtils.GetPlayerName(action_data.m_Player));
+	}
+
+	override void OnEndServer(ActionData action_data)
+	{
+		super.OnEndServer(action_data);
+		if (!action_data || !action_data.m_Player || !action_data.m_Target)
+			return;
+
+		DZBBC_EventManager.GetInstance().CancelTerminalDecrypt(action_data.m_Player, action_data.m_Target.GetObject());
+	}
+
 	override void OnFinishProgressServer(ActionData action_data)
 	{
 		if (!action_data || !action_data.m_Player || !action_data.m_Target)
 			return;
 
-		DZBBC_EventManager.GetInstance().CompleteTerminalDecrypt(action_data.m_Player, action_data.m_Target.GetObject());
+		if (!DZBBC_EventManager.GetInstance().CompleteTerminalDecrypt(action_data.m_Player, action_data.m_Target.GetObject()))
+			DZBBC_Utils.Warn("Terminal 60s action rejected on finish for " + DZBBC_PlayerUtils.GetPlayerName(action_data.m_Player));
 	}
 }

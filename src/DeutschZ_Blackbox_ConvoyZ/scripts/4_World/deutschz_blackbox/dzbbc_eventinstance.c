@@ -105,11 +105,60 @@ class DZBBC_EventInstance
 		if (!m_Blackbox.CanHack(player, blackbox, m_Config.Main))
 			return false;
 
-		if (!m_Hack.Begin(player, m_Config.Main.HackDurationSeconds))
+		if (!m_Hack.Begin(player, blackbox, m_Config.Main.HackDurationSeconds))
 			return false;
 
 		SetState(DZBBC_BLACKBOX_HACK_ACTIVE);
-		DZBBC_ServerRPC.BroadcastNotification("#STR_DZBBC_TITLE_BLACKBOX", DZBBC_PlayerUtils.GetPlayerName(player) + " hacks the blackbox.", 7.0);
+		DZBBC_ServerRPC.BroadcastNotification("#STR_DZBBC_TITLE_BLACKBOX", DZBBC_PlayerUtils.GetPlayerName(player) + " beginnt den 90-Sekunden-Hack.", 7.0);
+		return true;
+	}
+
+	bool CanUseBlackboxAction(PlayerBase player, Object blackbox)
+	{
+		if (m_State == DZBBC_BLACKBOX_SIGNAL_FOUND || m_State == DZBBC_COMBAT_COMPLETE)
+			return m_Blackbox.CanHack(player, blackbox, m_Config.Main);
+
+		if (m_State != DZBBC_BLACKBOX_HACK_ACTIVE || !m_Hack.IsActive())
+			return false;
+		if (m_Hack.GetPlayer() != player || m_Hack.GetBlackbox() != blackbox)
+			return false;
+
+		return m_Blackbox.CanHack(player, blackbox, m_Config.Main);
+	}
+
+	bool CancelBlackboxHack(PlayerBase player, Object blackbox, string requestedReason = "INPUT_RELEASED")
+	{
+		if (!m_Hack.IsActive())
+			return false;
+
+		string reasonCode = requestedReason;
+		string validationReason;
+		if (!ValidateActiveBlackboxHack(validationReason))
+			reasonCode = validationReason;
+
+		LogHackCancellation(player, blackbox, reasonCode);
+
+		if (!m_Hack.Cancel(player))
+			return false;
+
+		OnHackFailed();
+		return true;
+	}
+
+	bool CompleteBlackboxHack(PlayerBase player, Object blackbox)
+	{
+		if (m_State != DZBBC_BLACKBOX_HACK_ACTIVE)
+			return false;
+
+		if (!m_Blackbox.CanHack(player, blackbox, m_Config.Main))
+			return false;
+
+		if (!m_Hack.Complete(player))
+			return false;
+
+		DZBBC_ServerRPC.BroadcastNotification("#STR_DZBBC_TITLE_BLACKBOX", DZBBC_PlayerUtils.GetPlayerName(player) + " hat die Blackbox gehackt.", 7.0);
+		OnHackStage(90, player);
+		OnHackComplete(player);
 		return true;
 	}
 
@@ -129,17 +178,33 @@ class DZBBC_EventInstance
 
 	bool CompleteTerminalDecrypt(PlayerBase player, Object terminal)
 	{
-		if (m_State == DZBBC_DATACORE_TRANSPORT_ACTIVE || m_State == DZBBC_TERMINAL_FOUND)
-		{
-			if (!StartTerminalDecrypt(player, terminal))
-				return false;
-		}
-
 		if (m_State != DZBBC_TERMINAL_DECRYPT_ACTIVE && m_State != DZBBC_FINAL_DEFENSE_ACTIVE)
 			return false;
 
+		if (!m_Terminals.Complete(player, terminal, m_DataCore))
+			return false;
+
+		if (!m_DataCore.Consume(player))
+		{
+			DZBBC_Utils.Error("Terminal completion blocked: exact data core could not be consumed.");
+			return false;
+		}
+
 		DZBBC_Utils.Log("Terminal decrypt complete by 60s action.");
 		CompleteTerminal();
+		return true;
+	}
+
+	bool CancelTerminalDecrypt(PlayerBase player, Object terminal)
+	{
+		if (m_State != DZBBC_TERMINAL_DECRYPT_ACTIVE && m_State != DZBBC_FINAL_DEFENSE_ACTIVE)
+			return false;
+
+		if (!m_Terminals.Cancel(player, terminal))
+			return false;
+
+		SetState(DZBBC_TERMINAL_FOUND);
+		DZBBC_ServerRPC.SendNotification(player, m_Config.Main.EventName, "Entschluesselung unterbrochen. Fortschritt auf 0 zurueckgesetzt.", 6.0);
 		return true;
 	}
 
@@ -153,7 +218,13 @@ class DZBBC_EventInstance
 			TickCombat();
 
 		if (m_State == DZBBC_BLACKBOX_HACK_ACTIVE)
-			m_Hack.Tick(delta, this);
+		{
+			string cancelReason;
+			if (!ValidateActiveBlackboxHack(cancelReason))
+				CancelBlackboxHack(m_Hack.GetPlayer(), m_Hack.GetBlackbox(), cancelReason);
+			else
+				m_Hack.Tick(delta, this);
+		}
 
 		if (m_State == DZBBC_DATACORE_TRANSPORT_ACTIVE || m_State == DZBBC_TERMINAL_FOUND)
 			TickDataCore(delta);
@@ -172,8 +243,81 @@ class DZBBC_EventInstance
 
 	void OnHackFailed()
 	{
+		DZBBC_ServerRPC.BroadcastHud(DZBBC_HUD_HIDE, "", 0.0, 0.0);
 		DZBBC_ServerRPC.BroadcastNotification(m_Config.Main.EventName, "#STR_DZBBC_MSG_HACK_CANCELED", 6.0);
 		SetState(DZBBC_BLACKBOX_SIGNAL_FOUND);
+	}
+
+	protected bool ValidateActiveBlackboxHack(out string reasonCode)
+	{
+		reasonCode = "";
+		if (m_State != DZBBC_BLACKBOX_HACK_ACTIVE)
+		{
+			reasonCode = "INVALID_EVENT_STATE";
+			return false;
+		}
+		if (!m_Hack || !m_Hack.IsActive())
+		{
+			reasonCode = "HACK_MANAGER_INACTIVE";
+			return false;
+		}
+
+		PlayerBase player = m_Hack.GetPlayer();
+		Object blackbox = m_Hack.GetBlackbox();
+		if (!player)
+		{
+			reasonCode = "PLAYER_NULL";
+			return false;
+		}
+		if (!player.IsAlive())
+		{
+			reasonCode = "PLAYER_DEAD";
+			return false;
+		}
+		if (player.IsUnconscious())
+		{
+			reasonCode = "PLAYER_UNCONSCIOUS";
+			return false;
+		}
+		if (!player.GetIdentity())
+		{
+			reasonCode = "PLAYER_IDENTITY_MISSING";
+			return false;
+		}
+		if (!blackbox || !m_Blackbox.IsSpawned())
+		{
+			reasonCode = "BLACKBOX_MISSING";
+			return false;
+		}
+		if (!m_Blackbox.IsExpectedTarget(blackbox))
+		{
+			reasonCode = "BLACKBOX_TARGET_INVALID";
+			return false;
+		}
+		if (m_Config && m_Config.Main && vector.Distance(player.GetPosition(), m_Blackbox.GetPosition()) > m_Config.Main.PlayerInteractionDistance)
+		{
+			reasonCode = "DISTANCE_EXCEEDED";
+			return false;
+		}
+
+		return true;
+	}
+
+	protected void LogHackCancellation(PlayerBase player, Object blackbox, string reasonCode)
+	{
+		string playerName = "<null>";
+		string uid = "<none>";
+		float distance = -1.0;
+		if (player)
+		{
+			playerName = DZBBC_PlayerUtils.GetPlayerName(player);
+			uid = DZBBC_PlayerUtils.GetPlayerUid(player);
+			if (m_Blackbox && m_Blackbox.IsSpawned())
+				distance = vector.Distance(player.GetPosition(), m_Blackbox.GetPosition());
+		}
+
+		bool blackboxPresent = m_Blackbox && m_Blackbox.IsSpawned() && blackbox && m_Blackbox.IsExpectedTarget(blackbox);
+		DZBBC_Utils.Warn("Hack canceled reason=" + reasonCode + " player=" + playerName + " uid=" + uid + " progress=" + m_Hack.GetProgressSeconds().ToString() + " distance=" + distance.ToString() + " state=" + DZBBC_EventStateNames.GetName(m_State) + " blackboxPresent=" + blackboxPresent.ToString());
 	}
 
 	void OnHackComplete(PlayerBase player)
@@ -189,7 +333,7 @@ class DZBBC_EventInstance
 		}
 
 		SetState(DZBBC_BLACKBOX_HACK_COMPLETE);
-		m_DataCore.Begin(player, m_Config.Main.DataCoreLifetimeSeconds);
+		m_DataCore.Begin(player, dataCore, m_Config.Main.DataCoreLifetimeSeconds);
 		SetState(DZBBC_DATACORE_EXTRACTED);
 		DZBBC_ServerRPC.BroadcastNotification(m_Config.Main.EventName, m_Config.Messages.DatacoreExtracted, 8.0);
 		m_Markers.Remove(DZBBC_CRASHSITE_MARKER_UID);
@@ -227,8 +371,8 @@ class DZBBC_EventInstance
 		if (!player)
 			return;
 
-		m_Blackbox.GiveDataCore(player);
-		m_DataCore.Begin(player, m_Config.Main.DataCoreLifetimeSeconds);
+		EntityAI dataCore = m_Blackbox.GiveDataCore(player);
+		m_DataCore.Begin(player, dataCore, m_Config.Main.DataCoreLifetimeSeconds);
 		SetState(DZBBC_DATACORE_TRANSPORT_ACTIVE);
 	}
 
@@ -237,7 +381,10 @@ class DZBBC_EventInstance
 		if (!player || !m_Terminals.GetActiveTerminal())
 			return;
 
-		m_DataCore.Begin(player, m_Config.Main.DataCoreLifetimeSeconds);
+		EntityAI dataCore = DZBBC_PlayerUtils.FindInventoryItem(player, DZBBC_DATACORE_CLASSNAME);
+		if (!dataCore)
+			dataCore = m_Blackbox.GiveDataCore(player);
+		m_DataCore.Begin(player, dataCore, m_Config.Main.DataCoreLifetimeSeconds);
 		m_Terminals.Begin(player, m_Terminals.GetActiveTerminal(), m_DataCore, m_Config.Main);
 		SetState(DZBBC_TERMINAL_DECRYPT_ACTIVE);
 		StartFinalDefense();
@@ -251,6 +398,24 @@ class DZBBC_EventInstance
 	float GetDamageMultiplierForSource(EntityAI source)
 	{
 		return m_AI.GetDamageMultiplierForSource(source);
+	}
+
+	bool ShouldBlockVehicleManagedUnitContact(Object unit)
+	{
+		if (!unit || !m_AI || !m_Site || !IsActive())
+			return false;
+
+		if (!m_AI.IsManagedUnit(unit))
+			return false;
+
+		float radius = m_Site.Radius;
+		if (radius <= 0.0 && m_Config && m_Config.Main)
+			radius = m_Config.Main.CombatRadius;
+
+		if (radius <= 0.0)
+			return false;
+
+		return vector.Distance(unit.GetPosition(), m_Site.GetPosition()) <= radius;
 	}
 
 	void SyncToPlayer(PlayerBase player)
@@ -279,7 +444,7 @@ class DZBBC_EventInstance
 	void Cleanup()
 	{
 		if (GetGame())
-			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(Tick);
+			GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(Tick);
 
 		SetState(DZBBC_CLEANUP);
 		DZBBC_ServerRPC.BroadcastHud(DZBBC_HUD_HIDE, "", 0.0, 0.0);
@@ -373,8 +538,8 @@ class DZBBC_EventInstance
 		if (tickMs < 250)
 			tickMs = 1000;
 
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(Tick);
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(Tick, tickMs, true);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(Tick);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Tick, tickMs, true);
 	}
 
 	protected void TickCombat()
@@ -455,8 +620,7 @@ class DZBBC_EventInstance
 		if (!m_FinalDefenseStarted)
 			StartFinalDefense();
 
-		if (m_Terminals.Tick(delta))
-			CompleteTerminal();
+		m_Terminals.Tick(delta);
 	}
 
 	protected void StartFinalDefense()
@@ -492,7 +656,7 @@ class DZBBC_EventInstance
 		if (cleanupMs < 1000)
 			cleanupMs = 1000;
 
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(Cleanup, cleanupMs, false);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Cleanup, cleanupMs, false);
 	}
 
 	protected void SetState(int state)

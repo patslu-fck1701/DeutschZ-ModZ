@@ -1,0 +1,10 @@
+name = "DeutschZ BattlegroundZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ BattlegroundZ";
+overview = "Story event linking the KotH BattlegroundZ keycard to a hidden card reader and a permanent map ping.";
+action = "";
+author = "DeutschZ";
+version = "0.1.0";

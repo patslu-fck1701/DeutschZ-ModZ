@@ -119,6 +119,12 @@ class DZKOTH_WaveManager
 	{
 		string type = wave.Types.Get(Math.RandomIntInclusive(0, wave.Types.Count() - 1));
 		vector spawnPos = FindSpawnPosition(origin, mainConfig.SpawnMinDistance, mainConfig.SpawnMaxDistance);
+		if (spawnPos == vector.Zero)
+		{
+			DZKOTH_Utils.Warn("No safe infected spawn position found around mast for type " + type);
+			return;
+		}
+
 		EntityAI infected = EntityAI.Cast(GetGame().CreateObjectEx(type, spawnPos, ECE_PLACE_ON_SURFACE | ECE_INITAI | ECE_EQUIP_ATTACHMENTS));
 		if (!infected)
 		{
@@ -153,13 +159,40 @@ class DZKOTH_WaveManager
 			pos = origin + Vector(Math.Cos(angle) * distance, 0, Math.Sin(angle) * distance);
 			pos = DZKOTH_Utils.Grounded(pos);
 
-			if (!GetGame().SurfaceIsSea(pos[0], pos[2]) && IsSeparatedFromOtherSpawns(pos, 4.0))
+			if (IsSafeSpawnPosition(pos) && IsSeparatedFromOtherSpawns(pos, 4.0))
 				return pos;
 		}
 
-		float fallbackDistance = Math.Min(maxDistance, minDistance + 2.0);
-		float fallbackAngle = m_SpawnPositions.Count() * 0.9;
-		return DZKOTH_Utils.Grounded(origin + Vector(Math.Cos(fallbackAngle) * fallbackDistance, 0, Math.Sin(fallbackAngle) * fallbackDistance));
+		return vector.Zero;
+	}
+
+	protected bool IsSafeSpawnPosition(vector pos)
+	{
+		if (!GetGame() || GetGame().SurfaceIsSea(pos[0], pos[2]) || GetGame().SurfaceIsPond(pos[0], pos[2]))
+			return false;
+
+		array<vector> terrainSamples = new array<vector>;
+		terrainSamples.Insert(pos + "0.75 0 0.75");
+		terrainSamples.Insert(pos + "-0.75 0 0.75");
+		terrainSamples.Insert(pos + "0.75 0 -0.75");
+		terrainSamples.Insert(pos + "-0.75 0 -0.75");
+		if (GetGame().GetHighestSurfaceYDifference(terrainSamples) > 1.25)
+			return false;
+
+		array<Object> excluded = new array<Object>;
+		array<Object> collided = new array<Object>;
+		if (GetGame().IsBoxColliding(pos + "0 0.9 0", vector.Zero, "0.9 1.8 0.9", excluded, collided))
+			return false;
+
+		array<Man> players = new array<Man>;
+		GetGame().GetPlayers(players);
+		foreach (Man man: players)
+		{
+			if (man && vector.Distance(man.GetPosition(), pos) < 3.5)
+				return false;
+		}
+
+		return true;
 	}
 
 	protected bool IsSeparatedFromOtherSpawns(vector position, float minimumDistance)

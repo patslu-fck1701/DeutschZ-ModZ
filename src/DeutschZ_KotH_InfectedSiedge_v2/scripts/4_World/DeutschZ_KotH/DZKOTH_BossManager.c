@@ -11,7 +11,14 @@ class DZKOTH_BossManager
 
 		Cleanup();
 
-		vector bossPos = DZKOTH_Utils.Grounded(location.GetBossSpawnPosition());
+		vector origin = location.GetFlagPosition();
+		vector bossPos = FindSpawnPosition(origin, mainConfig.BossSpawnMinDistance, mainConfig.BossSpawnMaxDistance);
+		if (bossPos == vector.Zero)
+		{
+			bossPos = DZKOTH_Utils.Grounded(location.GetBossSpawnPosition());
+			DZKOTH_Utils.Warn("No safe mast-relative boss position found; static BossSpawnPosition fallback active at " + bossPos.ToString());
+		}
+
 		return SpawnBossAt(bossPos, mainConfig);
 	}
 
@@ -23,12 +30,17 @@ class DZKOTH_BossManager
 		Cleanup();
 
 		vector origin = "0 0 0";
-		if (player)
+		if (location)
+			origin = location.GetFlagPosition();
+		else if (player)
 			origin = player.GetPosition();
-		else if (location)
-			origin = location.GetPosition();
 
 		vector bossPos = FindSpawnPosition(origin, mainConfig.BossSpawnMinDistance, mainConfig.BossSpawnMaxDistance);
+		if (bossPos == vector.Zero && location)
+			bossPos = DZKOTH_Utils.Grounded(location.GetBossSpawnPosition());
+		if (bossPos == vector.Zero)
+			return false;
+
 		return SpawnBossAt(bossPos, mainConfig);
 	}
 
@@ -67,21 +79,49 @@ class DZKOTH_BossManager
 		if (minDistance < 8.0)
 			minDistance = 8.0;
 		if (maxDistance < minDistance)
-			maxDistance = minDistance + 6.0;
+			maxDistance = minDistance;
 
-		vector pos = origin;
-		for (int attempt = 0; attempt < 12; attempt++)
+		for (int attempt = 0; attempt < 24; attempt++)
 		{
 			float angle = Math.RandomFloatInclusive(0.0, 6.28318);
 			float distance = Math.RandomFloatInclusive(minDistance, maxDistance);
-			pos = origin + Vector(Math.Cos(angle) * distance, 0, Math.Sin(angle) * distance);
+			vector pos = origin + Vector(Math.Cos(angle) * distance, 0, Math.Sin(angle) * distance);
 			pos = DZKOTH_Utils.Grounded(pos);
 
-			if (!GetGame().SurfaceIsSea(pos[0], pos[2]))
+			if (IsSafeSpawnPosition(pos))
 				return pos;
 		}
 
-		return DZKOTH_Utils.Grounded(origin);
+		return vector.Zero;
+	}
+
+	protected bool IsSafeSpawnPosition(vector pos)
+	{
+		if (!GetGame() || GetGame().SurfaceIsSea(pos[0], pos[2]) || GetGame().SurfaceIsPond(pos[0], pos[2]))
+			return false;
+
+		array<vector> terrainSamples = new array<vector>;
+		terrainSamples.Insert(pos + "1 0 1");
+		terrainSamples.Insert(pos + "-1 0 1");
+		terrainSamples.Insert(pos + "1 0 -1");
+		terrainSamples.Insert(pos + "-1 0 -1");
+		if (GetGame().GetHighestSurfaceYDifference(terrainSamples) > 1.25)
+			return false;
+
+		array<Object> excluded = new array<Object>;
+		array<Object> collided = new array<Object>;
+		if (GetGame().IsBoxColliding(pos + "0 0.9 0", vector.Zero, "1.6 1.8 1.6", excluded, collided))
+			return false;
+
+		array<Man> players = new array<Man>;
+		GetGame().GetPlayers(players);
+		foreach (Man man: players)
+		{
+			if (man && vector.Distance(man.GetPosition(), pos) < 4.0)
+				return false;
+		}
+
+		return true;
 	}
 
 	protected void DisableRunning(EntityAI boss)
@@ -89,8 +129,15 @@ class DZKOTH_BossManager
 		if (!boss)
 			return;
 
-		boss.SetHealth("LeftLeg", "Health", 0.0);
-		boss.SetHealth("RightLeg", "Health", 0.0);
+		DayZInfected infected = DayZInfected.Cast(boss);
+		if (!infected || !infected.GetInputController())
+		{
+			DZKOTH_Utils.Warn("BosZ Zombie movement controller unavailable; slow-walk override was not applied.");
+			return;
+		}
+
+		infected.GetInputController().OverrideMovementSpeed(true, 0.75);
+		DZKOTH_Utils.Log("BosZ Zombie movement locked to slow walk.");
 	}
 
 	protected EntityAI CreateBossEntity(string className, vector bossPos)

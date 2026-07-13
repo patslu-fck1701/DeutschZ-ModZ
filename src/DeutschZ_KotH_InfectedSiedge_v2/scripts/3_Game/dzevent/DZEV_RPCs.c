@@ -8,9 +8,9 @@ class DZEV_RPCIds
 
 class DZEV_Paths
 {
-	static const string PROFILE_DIR = "$profile:DZEventVanilla";
-	static const string CONFIG_PATH = "$profile:DZEventVanilla/config.json";
-	static const string GROUPS_PATH = "$profile:DZEventVanilla/groups.json";
+	static const string PROFILE_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2";
+	static const string CONFIG_PATH = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Config/dzevent_config.json";
+	static const string GROUPS_PATH = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Persistence/groups.json";
 }
 
 class DZEV_States

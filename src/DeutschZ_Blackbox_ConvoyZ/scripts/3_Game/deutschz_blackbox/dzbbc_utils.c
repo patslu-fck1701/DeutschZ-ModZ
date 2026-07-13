@@ -3,16 +3,19 @@ class DZBBC_Utils
 	static void Log(string message)
 	{
 		Print(DZBBC_LOG_PREFIX + message);
+		DZBBC_ProfilePaths.AppendLog(message);
 	}
 
 	static void Warn(string message)
 	{
 		Print(DZBBC_LOG_PREFIX + "WARN " + message);
+		DZBBC_ProfilePaths.AppendLog("WARN " + message);
 	}
 
 	static void Error(string message)
 	{
 		Print(DZBBC_LOG_PREFIX + "ERROR " + message);
+		DZBBC_ProfilePaths.AppendLog("ERROR " + message);
 	}
 
 	static string Localize(string text)

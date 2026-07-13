@@ -1,8 +1,73 @@
 const string DZECZ_VERSION = "0.1.0";
-const string DZECZ_PROFILE_DIR = "$profile:DZECZ";
-const string DZECZ_CONFIG_PATH = "$profile:DZECZ/dzecz_config.json";
-const string DZECZ_PROGRESS_PATH = "$profile:DZECZ/dzecz_progress.json";
+const string DZECZ_PROFILE_NAME = "DeutschZ_Operation_EclipseZ";
+const string DZECZ_PROFILE_DIR = "$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ";
+const string DZECZ_PROFILE_CONFIG_DIR = "$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ/Config";
+const string DZECZ_PROFILE_DATA_DIR = "$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ/Data";
+const string DZECZ_PROFILE_RUNTIME_DIR = "$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ/Runtime";
+const string DZECZ_PROFILE_PERSISTENCE_DIR = "$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ/Persistence";
+const string DZECZ_PROFILE_LOG_DIR = "$profile:DeutschZ-System/LogZ/DeutschZ_Operation_EclipseZ";
+const string DZECZ_LOG_FILE = "$profile:DeutschZ-System/LogZ/DeutschZ_Operation_EclipseZ/dzecz.log";
+const string DZECZ_MIGRATION_LOG = "$profile:DeutschZ-System/LogZ/DeutschZ_Main_Settings/profile_migration.log";
+const string DZECZ_CONFIG_PATH = "$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ/Config/dzecz_config.json";
+const string DZECZ_PROGRESS_PATH = "$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ/Persistence/dzecz_progress.json";
 const string DZECZ_MARKER_UID = "DZECZ_ACTIVE_SECTOR";
+
+class DZECZ_ProfilePaths
+{
+	static void EnsureDirectory(string path)
+	{
+		if (!FileExist(path))
+			MakeDirectory(path);
+	}
+
+	static void Ensure()
+	{
+		EnsureDirectory("$profile:DeutschZ-System");
+		EnsureDirectory("$profile:DeutschZ-System/LogZ");
+		EnsureDirectory("$profile:DeutschZ-System/LogZ/DeutschZ_Main_Settings");
+		EnsureDirectory(DZECZ_PROFILE_DIR);
+		EnsureDirectory(DZECZ_PROFILE_CONFIG_DIR);
+		EnsureDirectory(DZECZ_PROFILE_DATA_DIR);
+		EnsureDirectory(DZECZ_PROFILE_RUNTIME_DIR);
+		EnsureDirectory(DZECZ_PROFILE_PERSISTENCE_DIR);
+		EnsureDirectory(DZECZ_PROFILE_LOG_DIR);
+
+		MigrateFile("$profile:DZECZ/dzecz_config.json", DZECZ_CONFIG_PATH);
+		MigrateFile("$profile:DZECZ/dzecz_progress.json", DZECZ_PROGRESS_PATH);
+		MigrateFile("$profile:DZECZ/dzecz_story_progress.json", DZECZ_PROGRESS_PATH);
+	}
+
+	static void MigrateFile(string oldPath, string newPath)
+	{
+		if (FileExist(newPath) || !FileExist(oldPath))
+			return;
+
+		if (CopyFile(oldPath, newPath))
+			AppendMigration("Migration: " + oldPath + " -> " + newPath);
+		else
+			AppendMigration("ERROR Migration fehlgeschlagen: " + oldPath + " -> " + newPath);
+	}
+
+	static void AppendMigration(string message)
+	{
+		FileHandle file = OpenFile(DZECZ_MIGRATION_LOG, FileMode.APPEND);
+		if (file != 0)
+		{
+			FPrintln(file, "[DeutschZ-System][" + DZECZ_PROFILE_NAME + "] " + message);
+			CloseFile(file);
+		}
+	}
+
+	static void AppendLog(string message)
+	{
+		FileHandle file = OpenFile(DZECZ_LOG_FILE, FileMode.APPEND);
+		if (file != 0)
+		{
+			FPrintln(file, "[DZECZ] " + message);
+			CloseFile(file);
+		}
+	}
+}
 
 const int DZECZ_INACTIVE = 0;
 const int DZECZ_PREREQUISITES_CHECK = 1;
@@ -127,7 +192,7 @@ class DZECZ_Config
 
 	static ref DZECZ_Config Load()
 	{
-		MakeDirectory(DZECZ_PROFILE_DIR);
+		DZECZ_ProfilePaths.Ensure();
 		ref DZECZ_Config config = new DZECZ_Config;
 		string errorMessage;
 		if (FileExist(DZECZ_CONFIG_PATH))

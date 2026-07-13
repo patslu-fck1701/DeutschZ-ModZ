@@ -3,11 +3,13 @@ class DZECZ_Utils
 	static void Log(string message)
 	{
 		Print("[DZECZ] " + message);
+		DZECZ_ProfilePaths.AppendLog(message);
 	}
 
 	static void Warn(string message)
 	{
 		Print("[DZECZ][WARN] " + message);
+		DZECZ_ProfilePaths.AppendLog("WARN " + message);
 	}
 
 	static vector Grounded(vector pos)
