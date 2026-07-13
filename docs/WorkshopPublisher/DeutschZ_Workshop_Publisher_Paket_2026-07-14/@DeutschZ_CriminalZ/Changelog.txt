@@ -1,0 +1,11 @@
+[h1]DeutschZ CriminalZ — Changelog[/h1]
+
+[h2]0.1.0 — 14.07.2026[/h2]
+[list]
+[*] 300–600 Sekunden serverautoritatives ATM-Hacking
+[*] 45.000–185.000 NoxZ-Euro-Reward; Bitcoin blockiert
+[*] automatische City-Store-Erkennung mit genau einem ATM und Schild
+[*] Store-Transform-Referenz und Doppelstart-Duplikatschutz bestanden
+[*] Custom-Schild-PAA im signierten PBO enthalten
+[*] DE/EN-Workshoptexte und erstes echtes Previewbild ergänzt
+[/list]

@@ -1,0 +1,65 @@
+[h1]🧩 DEUTSCHZ ONLY CORE — THE BUNDLED DEUTSCHZ MOD PACKAGE[/h1]
+
+[b]One mod folder. The central DeutschZ systems. Consistently packaged for server use.[/b]
+
+DeutschZ_only_core bundles the established DeutschZ event, menu and convenience modules together with the vehicle, admin and server helpers already belonging to the Core.
+
+[hr][/hr]
+[h2]🔥 INCLUDED DEUTSCHZ MODULES[/h2]
+
+[list]
+[*] DeutschZ BattlegroundZ
+[*] DeutschZ Blackbox ConvoyZ
+[*] DeutschZ KotH Infected Siege v2
+[*] DeutschZ MenüZ / MenuMusic
+[*] DeutschZ Operation EclipseZ
+[/list]
+
+The same current DeutschZ builds are also available as separate [b]@DeutschZ_*[/b] folders. Never load the same PBO from the Core and a standalone mod at the same time.
+
+[hr][/hr]
+[h2]🛠️ CORE FEATURES[/h2]
+
+[list]
+[*] bundled DeutschZ event chain and menu system
+[*] category-based inventory transfer and vehicle convenience helpers
+[*] COT/VPP-related server and admin additions already present in the Core
+[*] selected custom vehicles with their original signatures
+[*] unified profile structure below [b]$profile:DeutschZ-System/[/b]
+[*] music without spatial NoxZ or trader speakers
+[*] own DeutschZ deathscreen/spawn UI while duplicate Expansion UI is disabled server-side
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Folder name: [b]@DeutschZ_only_core[/b]
+[*] Load client-script/UI content through [b]-mod[/b] on client and server.
+[*] Client and server require the exact same Core build.
+[*] Keep the supplied original signatures and public keys with their PBOs.
+[*] Load external dependencies in the order required by the active server mod list.
+[/list]
+
+[hr][/hr]
+[h2]⚙️ CURRENT TECHNICAL STATUS[/h2]
+
+[b]Status: 14 July 2026[/b]
+
+[list]
+[*] current DeutschZ event builds bundled and signed
+[*] profile migration keeps legacy data and never deletes it automatically
+[*] spatial speaker objects and trader speaker entries disabled or cleaned up
+[*] Expansion deathscreen and spawn selection disabled to avoid duplicate UI
+[*] client deathscreen, mouse and complete gameplay flows still require live client verification
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ LINKS[/h2]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ]DeutschZ-ModZ GitHub[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings]DeutschZ Server Settings GitHub[/url]
+
+[b]DeutschZ_only_core. Less chaos. One current DeutschZ package.[/b]

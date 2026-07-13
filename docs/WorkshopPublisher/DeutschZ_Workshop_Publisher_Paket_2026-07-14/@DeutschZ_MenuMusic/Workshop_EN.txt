@@ -1,0 +1,51 @@
+[h1]🖥️ DEUTSCHZ MENÜZ — MAIN MENU, LOADING SCREEN & MUSIC[/h1]
+
+[b]Your DeutschZ experience starts before you enter Chernarus.[/b]
+
+DeutschZ MenüZ delivers a dark survival main menu, rotating loading screens, server information, event notices and atmospheric music in one client-and-server mod.
+
+[hr][/hr]
+[h2]🔥 FEATURES[/h2]
+
+[list]
+[*] custom dark-glass DeutschZ main menu
+[*] server status, news, event cards and community links
+[*] three rotating loading-screen artworks
+[*] random rules, tips and event hints
+[*] eleven integrated menu music tracks
+[*] no spatial speaker objects and no trader speakers
+[*] custom loading, death and respawn interfaces
+[*] server-prepared DeutschZ spawn selection
+[/list]
+
+[hr][/hr]
+[h2]🎵 MUSIC WITHOUT SPEAKER SPAM[/h2]
+
+Music is played directly by the menu/event UI and follows normal DayZ audio settings. The mod does not create phone speakers, trader speakers or additional loudspeaker objects in the world.
+
+[hr][/hr]
+[h2]🧩 CORE OR STANDALONE[/h2]
+
+MenüZ is included in [b]@DeutschZ_only_core[/b] and is also available as [b]@DeutschZ_MenuMusic[/b]. Do not load both copies of the same PBO.
+
+[hr][/hr]
+[h2]⚙️ CURRENT STATUS[/h2]
+
+[b]Version 1.2.2-livefix — 14 July 2026[/b]
+
+[list]
+[*] built and signed with the DeutschZ key
+[*] main menu, loading screen, music, deathscreen and respawn hooks included
+[*] profile configuration below [b]$profile:DeutschZ-System/DeutschZ_Main_Settings/[/b]
+[*] duplicate Expansion deathscreen/spawn selection disabled server-side
+[*] real client deathscreen, cursor and spawn-flow validation remains open
+[/list]
+
+[hr][/hr]
+[h2]🔗 LINKS & SUPPORT[/h2]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3761800532]🖥️ MenüZ Workshop[/url]
+
+[b]DeutschZ MenüZ. Your entry into DeutschZ — before you even spawn.[/b]

@@ -1,0 +1,10 @@
+[h1]⚔️ DEUTSCHZ BATTLEGROUNDZ — UPDATE 14.07.2026[/h1]
+
+[list]
+[*] echter Keycard-/Funkpanel-Ablauf statt generischer Eventbeschreibung
+[*] persistenter persönlicher Unlock vor Itemverbrauch
+[*] aktuelle Signalzeiten, Radien und AI-Balance dokumentiert
+[*] vollständiger DE/EN-Workshoptext und neues Previewbild
+[/list]
+
+[i]Client-Marker und kompletter Arenaablauf bleiben Live-Tests.[/i]

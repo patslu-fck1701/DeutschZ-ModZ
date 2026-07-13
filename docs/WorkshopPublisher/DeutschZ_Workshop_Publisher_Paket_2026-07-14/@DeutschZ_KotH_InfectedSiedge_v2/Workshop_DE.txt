@@ -1,0 +1,154 @@
+[h1]👑 DEUTSCHZ KOTHZ — INFECTED SIEGE V2[/h1]
+
+[b]Erobere die Zone. Überlebe die Wellen. Besiege die BosZ-Mumie. Sichere das Reward-Fass.[/b]
+
+DeutschZ KotHZ ist ein serverautoritatives King-of-the-Hill-Event mit sichtbarem Rauchsignal, fünf Infected-Wellen, Bossphase, Eventmusik, Markern, Fortschrittsanzeige und einem gemischten High-Tier-Lootpool.
+
+[hr][/hr]
+[h2]🔥 FEATURES[/h2]
+
+[list]
+[*] dynamische KotHZ-Positionen
+[*] fünf Minuten Capture-Zeit
+[*] 25 Meter Capture-Radius
+[*] gegnerische Spieler blockieren den Fortschritt
+[*] mehrere Spieler beschleunigen den Capture nicht
+[*] fünf Infected-Wellen bei 0 / 20 / 40 / 60 / 80 Prozent
+[*] BosZ-Mumie mit 7500 Leben und erzwungenem langsamen Gang
+[*] weißer, grüner und roter Statusrauch
+[*] Eventmusik, HUD, Marker und deutschsprachige Meldungen
+[*] drei DeutschZ-Feuerwerksbatterien nach erfolgreichem Capture
+[*] Reward-Fass mit abwechslungsreichem Lootpool
+[*] kontrolliertes Teil- und Voll-Cleanup
+[/list]
+
+[hr][/hr]
+[h2]🎮 EVENT-ABLAUF[/h2]
+
+[b]1. WEISSER RAUCH — EVENT BEREIT[/b]
+
+Der weiße Rauch macht die aktive KotHZ-Zone schon aus größerer Entfernung sichtbar. Marker und Hinweise führen Spieler zum Event.
+
+[b]2. GRÜNER RAUCH — CAPTURE AKTIV[/b]
+
+Sobald ein Spieler die Zone betritt, startet der Capture. Die Zone muss insgesamt [b]300 Sekunden[/b] gehalten werden. Gegnerische Spieler blockieren den Fortschritt.
+
+[b]3. INFECTED-WELLEN[/b]
+
+Bei [b]0, 20, 40, 60 und 80 Prozent[/b] erscheinen abgestufte Wellen. Spätere Infected sind widerstandsfähiger; die schweren Stufen können nicht rennen.
+
+[b]4. CAPTURE ABGESCHLOSSEN & FEUERWERK[/b]
+
+Nach erfolgreichem Capture erscheinen nach etwa fünf Sekunden drei DeutschZ-Feuerwerksbatterien. Die Bossphase beginnt kurz darauf; der endgültige Sieg ist erst nach dem Bosskill erreicht.
+
+[b]5. BOSZ-MUMIE[/b]
+
+Nach etwa zehn Sekunden beginnt die Bossphase. Die BosZ-Mumie besitzt [b]7500 Leben[/b], verursacht hohen Druck, kann aber nur langsam gehen.
+
+[b]6. ROTER RAUCH & REWARD-FASS[/b]
+
+Nach dem Bosskill wechselt der Rauch auf Rot und das Reward-Fass wird freigegeben. Etwa zehn Sekunden später werden Arena, Musik, AI, Mast, Marker und Feuerwerk bereinigt; Fass, BossRemains, Loot und Keycard bleiben bestehen. Spätestens nach [b]10 Minuten[/b] folgt das vollständige Cleanup.
+
+[hr][/hr]
+[h2]🎨 RAUCHSIGNAL[/h2]
+
+[list]
+[*] [b]WEISS[/b] — Event ist bereit
+[*] [b]GRÜN[/b] — Capture läuft
+[*] [b]ROT[/b] — BosZ besiegt / Event gewonnen
+[/list]
+
+Der Rauch wird serverseitig gesteuert und regelmäßig erneuert, damit der Eventstatus auch aus der Entfernung erkennbar bleibt.
+
+[hr][/hr]
+[h2]🎁 BELOHNUNGEN[/h2]
+
+Das Reward-Fass verwendet einen gemischten Pool aus Waffen, passenden Magazinen, Munition, Optiken, Schalldämpfern, Medizin und Event-Items.
+
+[list]
+[*] M4A1, AKM, AK74, M16A2, SVD oder FAL mit getrennten Chancen
+[*] passende Magazine und Munitionsboxen
+[*] Optiken und Schalldämpfer
+[*] Medizin und Granaten
+[*] DeutschZ-FireworksLauncher mit [b]10 Prozent[/b] Chance
+[*] BattlegroundZ-Keycard mit aktuell [b]100 Prozent[/b] Eventchance
+[/list]
+
+[hr][/hr]
+[h2]⏱️ AKTUELLE STANDARDWERTE[/h2]
+
+[list]
+[*] Capture: [b]300 Sekunden[/b]
+[*] Radius: [b]25 Meter[/b]
+[*] Wellen: [b]0 / 20 / 40 / 60 / 80 Prozent[/b]
+[*] BosZ-Leben: [b]7500[/b]
+[*] Feuerwerk: [b]3 Batterien[/b]
+[*] Keycard-Chance: [b]100 Prozent[/b]
+[*] FireworksLauncher-Chance: [b]10 Prozent[/b]
+[*] Reward-/Voll-Cleanup: [b]spätestens 10 Minuten[/b]
+[/list]
+
+[hr][/hr]
+[h2]🧩 DEUTSCHZ ONLY CORE[/h2]
+
+KotHZ ist im gebündelten [b]@DeutschZ_only_core[/b] enthalten. Zusätzlich bleibt [b]@DeutschZ_KotH_InfectedSiedge_v2[/b] als eigener Modordner verfügbar.
+
+[b]Client und Server müssen dieselbe aktuelle Version laden.[/b]
+
+[hr][/hr]
+[h2]⚙️ AKTUELLER TECHNISCHER STAND[/h2]
+
+[b]Stand: 14.07.2026[/b]
+
+[list]
+[*] Version: 0.4.3-livefix
+[*] Smoke-State Weiß / Grün / Rot im Build enthalten
+[*] fünf Wellenstufen mit aktuellen 0/20/40/60/80-Werten
+[*] BosZ-Slow-Walk serverseitig erzwungen
+[*] drei Feuerwerksbatterien nach Capture
+[*] Reward-Fass bleibt nach Boss-Cleanup bestehen
+[*] BattlegroundZ-Keycard stammt zu 100 Prozent aus den Boss-Überresten; keine Keycard aus ConvoyZ
+[*] Konfiguration und Logs unter [b]$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/[/b] und [b]LogZ/DeutschZ_KotH_InfectedSiedge_v2/[/b]
+[*] aktueller PBO-Build mit DeutschZ-Key signiert
+[*] technischer Serverstart bestätigt; vollständiger Gameplaylauf noch nicht clientseitig getestet
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ LINKS[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | CarZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://de.top-games.net/dayz/vote/deutschz-gunz-heliz-carz-traderz-httpsdiscordggfhzz7bykfk]✅ Server Voting[/url]
+
+[b]GitHub[/b]
+
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ]DeutschZ-ModZ[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings]DeutschZ Server Settings[/url]
+
+[b]Workshop[/b]
+
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3751588241]🧩 DeutschZ_only_core[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3759074342]👑 KotHZ[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3758351646]🚚 ConvoyZ[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3761800532]🖥️ MenüZ[/url]
+
+[hr][/hr]
+[h2]⚠️ SUPPORT & FEEDBACK[/h2]
+
+Bitte Event-, Marker-, Rauch-, Boss- oder Lootprobleme im Discord melden. Hilfreich sind:
+
+[list]
+[*] Screenshot oder Video
+[*] Uhrzeit und genaue Eventposition
+[*] Capture-Fortschritt oder aktuelle Bossphase
+[*] sichtbare Rauchfarbe
+[*] beteiligte Spielerzahl
+[*] RPT-/Scriptlog-Hinweis
+[/list]
+
+[b]DeutschZ KotHZ. Erobern. Halten. Überleben.[/b]

@@ -1,0 +1,63 @@
+[h1]⚔️ DEUTSCHZ BATTLEGROUNDZ — ACCESS GRANTED[/h1]
+
+[b]Bring the KotHZ keycard to the hidden radio-panel reader. Unlock the signal. Enter the battleground.[/b]
+
+DeutschZ BattlegroundZ is the next server-authoritative chapter in the DeutschZ event chain. A valid living player with the real KotHZ boss keycard can activate a hidden large radio-panel reader and unlock the personal signal sequence.
+
+[hr][/hr]
+[h2]🔥 FEATURES[/h2]
+
+[list]
+[*] large vanilla radio control panel used as the card reader
+[*] exact keycard, player state and four-metre distance validated by the server
+[*] personal unlock saved before the keycard is consumed
+[*] persistent personal map ping can return after reconnecting
+[*] randomized signal/interference sequence leading to the arena
+[*] six lightly equipped Expansion AI split into RussianZ and AmericanZ
+[*] low configured accuracy of 0.03 to 0.12
+[*] server-authoritative cleanup and 30-minute dynamic object lifetime
+[/list]
+
+[hr][/hr]
+[h2]🎮 CURRENT FLOW[/h2]
+
+[b]1. OBTAIN THE KEYCARD[/b] — it comes from the KotHZ boss remains, not from ConvoyZ.
+
+[b]2. FIND THE READER[/b] — approach the large radio panel and present the exact keycard within four metres.
+
+[b]3. PERSIST THE UNLOCK[/b] — the server saves the personal unlock first and consumes the keycard only after the save succeeds.
+
+[b]4. FOLLOW THE SIGNAL[/b] — interference phases and a personal persistent map ping lead toward the battleground.
+
+[b]5. SURVIVE THE ARENA[/b] — RussianZ, AmericanZ, infected and rival players create the PvPvE pressure.
+
+[hr][/hr]
+[h2]⏱️ CURRENT VALUES[/h2]
+
+[list]
+[*] server tick: 10 seconds
+[*] approach radius: 360 metres
+[*] battleground radius: 135 metres
+[*] reader distance: 4 metres
+[*] dynamic cleanup: 1,800 seconds
+[*] signal timing: 45 s / 180 s / 180 s / 240 s
+[/list]
+
+[hr][/hr]
+[h2]⚙️ TECHNICAL STATUS[/h2]
+
+[b]Version 0.1.0 — 14 July 2026[/b]
+
+[list]
+[*] built and signed with DeutschZ
+[*] reader, persistence and server initialization technically validated
+[*] client marker visibility and complete gameplay sequence remain live tests
+[/list]
+
+[hr][/hr]
+[h2]🔗 LINKS[/h2]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+
+[b]DeutschZ BattlegroundZ. Access granted. Return uncertain.[/b]

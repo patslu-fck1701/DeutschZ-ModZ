@@ -1,0 +1,11 @@
+[h1]DeutschZ Blackbox ConvoyZ — Changelog[/h1]
+
+[h2]0.2.2-livefix — 14.07.2026[/h2]
+[list]
+[*] echter ununterbrochener Blackbox-Hack auf 90 Sekunden bestätigt
+[*] echter ununterbrochener Terminal-Decrypt auf 60 Sekunden bestätigt
+[*] Bergungstrupp spawnt erst nach erfolgreichem Blackbox-Hack
+[*] Blackbox erzeugt ausschließlich DZBBC_DataCore und keine Keycard
+[*] finale Storyrewards und reduzierte AI-Genauigkeit aktualisiert
+[*] DE/EN-Texte und neues Workshop-Preview ergänzt
+[/list]

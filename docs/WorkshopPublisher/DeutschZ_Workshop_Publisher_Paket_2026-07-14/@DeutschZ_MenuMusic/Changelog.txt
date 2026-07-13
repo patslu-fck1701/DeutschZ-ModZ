@@ -1,0 +1,9 @@
+[h1]DeutschZ MenüZ — Changelog[/h1]
+
+[h2]1.2.2-livefix — 14.07.2026[/h2]
+[list]
+[*] Hauptmenü, Ladebildschirm und elf Musiktitel als aktueller Stand dokumentiert
+[*] alle räumlichen Speaker-/Trader-Lautsprecher aus dem beworbenen Ablauf entfernt
+[*] eigenes Deathscreen-/Spawnsystem klar von deaktivierter Expansion-Doppelbelegung getrennt
+[*] DE/EN-Workshoptexte und neues Previewbild aktualisiert
+[/list]
