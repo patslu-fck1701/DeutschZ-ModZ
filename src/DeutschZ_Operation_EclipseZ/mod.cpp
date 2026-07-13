@@ -1,0 +1,10 @@
+name = "DeutschZ Operation EclipseZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ Operation EclipseZ";
+overview = "Storybasiertes PvPvE-Endgame-Event, das KotHZ, BattlegroundZ und ConvoyZ verbindet.";
+action = "https://project23947.websitepublisher.ai/eventsystem.html";
+author = "DeutschZ";
+version = "0.1.0";
