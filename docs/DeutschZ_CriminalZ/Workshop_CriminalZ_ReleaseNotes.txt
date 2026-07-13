@@ -1,0 +1,8 @@
+DeutschZ_CriminalZ 0.1.0
+
+- Technically built and signed with the DeutschZ key.
+- Server-side script compile and mission startup tested with the active 15-mod DayZ Labs stack.
+- Reference StorePlacement transform passed within the requested tolerance.
+- Custom sign PAA is included as DZCRZ_StoreInfoSign and bound to the fuel-station sign model.
+- Gameplay validation still required: complete ATM robbery, payout, cooldown restart, Expansion ATM banking menu, vehicle unlock, two-client visibility and map-loader late spawn.
+- Garage unlock remains disabled until a compatible general Expansion Garage API is verified.

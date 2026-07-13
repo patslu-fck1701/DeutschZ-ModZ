@@ -1,0 +1,16 @@
+{
+  "mod": "@DeutschZ_CriminalZ",
+  "version": "0.1.0",
+  "SOURCE_VALIDATED": "JA",
+  "CONFIG_COMPILE": "BESTANDEN",
+  "PBO_BUILT": "JA - 49 Dateien",
+  "SIGNED": "JA - DeutschZ / DSCheckSignatures OK",
+  "SERVER_START": "BESTANDEN - zwei lokale technische Serverstarts",
+  "REFERENCE_TRANSFORM": "BESTANDEN",
+  "FUNCTION_TEST": "TEILWEISE - StorePlacement und Duplikatschutz serverseitig bestaetigt",
+  "CLIENT_TEST": "OFFEN",
+  "WORKSHOP_TEXT": "VOLLSTAENDIG",
+  "WORKSHOP_MEDIA": "IN ARBEIT",
+  "WORKSHOP_READY": "NEIN - Live-Clienttest und echte Workshop-ID offen",
+  "LIVE_SERVER_TOUCHED": "NEIN"
+}

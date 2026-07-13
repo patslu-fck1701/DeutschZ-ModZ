@@ -1,0 +1,5 @@
+Publish DeutschZ_CriminalZ as a client-and-server DayZ mod.
+
+Use Workshop_CriminalZ_DE.txt as the primary German description and Workshop_CriminalZ_EN.txt as the English description. Append Workshop_CriminalZ_Changelog.txt to the change notes. Do not claim client gameplay validation. The custom DeutschZ_a_fuelstation_sign_co.paa is included in the signed PBO; visual inspection remains a live client test. Required dependencies are DayZ Expansion Market/Core/Navigation/Garage/Vehicles and the NoxZ package that provides NoxZ_Euro1 through NoxZ_Euro500.
+
+Upload the signed @DeutschZ_CriminalZ folder. Keep DeutschZ.bikey available for the server keys directory. Client and server must load the same version.

@@ -1,0 +1,23 @@
+{
+  "internal_mod_folder": "@DeutschZ_CriminalZ",
+  "public_title": "DeutschZ CriminalZ - ATM Robberies & City Store Network",
+  "appid": 221100,
+  "publishedfileid": "0",
+  "version": "0.1.0",
+  "visibility_draft": 2,
+  "content_root": "release_root/@DeutschZ_CriminalZ",
+  "preview_file": "release_media/01_CriminalZ_Workshop_Preview.png",
+  "brand_references": [
+    "deutschz-logo-golden.webp",
+    "deutschz-logo-dark.webp"
+  ],
+  "required_release_assets": [
+    "Addons/DeutschZ_CriminalZ.pbo",
+    "Addons/DeutschZ_CriminalZ.pbo.DeutschZ.bisign",
+    "keys/DeutschZ.bikey",
+    "release_media/01_CriminalZ_Workshop_Preview.png",
+    "03_WORKSHOP_DESCRIPTION_DE.txt",
+    "04_WORKSHOP_DESCRIPTION_EN.txt",
+    "05_CHANGELOG_0_1_0.md"
+  ]
+}

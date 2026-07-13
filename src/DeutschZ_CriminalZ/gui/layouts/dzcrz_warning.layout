@@ -1,0 +1,32 @@
+FrameWidgetClass DZCRZ_WarningRoot
+{
+    name "DZCRZ_WarningRoot"
+    position 0.25 0.12
+    size 0.50 0.10
+    hexactpos 0
+    vexactpos 0
+    hexactsize 0
+    vexactsize 0
+    visible 0
+    priority 9600
+    ignorepointer 1
+    {
+        TextWidgetClass DZCRZ_WarningText
+        {
+            position 0 0
+            size 1 1
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            text "CRIMINALZ ALARM"
+            font "gui/fonts/sdf_MetronBook24"
+            "exact text" 1
+            "exact text size" 28
+            color 1 0.06 0.03 1
+            "text halign" center
+            "text valign" center
+            ignorepointer 1
+        }
+    }
+}

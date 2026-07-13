@@ -1,0 +1,58 @@
+FrameWidgetClass DZCRZ_HackRoot
+{
+    name "DZCRZ_HackRoot"
+    position 0.35 0.82
+    size 0.30 0.08
+    hexactpos 0
+    vexactpos 0
+    hexactsize 0
+    vexactsize 0
+    visible 0
+    priority 9500
+    ignorepointer 1
+    {
+        PanelWidgetClass DZCRZ_HackBackground
+        {
+            position 0 0
+            size 1 1
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0.03 0.01 0.01 0.92
+            ignorepointer 1
+            {
+                TextWidgetClass DZCRZ_HackText
+                {
+                    position 0.04 0.08
+                    size 0.92 0.42
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text "CRIMINALZ | HACK AKTIV"
+                    font "gui/fonts/sdf_MetronBook18"
+                    color 0.95 0.08 0.06 1
+                    "text halign" center
+                    "text valign" center
+                    ignorepointer 1
+                }
+                ProgressBarWidgetClass DZCRZ_HackBar
+                {
+                    position 0.04 0.62
+                    size 0.92 0.18
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    style Quantity
+                    min 0
+                    max 100
+                    current 0
+                    color 0.90 0.04 0.03 1
+                    ignorepointer 1
+                }
+            }
+        }
+    }
+}

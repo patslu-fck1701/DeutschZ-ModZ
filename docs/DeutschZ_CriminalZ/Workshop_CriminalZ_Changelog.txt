@@ -1,0 +1,18 @@
+[h1]DEUTSCHZ CRIMINALZ - CHANGELOG[/h1]
+
+[h2]0.1.0 - 13.07.2026[/h2]
+
+[list]
+[*] initial CriminalZ MVP
+[*] added continuous server-authoritative ATM robbery
+[*] added random 300-600 second hack duration and 15 metre validation
+[*] added red Expansion markers, global notifications and alarms
+[*] added NoxZ Euro payout from 45,000 to 185,000 and Bitcoin block
+[*] added persistent ATM cooldowns and exploit protection
+[*] added verified Expansion vehicle unlock integration
+[*] prepared garage manager with explicit API blocker
+[*] added automatic City Store placement for ExpansionATM_2 and the custom DZCRZ_StoreInfoSign
+[*] added DeutschZ_a_fuelstation_sign_co.paa and a dedicated CriminalZ fuel-station sign model/material
+[*] added store-local transforms, per-building profiles, deduplication and map-loader support
+[*] prepared DZCRZ_StoreInfoSign for the later custom sign PAA
+[/list]

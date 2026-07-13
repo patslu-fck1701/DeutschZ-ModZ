@@ -1,0 +1,7 @@
+{
+  "Positions": [
+    {"Id": "atm_green_mountain_01", "Name": "Green Mountain 1", "Position": [3708.102051, 402.980347, 5959.185547], "Orientation": [162.440445, 0.0, 0.0], "Enabled": true},
+    {"Id": "atm_green_mountain_02", "Name": "Green Mountain 2", "Position": [3706.087158, 402.322876, 6003.259766], "Orientation": [154.170258, 0.0, 0.0], "Enabled": true},
+    {"Id": "atm_kamenka_blackmarket_01", "Name": "Kamenka Blackmarket", "Position": [1133.584473, 5.857156, 2418.129150], "Orientation": [-114.936584, 0.0, 0.0], "Enabled": true}
+  ]
+}

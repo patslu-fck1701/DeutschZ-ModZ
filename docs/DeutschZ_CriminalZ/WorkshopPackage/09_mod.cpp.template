@@ -1,0 +1,12 @@
+name = "DeutschZ CriminalZ — ATM Robberies & City Store Network";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "@DeutschZ_CriminalZ";
+overview = "Serverautoritative ATM-Hacks, rote Alarmmarker, NoxZ-Euro-Payout und automatische City-Store-ATMs.";
+action = "https://discord.gg/FHzZ7BykFk";
+author = "DeutschZ";
+version = "0.1.0";
+hideName = 0;
+hidePicture = 0;

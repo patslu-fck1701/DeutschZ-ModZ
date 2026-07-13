@@ -1,0 +1,10 @@
+name = "DeutschZ CriminalZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ CriminalZ";
+overview = "Serverautoritative ATM-Ueberfaelle, Fahrzeug-Hacks und kriminelle Expansion-Hotspots fuer DeutschZ.";
+action = "https://discord.gg/FHzZ7BykFk";
+author = "DeutschZ";
+version = "0.1.0";

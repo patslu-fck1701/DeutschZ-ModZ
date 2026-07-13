@@ -1,0 +1,18 @@
+Bereich;Test;Soll-Ergebnis;Status;Log/Notiz
+Config/Compile;Technisches Test-Loadout laden;Keine DZCRZ-Compilefehler;BESTANDEN;zwei lokale Serverstarts
+Build;PBO prüfen;49 erwartete Dateien;BESTANDEN;DayZ Labs
+Signatur;DSCheckSignatures;DeutschZ BISIGN OK;BESTANDEN;OK
+Referenz;Storetransform berechnen;Position <=0,02m und Rotation <=0,10 Grad;BESTANDEN;Script Ergebnis=true
+Store;Land_City_Store prüfen;Genau ein ATM und Schild;OFFEN;Clienttest
+Store;Land_City_Store_WithStairs prüfen;Genau ein ATM und Schild;OFFEN;Clienttest
+Restart;Server zweimal starten;Keine Duplikate;BESTANDEN;zweiter Start meldet Neue ATMs=0
+ATM;Bankingmenü öffnen;Expansion ATM vollständig nutzbar;OFFEN;Clienttest
+ATM;300-600s Aktion halten;Kein Kurzdruck und kein Hintergrundtimer;OFFEN;Clienttest
+Abort;Distanz/Tod/Logout/Toolwechsel;Session wird abgebrochen;OFFEN;Clienttest
+Reward;Hack abschließen;45.000-185.000 NoxZ Euro und kein Bitcoin;OFFEN;Clienttest
+Cooldown;Server neu starten;Restzeit bleibt erhalten;OFFEN;Clienttest
+Marker/Alarm;Hack starten;Globaler Hinweis, roter Marker und räumlicher Alarm;OFFEN;Clienttest
+Vehicle;Verschlossenes Expansion-Fahrzeug hacken;ForceUnlock nach vollständiger Aktion;OFFEN;Clienttest
+TwoClient;Zwei Clients verbinden;ATM und Schild synchron sichtbar;OFFEN;Clienttest
+MapLoader;Store nach Missionstart erzeugen;ATM/Schild werden verzögert ergänzt;OFFEN;Clienttest
+Logs;RPT/Script/Crash prüfen;Keine CriminalZ-Fehler;BESTANDEN;frische lokale Testlogs
