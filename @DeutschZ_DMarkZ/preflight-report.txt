@@ -1,0 +1,5 @@
+dzl preflight — DeutschZ_DMarkZ
+errors: 0  warnings: 0  info: 0
+checked: 3 files, 9 references, 1 configs
+
+No findings.
