@@ -1,9 +1,0 @@
-[h1]🧩 DEUTSCHZ ONLY CORE — UPDATE 14.07.2026[/h1]
-
-[list]
-[*] aktuelle DeutschZ-Systeme und Eventkette dokumentiert
-[*] Speaker-Cleanup und doppelte UI-Systeme bereinigt
-[*] vollständige DE/EN-Beschreibung und neues Workshop-Preview
-[/list]
-
-[i]Client-Deathscreen und kompletter Gameplayflow bleiben Live-Tests.[/i]

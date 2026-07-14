@@ -1,0 +1,23 @@
+[h1]🧩 DeutschZ_only_core — Changelog[/h1]
+
+[h2]Dokumentationsstand 14.07.2026[/h2]
+[list]
+[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
+[*] Core-Inventar auf 23 reale PBOs aktualisiert
+[*] acht DeutschZ-PBOs inklusive CriminalZ, D-MarkZ und internem SpeakerCleanup dokumentiert
+[*] bestehende Helper- und Fahrzeug-PBOs mit Originalsignatur-/Rechtehinweis aufgeführt
+[*] aktuelle technische Dependencies von der vollständigen DeutschZ-Server-Modliste getrennt
+[*] Eventzeiten, MenuZ-/Speaker-Status und vereinheitlichte Profilstruktur synchronisiert
+[*] MenüZ 1.2.3-loading-refresh als technisch gebautes Standalone-Paket vom stabilen Core mit 1.2.2-livefix getrennt
+[*] frischen Missionstart ohne Script-Compilefehler als technischen Nachweis ergänzt
+[*] Clientjoin, Signaturhandshake und Gameplay weiterhin ausdrücklich als offen markiert
+[/list]
+
+[h2]Aktueller stabiler Core[/h2]
+[list]
+[*] 23 PBOs mit DeutschZ- und Original-Drittanbietersignaturen
+[*] aktuelle DeutschZ-Event-, UI-, Währungs- und Cleanup-Module
+[*] keine Änderung oder Entfernung fremder Originalsignaturen durch die Dokumentationspflege
+[/list]
+
+[i]Diese Aktualisierung ändert Workshoptexte und nicht den stabilen Core-Ausgabeordner.[/i]

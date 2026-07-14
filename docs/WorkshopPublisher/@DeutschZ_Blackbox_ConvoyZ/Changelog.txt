@@ -1,0 +1,21 @@
+[h1]🚚 DeutschZ Blackbox ConvoyZ — Changelog[/h1]
+
+[h2]Dokumentationsstand 14.07.2026[/h2]
+[list]
+[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
+[*] 90-Sekunden-Blackbox-Hack und 60-Sekunden-Terminal-Decrypt aus aktiver Quelle bestätigt
+[*] Reset auf 0 bei Abbruch und Recovery-Team erst nach erfolgreichem Hack dokumentiert
+[*] DZBBC_DataCore als einziges Blackbox-Storyitem klargestellt; keine Keycard
+[*] DataCore-Lebensdauer, Sektorhinweis, AI-Balance und Rewardchancen aktualisiert
+[*] Abhängigkeiten und Core-/Standalone-Regel korrigiert
+[*] Serverstart als technisch bestätigt, vollständiger Client-Gameplaylauf als offen markiert
+[/list]
+
+[h2]Aktueller Build 0.2.2-livefix[/h2]
+[list]
+[*] serverautoritatives Crashsite-, Hack-, Transport-, Terminal- und Rewardsystem
+[*] Fahrzeug-Kontaktschutz für Event-AI und Event-Infizierte
+[*] vereinheitlichte Profile, Logs und Cleanup-Zustände
+[/list]
+
+[i]Diese Aktualisierung ändert Workshoptexte und keine Gameplay-PBO.[/i]

@@ -1,0 +1,12 @@
+[h1]🧩 DEUTSCHZ ONLY CORE — UPDATE 14.07.2026[/h1]
+
+[list]
+[*] vollständiger DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
+[*] reale 23-PBO-Core-Struktur dokumentiert
+[*] CriminalZ, D-MarkZ und internes SpeakerCleanup ergänzt
+[*] aktive Server-Modliste und technische Abhängigkeiten sauber getrennt
+[*] aktuelle Eventwerte, Profile und Beweisstatus synchronisiert
+[*] MenüZ-Loading-Refresh nicht mit dem stabilen Core-Stand verwechselt
+[/list]
+
+[b]Status:[/b] Serverstart und Scriptinitialisierung technisch bestätigt. Clientjoin und vollständige Gameplayabläufe bleiben offen.

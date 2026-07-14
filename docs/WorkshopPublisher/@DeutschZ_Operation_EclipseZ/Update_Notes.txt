@@ -1,0 +1,11 @@
+[h1]🌑 OPERATION ECLIPSEZ — UPDATE 14.07.2026[/h1]
+
+[list]
+[*] kompletter DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
+[*] Storyitems, Signalstationen und Reihenfolge aktualisiert
+[*] Feuerwerksbatterie, Countdown und 90-Sekunden-Hauptterminal dokumentiert
+[*] GPS-StartReceiver, Wächter und EclipseToken korrigiert
+[*] Dependencies und technischer Beweisstatus ergänzt
+[/list]
+
+[b]Status:[/b] Serverstart und StartReceiver technisch bestätigt. Vollständiger Client- und Gameplaytest bleibt offen.

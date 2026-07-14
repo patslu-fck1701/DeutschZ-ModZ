@@ -1,0 +1,10 @@
+[h1]⚔️ DEUTSCHZ BATTLEGROUNDZ — UPDATE 14.07.2026[/h1]
+
+[list]
+[*] kompletter DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
+[*] GPS-Kartenleser, Keycard-Herkunft und Persistenzablauf korrigiert
+[*] aktuelle Signalzeiten, Radien und AI-Balance dokumentiert
+[*] Abhängigkeiten und Installation eindeutig getrennt
+[/list]
+
+[b]Status:[/b] Serverstart technisch bestätigt. Client-Marker und kompletter Gameplayablauf bleiben offen.

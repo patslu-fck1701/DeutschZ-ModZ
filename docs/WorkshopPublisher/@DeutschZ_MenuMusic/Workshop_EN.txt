@@ -1,0 +1,138 @@
+[h1]🖥️ DEUTSCHZ MENÜZ — MENU, LOADING, MUSIC, DEATHSCREEN & SPAWN[/h1]
+
+[b]Your DeutschZ experience begins before you enter Chernarus — and does not end at the deathscreen.[/b]
+
+DeutschZ MenüZ combines the main menu, loading screen, music, deathscreen and spawn interface in one client/server module. Its visual direction follows the dark DeutschZ gaming style and completely avoids spatial speaker objects and trader speakers.
+
+[hr][/hr]
+[h2]🎯 OVERVIEW[/h2]
+
+[list]
+[*] custom dark-glass DeutschZ survival main menu
+[*] server status, news, event cards and community links
+[*] rotating loading screens with tips and event hints
+[*] eleven integrated music tracks
+[*] custom deathscreen and spawn UI
+[*] no spatial speaker objects and no trader speakers
+[*] unified profile configuration below DeutschZ-System
+[/list]
+
+[hr][/hr]
+[h2]🖥️ MAIN MENU & LOADING SCREEN[/h2]
+
+[list]
+[*] custom main menu with DeutschZ branding
+[*] current server address, Discord, website and repositories
+[*] seven DayZ-compatible loading artworks in the new technical package
+[*] current loading-content interval: [b]8 seconds[/b]
+[*] randomized hints, rules and event information
+[*] client rendering through DayZ layout and script modules
+[/list]
+
+Loading copy and images are maintained as mod assets. Resolution, UI scaling and other UI mods can affect rendering and require a real client test.
+
+[hr][/hr]
+[h2]🎵 MUSIC WITHOUT SPEAKER SPAM[/h2]
+
+[list]
+[*] [b]11[/b] integrated menu tracks
+[*] non-spatial playback through menu/UI logic
+[*] volume follows normal DayZ audio settings
+[*] no NoxZ Phone speaker objects in the world
+[*] no trader speakers
+[*] no extra missing-speaker warnings
+[/list]
+
+[hr][/hr]
+[h2]💀 DEATHSCREEN & SPAWN SYSTEM[/h2]
+
+[list]
+[*] custom DeutschZ deathscreen is intended and enabled
+[*] custom DeutschZ spawn selection is intended and enabled
+[*] Expansion [b]UseDeathScreen=0[/b]
+[*] Expansion [b]UseDeathScreenStatistics=0[/b]
+[*] Expansion [b]EnableSpawnSelection=0[/b]
+[*] Expansion [b]SpawnOnTerritory=0[/b]
+[/list]
+
+The duplicate Expansion interfaces are disabled server-side so mouse, cursor and spawn flow are not owned by two systems. Real mouse behaviour and the complete respawn flow remain pending until client live testing.
+
+[hr][/hr]
+[h2]🛡️ SERVER & CONFIGURATION[/h2]
+
+[list]
+[*] main config: [b]$profile:DeutschZ-System/DeutschZ_Main_Settings/Config/[/b]
+[*] data, runtime and persistence are organized separately
+[*] spawn points are prepared server-side and sent to eligible clients
+[*] music, news, loading and UI content are maintained as separate mod assets
+[*] no reward or spawn decision is trusted from an unvalidated client
+[/list]
+
+[hr][/hr]
+[h2]🧩 DEPENDENCIES & COMPATIBILITY[/h2]
+
+[list]
+[*] no external CfgPatches dependency beyond vanilla DayZ
+[*] compatible with the current DeutschZ stack using CF, Dabs Framework and DayZ Expansion
+[*] Expansion deathscreen and spawn selection must remain disabled while using the DeutschZ system
+[*] included in [b]@DeutschZ_only_core[/b] or available as [b]@DeutschZ_MenuMusic[/b]
+[*] never load the same MenuMusic PBO from Core and standalone together
+[*] other menu/deathscreen/spawn mods may cause layout or cursor conflicts
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Load the mod on client and server through [b]-mod[/b].
+[*] Client and server must use the same PBO build.
+[*] Place [b]DeutschZ.bikey[/b] in the server keys folder.
+[*] Disable Expansion deathscreen and spawn selection through server settings.
+[*] Do not load the standalone PBO when using [b]@DeutschZ_only_core[/b].
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNICAL STATUS — 14 JULY 2026[/h2]
+
+[list]
+[*] stable server-loaded build: [b]1.2.2-livefix[/b]
+[*] new technically built package: [b]1.2.3-loading-refresh[/b]
+[*] the new package contains [b]7[/b] DayZ-compatible loading artworks and still includes [b]11[/b] music tracks
+[*] server start, music initialization and SpawnSystem self-test are technically confirmed for 1.2.2-livefix
+[*] the fresh server run reported [b]43 spawn points[/b]
+[*] [b]NOT YET SERVER-/CLIENT-TESTED:[/b] 1.2.3-loading-refresh with seven artworks
+[*] [b]NOT CLIENT-TESTED:[/b] main menu rendering, loading rotation, music mix, deathscreen mouse and complete spawn flow
+[*] no automatic Steam upload was performed by this documentation update
+[/list]
+
+[hr][/hr]
+[h2]📝 CURRENT CHANGES[/h2]
+
+[list]
+[*] separated stable server build 1.2.2-livefix from the new technical 1.2.3-loading-refresh package
+[*] documented seven new DayZ-compatible loading screens and the 8-second interval
+[*] explicitly removed spatial speakers and trader loudspeakers
+[*] separated DeutschZ and Expansion UI responsibilities clearly
+[*] separated technical server status from pending client validation
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3761800532]🖥️ MenüZ Workshop[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Concept, development and operation: [b]DeutschZ[/b]. Report UI issues on Discord with resolution, UI scaling, mod list, screenshot/video, exact phase and client log.
+
+[b]DeutschZ MenüZ — Your entry into DeutschZ, before you even spawn.[/b]

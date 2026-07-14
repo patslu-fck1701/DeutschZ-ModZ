@@ -1,0 +1,11 @@
+[h1]👑 DEUTSCHZ KOTHZ — UPDATE 14.07.2026[/h1]
+
+[list]
+[*] kompletter DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
+[*] 300 Sekunden Capture und Wellen bei 0 / 20 / 40 / 60 / 80 bestätigt
+[*] Rauchfarben, BosZ-Werte, Storyrewards und Cleanup korrigiert
+[*] Vor-Capture-Terminalhack korrekt als deaktiviert dokumentiert
+[*] Dependencies und technischer Beweisstatus ergänzt
+[/list]
+
+[b]Status:[/b] Serverstart technisch bestätigt. Der vollständige Capture- und Gameplaylauf bleibt offen.

@@ -1,0 +1,161 @@
+[h1]🚚 DEUTSCHZ BLACKBOX CONVOYZ — HACK. EXTRACT. DECRYPT.[/h1]
+
+[b]A destroyed military convoy. Two fighting factions. One blackbox containing data that was never meant to be found.[/b]
+
+DeutschZ Blackbox ConvoyZ is a multi-stage, server-authoritative PvPvE event. Players secure a crashsite, hold an uninterrupted blackbox action, transport the DataCore to a military terminal and survive the final defense.
+
+[hr][/hr]
+[h2]🎯 OVERVIEW[/h2]
+
+[list]
+[*] dynamic convoy crashsite and combat zone
+[*] RussianZ versus AmericanZ with light equipment
+[*] true continuous blackbox hacking
+[*] transportable [b]DZBBC_DataCore[/b]
+[*] coarse sector hints instead of permanent item tracking
+[*] uninterrupted terminal decryption
+[*] recovery team and final defense
+[*] server-controlled reward, cleanup, HUD and markers
+[/list]
+
+[hr][/hr]
+[h2]🔥 MAIN FEATURES[/h2]
+
+[list]
+[*] blackbox hack: [b]90 uninterrupted seconds[/b]
+[*] terminal decrypt: [b]60 uninterrupted seconds[/b]
+[*] aborting resets the relevant progress to [b]0[/b]
+[*] DataCore lifetime: [b]1,800 seconds / 30 minutes[/b]
+[*] current build uses a coarse [b]1,000-metre sector hint[/b]
+[*] event cooldown: [b]120 minutes[/b]
+[*] autostart delay: [b]60 seconds[/b]
+[*] interaction distance: [b]4 metres[/b]
+[*] combat radius fallback: [b]85 metres[/b]
+[*] marker radius: [b]420 metres[/b]
+[/list]
+
+[hr][/hr]
+[h2]🎮 EVENT FLOW[/h2]
+
+[b]1. LOCATE THE CRASHSITE[/b]
+
+The event announces the attacked convoy and marks its search area. RussianZ and AmericanZ are already fighting; approaching players become targets too.
+
+[b]2. SECURE THE COMBAT ZONE[/b]
+
+Three lightly equipped Expansion AI form each initial faction. Their configured accuracy is [b]0.03 to 0.12[/b].
+
+[b]3. HACK THE BLACKBOX FOR 90 SECONDS[/b]
+
+The action must be held continuously. Death, unconsciousness, excessive distance, an invalid target or releasing the action cancels the hack and resets progress.
+
+[b]4. EXTRACT THE DATACORE[/b]
+
+After a successful hack, the blackbox creates only [b]DZBBC_DataCore[/b]. The recovery team may spawn only now. The BattlegroundZ keycard never comes from ConvoyZ; it comes from the KotHZ boss remains.
+
+[b]5. REACH THE TERMINAL[/b]
+
+Only the owner of the exact DataCore entity can start an active military terminal. Decryption must be held uninterrupted for [b]60 seconds[/b].
+
+[b]6. FINAL DEFENSE & REWARD[/b]
+
+Successful decryption triggers the final defense. The server releases the reward only after a valid event completion and then performs controlled cleanup.
+
+[hr][/hr]
+[h2]🎯 AI & VEHICLE PROTECTION[/h2]
+
+[list]
+[*] initial factions: [b]3 Expansion AI each[/b], accuracy [b]0.03–0.12[/b]
+[*] recovery team: [b]2 Expansion AI[/b], accuracy [b]0.04–0.14[/b]
+[*] final defense: [b]4 Expansion AI[/b], accuracy [b]0.05–0.16[/b]
+[*] event AI and infected receive no vehicle contact damage inside the event zone
+[/list]
+
+[hr][/hr]
+[h2]🎁 STORY REWARD[/h2]
+
+[list]
+[*] [b]GasZonen_Leuchtfackel[/b]: guaranteed
+[*] [b]DZBBC_SignalMatches[/b]: 75%
+[*] [b]DZBBC_Coded9VBattery[/b]: 50%
+[*] [b]no BattlegroundZ keycard[/b] in the blackbox or convoy reward
+[/list]
+
+Protected story items inside player inventories are not deleted by generic event cleanup.
+
+[hr][/hr]
+[h2]🛡️ SERVER, ADMIN & CONFIGURATION[/h2]
+
+[list]
+[*] admin prefix: [b]/dzbbc[/b]
+[*] actions: [b]start, stop, cleanup, forcecombatcomplete, forceblackbox, sethack, givedatacore, forceterminal, setdecrypt[/b]
+[*] the server validates player, ownership, exact entity, distance, event state and timer
+[*] config: [b]$profile:DeutschZ-System/DeutschZ_Blackbox_ConvoyZ/Config/[/b]
+[*] logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_Blackbox_ConvoyZ/[/b]
+[*] runtime and persistence are separated from static configuration
+[/list]
+
+[hr][/hr]
+[h2]🧩 DEPENDENCIES & COMPATIBILITY[/h2]
+
+[list]
+[*] current DeutschZ server stack: [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b] and [b]DayZ Expansion Licensed[/b]
+[*] the current flow uses Expansion AI, Navigation/markers and notifications
+[*] included in [b]@DeutschZ_only_core[/b] or available as [b]@DeutschZ_Blackbox_ConvoyZ[/b]
+[*] never load the same PBO from Core and standalone at the same time
+[*] client and server must use the same current build
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Load the mod and all required dependencies on client and server through [b]-mod[/b].
+[*] Load CF/Dabs and Expansion before ConvoyZ.
+[*] Place [b]DeutschZ.bikey[/b] in the server keys folder.
+[*] Never delete the profile folder during updates.
+[*] Do not add the standalone PBO when using [b]@DeutschZ_only_core[/b].
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNICAL STATUS — 14 JULY 2026[/h2]
+
+[list]
+[*] version: [b]0.2.2-livefix[/b]
+[*] current PBO signed with DeutschZ and loaded through the Core
+[*] server start and ConvoyZ manager initialization technically confirmed
+[*] current source confirms the [b]90-second hack[/b] and [b]60-second decrypt[/b]
+[*] [b]NOT GAMEPLAY-TESTED:[/b] complete client run from crashsite to reward
+[*] no automatic Steam upload was performed by this documentation update
+[/list]
+
+[hr][/hr]
+[h2]📝 CURRENT CHANGES[/h2]
+
+[list]
+[*] 90-/60-second actions and reset behaviour synchronized from source
+[*] DataCore instead of keycard documented explicitly
+[*] AI balance, sector hint, reward chances and dependencies updated
+[*] technical server-start evidence separated from pending gameplay evidence
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3758351646]🚚 ConvoyZ Workshop[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Concept, development and operation: [b]DeutschZ[/b]. Report issues on Discord with time, position, event phase, screenshots/video and matching RPT/script log details.
+
+[b]DeutschZ ConvoyZ — Hack. Extract. Decrypt. Survive.[/b]

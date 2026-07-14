@@ -1,9 +1,0 @@
-[h1]🌑 OPERATION ECLIPSEZ — UPDATE 14.07.2026[/h1]
-
-[list]
-[*] drei Signalstationen, codiertes Feuerwerk und finales Terminal dokumentiert
-[*] Storyitems und serverseitige Prüfungen aktualisiert
-[*] vollständiger DE/EN-Workshoptext und neues Eclipse-Previewbild
-[/list]
-
-[i]Vollständiger Client- und Gameplaytest bleibt offen.[/i]

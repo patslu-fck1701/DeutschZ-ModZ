@@ -1,0 +1,21 @@
+[h1]⚔️ DeutschZ BattlegroundZ — Changelog[/h1]
+
+[h2]Dokumentationsstand 14.07.2026[/h2]
+[list]
+[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
+[*] aktuellen GPSReceiver-basierten DZBGZ_CardReader statt der alten Funkpanel-Angabe dokumentiert
+[*] Keycard-Herkunft, Save-before-consume und Persistenzpfad präzisiert
+[*] aktuelle Signalfolge 45 / 180 / 180 / 240 Sekunden ergänzt
+[*] Radien, AI-Anzahl, Ausrüstung, Genauigkeit und Cleanup aktualisiert
+[*] Abhängigkeiten und Core-/Standalone-Regel korrigiert
+[*] technischen Serverstart als bestätigt, Client- und Gameplaytest als offen markiert
+[/list]
+
+[h2]Aktueller Build 0.1.0[/h2]
+[list]
+[*] serverautoritatives Reader-, Signal- und Persistenzsystem
+[*] persönlicher Unlock vor Keycard-Verbrauch
+[*] Expansion-AI-Fraktionen und Fahrzeug-Kontaktschutz in der Eventzone
+[/list]
+
+[i]Diese Aktualisierung ändert Workshoptexte und keine Gameplay-PBO.[/i]

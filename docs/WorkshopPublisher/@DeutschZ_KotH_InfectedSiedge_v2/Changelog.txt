@@ -1,0 +1,21 @@
+[h1]👑 DeutschZ KotHZ Infected Siedge v2 — Changelog[/h1]
+
+[h2]Dokumentationsstand 14.07.2026[/h2]
+[list]
+[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
+[*] Capture-Dauer von 300 Sekunden und Radius von 25 Metern aus aktiver Quelle bestätigt
+[*] Wellen bei 0 / 20 / 40 / 60 / 80 Prozent mit aktuellen Stückzahlen und HP dokumentiert
+[*] weiß/grün/roten Rauchablauf sowie blockierende Gegner und fehlenden Leerzonenverlust ergänzt
+[*] optionalen Vor-Capture-Terminalhack korrekt als deaktiviert markiert
+[*] BosZ-Werte, Keycard-Herkunft, 10-Prozent-FireworksLauncher-Chance und Cleanup aktualisiert
+[*] Serverstart als technisch bestätigt, vollständiger Client-Gameplaylauf als offen markiert
+[/list]
+
+[h2]Aktueller Build 0.4.3-livefix[/h2]
+[list]
+[*] serverautoritatives Capture-, Wellen-, Boss-, Reward- und Cleanup-System
+[*] getrennte Configs für Hauptwerte, Positionen, Wellen und Loot
+[*] optionale Expansion-Marker und -Benachrichtigungen
+[/list]
+
+[i]Diese Aktualisierung ändert Workshoptexte und keine Gameplay-PBO.[/i]

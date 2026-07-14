@@ -1,0 +1,11 @@
+[h1]🚚 DEUTSCHZ CONVOYZ — UPDATE 14.07.2026[/h1]
+
+[list]
+[*] kompletter DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
+[*] 90 Sekunden Blackbox-Hack und 60 Sekunden Terminal-Decrypt bestätigt
+[*] Recovery-Team erst nach abgeschlossenem Hack
+[*] DataCore statt Keycard sowie finale Storyrewards korrigiert
+[*] Abhängigkeiten, AI-Balance und technischer Beweisstatus ergänzt
+[/list]
+
+[b]Status:[/b] Serverstart technisch bestätigt. Der komplette Client-Gameplaylauf bleibt offen.

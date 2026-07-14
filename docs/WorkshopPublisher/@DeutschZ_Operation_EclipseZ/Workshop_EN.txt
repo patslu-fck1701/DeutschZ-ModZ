@@ -1,0 +1,147 @@
+[h1]🌑 DEUTSCHZ OPERATION ECLIPSEZ — THE FINAL SIGNAL[/h1]
+
+[b]Four story requirements. Three signal stations. One firework sequence. One final decision.[/b]
+
+Operation EclipseZ connects KotHZ, BattlegroundZ and ConvoyZ into a server-authoritative PvPvE endgame. Players unite the story items from previous chapters, activate three signal stations, synchronize a DeutschZ firework battery and fight for control of the Eclipse main terminal.
+
+[hr][/hr]
+[h2]🎯 OVERVIEW[/h2]
+
+[list]
+[*] story-driven conclusion to the current DeutschZ event chain
+[*] GPS receiver used as the StartReceiver
+[*] personal BattlegroundZ unlock as a requirement
+[*] real story items from KotHZ and ConvoyZ
+[*] three signal stations in randomized order
+[*] multi-stage firework battery synchronization
+[*] final 90-second terminal with PvPvE defense
+[*] Eclipse Guardian and a final decision
+[/list]
+
+[hr][/hr]
+[h2]🔑 REQUIREMENTS[/h2]
+
+[list]
+[*] persistent personal BattlegroundZ unlock
+[*] [b]DeutschZ_FireworksLauncher[/b] from KotHZ
+[*] [b]GasZonen_Leuchtfackel[/b] from ConvoyZ
+[*] [b]DZBBC_SignalMatches[/b] from ConvoyZ
+[*] [b]DZBBC_Coded9VBattery[/b] from ConvoyZ
+[/list]
+
+Items may be distributed across team members within [b]10 metres[/b]. The server validates the real item entities, ownership, distance and unlock. There is no permanent player or story-item tracking.
+
+[hr][/hr]
+[h2]📡 THREE SIGNAL STATIONS[/h2]
+
+[list]
+[*] [b]NWAF / Alpha:[/b] connect the Coded9VBattery for 45 seconds
+[*] [b]Tisy / Bravo:[/b] synchronize the FireworksLauncher for 60 seconds
+[*] [b]Contaminated zone / Charlie:[/b] activate the flare for 30 seconds
+[/list]
+
+The server determines the order. Abort state, distance, item ownership, event state and the active station are validated during every action.
+
+[hr][/hr]
+[h2]🎆 FIREWORK BATTERY[/h2]
+
+[list]
+[*] insert battery: [b]20 seconds[/b]
+[*] synchronize signal: [b]30 seconds[/b]
+[*] prepare ignition: [b]20 seconds[/b]
+[*] launch countdown: [b]30 seconds[/b]
+[*] coarse global target sector: [b]1,500 metres[/b]
+[*] more precise activator hint: [b]400 metres[/b]
+[/list]
+
+The current [b]DZECZ_FireworkBattery[/b] uses the same DeutschZ FireworksLauncher base as the KotHZ story item.
+
+[hr][/hr]
+[h2]⚔️ FINAL TERMINAL & DECISION[/h2]
+
+The Eclipse main terminal action must be held uninterrupted for [b]90 seconds[/b]. RussianZ, AmericanZ, infected and the [b]3,500-HP[/b] Eclipse Guardian defend the zone.
+
+[list]
+[*] [b]Shut the signal down:[/b] controlled ending
+[*] [b]Send the signal:[/b] additional heavy defense and enhanced reward
+[*] story reward: [b]DZECZ_EclipseToken[/b] as a solid stone/relic object with its own texture
+[*] event cleanup: [b]900 seconds / 15 minutes[/b]
+[/list]
+
+[hr][/hr]
+[h2]🛡️ SERVER AUTHORITY & CONFIGURATION[/h2]
+
+[list]
+[*] the server decides unlocks, exact items, ownership, distance, order, timers and rewards
+[*] no client can confirm stations, progress or completion
+[*] config: [b]$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ/Config/[/b]
+[*] persistence and runtime remain separated from static configuration
+[*] logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_Operation_EclipseZ/[/b]
+[*] protected story items are never removed from player inventories by generic cleanup
+[/list]
+
+[hr][/hr]
+[h2]🧩 DEPENDENCIES & COMPATIBILITY[/h2]
+
+[list]
+[*] required: [b]DeutschZ KotH Infected Siedge v2[/b]
+[*] required: [b]DeutschZ BattlegroundZ[/b]
+[*] required: [b]DeutschZ Blackbox ConvoyZ[/b]
+[*] current server stack for AI, markers and notifications: [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b], [b]DayZ Expansion Licensed[/b]
+[*] included in [b]@DeutschZ_only_core[/b] or available as [b]@DeutschZ_Operation_EclipseZ[/b]
+[*] never load the same PBO from Core and standalone at the same time
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Load CF/Dabs and Expansion first.
+[*] Then load KotHZ, BattlegroundZ and ConvoyZ.
+[*] Load Operation EclipseZ on client and server through [b]-mod[/b].
+[*] Place [b]DeutschZ.bikey[/b] in the server keys folder.
+[*] Never delete profiles or persistence during updates.
+[*] Do not load standalone duplicates when using [b]@DeutschZ_only_core[/b].
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNICAL STATUS — 14 JULY 2026[/h2]
+
+[list]
+[*] version: [b]0.1.0[/b]
+[*] current PBO signed with DeutschZ and loaded through the Core
+[*] server start, Eclipse manager and StartReceiver initialization technically confirmed
+[*] active source confirms 45 / 60 / 30 seconds, battery 20 / 30 / 20 and 90-second main terminal
+[*] [b]NOT GAMEPLAY-TESTED:[/b] complete client run through all stations, firework, final defense, decision and reward
+[*] no automatic Steam upload was performed by this documentation update
+[/list]
+
+[hr][/hr]
+[h2]📝 CURRENT CHANGES[/h2]
+
+[list]
+[*] clarified story requirements and dependencies from all three preceding events
+[*] synchronized current station, firework and terminal times
+[*] documented the GPS StartReceiver, FireworksLauncher base and stone token
+[*] separated technical server start from pending gameplay evidence
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Concept, development and operation: [b]DeutschZ[/b]. Report issues on Discord with time, station, event state, carried story items, screenshots/video and matching logs.
+
+[b]DeutschZ Operation EclipseZ — The final signal is waiting.[/b]

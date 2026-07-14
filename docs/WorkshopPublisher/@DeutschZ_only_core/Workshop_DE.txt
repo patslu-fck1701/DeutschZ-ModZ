@@ -1,0 +1,198 @@
+[h1]🧩 DEUTSCHZ ONLY CORE — DAS GEBÜNDELTE DEUTSCHZ MODPAKET[/h1]
+
+[b]Ein Modordner. 23 PBOs. Die aktuellen DeutschZ-Systeme plus bewährte Core-Helfer und Fahrzeuge.[/b]
+
+DeutschZ_only_core bündelt die aktuell eingesetzten DeutschZ-Event-, Menü-, Währungs- und Cleanup-Module mit den bereits zum Core gehörenden Hilfs-, Admin- und Fahrzeug-PBOs. Der Core ist für den DeutschZ-Serverstack zusammengestellt; er ist kein Ersatz für seine externen Framework- und Content-Abhängigkeiten.
+
+[hr][/hr]
+[h2]🔥 AKTUELLE DEUTSCHZ-MODULE[/h2]
+
+[list]
+[*] DeutschZ BattlegroundZ
+[*] DeutschZ Blackbox ConvoyZ
+[*] DeutschZ CriminalZ
+[*] DeutschZ D-MarkZ
+[*] DeutschZ KotH Infected Siedge v2
+[*] DeutschZ MenüZ / MenuMusic
+[*] DeutschZ Operation EclipseZ
+[*] DeutschZ SpeakerCleanup als internes Serverhilfsmodul
+[/list]
+
+Die öffentlich gepflegten DeutschZ-Module stehen zusätzlich als einzelne [b]@DeutschZ_*[/b]-Ordner bereit. Dieselbe PBO darf niemals gleichzeitig aus dem Core und einem Standalone-Ordner geladen werden.
+
+[hr][/hr]
+[h2]🛠️ ENTHALTENE CORE-HELFER[/h2]
+
+[list]
+[*] Auto Transfer Items by Category
+[*] Axiao VPPCheck Items
+[*] COT Override
+[*] ZenCOT
+[*] HB FlipVehicle
+[*] InventoryInCar
+[*] MB Batteries
+[/list]
+
+Diese bestehenden PBOs behalten ihre Originalsignaturen und jeweiligen Rechteinhaber. Die DeutschZ-Dokumentation erhebt keinen Eigentumsanspruch an Fremdkomponenten.
+
+[hr][/hr]
+[h2]🚙 ENTHALTENE FAHRZEUG-PBOS[/h2]
+
+[list]
+[*] JGC G63 W463
+[*] MBM BMW Alpina
+[*] MBM Can-Am Maverick
+[*] MBM Dodge Ram
+[*] MBM Dune Buggy
+[*] MBM JLTV
+[*] MBM Monte Carlo SS
+[*] MBM Ram Rebel
+[/list]
+
+Auch diese bereits im Core vorhandenen Fahrzeuge behalten ihre Originalsignaturen und Lizenzbedingungen.
+
+[hr][/hr]
+[h2]🎮 DEUTSCHZ EVENT- UND UI-SYSTEM[/h2]
+
+[list]
+[*] KotHZ: 300 Sekunden Capture, fünf Wellen und BosZ
+[*] BattlegroundZ: Keycard, GPS-Kartenleser und persönliche Signalkette
+[*] ConvoyZ: 90-Sekunden-Blackbox-Hack, DataCore und 60-Sekunden-Terminal
+[*] Operation EclipseZ: Storyitems, drei Signalstationen und finales Endgame
+[*] CriminalZ: ATM-Raub, Fahrzeug-Hacks und automatisches City-Store-Netzwerk
+[*] D-MarkZ: gebrandete Münzen und Scheine auf Basis der NoxZCurrency-Klassen
+[*] MenüZ: Hauptmenü, Loading, 11 Musiktitel, Deathscreen und Spawnoberfläche
+[*] SpeakerCleanup: keine räumlichen NoxZ-/Trader-Speaker und keine Speaker-Warnflut
+[/list]
+
+[hr][/hr]
+[h2]🗂️ PROFILE & SERVERAUTORITÄT[/h2]
+
+Neue DeutschZ-Daten liegen unter [b]$profile:DeutschZ-System/[/b]. Config, Data, Runtime und Persistence bleiben pro System getrennt; Logs landen unter [b]DeutschZ-System/LogZ/[/b]. Legacy-Profile werden bei einer Migration nur kopiert, niemals automatisch gelöscht.
+
+Eventzustand, Items, Rewards, Distanzen, Markerberechtigungen, Cooldowns, Spawns und Persistenzentscheidungen bleiben serverautoritativ.
+
+[hr][/hr]
+[h2]🧩 TECHNISCHE ABHÄNGIGKEITEN[/h2]
+
+Für alle aktuell aktiven Core-Module und ihre integrierten Funktionen werden im DeutschZ-Stack insbesondere verwendet:
+
+[list]
+[*] [b]CF[/b]
+[*] [b]Dabs Framework[/b]
+[*] [b]Community Online Tools[/b]
+[*] [b]VPPAdminTools[/b]
+[*] [b]DayZ Expansion Bundle[/b]
+[*] [b]DayZ Expansion Licensed[/b]
+[*] [b]NoxZ_Phone[/b] / NoxZCurrency
+[*] [b]COT Bundle Utility[/b] für die aktuelle Admin-/Utility-Umgebung
+[/list]
+
+[h2]📋 AKTUELLER DEUTSCHZ SERVER-MODSTACK[/h2]
+
+[code]@CF;
+@Dabs Framework;
+@Community-Online-Tools;
+@VPPAdminTools;
+@DayZ-Expansion-Bundle;
+@DayZ-Expansion-Licensed;
+@BaseBuildingPlus;
+@Code Lock;
+@RaG_Core;
+@RaG_BaseItems;
+@RedFalcon Flight System Heliz;
+@BS Patrol Tank;
+@NoxZ_Phone;
+@NVG + Scope;
+@RevScopes;
+@MegaFoodPack;
+@Modular Vest System-Bastions Editon;
+@ReDos Bags;
+@ArmA2 Trucks;
+@SNAFU Weapons;
+@SprayZ;
+@COT Bundle Utility;
+@DeutschZ_only_core[/code]
+
+Die vollständige Server-Modliste enthält Contentmods, die nicht automatisch harte Abhängigkeiten jeder einzelnen DeutschZ-PBO sind. Für andere Server muss die Abhängigkeitsprüfung modweise erfolgen.
+
+[hr][/hr]
+[h2]📦 INSTALLATION & LADEREIHENFOLGE[/h2]
+
+[list]
+[*] Ordnername: [b]@DeutschZ_only_core[/b]
+[*] Frameworks und externe Abhängigkeiten vor dem Core laden.
+[*] Den Core auf Client und Server über [b]-mod[/b] laden.
+[*] Client und Server müssen exakt denselben Core-Build verwenden.
+[*] mitgelieferte Originalsignaturen und öffentliche Keys beibehalten
+[*] keine einzelne DeutschZ-PBO zusätzlich zum identischen Core-PBO laden
+[*] private Signierschlüssel, Login-Daten und Profile gehören niemals in einen Workshop-Upload
+[/list]
+
+[hr][/hr]
+[h2]🔐 SIGNATUREN & KEYS[/h2]
+
+[list]
+[*] aktuelle DeutschZ-PBOs sind mit [b]DeutschZ[/b] signiert
+[*] Drittanbieter-PBOs behalten ihre Originalsignaturen
+[*] öffentliche Keys gehören in den Server-Keyordner
+[*] private [b].biprivatekey[/b]-Dateien dürfen niemals verteilt werden
+[*] für einzelne Helper-PBOs können zusätzliche Originalkeys erforderlich sein
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
+
+[list]
+[*] [b]23 PBOs[/b] im aktuellen stabilen Core-Ausgabeordner
+[*] alle aktuellen DeutschZ-PBOs im frischen Serverlauf gemountet
+[*] SteamGameServer_Init, MissionServer-Start und CE-Initialisierung technisch bestätigt
+[*] D-MarkZ, MenüZ, KotHZ, ConvoyZ, BattlegroundZ, CriminalZ, EclipseZ und SpeakerCleanup initialisiert beziehungsweise geladen
+[*] stabiler Core enthält MenüZ [b]1.2.2-livefix[/b]; das neue Standalone-Paket [b]1.2.3-loading-refresh[/b] mit sieben Motiven ist technisch gebaut, aber noch nicht in diesen stabilen Core übernommen
+[*] keine Script-Compile-, Unknown-Type- oder Null-Pointer-Fehler im frischen Startlog
+[*] [b]NICHT CLIENT-GETESTET:[/b] Join, Signaturhandshake, UI und vollständige Gameplayabläufe
+[*] der stabile Core wird durch reine Workshoptext-Änderungen nicht ersetzt
+[/list]
+
+[hr][/hr]
+[h2]⚠️ BEKANNTE HINWEISE[/h2]
+
+[list]
+[*] Doppelt geladene Core-/Standalone-PBOs können Scriptklassen und Signaturen kollidieren lassen.
+[*] UI-, Deathscreen- und Spawnmods können Maus-/Layoutkonflikte verursachen.
+[*] Fehlende externe Frameworks oder Contentmods können trotz korrektem Core den Serverstart blockieren.
+[*] Gameplay-Status der Events ist erst nach dem echten Clienttest bestätigt.
+[/list]
+
+[hr][/hr]
+[h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
+
+[list]
+[*] Core-Inhalt auf 23 reale PBOs und acht DeutschZ-Komponenten aktualisiert
+[*] CriminalZ, D-MarkZ und internes SpeakerCleanup ergänzt
+[*] vollständige aktive Server-Modliste und technische Dependencies getrennt dokumentiert
+[*] aktuelle Eventzeiten, Menüstatus und Profilstruktur synchronisiert
+[*] neuen MenüZ-Loading-Refresh klar vom stabilen Core getrennt
+[*] technischen Serverstart klar vom offenen Client-/Gameplaytest getrennt
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3751588241]🧩 DeutschZ_only_core Workshop[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+DeutschZ-Systeme, Packaging und Serverbetrieb: [b]DeutschZ[/b]. Rechte und Credits externer PBOs verbleiben bei ihren jeweiligen Autoren. Bitte Start-, Signatur- oder Gameplayfehler mit kompletter Modliste, Uhrzeit, erstem Fehler aus RPT/Scriptlog und Screenshot im Discord melden.
+
+[b]DeutschZ_only_core — Weniger Chaos. Ein kontrollierter DeutschZ-Stand.[/b]

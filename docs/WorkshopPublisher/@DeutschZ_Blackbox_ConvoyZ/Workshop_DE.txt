@@ -1,0 +1,161 @@
+[h1]🚚 DEUTSCHZ BLACKBOX CONVOYZ — HACKEN. BERGEN. ENTSCHLÜSSELN.[/h1]
+
+[b]Ein zerstörter Militärkonvoi. Zwei kämpfende Fraktionen. Eine Blackbox mit Daten, die nicht gefunden werden sollten.[/b]
+
+DeutschZ Blackbox ConvoyZ ist ein mehrstufiges, serverautoritatives PvPvE-Event. Spieler sichern ein Crashsite, halten eine ununterbrochene Blackbox-Aktion, transportieren den DataCore zu einem Militärterminal und überleben die finale Verteidigung.
+
+[hr][/hr]
+[h2]🎯 KURZBESCHREIBUNG[/h2]
+
+[list]
+[*] dynamisches Convoy-Crashsite mit Kampfzone
+[*] RussianZ gegen AmericanZ mit leichter Bewaffnung
+[*] echter kontinuierlicher Blackbox-Hack
+[*] transportierbarer [b]DZBBC_DataCore[/b]
+[*] grobe Sektorhinweise statt permanentem Itemtracking
+[*] ununterbrochene Terminal-Entschlüsselung
+[*] Bergungstrupp und finale Verteidigung
+[*] serverseitiger Reward, Cleanup, HUD und Marker
+[/list]
+
+[hr][/hr]
+[h2]🔥 HAUPTFEATURES[/h2]
+
+[list]
+[*] Blackbox-Hack: [b]90 Sekunden ununterbrochen[/b]
+[*] Terminal-Decrypt: [b]60 Sekunden ununterbrochen[/b]
+[*] Abbruch setzt den jeweiligen Fortschritt auf [b]0[/b]
+[*] DataCore-Lebensdauer: [b]1800 Sekunden / 30 Minuten[/b]
+[*] grober [b]1000-Meter-Sektorhinweis[/b] im aktuellen Build
+[*] Event-Cooldown: [b]120 Minuten[/b]
+[*] Autostart-Verzögerung: [b]60 Sekunden[/b]
+[*] Interaktionsdistanz: [b]4 Meter[/b]
+[*] Kampfbereich-Fallback: [b]85 Meter[/b]
+[*] Markerradius: [b]420 Meter[/b]
+[/list]
+
+[hr][/hr]
+[h2]🎮 EVENT-ABLAUF[/h2]
+
+[b]1. CRASHSITE FINDEN[/b]
+
+Das Event kündigt den überfallenen Konvoi an und markiert den Suchbereich. RussianZ und AmericanZ kämpfen bereits gegeneinander; Spieler werden beim Annähern selbst zum Ziel.
+
+[b]2. KAMPFBEREICH SICHERN[/b]
+
+Je drei leicht bewaffnete Expansion-AI bilden die Ausgangsfraktionen. Ihre Genauigkeit liegt bei [b]0,03 bis 0,12[/b].
+
+[b]3. BLACKBOX 90 SEKUNDEN HACKEN[/b]
+
+Die Bomben-/Hackaktion muss durchgehend gehalten werden. Tod, Bewusstlosigkeit, Distanzüberschreitung, ungültiges Ziel oder Abbruch beenden die Aktion und setzen den Fortschritt zurück.
+
+[b]4. DATACORE EXTRAHIEREN[/b]
+
+Nach erfolgreichem Hack erzeugt die Blackbox ausschließlich den [b]DZBBC_DataCore[/b]. Erst jetzt darf der Bergungstrupp erscheinen. Die BattlegroundZ-Keycard kommt niemals aus ConvoyZ, sondern aus KotHZ-Boss-Überresten.
+
+[b]5. TERMINAL ERREICHEN[/b]
+
+Nur der Besitzer der exakten DataCore-Entität kann das aktive Militärterminal starten. Die Entschlüsselung muss [b]60 Sekunden[/b] ununterbrochen gehalten werden.
+
+[b]6. FINALE VERTEIDIGUNG & REWARD[/b]
+
+Nach der Entschlüsselung wird die finale Verteidigung ausgelöst. Der Server gibt den Reward erst nach gültigem Eventabschluss frei und bereinigt danach kontrolliert die dynamischen Eventobjekte.
+
+[hr][/hr]
+[h2]🎯 AI & FAHRZEUGSCHUTZ[/h2]
+
+[list]
+[*] Startfraktionen: je [b]3 Expansion-AI[/b], Genauigkeit [b]0,03–0,12[/b]
+[*] Bergungstrupp: [b]2 Expansion-AI[/b], Genauigkeit [b]0,04–0,14[/b]
+[*] finale Verteidigung: [b]4 Expansion-AI[/b], Genauigkeit [b]0,05–0,16[/b]
+[*] Event-AI und Event-Infizierte erhalten in der Eventzone keinen Fahrzeug-Kontaktschaden
+[/list]
+
+[hr][/hr]
+[h2]🎁 STORYREWARD[/h2]
+
+[list]
+[*] [b]GasZonen_Leuchtfackel[/b]: garantiert
+[*] [b]DZBBC_SignalMatches[/b]: 75 %
+[*] [b]DZBBC_Coded9VBattery[/b]: 50 %
+[*] [b]keine BattlegroundZ-Keycard[/b] in der Blackbox oder im Convoy-Reward
+[/list]
+
+Geschützte Storyitems in Spielerinventaren werden nicht durch generischen Event-Cleanup entfernt.
+
+[hr][/hr]
+[h2]🛡️ SERVER, ADMIN & KONFIGURATION[/h2]
+
+[list]
+[*] Admin-Präfix: [b]/dzbbc[/b]
+[*] Aktionen: [b]start, stop, cleanup, forcecombatcomplete, forceblackbox, sethack, givedatacore, forceterminal, setdecrypt[/b]
+[*] Server validiert Spieler, Besitz, exakte Entität, Distanz, Eventzustand und Zeit
+[*] Config: [b]$profile:DeutschZ-System/DeutschZ_Blackbox_ConvoyZ/Config/[/b]
+[*] Logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_Blackbox_ConvoyZ/[/b]
+[*] Runtime und Persistence werden getrennt von statischer Konfiguration verwaltet
+[/list]
+
+[hr][/hr]
+[h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
+
+[list]
+[*] aktueller DeutschZ-Serverstack: [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b] und [b]DayZ Expansion Licensed[/b]
+[*] Expansion AI, Navigation/Marker und Benachrichtigungen werden im aktuellen Ablauf verwendet
+[*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_Blackbox_ConvoyZ[/b]
+[*] niemals dieselbe PBO aus Core und Standalone doppelt laden
+[*] Client und Server benötigen denselben aktuellen Build
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Mod und alle benötigten Abhängigkeiten auf Client und Server über [b]-mod[/b] laden.
+[*] CF/Dabs und Expansion vor ConvoyZ laden.
+[*] [b]DeutschZ.bikey[/b] in den Server-Keyordner kopieren.
+[*] Das Profilverzeichnis bei Updates nicht löschen.
+[*] Bei Nutzung von [b]@DeutschZ_only_core[/b] die Standalone-PBO nicht zusätzlich laden.
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
+
+[list]
+[*] Version: [b]0.2.2-livefix[/b]
+[*] aktueller PBO mit DeutschZ signiert und im Core geladen
+[*] Serverstart und ConvoyZ-Manager-Initialisierung technisch bestätigt
+[*] aktuelle Quellen bestätigen [b]90 Sekunden Hack[/b] und [b]60 Sekunden Decrypt[/b]
+[*] [b]NICHT GAMEPLAY-GETESTET:[/b] vollständiger Clientlauf von Crashsite bis Reward
+[*] kein automatischer Steam-Upload durch diese Dokumentationsaktualisierung
+[/list]
+
+[hr][/hr]
+[h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
+
+[list]
+[*] 90-/60-Sekunden-Aktionen und Resetverhalten aus der Quelle übernommen
+[*] DataCore statt Keycard eindeutig dokumentiert
+[*] AI-Stärken, Sektorhinweis, Rewardchancen und Abhängigkeiten synchronisiert
+[*] technischen Serverstart klar vom offenen Gameplaytest getrennt
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3758351646]🚚 ConvoyZ Workshop[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Position, Eventphase, Screenshot/Video sowie RPT- und Scriptlog-Hinweis im Discord melden.
+
+[b]DeutschZ ConvoyZ — Hacken. Bergen. Entschlüsseln. Überleben.[/b]

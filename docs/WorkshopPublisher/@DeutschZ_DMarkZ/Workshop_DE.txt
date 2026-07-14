@@ -1,0 +1,122 @@
+[h1]💶 DEUTSCHZ D-MARKZ — DIE OFFIZIELLE DEUTSCHZ WÄHRUNG[/h1]
+
+[b]Neun Werte. Eine Ökonomie. Ein unverwechselbares DeutschZ-Design.[/b]
+
+DeutschZ D-MarkZ ersetzt die sichtbaren NoxZ-Euro-Münzen und -Scheine durch eine eigene fiktive DeutschZ-Währung. Die Klassen bleiben mit NoxZ Phone, ATMs, Tradern und CriminalZ kompatibel, während Namen und Texturen die DeutschZ-D-MarkZ-Identität tragen.
+
+[hr][/hr]
+[h2]🎯 KURZBESCHREIBUNG[/h2]
+
+[list]
+[*] eigene DeutschZ-Währungsoptik für die bestehenden NoxZCurrency-Klassen
+[*] zwei Münzen und sieben Scheine
+[*] direkte Kompatibilität mit NoxZ Phone und NoxZ-Euro-Auszahlungen
+[*] geeignet für Expansion-ATMs, Trader, Events und CriminalZ-Rewards
+[*] eigenständige PAA-Texturen pro Wert
+[*] als Standalone-PBO und im @DeutschZ_only_core verfügbar
+[/list]
+
+[hr][/hr]
+[h2]💰 AKTUELLE WERTE[/h2]
+
+[list]
+[*] [b]1 D-MarkZ[/b] — Münze
+[*] [b]2 D-MarkZ[/b] — Münze
+[*] [b]5 D-MarkZ[/b] — Schein
+[*] [b]10 D-MarkZ[/b] — Schein
+[*] [b]20 D-MarkZ[/b] — Schein
+[*] [b]50 D-MarkZ[/b] — Halftan-Motiv
+[*] [b]100 D-MarkZ[/b] — Patrick-Motiv
+[*] [b]200 D-MarkZ[/b] — Schein
+[*] [b]500 D-MarkZ[/b] — Patrick-Motiv
+[/list]
+
+[hr][/hr]
+[h2]🔧 TECHNISCHE UMSETZUNG[/h2]
+
+[list]
+[*] Münzen erben von [b]NoxZ_Currency_Coin_Base[/b]
+[*] Scheine erben von [b]NoxZ_Euro_Base[/b]
+[*] verwendete Klassen: [b]NoxZ_Euro1, NoxZ_Euro2, NoxZ_Euro5, NoxZ_Euro10, NoxZ_Euro20, NoxZ_Euro50, NoxZ_Euro100, NoxZ_Euro200, NoxZ_Euro500[/b]
+[*] die bestehenden Classnames sichern Kompatibilität mit NoxZ Phone, ATMs und Rewards
+[*] jede Klasse verweist auf eine eigene DeutschZ-PAA
+[*] Version: [b]1.0.0[/b]
+[/list]
+
+[hr][/hr]
+[h2]🏧 ÖKONOMIE & CRIMINALZ[/h2]
+
+CriminalZ zahlt technisch weiterhin über die NoxZ-Euro-Klassen aus. Ist DeutschZ D-MarkZ geladen, erscheinen diese Klassen mit den DeutschZ-Münzen und -Scheinen. Dadurch bleibt das vorhandene Banking- und Trader-System kompatibel, ohne eine zweite konkurrierende Währungslogik einzubauen.
+
+Bitcoin wird durch D-MarkZ nicht ersetzt und ist kein Bestandteil dieser Mod.
+
+[hr][/hr]
+[h2]🛡️ SERVERAUTORITÄT & KONFIGURATION[/h2]
+
+Die Mod liefert Itemklassen und Texturen. Kontostände, Auszahlungen, Käufe, Verkäufe und Rewards werden weiterhin von den jeweils zuständigen Servermods wie NoxZ Phone, Expansion Market, Trader- oder Eventlogik entschieden. D-MarkZ enthält keine clientseitige Geldgenerierung.
+
+[hr][/hr]
+[h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
+
+[list]
+[*] Pflicht: [b]NoxZ_Phone[/b] beziehungsweise das enthaltene [b]NoxZCurrency[/b]-Paket
+[*] kompatibel mit dem aktuellen DeutschZ-Expansion- und Trader-Stack
+[*] kompatibel mit CriminalZ-Auszahlungen über NoxZ-Euro-Classnames
+[*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_DMarkZ[/b]
+[*] niemals dieselbe DMarkZ-PBO aus Core und Standalone doppelt laden
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] NoxZ_Phone/NoxZCurrency zuerst laden.
+[*] D-MarkZ anschließend auf Client und Server über [b]-mod[/b] laden.
+[*] [b]DeutschZ.bikey[/b] im Server-Keyordner bereitstellen.
+[*] Client und Server müssen denselben PBO-Stand verwenden.
+[*] Bei Nutzung von [b]@DeutschZ_only_core[/b] die Standalone-PBO nicht zusätzlich laden.
+[*] Trader-/ATM-Werte serverseitig separat konfigurieren; diese Mod ändert keine Preise automatisch.
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
+
+[list]
+[*] Version: [b]1.0.0[/b]
+[*] aktueller PBO mit DeutschZ signiert und im Core geladen
+[*] alle neun D-MarkZ-Klassen im Serverbuild vorhanden
+[*] Serverstart mit geladenem DMarkZ-PBO technisch bestätigt
+[*] [b]NICHT CLIENT-/GAMEPLAY-GETESTET:[/b] vollständige Darstellung aller Werte, Inventarstapel, ATM, Phone, Trader und CriminalZ-Auszahlung
+[*] Workshop-Preview und Einzelansichten wurden direkt aus den aktuellen neun PAA-Texturen erzeugt
+[/list]
+
+[hr][/hr]
+[h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
+
+[list]
+[*] vollständiges eigenständiges D-MarkZ-Workshoppaket angelegt
+[*] reale Werte 1 / 2 / 5 / 10 / 20 / 50 / 100 / 200 / 500 dokumentiert
+[*] Halftan- und Patrick-Motive den aktuellen Klassen zugeordnet
+[*] NoxZCurrency-, CriminalZ- und Core-Kompatibilität erklärt
+[*] aktuelles Workshop-Preview und exakte Vorder-/Rückseiten-Exporte ergänzt
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Währungsdesign, Integration und Betrieb: [b]DeutschZ[/b]. NoxZCurrency/NoxZ Phone bleiben technische Abhängigkeiten ihrer jeweiligen Autoren. Bitte Darstellungsfehler mit Wert, Zustand, Inventaransicht, Screenshot und Clientlog im Discord melden.
+
+[b]DeutschZ D-MarkZ — Deine Beute. Deine Wirtschaft. Dein DeutschZ.[/b]

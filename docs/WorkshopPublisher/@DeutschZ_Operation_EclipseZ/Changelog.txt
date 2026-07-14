@@ -1,0 +1,21 @@
+[h1]🌑 DeutschZ Operation EclipseZ — Changelog[/h1]
+
+[h2]Dokumentationsstand 14.07.2026[/h2]
+[list]
+[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
+[*] Storyvoraussetzungen aus KotHZ, BattlegroundZ und ConvoyZ präzisiert
+[*] GPS-StartReceiver und drei Stationsaktionen mit 45 / 60 / 30 Sekunden dokumentiert
+[*] Feuerwerksbatterie mit 20 / 30 / 20 Sekunden und 30-Sekunden-Countdown aktualisiert
+[*] 90-Sekunden-Hauptterminal, 3500-HP-Wächter, Entscheidung und 900-Sekunden-Cleanup ergänzt
+[*] FireworksLauncher-Basis und neuer Stein-/Relikt-Token klargestellt
+[*] Serverstart als technisch bestätigt, vollständiger Client-Gameplaylauf als offen markiert
+[/list]
+
+[h2]Aktueller Build 0.1.0[/h2]
+[list]
+[*] serverautoritative Storyitem-, Stations-, Feuerwerks-, Terminal- und Rewardlogik
+[*] kein permanentes Spieler- oder Storyitem-Tracking
+[*] Abhängigkeit von KotHZ, BattlegroundZ und ConvoyZ
+[/list]
+
+[i]Diese Aktualisierung ändert Workshoptexte und keine Gameplay-PBO.[/i]

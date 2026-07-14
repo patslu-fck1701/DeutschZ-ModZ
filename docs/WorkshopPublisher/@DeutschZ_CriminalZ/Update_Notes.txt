@@ -1,0 +1,11 @@
+[h1]💰 DEUTSCHZ CRIMINALZ — UPDATE 14.07.2026[/h1]
+
+[list]
+[*] kompletter DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
+[*] ATM-Hack, Auszahlung, Cooldown und Fahrzeug-Hack aus aktueller Config dokumentiert
+[*] StorePlacement mit ExpansionATM_2 und DeutschZ-Schild präzisiert
+[*] technischer Nachweis: 19 Stores, 19 ATMs, 19 Schilder, 0 Fehler
+[*] Garage-Status und Abhängigkeiten ehrlich getrennt
+[/list]
+
+[b]Status:[/b] Serverstart und StorePlacement technisch bestätigt. Client-Gameplaytest bleibt offen.

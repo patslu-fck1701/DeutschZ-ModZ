@@ -1,0 +1,147 @@
+[h1]🌑 DEUTSCHZ OPERATION ECLIPSEZ — DAS FINALE SIGNAL[/h1]
+
+[b]Vier Storyvoraussetzungen. Drei Signalstationen. Eine Feuerwerkssequenz. Eine letzte Entscheidung.[/b]
+
+Operation EclipseZ verbindet KotHZ, BattlegroundZ und ConvoyZ zu einem serverautoritativ gesteuerten PvPvE-Endgame. Spieler bringen die Storyitems der vorherigen Kapitel zusammen, aktivieren drei Signalstationen, synchronisieren eine DeutschZ-Feuerwerksbatterie und kämpfen um das Eclipse-Hauptterminal.
+
+[hr][/hr]
+[h2]🎯 KURZBESCHREIBUNG[/h2]
+
+[list]
+[*] storybasierter Abschluss der aktuellen DeutschZ-Eventkette
+[*] GPS-Empfänger als StartReceiver
+[*] persönliche BattlegroundZ-Freischaltung als Voraussetzung
+[*] echte Storyitems aus KotHZ und ConvoyZ
+[*] drei Signalstationen in zufälliger Reihenfolge
+[*] mehrstufige Feuerwerksbatterie-Synchronisation
+[*] finales 90-Sekunden-Terminal mit PvPvE-Verteidigung
+[*] Eclipse-Wächter und abschließende Entscheidung
+[/list]
+
+[hr][/hr]
+[h2]🔑 VORAUSSETZUNGEN[/h2]
+
+[list]
+[*] persistenter persönlicher BattlegroundZ-Unlock
+[*] [b]DeutschZ_FireworksLauncher[/b] aus KotHZ
+[*] [b]GasZonen_Leuchtfackel[/b] aus ConvoyZ
+[*] [b]DZBBC_SignalMatches[/b] aus ConvoyZ
+[*] [b]DZBBC_Coded9VBattery[/b] aus ConvoyZ
+[/list]
+
+Die Gegenstände dürfen auf Teammitglieder im Umkreis von [b]10 Metern[/b] verteilt sein. Der Server prüft die echten Item-Entitäten, Besitzer, Distanz und Freischaltung. Es gibt kein permanentes Spieler- oder Storyitem-Tracking.
+
+[hr][/hr]
+[h2]📡 DREI SIGNALSTATIONEN[/h2]
+
+[list]
+[*] [b]NWAF / Alpha:[/b] Coded9VBattery 45 Sekunden koppeln
+[*] [b]Tisy / Bravo:[/b] FireworksLauncher 60 Sekunden synchronisieren
+[*] [b]Gaszone / Charlie:[/b] Leuchtfackel 30 Sekunden aktivieren
+[/list]
+
+Die Reihenfolge wird serverseitig bestimmt. Abbruch, Distanz, Itembesitz, Eventzustand und die aktive Station werden bei jeder Aktion validiert.
+
+[hr][/hr]
+[h2]🎆 FEUERWERKSBATTERIE[/h2]
+
+[list]
+[*] Batterie einsetzen: [b]20 Sekunden[/b]
+[*] Signal synchronisieren: [b]30 Sekunden[/b]
+[*] Zündung vorbereiten: [b]20 Sekunden[/b]
+[*] Start-Countdown: [b]30 Sekunden[/b]
+[*] grober globaler Zielsektor: [b]1500 Meter[/b]
+[*] genauerer Aktivatorhinweis: [b]400 Meter[/b]
+[/list]
+
+Die aktuelle [b]DZECZ_FireworkBattery[/b] verwendet dieselbe DeutschZ-FireworksLauncher-Basis wie das KotHZ-Storyitem.
+
+[hr][/hr]
+[h2]⚔️ FINALES TERMINAL & ENTSCHEIDUNG[/h2]
+
+Am Eclipse-Hauptterminal muss die Aktion [b]90 Sekunden ununterbrochen[/b] gehalten werden. RussianZ, AmericanZ, Infizierte und der Eclipse-Wächter mit [b]3500 HP[/b] verteidigen die Zone.
+
+[list]
+[*] [b]Signal abschalten:[/b] kontrollierter Abschluss
+[*] [b]Signal senden:[/b] zusätzliche starke Verteidigung und höherwertiger Reward
+[*] Storyreward: [b]DZECZ_EclipseToken[/b] als massives Stein-/Reliktobjekt mit eigener Textur
+[*] Event-Cleanup: [b]900 Sekunden / 15 Minuten[/b]
+[/list]
+
+[hr][/hr]
+[h2]🛡️ SERVERAUTORITÄT & KONFIGURATION[/h2]
+
+[list]
+[*] Server entscheidet über Unlocks, Items, Besitzer, Distanz, Reihenfolge, Zeiten und Rewards
+[*] kein Client kann Stationen, Fortschritt oder Abschluss selbst bestätigen
+[*] Config: [b]$profile:DeutschZ-System/DeutschZ_Operation_EclipseZ/Config/[/b]
+[*] Persistence und Runtime bleiben getrennt von statischer Konfiguration
+[*] Logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_Operation_EclipseZ/[/b]
+[*] geschützte Storyitems werden nicht durch generischen Cleanup aus Spielerinventaren gelöscht
+[/list]
+
+[hr][/hr]
+[h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
+
+[list]
+[*] Pflicht: [b]DeutschZ KotH Infected Siedge v2[/b]
+[*] Pflicht: [b]DeutschZ BattlegroundZ[/b]
+[*] Pflicht: [b]DeutschZ Blackbox ConvoyZ[/b]
+[*] aktueller Serverstack für AI, Marker und Benachrichtigungen: [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b], [b]DayZ Expansion Licensed[/b]
+[*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_Operation_EclipseZ[/b]
+[*] niemals dieselbe PBO aus Core und Standalone doppelt laden
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] CF/Dabs und Expansion zuerst laden.
+[*] Danach KotHZ, BattlegroundZ und ConvoyZ laden.
+[*] Operation EclipseZ anschließend auf Client und Server über [b]-mod[/b] laden.
+[*] [b]DeutschZ.bikey[/b] im Server-Keyordner bereitstellen.
+[*] Profile und Persistenz bei Updates nicht löschen.
+[*] Bei Nutzung von [b]@DeutschZ_only_core[/b] keine Standalone-Doppelkopien laden.
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
+
+[list]
+[*] Version: [b]0.1.0[/b]
+[*] aktueller PBO mit DeutschZ signiert und im Core geladen
+[*] Serverstart, Eclipse-Manager und StartReceiver-Initialisierung technisch bestätigt
+[*] aktive Quelle bestätigt 45 / 60 / 30 Sekunden, Batterie 20 / 30 / 20 und Hauptterminal 90 Sekunden
+[*] [b]NICHT GAMEPLAY-GETESTET:[/b] kompletter Clientlauf über alle Stationen, Feuerwerk, finale Verteidigung, Entscheidung und Reward
+[*] kein automatischer Steam-Upload durch diese Dokumentationsaktualisierung
+[/list]
+
+[hr][/hr]
+[h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
+
+[list]
+[*] Storyvoraussetzungen und Abhängigkeiten der drei Vorereignisse präzisiert
+[*] aktuelle Station-, Feuerwerks- und Terminalzeiten synchronisiert
+[*] GPS-StartReceiver, FireworksLauncher-Basis und Stein-Token dokumentiert
+[*] technischen Serverstart vom offenen Gameplaytest getrennt
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Station, Eventzustand, getragenen Storyitems, Screenshot/Video und passenden Logs im Discord melden.
+
+[b]DeutschZ Operation EclipseZ — Das finale Signal wartet.[/b]

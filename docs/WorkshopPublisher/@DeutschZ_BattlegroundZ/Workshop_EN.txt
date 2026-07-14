@@ -1,0 +1,135 @@
+[h1]⚔️ DEUTSCHZ BATTLEGROUNDZ — ACCESS GRANTED[/h1]
+
+[b]Secure the KotHZ keycard. Find the military GPS reader. Decode your personal signal.[/b]
+
+DeutschZ BattlegroundZ is the next server-authoritative chapter of the DeutschZ event chain. The server validates the player, item, reader and distance, persists the personal unlock and then guides the player through a multi-stage signal sequence into a contested PvPvE zone.
+
+[hr][/hr]
+[h2]🎯 OVERVIEW[/h2]
+
+[list]
+[*] personal story event following KotH Infected Siedge
+[*] [b]DZBGZ_CardReader[/b] based on a vanilla GPS receiver
+[*] exact keycard and distance validation by the server
+[*] persistent personal unlock saved before keycard consumption
+[*] staged interference messages and a personal map ping
+[*] RussianZ versus AmericanZ inside a contested PvPvE zone
+[/list]
+
+[hr][/hr]
+[h2]🔥 MAIN FEATURES[/h2]
+
+[list]
+[*] server-authoritative unlock, signal and persistence logic
+[*] reader distance: [b]4 metres[/b]
+[*] approach radius: [b]360 metres[/b]
+[*] battleground radius: [b]135 metres[/b]
+[*] server tick: [b]10 seconds[/b]
+[*] dynamic cleanup after [b]1,800 seconds[/b]
+[*] [b]3 RussianZ and 3 AmericanZ[/b] Expansion AI
+[*] light pistol loadouts and reduced accuracy of [b]0.03 to 0.12[/b]
+[*] event AI and infected are protected from vehicle contact damage inside the event zone
+[/list]
+
+[hr][/hr]
+[h2]🎮 EVENT FLOW[/h2]
+
+[b]1. OBTAIN THE KEYCARD[/b]
+
+The [b]DZKOTH_BattlegroundZ_Keycard[/b] comes from the KotHZ boss remains. ConvoyZ never creates this keycard.
+
+[b]2. FIND THE READER[/b]
+
+The current [b]DZBGZ_CardReader[/b] uses a GPS receiver as its military reader. Only a living player carrying the exact keycard within four metres can request an unlock.
+
+[b]3. PERSIST THE UNLOCK[/b]
+
+The server first writes the personal unlock below [b]$profile:DeutschZ-System/DeutschZ_BattlegroundZ/Persistence/[/b]. The keycard is consumed only after the save succeeds.
+
+[b]4. FOLLOW THE SIGNAL[/b]
+
+The current sequence begins after [b]45 seconds[/b], continues twice after [b]180 seconds[/b] each and reaches the puzzle or target signal after another [b]240 seconds[/b].
+
+[b]5. SURVIVE THE BATTLEGROUND[/b]
+
+RussianZ, AmericanZ, infected, groups and rival players converge on the destination. The server controls event state, AI, marker permissions, cleanup and personal unlocks.
+
+[hr][/hr]
+[h2]🛡️ SERVER, ADMIN & PERSISTENCE[/h2]
+
+[list]
+[*] server validation of player state, keycard, reader and distance
+[*] save-before-consume protection for the story keycard
+[*] personal unlock can return after reconnecting
+[*] admin prefix: [b]/dzbgz[/b]
+[*] current admin actions: [b]start, reader, battle, reveal, cleanup[/b] and status
+[*] logs and data use the unified DeutschZ profile structure
+[/list]
+
+[hr][/hr]
+[h2]⚙️ CONFIGURATION[/h2]
+
+Radii, signal timing, event locations, cleanup, AI and debug controls are managed server-side. New data belongs below [b]$profile:DeutschZ-System/DeutschZ_BattlegroundZ/[/b]. Runtime and persistence data must never be overwritten by a Workshop update.
+
+[hr][/hr]
+[h2]🧩 DEPENDENCIES & COMPATIBILITY[/h2]
+
+[list]
+[*] required: [b]DeutschZ KotH Infected Siedge v2[/b] for the keycard class
+[*] current DeutschZ server stack: [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b] and [b]DayZ Expansion Licensed[/b]
+[*] the current server uses Expansion AI and Expansion notifications
+[*] included in [b]@DeutschZ_only_core[/b] or available as [b]@DeutschZ_BattlegroundZ[/b]
+[*] never load the Core and standalone copy of the same PBO together
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Load the mod on client and server through [b]-mod[/b].
+[*] Load all dependencies before BattlegroundZ.
+[*] Place the supplied [b]DeutschZ.bikey[/b] in the server keys folder.
+[*] Client and server must use the same PBO build.
+[*] Do not load a second BattlegroundZ PBO when using [b]@DeutschZ_only_core[/b].
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNICAL STATUS — 14 JULY 2026[/h2]
+
+[list]
+[*] version: [b]0.1.0[/b]
+[*] current PBO signed with DeutschZ and loaded through the Core
+[*] server start, mission initialization and reader initialization technically confirmed
+[*] [b]NOT GAMEPLAY-TESTED:[/b] complete signal chain, client markers, arena flow and balance
+[*] no automatic Steam upload was performed by this documentation update
+[/list]
+
+[hr][/hr]
+[h2]📝 CURRENT CHANGES[/h2]
+
+[list]
+[*] Workshop copy aligned with the current GPS reader implementation
+[*] keycard origin and save-before-consume behaviour documented clearly
+[*] current timings, radii, AI balance and dependencies synchronized
+[*] server-start evidence separated from pending gameplay evidence
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Concept, development and operation: [b]DeutschZ[/b]. Report issues on Discord with time, position, event phase, screenshots and the matching client/server logs.
+
+[b]DeutschZ BattlegroundZ — Access granted. Return uncertain.[/b]

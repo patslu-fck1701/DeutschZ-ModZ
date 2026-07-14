@@ -1,0 +1,135 @@
+[h1]⚔️ DEUTSCHZ BATTLEGROUNDZ — ZUGANG GEWÄHRT[/h1]
+
+[b]Sichere die Keycard aus KotHZ. Finde den militärischen GPS-Kartenleser. Entschlüssele dein persönliches Signal.[/b]
+
+DeutschZ BattlegroundZ ist das nächste serverautoritativ gesteuerte Kapitel der DeutschZ-Eventkette. Der Server prüft Spieler, Item, Kartenleser und Entfernung, speichert die persönliche Freischaltung und führt den Spieler anschließend durch eine mehrstufige Signalkette in eine umkämpfte PvPvE-Zone.
+
+[hr][/hr]
+[h2]🎯 KURZBESCHREIBUNG[/h2]
+
+[list]
+[*] persönliches Story-Event nach KotH Infected Siedge
+[*] [b]DZBGZ_CardReader[/b] auf Basis eines Vanilla-GPS-Empfängers
+[*] exakte Keycard- und Distanzprüfung durch den Server
+[*] persistenter persönlicher Unlock vor dem Verbrauch der Keycard
+[*] mehrstufige Funkstörungen und persönlicher Karten-Ping
+[*] RussianZ gegen AmericanZ in einer umkämpften PvPvE-Zone
+[/list]
+
+[hr][/hr]
+[h2]🔥 HAUPTFEATURES[/h2]
+
+[list]
+[*] serverautoritatives Freischalt-, Signal- und Persistenzsystem
+[*] Reader-Distanz: [b]4 Meter[/b]
+[*] Annäherungsradius: [b]360 Meter[/b]
+[*] Battleground-Radius: [b]135 Meter[/b]
+[*] Servertick: [b]10 Sekunden[/b]
+[*] dynamisches Cleanup nach [b]1800 Sekunden[/b]
+[*] je [b]3 RussianZ und 3 AmericanZ[/b] als Expansion-AI
+[*] leichte Pistolenbewaffnung und reduzierte Genauigkeit von [b]0,03 bis 0,12[/b]
+[*] Event-AI und Event-Infizierte sind in der Zone vor Fahrzeug-Kontaktschaden geschützt
+[/list]
+
+[hr][/hr]
+[h2]🎮 EVENT-ABLAUF[/h2]
+
+[b]1. KEYCARD SICHERN[/b]
+
+Die [b]DZKOTH_BattlegroundZ_Keycard[/b] stammt aus den Überresten des KotHZ-Bosses. ConvoyZ erzeugt keine BattlegroundZ-Keycard.
+
+[b]2. KARTENLESER FINDEN[/b]
+
+Der aktuelle [b]DZBGZ_CardReader[/b] verwendet einen GPS-Empfänger als militärisches Lesegerät. Nur ein lebender Spieler mit der exakten Keycard innerhalb von vier Metern kann die Freischaltung anfordern.
+
+[b]3. UNLOCK SICHERN[/b]
+
+Der Server speichert den persönlichen Unlock zuerst unter [b]$profile:DeutschZ-System/DeutschZ_BattlegroundZ/Persistence/[/b]. Erst nach erfolgreichem Speichern wird die Keycard verbraucht.
+
+[b]4. SIGNAL VERFOLGEN[/b]
+
+Die aktuelle Zeitkette startet nach [b]45 Sekunden[/b], setzt sich zweimal nach jeweils [b]180 Sekunden[/b] fort und führt nach weiteren [b]240 Sekunden[/b] zum Rätsel- beziehungsweise Zielsignal.
+
+[b]5. BATTLEGROUND ÜBERLEBEN[/b]
+
+In der Zielzone treffen RussianZ, AmericanZ, Infizierte, Spielergruppen und Rivalen aufeinander. Der Server entscheidet über Eventzustand, AI, Markerberechtigung, Cleanup und persönliche Freischaltungen.
+
+[hr][/hr]
+[h2]🛡️ SERVER, ADMIN & PERSISTENZ[/h2]
+
+[list]
+[*] serverseitige Validierung von Spielerzustand, Keycard, Reader und Distanz
+[*] Save-before-consume: kein Keycard-Verbrauch ohne bestätigten Persistenz-Save
+[*] persönlicher Unlock kann nach erneutem Join wiederhergestellt werden
+[*] Admin-Präfix: [b]/dzbgz[/b]
+[*] verfügbare Adminaktionen: [b]start, reader, battle, reveal, cleanup[/b] und Status
+[*] Logs und Daten liegen in der vereinheitlichten DeutschZ-Profilstruktur
+[/list]
+
+[hr][/hr]
+[h2]⚙️ KONFIGURATION[/h2]
+
+Radien, Zeitkette, Eventpositionen, Cleanup, AI und Debugfunktionen werden serverseitig verwaltet. Neue Daten gehören unter [b]$profile:DeutschZ-System/DeutschZ_BattlegroundZ/[/b]. Runtime- und Persistenzdaten dürfen nicht durch Workshop-Updates überschrieben werden.
+
+[hr][/hr]
+[h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
+
+[list]
+[*] Pflicht: [b]DeutschZ KotH Infected Siedge v2[/b] für die Keycard-Klasse
+[*] aktueller DeutschZ-Server: [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b] und [b]DayZ Expansion Licensed[/b]
+[*] Expansion-AI und Expansion-Benachrichtigungen werden im aktuellen Serverstack verwendet
+[*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_BattlegroundZ[/b]
+[*] niemals Core- und Standalone-PBO gleichzeitig laden
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Mod auf Client und Server über [b]-mod[/b] laden.
+[*] Abhängigkeiten vor BattlegroundZ laden.
+[*] Den mitgelieferten [b]DeutschZ.bikey[/b] im Server-Keyordner bereithalten.
+[*] Client und Server müssen denselben PBO-Stand verwenden.
+[*] Bei Nutzung von [b]@DeutschZ_only_core[/b] keinen zweiten BattlegroundZ-PBO laden.
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
+
+[list]
+[*] Version: [b]0.1.0[/b]
+[*] aktueller PBO mit DeutschZ signiert und im Core geladen
+[*] Serverstart, Missionsinitialisierung und Reader-Initialisierung technisch bestätigt
+[*] [b]NICHT GAMEPLAY-GETESTET:[/b] vollständige Signalkette, Client-Marker, Arenaablauf und Balance
+[*] kein automatischer Steam-Upload durch diese Dokumentationsaktualisierung
+[/list]
+
+[hr][/hr]
+[h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
+
+[list]
+[*] Workshoptext an den aktuellen GPS-Kartenleser angepasst
+[*] Keycard-Herkunft und Save-before-consume eindeutig dokumentiert
+[*] aktuelle Signalzeiten, Radien, AI-Stärke und Abhängigkeiten synchronisiert
+[*] Beweisstatus klar zwischen Serverstart und Gameplaytest getrennt
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Position, Eventphase, Screenshot und den passenden Client-/Serverlogs im Discord melden.
+
+[b]DeutschZ BattlegroundZ — Zugang gewährt. Rückkehr ungewiss.[/b]

@@ -1,0 +1,151 @@
+[h1]👑 DEUTSCHZ KOTHZ — INFECTED SIEDGE V2[/h1]
+
+[b]Capture the zone. Hold for five minutes. Survive five escalation stages and the BosZ.[/b]
+
+DeutschZ KotH Infected Siedge v2 is a server-authoritative King-of-the-Hill PvPvE event with a long-range smoke signal, contested capture zone, five infected waves, a 7,500-HP boss and story rewards leading into the next event chapter.
+
+[hr][/hr]
+[h2]🎯 OVERVIEW[/h2]
+
+[list]
+[*] rotating configurable KotH event zones
+[*] white smoke before capture
+[*] green smoke during active capture
+[*] red smoke only after true victory and BosZ death
+[*] 300-second capture without multiplayer acceleration
+[*] five waves at 0 / 20 / 40 / 60 / 80 percent
+[*] 7,500-HP BosZ mummy
+[*] reward barrel, boss remains and story items
+[/list]
+
+[hr][/hr]
+[h2]🔥 CAPTURE RULES[/h2]
+
+[list]
+[*] capture radius: [b]25 metres[/b]
+[*] capture duration: [b]300 seconds / 5 minutes[/b]
+[*] additional team members do not speed up progress
+[*] enemy players block capture
+[*] an empty zone does not lose progress
+[*] the server decides team ownership, progress, blocking and victory
+[*] the optional pre-capture terminal hack is currently [b]disabled[/b]
+[/list]
+
+The existing 60-second terminal/chest action code is not a mandatory part of the current capture flow while [b]RequireTerminalHackBeforeCapture=false[/b].
+
+[hr][/hr]
+[h2]🧟 FIVE INFECTED WAVES[/h2]
+
+[list]
+[*] [b]0%:[/b] 3 infected with 250 HP each
+[*] [b]20%:[/b] 2 infected with 400 HP each
+[*] [b]40%:[/b] 2 infected with 600 HP each; running disabled
+[*] [b]60%:[/b] 3 infected with 800 HP each; running disabled
+[*] [b]80%:[/b] 2 infected with 1,000 HP each, red eyes; running disabled
+[/list]
+
+The server binds each wave to capture progress. Clients never decide spawns, progress or rewards.
+
+[hr][/hr]
+[h2]👹 BOSZ & REWARDS[/h2]
+
+[list]
+[*] BosZ health: [b]7,500 HP[/b]
+[*] BosZ damage multiplier: [b]10[/b]
+[*] BattlegroundZ keycard in boss remains: [b]100%[/b]
+[*] DeutschZ_FireworksLauncher chance: [b]10%[/b]
+[*] reward and complete cleanup no later than [b]10 minutes[/b]
+[*] no permanent keycard-carrier tracking
+[/list]
+
+The BattlegroundZ keycard comes from the KotHZ boss remains. ConvoyZ never creates it.
+
+[hr][/hr]
+[h2]🎮 EVENT FLOW[/h2]
+
+[b]1. FIND THE SIGNAL[/b] — white smoke marks the active area from long range.
+
+[b]2. ENTER THE ZONE[/b] — a valid capture begins and the smoke turns green.
+
+[b]3. SURVIVE THE WAVES[/b] — hold the area against infected and hostile players.
+
+[b]4. DEFEAT THE BOSZ[/b] — only the true boss victory enables red smoke and the reward phase.
+
+[b]5. SECURE STORY ITEMS[/b] — search the boss remains and reward barrel before complete cleanup.
+
+[hr][/hr]
+[h2]🛡️ SERVER, ADMIN & CONFIGURATION[/h2]
+
+[list]
+[*] admin prefixes: [b]!dzkoth[/b] and [b]/dzkoth[/b]
+[*] actions: state, start, capture, teststart, activate, forceboss, forceterminalhack/forcechest, setterminalhack/setchest, progress/setprogress, cleanup, stop
+[*] commands require server permission and enabled DebugCommands
+[*] profiles: [b]$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/[/b]
+[*] logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_KotH_InfectedSiedge_v2/[/b]
+[*] locations, loot, waves and main values are configured separately
+[/list]
+
+[hr][/hr]
+[h2]🧩 DEPENDENCIES & COMPATIBILITY[/h2]
+
+[list]
+[*] no hard external CfgPatches dependency beyond vanilla DayZ
+[*] the current DeutschZ configuration uses [b]DayZ Expansion Bundle[/b] for markers and notifications
+[*] the current server stack loads [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b] and [b]DayZ Expansion Licensed[/b]
+[*] included in [b]@DeutschZ_only_core[/b] or available as [b]@DeutschZ_KotH_InfectedSiedge_v2[/b]
+[*] never load the same PBO from Core and standalone at the same time
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Load the mod on client and server through [b]-mod[/b].
+[*] When Expansion markers are enabled, load Expansion dependencies first.
+[*] Place [b]DeutschZ.bikey[/b] in the server keys folder.
+[*] Never delete config or persistence folders during updates.
+[*] Do not add the standalone PBO when using [b]@DeutschZ_only_core[/b].
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNICAL STATUS — 14 JULY 2026[/h2]
+
+[list]
+[*] version: [b]0.4.3-livefix[/b]
+[*] current PBO signed with DeutschZ and loaded through the Core
+[*] server start, event manager and a Vybor zone start technically confirmed
+[*] active source confirms 300 seconds and waves at 0 / 20 / 40 / 60 / 80
+[*] [b]NOT GAMEPLAY-TESTED:[/b] complete client capture, smoke, waves, BosZ and reward flow
+[*] zone distribution and balance remain open until real player testing
+[/list]
+
+[hr][/hr]
+[h2]📝 CURRENT CHANGES[/h2]
+
+[list]
+[*] removed obsolete wave and mandatory-terminal claims
+[*] documented current smoke colours, capture rules and five waves
+[*] synchronized boss values, keycard origin, reward chances and cleanup
+[*] separated dependencies and technical evidence from pending gameplay evidence
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3759074342]👑 KotHZ Workshop[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Concept, development and operation: [b]DeutschZ[/b]. Report issues on Discord with time, zone, capture percentage, event state, screenshots/video and matching logs.
+
+[b]DeutschZ KotHZ — Hold the zone. Survive the BosZ.[/b]

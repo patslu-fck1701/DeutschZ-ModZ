@@ -1,9 +1,0 @@
-[h1]🖥️ DEUTSCHZ MENÜZ — UPDATE 14.07.2026[/h1]
-
-[list]
-[*] Dark-Glass-Menü, Ladebilder und Musikbeschreibung aktualisiert
-[*] keine räumlichen Speakerobjekte mehr vorgesehen
-[*] DE/EN-Workshoptext und neues Gamer-Preview ergänzt
-[/list]
-
-[i]Maus-, Deathscreen- und Spawnflow benötigen weiterhin den echten Clienttest.[/i]

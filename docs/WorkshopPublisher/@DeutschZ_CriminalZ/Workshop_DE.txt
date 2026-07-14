@@ -1,0 +1,155 @@
+[h1]💰 DEUTSCHZ CRIMINALZ — ATM-RAUB & CITY-STORE-NETZWERK[/h1]
+
+[b]Halte die Hackaktion. Überlebe den Alarm. Nimm das Geld — wenn dich Chernarus lässt.[/b]
+
+DeutschZ CriminalZ erweitert den aktuellen DeutschZ-Expansion-Server um serverautoritativ geprüfte ATM-Überfälle, Fahrzeug-Hacks und ein automatisch aufgebautes City-Store-Netzwerk. Jeder erkannte Store erhält genau einen funktionierenden [b]ExpansionATM_2[/b] und ein eigenes DeutschZ-Hinweisschild.
+
+[hr][/hr]
+[h2]🎯 KURZBESCHREIBUNG[/h2]
+
+[list]
+[*] echte gehaltene ATM-Hackaktion statt einfachem Tastendruck
+[*] zufällige Hackdauer zwischen 300 und 600 Sekunden
+[*] globale Alarmmeldung, roter Marker und Sirene
+[*] serverseitige Auszahlung in NoxZ-Euro-Klassen beziehungsweise D-MarkZ-Optik
+[*] persistente ATM-Cooldowns und Parallelhack-Schutz
+[*] Expansion-Fahrzeug-Hacks mit Werkzeugprüfung
+[*] automatische ATM- und Schildplatzierung an allen unterstützten City Stores
+[*] Duplikatschutz, JSON-Konfiguration und kompakte Serverlogs
+[/list]
+
+[hr][/hr]
+[h2]🏧 ATM-RAUB[/h2]
+
+[list]
+[*] benötigtes Werkzeug: [b]RobTool_Crowbar[/b] in den Händen
+[*] Hackdauer: zufällig [b]300 bis 600 Sekunden[/b]
+[*] maximale Entfernung: [b]15 Meter[/b]
+[*] Cooldown nach Erfolg: [b]7200 Sekunden / 2 Stunden[/b]
+[*] Auszahlung: [b]45.000 bis 185.000[/b] in NoxZ-Euro-Klassen
+[*] Bitcoin-Rewards: [b]deaktiviert[/b]
+[/list]
+
+Tod, Bewusstlosigkeit, Logout, falsches Werkzeug, Zielverlust oder zu große Distanz brechen die Aktion ab. Die finale Auszahlung wird ausschließlich vom Server berechnet und erzeugt.
+
+Ist [b]DeutschZ_DMarkZ[/b] geladen, verwenden die NoxZ-Euro-Klassen die aktuellen DeutschZ-D-MarkZ-Münzen und -Scheine.
+
+[hr][/hr]
+[h2]🏪 AUTOMATISCHES CITY-STORE-NETZWERK[/h2]
+
+CriminalZ erkennt serverseitig exakt diese Gebäudeklassen:
+
+[list]
+[*] [b]Land_City_Store[/b]
+[*] [b]Land_City_Store_WithStairs[/b]
+[/list]
+
+Die Objekte werden relativ zur Position und Drehung des jeweiligen Stores berechnet. Es gibt keine manuell gepflegte Liste fester Weltkoordinaten.
+
+[list]
+[*] ATM-Klasse: [b]ExpansionATM_2[/b]
+[*] DeutschZ-Schild: [b]DZCRZ_StoreInfoSign[/b]
+[*] Duplikatradius: [b]0,75 Meter[/b]
+[*] Spawnverzögerung: [b]2000 Millisekunden[/b]
+[*] vorhandene passende Objekte werden wiederverwendet und auf Sollposition korrigiert
+[*] Map-Loader-Stores können über denselben serverseitigen Hook verarbeitet werden
+[/list]
+
+[b]Frischer technischer Servernachweis:[/b] 19 Stores erkannt, 19 ATMs und 19 Schilder erzeugt, 0 StorePlacement-Fehler; Referenztransform-Test erfolgreich.
+
+[hr][/hr]
+[h2]🚙 FAHRZEUGE & GARAGEN[/h2]
+
+[list]
+[*] Fahrzeug-Hacks verwenden [b]HackingTool_Lockpick[/b]
+[*] Hackdauer: zufällig [b]300 bis 600 Sekunden[/b]
+[*] maximale Entfernung: [b]15 Meter[/b]
+[*] Fahrzeug, Schlossstatus, Werkzeug, Spielerzustand und Distanz werden serverseitig geprüft
+[*] die aktuelle Implementierung nutzt die lokal bestätigte Expansion-Vehicle-API
+[/list]
+
+[b]Wichtiger Hinweis:[/b] Das Garage-Modul ist in der Konfiguration vorbereitet, bleibt aber ohne eine in der installierten Expansion-Version bestätigte allgemeine Garage-Unlock-API technisch inaktiv. Es wird nicht als fertiges Gameplayfeature beworben.
+
+[hr][/hr]
+[h2]🛡️ SERVERAUTORITÄT & PERSISTENZ[/h2]
+
+[list]
+[*] kein Client entscheidet über Erfolg, Auszahlung oder Cooldown
+[*] parallele Hacks desselben Ziels werden verhindert
+[*] Cooldowns werden persistent gespeichert
+[*] Marker, Alarm, Werkzeugschaden und Reward werden serverseitig ausgelöst
+[*] Konfiguration: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/[/b]
+[*] Logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_CriminalZ/[/b]
+[*] StorePlacement-Konfiguration: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/StorePlacementSettings.json[/b]
+[/list]
+
+[hr][/hr]
+[h2]⚙️ KONFIGURATION[/h2]
+
+ATM-, Fahrzeug-, Marker-, Alarm-, Reward-, Werkzeug-, Cooldown- und StorePlacement-Werte sind über JSON einstellbar. Ungültige StorePlacement-Konfigurationen fallen auf sichere Standardwerte zurück, statt den Server zu beenden.
+
+[hr][/hr]
+[h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
+
+[list]
+[*] Pflicht: [b]NoxZ_Phone[/b] beziehungsweise dessen [b]NoxZCurrency[/b]-Paket
+[*] Pflicht für ATM-, Market-, Vehicle-, Garage- und Markerklassen: [b]DayZ Expansion Bundle[/b] und [b]DayZ Expansion Licensed[/b]
+[*] aktueller DeutschZ-Basisstack: [b]CF[/b] und [b]Dabs Framework[/b]
+[*] optional für DeutschZ-Währungsoptik: [b]DeutschZ_DMarkZ[/b]
+[*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_CriminalZ[/b]
+[*] niemals dieselbe PBO aus Core und Standalone doppelt laden
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] CF und Dabs Framework zuerst laden.
+[*] Danach DayZ Expansion Bundle, DayZ Expansion Licensed und NoxZ_Phone laden.
+[*] CriminalZ anschließend auf Client und Server über [b]-mod[/b] laden.
+[*] [b]DeutschZ.bikey[/b] im Server-Keyordner bereitstellen.
+[*] Profil-, Cooldown- und Runtime-Daten bei Updates nicht löschen.
+[*] Bei Nutzung von [b]@DeutschZ_only_core[/b] keine zweite CriminalZ-PBO laden.
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
+
+[list]
+[*] Version: [b]0.1.0[/b]
+[*] aktueller PBO mit DeutschZ signiert und im Core geladen
+[*] Serverstart, Managerinitialisierung und StorePlacement technisch bestätigt
+[*] 19 Stores / 19 ATMs / 19 Schilder / 0 StorePlacement-Fehler im frischen Lauf
+[*] [b]NICHT GAMEPLAY-GETESTET:[/b] vollständiger ATM-Hack, Auszahlung, Marker/Sirene und Fahrzeug-Hack mit Client
+[*] Garage-Unlock bleibt technisch offen und wird nicht als aktiv behauptet
+[/list]
+
+[hr][/hr]
+[h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
+
+[list]
+[*] ExpansionATM_2 und aktuelles DeutschZ-Schild als reale Store-Objekte dokumentiert
+[*] aktuelle Hackzeiten, Rewards, Cooldown und Duplikatschutz synchronisiert
+[*] D-MarkZ-Zusammenspiel und Garage-Status präzisiert
+[*] frischen StorePlacement-Servernachweis ergänzt
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Store-/ATM-Position, Aktion, Restzeit, Screenshot/Video und passenden Logs im Discord melden.
+
+[b]DeutschZ CriminalZ — Das Risiko ist öffentlich. Der Reward gehört dem Überlebenden.[/b]

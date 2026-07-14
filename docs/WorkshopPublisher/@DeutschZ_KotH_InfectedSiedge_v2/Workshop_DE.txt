@@ -1,0 +1,151 @@
+[h1]👑 DEUTSCHZ KOTHZ — INFECTED SIEDGE V2[/h1]
+
+[b]Erobere die Zone. Halte fünf Minuten stand. Überlebe fünf Eskalationsstufen und den BosZ.[/b]
+
+DeutschZ KotH Infected Siedge v2 ist ein serverautoritatives King-of-the-Hill-PvPvE-Event mit sichtbarem Rauchsignal, blockierbarer Capture-Zone, fünf Infiziertenwellen, einem 7500-HP-Boss und Storyrewards für die nächste Eventstufe.
+
+[hr][/hr]
+[h2]🎯 KURZBESCHREIBUNG[/h2]
+
+[list]
+[*] rotierende, konfigurierbare KotH-Eventzonen
+[*] weißer Rauch vor dem Capture
+[*] grüner Rauch während des aktiven Capture
+[*] roter Rauch erst nach echtem Sieg und BosZ-Tod
+[*] 300 Sekunden Capture ohne Mehrspieler-Beschleunigung
+[*] fünf Wellen bei 0 / 20 / 40 / 60 / 80 Prozent
+[*] BosZ-Mumie mit 7500 HP
+[*] Reward-Fass, Boss-Überreste und Storyitems
+[/list]
+
+[hr][/hr]
+[h2]🔥 CAPTURE-REGELN[/h2]
+
+[list]
+[*] Capture-Radius: [b]25 Meter[/b]
+[*] Capture-Dauer: [b]300 Sekunden / 5 Minuten[/b]
+[*] mehrere Teammitglieder beschleunigen den Fortschritt nicht
+[*] feindliche Spieler blockieren das Capture
+[*] eine leere Zone verliert keinen Fortschritt
+[*] Server entscheidet über Spielerzuordnung, Fortschritt, Blockierung und Sieg
+[*] optionaler Vor-Capture-Terminalhack ist aktuell [b]deaktiviert[/b]
+[/list]
+
+Der vorhandene 60-Sekunden-Terminal-/Kistenaktionscode ist nicht Teil des verpflichtenden aktuellen Capture-Ablaufs, solange [b]RequireTerminalHackBeforeCapture=false[/b] gesetzt ist.
+
+[hr][/hr]
+[h2]🧟 FÜNF INFIZIERTENWELLEN[/h2]
+
+[list]
+[*] [b]0 %:[/b] 3 Infizierte mit je 250 HP
+[*] [b]20 %:[/b] 2 Infizierte mit je 400 HP
+[*] [b]40 %:[/b] 2 Infizierte mit je 600 HP; Laufen deaktiviert
+[*] [b]60 %:[/b] 3 Infizierte mit je 800 HP; Laufen deaktiviert
+[*] [b]80 %:[/b] 2 Infizierte mit je 1000 HP, rote Augen; Laufen deaktiviert
+[/list]
+
+Die Wellen werden vom Server an den Capture-Fortschritt gebunden. Der Client entscheidet weder Spawns noch Fortschritt oder Rewards.
+
+[hr][/hr]
+[h2]👹 BOSZ & REWARDS[/h2]
+
+[list]
+[*] BosZ-Gesundheit: [b]7500 HP[/b]
+[*] BosZ-Schadensmultiplikator: [b]10[/b]
+[*] BattlegroundZ-Keycard in den Boss-Überresten: [b]100 %[/b]
+[*] DeutschZ_FireworksLauncher-Chance: [b]10 %[/b]
+[*] Reward und vollständiges Cleanup spätestens nach [b]10 Minuten[/b]
+[*] kein permanentes Keycard-Träger-Tracking
+[/list]
+
+Die BattlegroundZ-Keycard stammt aus den KotHZ-Boss-Überresten. Sie wird nicht von ConvoyZ erzeugt.
+
+[hr][/hr]
+[h2]🎮 EVENT-ABLAUF[/h2]
+
+[b]1. SIGNAL FINDEN[/b] — weißer Rauch markiert die aktive Zone bereits aus der Entfernung.
+
+[b]2. ZONE BETRETEN[/b] — das gültige Capture beginnt, der Rauch wechselt auf grün.
+
+[b]3. WELLEN ÜBERLEBEN[/b] — halte den Bereich, verteidige dich gegen Infizierte und feindliche Spieler.
+
+[b]4. BOSZ BESIEGEN[/b] — erst der echte Boss-Sieg schaltet den roten Rauch und die Reward-Phase frei.
+
+[b]5. STORYITEMS SICHERN[/b] — prüfe Boss-Überreste und Reward-Fass, bevor das vollständige Cleanup einsetzt.
+
+[hr][/hr]
+[h2]🛡️ SERVER, ADMIN & KONFIGURATION[/h2]
+
+[list]
+[*] Admin-Präfixe: [b]!dzkoth[/b] und [b]/dzkoth[/b]
+[*] Aktionen: state, start, capture, teststart, activate, forceboss, forceterminalhack/forcechest, setterminalhack/setchest, progress/setprogress, cleanup, stop
+[*] Befehle erfordern Serverberechtigung und aktivierte DebugCommands
+[*] Profile: [b]$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/[/b]
+[*] Logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_KotH_InfectedSiedge_v2/[/b]
+[*] Positionen, Loot, Wellen und Hauptwerte sind getrennt konfigurierbar
+[/list]
+
+[hr][/hr]
+[h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
+
+[list]
+[*] keine harte externe CfgPatches-Abhängigkeit außer Vanilla DayZ
+[*] aktuelle DeutschZ-Konfiguration nutzt [b]DayZ Expansion Bundle[/b] für Marker und Benachrichtigungen
+[*] aktueller Serverstack lädt dafür [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b] und [b]DayZ Expansion Licensed[/b]
+[*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_KotH_InfectedSiedge_v2[/b]
+[*] niemals dieselbe PBO aus Core und Standalone doppelt laden
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Mod auf Client und Server über [b]-mod[/b] laden.
+[*] Bei aktivierten Expansion-Markern die Expansion-Abhängigkeiten davor laden.
+[*] [b]DeutschZ.bikey[/b] im Server-Keyordner bereitstellen.
+[*] Config- und Persistenzordner bei Updates nicht löschen.
+[*] Bei Nutzung von [b]@DeutschZ_only_core[/b] die Standalone-PBO nicht zusätzlich laden.
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
+
+[list]
+[*] Version: [b]0.4.3-livefix[/b]
+[*] aktueller PBO mit DeutschZ signiert und im Core geladen
+[*] Serverstart, Eventmanager und ein Zonenstart bei Vybor technisch bestätigt
+[*] aktive Quelle bestätigt 300 Sekunden und Wellen 0 / 20 / 40 / 60 / 80
+[*] [b]NICHT GAMEPLAY-GETESTET:[/b] vollständiger Capture-, Rauch-, Wellen-, BosZ- und Rewardlauf mit Client
+[*] Zonenverteilung und Balance bleiben bis zum realen Spielertest offen
+[/list]
+
+[hr][/hr]
+[h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
+
+[list]
+[*] veraltete Wellen- und Terminalpflicht-Angaben entfernt
+[*] aktuelle Rauchfarben, Capture-Regeln und fünf Wellen dokumentiert
+[*] Bosswerte, Keycard-Herkunft, Rewardchancen und Cleanup aktualisiert
+[*] Dependencies und technischer Beweisstatus eindeutig getrennt
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3759074342]👑 KotHZ Workshop[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Zone, Capture-Prozent, Eventstatus, Screenshot/Video und passenden Logs im Discord melden.
+
+[b]DeutschZ KotHZ — Halte die Zone. Überlebe den BosZ.[/b]

@@ -1,0 +1,21 @@
+[h1]💰 DeutschZ CriminalZ — Changelog[/h1]
+
+[h2]Dokumentationsstand 14.07.2026[/h2]
+[list]
+[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
+[*] ExpansionATM_2 und aktuelles DZCRZ_StoreInfoSign als echte Storeobjekte dokumentiert
+[*] ATM-Hack 300–600 Sekunden, 15-Meter-Radius, 2-Stunden-Cooldown und Auszahlung aktualisiert
+[*] automatische Store-Erkennung, relative Transformation und Duplikatschutz präzisiert
+[*] frischen Servernachweis mit 19 Stores, 19 ATMs, 19 Schildern und 0 Fehlern ergänzt
+[*] Garage-Modul korrekt als technisch vorbereitet, aber nicht aktiv bestätigt markiert
+[*] NoxZCurrency-/D-MarkZ-Zusammenspiel und Expansion-Abhängigkeiten korrigiert
+[/list]
+
+[h2]Aktueller Build 0.1.0[/h2]
+[list]
+[*] serverautoritative ATM- und Fahrzeug-Hackmanager
+[*] persistente Cooldowns, Marker, Alarm und Rewardlogik
+[*] dynamisches StorePlacement ohne feste Weltkoordinaten
+[/list]
+
+[i]Diese Aktualisierung ändert Workshoptexte und keine Gameplay-PBO.[/i]

@@ -1,0 +1,22 @@
+[h1]🖥️ DeutschZ MenüZ — Changelog[/h1]
+
+[h2]Dokumentationsstand 14.07.2026[/h2]
+[list]
+[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
+[*] stabilen serverseitigen Stand 1.2.2-livefix vom neuen technischen Paket 1.2.3-loading-refresh getrennt
+[*] elf Musiktitel und sieben DayZ-konforme Ladebilder dokumentiert
+[*] räumliche NoxZ-/Trader-Speaker und zugehörige Warnungen ausdrücklich ausgeschlossen
+[*] eigene DeutschZ-Deathscreen-/Spawnoberfläche von deaktivierter Expansion-Doppelbelegung getrennt
+[*] frischen Servernachweis für Musikinitialisierung und 43 Spawnpunkte ergänzt
+[*] Client-Maus-, Deathscreen-, Loading- und Spawnflow-Test korrekt als offen markiert
+[/list]
+
+[h2]Neues technisches Paket 1.2.3-loading-refresh[/h2]
+[list]
+[*] sieben DayZ-konforme Ladebilder bei weiterhin 11 Musikstücken
+[*] Hauptmenü, LoadingScreen, Deathscreen und Spawn-Hooks
+[*] vereinheitlichte DeutschZ-Main-Settings-Struktur
+[*] keine räumlichen Lautsprecherobjekte
+[/list]
+
+[i]1.2.3-loading-refresh ist technisch gebaut. Der stabile Servernachweis gilt weiterhin für 1.2.2-livefix; Server-/Clientdarstellung des neuen Pakets bleibt offen.[/i]

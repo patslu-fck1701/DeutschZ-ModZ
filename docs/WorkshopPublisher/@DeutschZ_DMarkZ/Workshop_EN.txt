@@ -1,0 +1,122 @@
+[h1]💶 DEUTSCHZ D-MARKZ — THE OFFICIAL DEUTSCHZ CURRENCY[/h1]
+
+[b]Nine denominations. One economy. One unmistakable DeutschZ identity.[/b]
+
+DeutschZ D-MarkZ replaces the visible NoxZ Euro coin and banknote designs with a fictional DeutschZ currency. The classes remain compatible with NoxZ Phone, ATMs, traders and CriminalZ while names and textures carry the DeutschZ D-MarkZ identity.
+
+[hr][/hr]
+[h2]🎯 OVERVIEW[/h2]
+
+[list]
+[*] custom DeutschZ currency visuals for existing NoxZCurrency classes
+[*] two coins and seven banknotes
+[*] direct compatibility with NoxZ Phone and NoxZ Euro payouts
+[*] designed for Expansion ATMs, traders, events and CriminalZ rewards
+[*] individual PAA texture for every denomination
+[*] available as a standalone PBO and inside @DeutschZ_only_core
+[/list]
+
+[hr][/hr]
+[h2]💰 CURRENT DENOMINATIONS[/h2]
+
+[list]
+[*] [b]1 D-MarkZ[/b] — coin
+[*] [b]2 D-MarkZ[/b] — coin
+[*] [b]5 D-MarkZ[/b] — banknote
+[*] [b]10 D-MarkZ[/b] — banknote
+[*] [b]20 D-MarkZ[/b] — banknote
+[*] [b]50 D-MarkZ[/b] — Halftan artwork
+[*] [b]100 D-MarkZ[/b] — Patrick artwork
+[*] [b]200 D-MarkZ[/b] — banknote
+[*] [b]500 D-MarkZ[/b] — Patrick artwork
+[/list]
+
+[hr][/hr]
+[h2]🔧 TECHNICAL IMPLEMENTATION[/h2]
+
+[list]
+[*] coins inherit from [b]NoxZ_Currency_Coin_Base[/b]
+[*] banknotes inherit from [b]NoxZ_Euro_Base[/b]
+[*] classes: [b]NoxZ_Euro1, NoxZ_Euro2, NoxZ_Euro5, NoxZ_Euro10, NoxZ_Euro20, NoxZ_Euro50, NoxZ_Euro100, NoxZ_Euro200, NoxZ_Euro500[/b]
+[*] existing class names preserve compatibility with NoxZ Phone, ATMs and rewards
+[*] every class references a dedicated DeutschZ PAA
+[*] version: [b]1.0.0[/b]
+[/list]
+
+[hr][/hr]
+[h2]🏧 ECONOMY & CRIMINALZ[/h2]
+
+CriminalZ technically continues to pay through the NoxZ Euro classes. When DeutschZ D-MarkZ is loaded, those classes appear with the DeutschZ coin and banknote visuals. This preserves the existing banking and trader system without introducing a competing currency backend.
+
+Bitcoin is not replaced by D-MarkZ and is not part of this mod.
+
+[hr][/hr]
+[h2]🛡️ SERVER AUTHORITY & CONFIGURATION[/h2]
+
+This mod supplies item classes and textures. Balances, payouts, purchases, sales and rewards remain controlled by the responsible server mods such as NoxZ Phone, Expansion Market, trader or event logic. D-MarkZ contains no client-side money generation.
+
+[hr][/hr]
+[h2]🧩 DEPENDENCIES & COMPATIBILITY[/h2]
+
+[list]
+[*] required: [b]NoxZ_Phone[/b] or its bundled [b]NoxZCurrency[/b] package
+[*] compatible with the current DeutschZ Expansion and trader stack
+[*] compatible with CriminalZ payouts through NoxZ Euro class names
+[*] included in [b]@DeutschZ_only_core[/b] or available as [b]@DeutschZ_DMarkZ[/b]
+[*] never load the same DMarkZ PBO from Core and standalone at the same time
+[/list]
+
+[hr][/hr]
+[h2]📦 INSTALLATION[/h2]
+
+[list]
+[*] Load NoxZ_Phone/NoxZCurrency first.
+[*] Load D-MarkZ on client and server through [b]-mod[/b].
+[*] Place [b]DeutschZ.bikey[/b] in the server keys folder.
+[*] Client and server must use the same PBO build.
+[*] Do not load the standalone PBO when using [b]@DeutschZ_only_core[/b].
+[*] Configure trader/ATM values separately server-side; this mod does not change prices automatically.
+[/list]
+
+[hr][/hr]
+[h2]🧪 TECHNICAL STATUS — 14 JULY 2026[/h2]
+
+[list]
+[*] version: [b]1.0.0[/b]
+[*] current PBO signed with DeutschZ and loaded through the Core
+[*] all nine D-MarkZ classes are present in the server build
+[*] server start with the DMarkZ PBO loaded is technically confirmed
+[*] [b]NOT CLIENT-/GAMEPLAY-TESTED:[/b] complete rendering of all denominations, stacking, ATM, Phone, trader and CriminalZ payout
+[*] Workshop preview and denomination views were exported directly from the current nine PAA textures
+[/list]
+
+[hr][/hr]
+[h2]📝 CURRENT CHANGES[/h2]
+
+[list]
+[*] created a complete standalone D-MarkZ Workshop package
+[*] documented the real 1 / 2 / 5 / 10 / 20 / 50 / 100 / 200 / 500 denominations
+[*] mapped Halftan and Patrick artwork to the current classes
+[*] explained NoxZCurrency, CriminalZ and Core compatibility
+[*] added the current Workshop preview plus exact front/back exports
+[/list]
+
+[hr][/hr]
+[h2]🔗 DEUTSCHZ — SERVER & COMMUNITY[/h2]
+
+[b]DeutschZ — GunZ | HeliZ | TraderZ[/b]
+
+IP: [b]193.135.10.126[/b]
+Port: [b]20076[/b]
+
+[url=https://discord.gg/FHzZ7BykFk]📌 DeutschZ Discord[/url]
+[url=https://project23947.websitepublisher.ai]🌐 Website / Wiki[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-ModZ.git]🧩 DeutschZ-ModZ Repository[/url]
+[url=https://github.com/patslu-fck1701/DeutschZ-Server-Settings.git]🛠 DeutschZ Server Settings Repository[/url]
+
+[hr][/hr]
+[h2]🏴 CREDITS & SUPPORT[/h2]
+
+Currency design, integration and operation: [b]DeutschZ[/b]. NoxZCurrency/NoxZ Phone remain technical dependencies by their respective authors. Report visual issues on Discord with denomination, item state, inventory view, screenshot and client log.
+
+[b]DeutschZ D-MarkZ — Your loot. Your economy. Your DeutschZ.[/b]

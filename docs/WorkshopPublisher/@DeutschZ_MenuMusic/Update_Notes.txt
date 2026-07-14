@@ -1,0 +1,13 @@
+[h1]🖥️ DEUTSCHZ MENÜZ — UPDATE 14.07.2026[/h1]
+
+[list]
+[*] kompletter DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
+[*] neues technisches Paket [b]1.2.3-loading-refresh[/b] mit 7 DayZ-konformen Ladebildern
+[*] 11 Tracks bleiben enthalten
+[*] stabiler Serverstand bleibt [b]1.2.2-livefix[/b]
+[*] keine räumlichen Speakerobjekte oder Trader-Lautsprecher
+[*] Deathscreen-/Spawnzuständigkeit und Expansion-Deaktivierung präzisiert
+[*] technischer Serverstatus und offene Clienttests klar getrennt
+[/list]
+
+[b]Status:[/b] Serverstart und SpawnSystem-Selbsttest für 1.2.2-livefix technisch bestätigt. 1.2.3-loading-refresh ist technisch gebaut; neue Loadingdarstellung, Maus, Deathscreen und kompletter Spawnflow bleiben Live-Clienttests.

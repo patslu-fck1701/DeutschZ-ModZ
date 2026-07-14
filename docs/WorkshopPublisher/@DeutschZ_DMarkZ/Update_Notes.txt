@@ -1,0 +1,11 @@
+[h1]💶 DEUTSCHZ D-MARKZ — RELEASE NOTES 14.07.2026[/h1]
+
+[list]
+[*] vollständige DE-/EN-Workshopbeschreibung für Version 1.0.0
+[*] 1- und 2-D-MarkZ-Münzen
+[*] 5-, 10-, 20-, 50-, 100-, 200- und 500-D-MarkZ-Scheine
+[*] NoxZCurrency-, CriminalZ-, ATM- und Trader-Kompatibilität dokumentiert
+[*] aktuelles Workshop-Preview sowie exakte Vorder- und Rückseitenansichten ergänzt
+[/list]
+
+[b]Status:[/b] PBO serverseitig geladen. Vollständige Clientdarstellung und Wirtschaftsintegration bleiben Live-Tests.
