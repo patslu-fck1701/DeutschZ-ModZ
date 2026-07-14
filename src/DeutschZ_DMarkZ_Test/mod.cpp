@@ -1,0 +1,10 @@
+name = "DeutschZ D-MarkZ Test";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ D-MarkZ Test";
+overview = "Isolierter Test der DeutschZ D-MarkZ-Texturen auf den vorhandenen NoxZ-Waehrungsklassen.";
+action = "https://discord.gg/FHzZ7BykFk";
+author = "DeutschZ";
+version = "0.1.0-test";
