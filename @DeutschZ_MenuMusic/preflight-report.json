@@ -3,11 +3,18 @@
   "ok": true,
   "errors": 0,
   "warnings": 1,
-  "info": 96,
-  "checked_files": 17,
-  "checked_references": 33,
+  "info": 201,
+  "checked_files": 40,
+  "checked_references": 94,
   "checked_configs": 1,
   "findings": [
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\chernarusplus_dark_2048.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\chernarusplus_dark_2048.paa",
+      "line": 0
+    },
     {
       "severity": "info",
       "rule": "texture-suffix",
@@ -32,8 +39,379 @@
     {
       "severity": "info",
       "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): data\\ui\\loading\\loading_3.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "data\\ui\\loading\\loading_3.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): data\\ui\\loading\\loading_4.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "data\\ui\\loading\\loading_4.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): data\\ui\\loading\\loading_5.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "data\\ui\\loading\\loading_5.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): data\\ui\\loading\\loading_6.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "data\\ui\\loading\\loading_6.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
       "message": "Texture has no role suffix (_co/_nohq/_smdi): data\\ui\\loading\\null.paa \u2014 fine for UI images, wrong for model textures.",
       "file": "data\\ui\\loading\\null.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\01_panels_blank\\panel_bottom_nav_blank_980x120_darker.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\01_panels_blank\\panel_bottom_nav_blank_980x120_darker.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\01_panels_blank\\panel_events_container_blank_600x285_darker.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\01_panels_blank\\panel_events_container_blank_600x285_darker.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\01_panels_blank\\panel_left_sidebar_blank_520x880_darker.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\01_panels_blank\\panel_left_sidebar_blank_520x880_darker.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\01_panels_blank\\panel_right_info_blank_520x230_darker.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\01_panels_blank\\panel_right_info_blank_520x230_darker.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\01_panels_blank\\panel_right_stats_blank_520x260_darker.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\01_panels_blank\\panel_right_stats_blank_520x260_darker.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\01_panels_blank\\panel_square_blank_128x128.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\01_panels_blank\\panel_square_blank_128x128.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\button_small_empty_disabled.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\button_small_empty_disabled.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\button_small_empty_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\button_small_empty_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\button_small_empty_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\button_small_empty_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\button_wide_empty_disabled.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\button_wide_empty_disabled.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\button_wide_empty_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\button_wide_empty_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\button_wide_empty_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\button_wide_empty_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\charakter_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\charakter_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\charakter_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\charakter_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\discord_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\discord_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\discord_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\discord_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\play_now_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\play_now_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\play_now_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\play_now_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\server_suchen_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\server_suchen_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\server_suchen_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\server_suchen_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\vote_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\vote_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\vote_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\vote_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\website_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\website_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\02_buttons_text\\website_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\02_buttons_text\\website_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\05_event_cards\\card_crashz_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\05_event_cards\\card_crashz_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\05_event_cards\\card_dropz_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\05_event_cards\\card_dropz_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\05_event_cards\\card_kothz_active.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\05_event_cards\\card_kothz_active.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\05_event_cards\\card_tankz_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\05_event_cards\\card_tankz_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\06_status_badges\\badge_online_players_24_60.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\06_status_badges\\badge_online_players_24_60.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\07_progress_fx\\radar_ground_ring_620.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\07_progress_fx\\radar_ground_ring_620.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\08_logos\\emblem_deutschz_gold_original_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\08_logos\\emblem_deutschz_gold_original_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\darkglass_v1\\08_logos\\logo_deutschz_dark_original_512.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\darkglass_v1\\08_logos\\logo_deutschz_dark_original_512.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\01_backgrounds\\deathscreen_background_2560x1440.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\01_backgrounds\\deathscreen_background_2560x1440.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\02_panels_blank\\bottom_notice_bar_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\02_panels_blank\\bottom_notice_bar_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\02_panels_blank\\large_message_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\02_panels_blank\\large_message_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\02_panels_blank\\main_left_logo_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\02_panels_blank\\main_left_logo_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\02_panels_blank\\statistics_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\02_panels_blank\\statistics_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_abbrechen_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_abbrechen_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_abbrechen_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_abbrechen_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_ausruestung_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_ausruestung_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_ausruestung_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_ausruestung_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_hauptmenue_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_hauptmenue_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_hauptmenue_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_hauptmenue_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_respawn_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_respawn_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_respawn_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_respawn_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_sofort_respawn_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_sofort_respawn_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_sofort_respawn_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_sofort_respawn_normal.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_zufaelliger_spawn_hover.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_zufaelliger_spawn_hover.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\deathscreen_v1\\03_buttons\\button_zufaelliger_spawn_normal.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\deathscreen_v1\\03_buttons\\button_zufaelliger_spawn_normal.paa",
       "line": 0
     },
     {
@@ -681,9 +1059,366 @@
       "line": 0
     },
     {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\02_frames\\deutschz_map_frame_2048_transparent.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\02_frames\\deutschz_map_frame_2048_transparent.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\03_spawnselection_panels\\spawnselection_bottom_bar_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\03_spawnselection_panels\\spawnselection_bottom_bar_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\03_spawnselection_panels\\spawnselection_center_confirm_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\03_spawnselection_panels\\spawnselection_center_confirm_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\03_spawnselection_panels\\spawnselection_left_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\03_spawnselection_panels\\spawnselection_left_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\03_spawnselection_panels\\spawnselection_right_info_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\03_spawnselection_panels\\spawnselection_right_info_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\03_spawnselection_panels\\spawn_description_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\03_spawnselection_panels\\spawn_description_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\03_spawnselection_panels\\spawn_warning_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\03_spawnselection_panels\\spawn_warning_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\03_spawnselection_panels\\spawn_zone_list_panel_blank.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\03_spawnselection_panels\\spawn_zone_list_panel_blank.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\03_spawnselection_panels\\top_title_spawnselection.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\03_spawnselection_panels\\top_title_spawnselection.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_coast_active_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_coast_active_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_coast_blocked_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_coast_blocked_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_coast_normal_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_coast_normal_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_coast_warning_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_coast_warning_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_event_active_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_event_active_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_event_blocked_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_event_blocked_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_event_normal_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_event_normal_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_event_warning_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_event_warning_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_inland_active_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_inland_active_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_inland_blocked_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_inland_blocked_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_inland_normal_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_inland_normal_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_inland_warning_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_inland_warning_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_safe_active_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_safe_active_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_safe_blocked_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_safe_blocked_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_safe_normal_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_safe_normal_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_safe_warning_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_safe_warning_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_spawn_active_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_spawn_active_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_spawn_blocked_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_spawn_blocked_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_spawn_normal_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_spawn_normal_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_spawn_warning_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_spawn_warning_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_trader_active_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_trader_active_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_trader_blocked_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_trader_blocked_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_trader_normal_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_trader_normal_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\06_markers\\marker_trader_warning_64.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\06_markers\\marker_trader_warning_64.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_back_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_back_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_check_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_check_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_coast_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_coast_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_coords_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_coords_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_event_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_event_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_home_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_home_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_info_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_info_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_inland_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_inland_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_next_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_next_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_random_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_random_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_safe_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_safe_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_spawn_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_spawn_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_trader_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_trader_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_warning_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_warning_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_warning_red_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_warning_red_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_x_green_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_x_green_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\07_icons\\icon_x_red_256.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\07_icons\\icon_x_red_256.paa",
+      "line": 0
+    },
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): gui\\spawnselection_v1\\08_layout_guides\\SpawnSelection_UI_Overlay_Transparent_2048.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "gui\\spawnselection_v1\\08_layout_guides\\SpawnSelection_UI_Overlay_Transparent_2048.paa",
+      "line": 0
+    },
+    {
       "severity": "warning",
       "rule": "path-uppercase",
-      "message": "8 packed path(s) contain uppercase characters (e.g. gui\\menu_assets\\logos\\Emblem.paa). Official guidance: keep packed files lowercase or the mod breaks on DayZ Linux Server binaries.",
+      "message": "19 packed path(s) contain uppercase characters (e.g. gui\\menu_assets\\logos\\Emblem.paa). Official guidance: keep packed files lowercase or the mod breaks on DayZ Linux Server binaries.",
       "file": "",
       "line": 0
     }
