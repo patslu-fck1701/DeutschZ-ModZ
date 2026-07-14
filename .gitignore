@@ -137,3 +137,8 @@ venv/
 
 # Git-LFS temporär
 .lfsconfig.local
+
+# Der öffentliche DeutschZ-Schlüssel gehört zum Release; private Schlüssel bleiben ignoriert.
+!keys/
+keys/*
+!keys/DeutschZ.bikey
