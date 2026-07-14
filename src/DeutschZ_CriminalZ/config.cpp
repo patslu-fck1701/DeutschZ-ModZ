@@ -18,7 +18,6 @@ class CfgPatches
             "DZ_Scripts",
             "DZ_Gear_Tools",
             "DZ_Structures_Specific",
-            "eXtremZ_ATM",
             "NoxZCurrency",
             "DayZExpansion_Core_Scripts",
             "DayZExpansion_Navigation_Scripts",
@@ -65,13 +64,13 @@ class CfgMods
 
 class CfgVehicles
 {
-    class eXtremZ_ATM;
+    class ExpansionATM_2;
     class Crowbar;
     class Lockpick;
     class Inventory_Base;
     class StaticObj_FueldStation_Sign;
 
-    class DZCRZ_ATM : eXtremZ_ATM
+    class DZCRZ_ATM : ExpansionATM_2
     {
         scope = 2;
         displayName = "DeutschZ CriminalZ ATM";

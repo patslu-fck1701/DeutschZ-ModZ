@@ -19,6 +19,7 @@ class DZKOTH_Const
 	static const string PROFILE_LOG_FILE = "$profile:DeutschZ-System/LogZ/DeutschZ_KotH_InfectedSiedge_v2/dzkoth.log";
 	static const string PROFILE_MIGRATION_LOG = "$profile:DeutschZ-System/LogZ/DeutschZ_Main_Settings/profile_migration.log";
 	static const string PROFILE_STATE_JSON = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Runtime/state.json";
+	static const string PROFILE_LOCATION_ROTATION_JSON = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Persistence/location_rotation.json";
 	static const string PROFILE_KOTH_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Config";
 	static const string PROFILE_KOTH_CONFIG_JSON = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Config/KotHConfig.json";
 

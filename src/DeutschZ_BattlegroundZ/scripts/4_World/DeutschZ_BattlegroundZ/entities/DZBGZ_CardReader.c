@@ -1,14 +1,26 @@
-class DZBGZ_CardReader : House
+class DZBGZ_CardReader : GPSReceiver
 {
-	override bool IsBuilding()
+	override void EEInit()
 	{
-		return false;
+		super.EEInit();
+		if (GetGame() && GetGame().IsServer())
+			SetAllowDamage(false);
 	}
 
 	override void SetActions()
 	{
 		super.SetActions();
 		AddAction(ActionDZBGZ_UseCardReader);
+	}
+
+	override bool CanPutIntoHands(EntityAI parent)
+	{
+		return false;
+	}
+
+	override bool CanPutInCargo(EntityAI parent)
+	{
+		return false;
 	}
 }
 

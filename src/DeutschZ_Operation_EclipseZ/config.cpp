@@ -22,6 +22,7 @@ class CfgPatches
 			"DZ_Scripts",
 			"DZ_Structures_Specific",
 			"DZ_Gear_Tools",
+			"DZ_Gear_Navigation",
 			"DZ_Gear_Containers",
 			"DZ_Gear_Consumables",
 			"DZ_Characters_Zombies",
@@ -67,9 +68,10 @@ class CfgMods
 class CfgVehicles
 {
 	class HouseNoDestruct;
-	class FireworksLauncher;
+	class DeutschZ_FireworksLauncher;
+	class GPSReceiver;
+	class Inventory_Base;
 	class SeaChest;
-	class Paper;
 	class ZmbM_Mummy;
 
 	class DZECZ_RadioPanelBase : HouseNoDestruct
@@ -81,11 +83,39 @@ class CfgVehicles
 		hiddenSelectionsMaterials[] = {"\DeutschZ_BattlegroundZ\data\textures\dz_koth_terminal_control_panel_big.rvmat"};
 	};
 
-	class DZECZ_StartReceiver : DZECZ_RadioPanelBase
+	class DZECZ_StartReceiver : GPSReceiver
 	{
 		scope = 2;
 		displayName = "DeutschZ Eclipse Empfaenger";
 		descriptionShort = "Ein alter Empfaenger, der nur auf erkannte Storytraeger reagiert.";
+		hiddenSelections[] =
+		{
+			"gpsreceiver",
+			"grid_1_0",
+			"grid_1_1",
+			"grid_1_2",
+			"grid_2_0",
+			"grid_2_1",
+			"grid_2_2",
+			"alt_0",
+			"alt_1",
+			"alt_2",
+			"alt_3"
+		};
+		hiddenSelectionsTextures[] =
+		{
+			"\DeutschZ_Operation_EclipseZ\data\items\cardreader_gpsreceiver_co.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa",
+			"\dz\gear\navigation\data\GPS_dash_ca.paa"
+		};
 	};
 
 	class DZECZ_NWAFStation : DZECZ_RadioPanelBase
@@ -116,10 +146,10 @@ class CfgVehicles
 		descriptionShort = "Das letzte Terminal des Eclipse-Protokolls.";
 	};
 
-	class DZECZ_FireworkBattery : FireworksLauncher
+	class DZECZ_FireworkBattery : DeutschZ_FireworksLauncher
 	{
 		scope = 2;
-		displayName = "DeutschZ FeuerwerkBattery";
+		displayName = "DeutschZ Feuerwerksbatterie";
 		descriptionShort = "Eine alte Signalbatterie fuer das Eclipse-Protokoll.";
 	};
 
@@ -131,11 +161,37 @@ class CfgVehicles
 		itemsCargoSize[] = {10, 50};
 	};
 
-	class DZECZ_EclipseToken : Paper
+	class DZECZ_EclipseToken : Inventory_Base
 	{
 		scope = 2;
 		displayName = "DeutschZ Eclipse Token";
-		descriptionShort = "Beweis fuer den Abschluss von Operation EclipseZ.";
+		descriptionShort = "Ein massives, vergoldetes DeutschZ Relikt als Beweis fuer den Abschluss von Operation EclipseZ.";
+		model = "\dz\gear\consumables\SmallStone.p3d";
+		animClass = "NoFireClass";
+		weight = 750;
+		itemSize[] = {1, 1};
+		rotationFlags = 17;
+		hiddenSelections[] = {"zbytek"};
+		hiddenSelectionsTextures[] = {"\DeutschZ_Operation_EclipseZ\data\items\eventtoken_stone_co.paa"};
+		hiddenSelectionsMaterials[] = {"\DeutschZ_Operation_EclipseZ\data\items\eventtoken_stone.rvmat"};
+		class DamageSystem
+		{
+			class GlobalHealth
+			{
+				class Health
+				{
+					hitpoints = 100;
+					healthLevels[] =
+					{
+						{1, {"\DeutschZ_Operation_EclipseZ\data\items\eventtoken_stone.rvmat"}},
+						{0.7, {"\DeutschZ_Operation_EclipseZ\data\items\eventtoken_stone.rvmat"}},
+						{0.5, {"\DeutschZ_Operation_EclipseZ\data\items\eventtoken_stone.rvmat"}},
+						{0.3, {"\DeutschZ_Operation_EclipseZ\data\items\eventtoken_stone.rvmat"}},
+						{0, {"\DeutschZ_Operation_EclipseZ\data\items\eventtoken_stone.rvmat"}}
+					};
+				};
+			};
+		};
 	};
 
 	class DZECZ_EclipseGuardian : ZmbM_Mummy

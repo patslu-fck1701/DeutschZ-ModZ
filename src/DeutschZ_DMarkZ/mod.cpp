@@ -1,0 +1,10 @@
+name = "DeutschZ D-MarkZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ D-MarkZ";
+overview = "Offizielle DeutschZ Waehrung fuer NoxZ Phone, ATMs, Trader und Events.";
+action = "https://discord.gg/FHzZ7BykFk";
+author = "DeutschZ";
+version = "1.0.0";

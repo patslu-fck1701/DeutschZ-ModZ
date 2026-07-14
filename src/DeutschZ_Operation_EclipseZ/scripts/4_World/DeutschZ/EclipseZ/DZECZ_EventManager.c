@@ -430,7 +430,8 @@ class DZECZ_EventManager
 	protected void SpawnReceiver()
 	{
 		vector pos = DZECZ_Utils.Grounded(DZECZ_Config.ToVector(m_Config.ReceiverPosition));
-		m_Receiver = GetGame().CreateObjectEx("DZECZ_StartReceiver", pos, ECE_PLACE_ON_SURFACE);
+		int flags = ECE_SETUP | ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE | ECE_NOLIFETIME | ECE_NOPERSISTENCY_WORLD;
+		m_Receiver = GetGame().CreateObjectEx("DZECZ_StartReceiver", pos, flags);
 		if (m_Receiver)
 			DZECZ_Utils.Log("Start receiver spawned at " + pos.ToString());
 		else

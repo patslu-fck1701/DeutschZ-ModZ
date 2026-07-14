@@ -108,11 +108,7 @@ class CfgVehicles
 		scope = 2;
 		displayName = "#STR_DZBBC_DATACORE_NAME";
 		descriptionShort = "#STR_DZBBC_DATACORE_DESC";
-		hiddenSelections[] = {"component01"};
-		hiddenSelectionsTextures[] =
-		{
-			"deutschz_blackbox_convoyz\data\textures\convoyz\datacore_punchedcard_co.paa"
-		};
+		model = "\deutschz_blackbox_convoyz\models\dzbbc_datacore.p3d";
 	};
 
 	class DZBBC_Coded9VBattery : Battery9V
@@ -192,6 +188,10 @@ class CfgVehicles
 		scope = 2;
 		displayName = "#STR_DZBBC_FLARE_NAME";
 		descriptionShort = "#STR_DZBBC_FLARE_DESC";
+		hiddenSelectionsTextures[] =
+		{
+			"deutschz_blackbox_convoyz\data\textures\convoyz\deutschz_road_flare_co.paa"
+		};
 	};
 
 	class GasZonen_Leuchtfackel : DZBBC_GasZoneFlare

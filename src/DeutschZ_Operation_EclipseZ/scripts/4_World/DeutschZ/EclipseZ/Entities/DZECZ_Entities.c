@@ -1,6 +1,18 @@
-class DZECZ_StartReceiver : House
+class DZECZ_StartReceiver : GPSReceiver
 {
-	override bool IsBuilding()
+	override void EEInit()
+	{
+		super.EEInit();
+		if (GetGame() && GetGame().IsServer())
+			SetAllowDamage(false);
+	}
+
+	override bool CanPutIntoHands(EntityAI parent)
+	{
+		return false;
+	}
+
+	override bool CanPutInCargo(EntityAI parent)
 	{
 		return false;
 	}
@@ -54,7 +66,7 @@ class DZECZ_GasZoneStation : House
 	}
 }
 
-class DZECZ_FireworkBattery : FireworksLauncher
+class DZECZ_FireworkBattery : DeutschZ_FireworksLauncher
 {
 	protected int m_DZECZ_BatteryStep;
 

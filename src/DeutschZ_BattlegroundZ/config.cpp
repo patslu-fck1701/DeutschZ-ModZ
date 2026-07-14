@@ -71,18 +71,42 @@ class CfgMods
 
 class CfgVehicles
 {
-	class HouseNoDestruct;
+	class GPSReceiver;
 	class Inventory_Base;
 
-	class DZBGZ_CardReader : HouseNoDestruct
+	class DZBGZ_CardReader : GPSReceiver
 	{
 		scope = 2;
 		displayName = "DeutschZ BattlegroundZ Kartenleser";
 		descriptionShort = "Ein instabiles militaerisches Lesegeraet. Es reagiert auf die BattlegroundZ Keycard.";
-		model = "\dz\structures\Specific\Radio\Radio_PanelBig.p3d";
-		hiddenSelections[] = {"control_panel"};
-		hiddenSelectionsTextures[] = {"\DeutschZ_BattlegroundZ\data\textures\dz_koth_terminal_control_panel_big_co.paa"};
-		hiddenSelectionsMaterials[] = {"\DeutschZ_BattlegroundZ\data\textures\dz_koth_terminal_control_panel_big.rvmat"};
+		hiddenSelections[] =
+		{
+			"gpsreceiver",
+			"grid_1_0",
+			"grid_1_1",
+			"grid_1_2",
+			"grid_2_0",
+			"grid_2_1",
+			"grid_2_2",
+			"alt_0",
+			"alt_1",
+			"alt_2",
+			"alt_3"
+		};
+		hiddenSelectionsTextures[] =
+		{
+			"\DeutschZ_BattlegroundZ\data\textures\cardreader_gpsreceiver_co.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa"
+		};
 	};
 
 	class DZBGZ_EventMarkerObject : Inventory_Base
