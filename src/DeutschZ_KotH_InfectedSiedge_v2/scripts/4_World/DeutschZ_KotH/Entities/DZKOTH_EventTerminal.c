@@ -1,4 +1,4 @@
-class DZKOTH_EventTerminal : SeaChest
+class DZKOTH_EventTerminal : GPSReceiver
 {
 	protected bool m_DZKOTH_ActionUnlocked;
 
@@ -30,6 +30,11 @@ class DZKOTH_EventTerminal : SeaChest
 	{
 		return false;
 	}
+
+	override bool CanPutInCargo(EntityAI parent)
+	{
+		return false;
+	}
 }
 
 class ActionDeutschZBreakKotHChestCB : ActionContinuousBaseCB
@@ -52,7 +57,7 @@ class ActionDeutschZBreakKotHChest : ActionContinuousBase
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONFB_HACKTREE;
 		m_FullBody = true;
 		m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT;
-		m_Text = "Kiste aufbrechen";
+		m_Text = "Terminal hacken";
 	}
 
 	override void CreateConditionComponents()

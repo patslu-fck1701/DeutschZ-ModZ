@@ -219,6 +219,11 @@ class CfgVehicles
 		scope = 0;
 		displayName = "DeutschZ BattlegroundZ Keycard";
 		descriptionShort = "An unstable story keycard connected to DeutschZ BattlegroundZ.";
+		hiddenSelections[] = {"component01"};
+		hiddenSelectionsTextures[] =
+		{
+			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\keycard_punchedcard_co.paa"
+		};
 	};
 
 	class DZKOTH_EliteInfected : ZmbM_PolicemanSpecForce_Heavy
@@ -364,16 +369,38 @@ class CfgVehicles
 		};
 	};
 
-	class DZKOTH_EventTerminal : SeaChest
+	class DZKOTH_EventTerminal : GPSReceiver
 	{
 		scope = 0;
-		displayName = "DeutschZ KotH Versorgungskiste";
-		descriptionShort = "Eventkiste. Nach gesicherter Zone 60 Sekunden aufbrechen, um den Fahnenmast zu aktivieren.";
-		itemsCargoSize[] = {10,50};
-		hiddenSelections[] = {"camoGround"};
+		displayName = "DeutschZ KotH Cardreader";
+		descriptionShort = "Eventterminal. Nach gesicherter Zone 60 Sekunden hacken, um den Fahnenmast zu aktivieren.";
+		hiddenSelections[] =
+		{
+			"gpsreceiver",
+			"grid_1_0",
+			"grid_1_1",
+			"grid_1_2",
+			"grid_2_0",
+			"grid_2_1",
+			"grid_2_2",
+			"alt_0",
+			"alt_1",
+			"alt_2",
+			"alt_3"
+		};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\KOTH_sea_chest_co.paa"
+			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\cardreader_gpsreceiver_co.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa",
+			"dz\gear\navigation\data\GPS_dash_ca.paa"
 		};
 	};
 
@@ -413,6 +440,11 @@ class CfgVehicles
 		scope = 0;
 		displayName = "DeutschZ K.o.t.H Keycard";
 		descriptionShort = "Event keycard for the Infected Siege encounter.";
+		hiddenSelections[] = {"component01"};
+		hiddenSelectionsTextures[] =
+		{
+			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\keycard_punchedcard_co.paa"
+		};
 	};
 
 	class DZEV_KOTH_SeaChest : SeaChest
