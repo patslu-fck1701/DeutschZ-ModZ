@@ -1,104 +1,119 @@
-[h1]💶 DEUTSCHZ D-MARKZ — THE OFFICIAL DEUTSCHZ CURRENCY[/h1]
+[h1]💶 DEUTSCHZ D-MARKZ — EXPANSION BANKNOTES FOR DEUTSCHZ[/h1]
 
-[b]Nine denominations. One economy. One unmistakable DeutschZ identity.[/b]
+[b]Nine values. Three genuine Expansion banknote templates. One unmistakable DeutschZ economy.[/b]
 
-DeutschZ D-MarkZ replaces the visible NoxZ Euro coin and banknote designs with a fictional DeutschZ currency. The classes remain compatible with NoxZ Phone, ATMs, traders and CriminalZ while names and textures carry the DeutschZ D-MarkZ identity.
+DeutschZ D-MarkZ adds the values 1, 2, 5, 10, 20, 50, 100, 200 and 500 as custom DeutschZ banknotes. Version 2.0.0-expansion uses native DayZ Expansion money models while retaining the established NoxZ_Euro class names as compatibility aliases for existing trader, ATM, CE and CriminalZ configuration.
 
 [hr][/hr]
 [h2]🎯 OVERVIEW[/h2]
 
 [list]
-[*] custom DeutschZ currency visuals for existing NoxZCurrency classes
-[*] two coins and seven banknotes
-[*] direct compatibility with NoxZ Phone and NoxZ Euro payouts
-[*] designed for Expansion ATMs, traders, events and CriminalZ rewards
-[*] individual PAA texture for every denomination
-[*] available as a standalone PBO and inside @DeutschZ_only_core
+[*] nine D-MarkZ banknotes instead of the previous coin/NoxZ model mix
+[*] native Expansion Hryvnia, 100-Dollar and 500-Euro banknote models
+[*] three current 2048×2048 money atlases with DeutschZ artwork
+[*] new primary classes [b]DZDM_1[/b] through [b]DZDM_500[/b]
+[*] existing [b]NoxZ_Euro1[/b] through [b]NoxZ_Euro500[/b] retained as compatibility classes
+[*] economy decisions remain server authoritative in ATM, trader, phone and event systems
+[*] available as a standalone PBO and inside [b]@DeutschZ_only_core[/b]
 [/list]
 
 [hr][/hr]
-[h2]💰 CURRENT DENOMINATIONS[/h2]
+[h2]📜 VALUES & EXPANSION TEMPLATES[/h2]
 
 [list]
-[*] [b]1 D-MarkZ[/b] — coin
-[*] [b]2 D-MarkZ[/b] — coin
-[*] [b]5 D-MarkZ[/b] — banknote
-[*] [b]10 D-MarkZ[/b] — banknote
-[*] [b]20 D-MarkZ[/b] — banknote
-[*] [b]50 D-MarkZ[/b] — Halftan artwork
-[*] [b]100 D-MarkZ[/b] — Patrick artwork
-[*] [b]200 D-MarkZ[/b] — banknote
-[*] [b]500 D-MarkZ[/b] — Patrick artwork
+[*] [b]1 D-MarkZ[/b] — Expansion Hryvnia template
+[*] [b]2 D-MarkZ[/b] — Expansion 100-Dollar template
+[*] [b]5 D-MarkZ[/b] — Expansion 100-Dollar template
+[*] [b]10 D-MarkZ[/b] — Expansion Hryvnia template
+[*] [b]20 D-MarkZ[/b] — Expansion 500-Euro template
+[*] [b]50 D-MarkZ[/b] — Expansion 100-Dollar template, Halftan artwork
+[*] [b]100 D-MarkZ[/b] — Expansion 500-Euro template
+[*] [b]200 D-MarkZ[/b] — Expansion Hryvnia template
+[*] [b]500 D-MarkZ[/b] — Expansion 500-Euro template
 [/list]
 
+The number always defines the D-MarkZ value. The Expansion template only defines the model and UV layout used to render the banknote.
+
 [hr][/hr]
-[h2]🔧 TECHNICAL IMPLEMENTATION[/h2]
+[h2]🧩 TECHNICAL IMPLEMENTATION[/h2]
 
 [list]
-[*] coins inherit from [b]NoxZ_Currency_Coin_Base[/b]
-[*] banknotes inherit from [b]NoxZ_Euro_Base[/b]
-[*] classes: [b]NoxZ_Euro1, NoxZ_Euro2, NoxZ_Euro5, NoxZ_Euro10, NoxZ_Euro20, NoxZ_Euro50, NoxZ_Euro100, NoxZ_Euro200, NoxZ_Euro500[/b]
-[*] existing class names preserve compatibility with NoxZ Phone, ATMs and rewards
-[*] every class references a dedicated DeutschZ PAA
-[*] version: [b]1.0.0[/b]
+[*] Hryvnia base: [b]ExpansionBanknoteHryvnia[/b]
+[*] Dollar base: [b]ExpansionBanknoteUSD[/b]
+[*] Euro base: [b]ExpansionBanknoteEuro[/b]
+[*] primary classes: [b]DZDM_1, DZDM_2, DZDM_5, DZDM_10, DZDM_20, DZDM_50, DZDM_100, DZDM_200, DZDM_500[/b]
+[*] compatibility classes: [b]NoxZ_Euro1, NoxZ_Euro2, NoxZ_Euro5, NoxZ_Euro10, NoxZ_Euro20, NoxZ_Euro50, NoxZ_Euro100, NoxZ_Euro200, NoxZ_Euro500[/b]
+[*] atlas groups: [b]1/2/500[/b], [b]5/10/20[/b] and [b]50/100/200[/b]
+[*] version: [b]2.0.0-expansion[/b]
 [/list]
 
 [hr][/hr]
-[h2]🏧 ECONOMY & CRIMINALZ[/h2]
+[h2]🏦 ECONOMY, ATM & CRIMINALZ[/h2]
 
-CriminalZ technically continues to pay through the NoxZ Euro classes. When DeutschZ D-MarkZ is loaded, those classes appear with the DeutschZ coin and banknote visuals. This preserves the existing banking and trader system without introducing a competing currency backend.
+This mod does not decide balances, prices or rewards. It supplies the visible banknote classes. Expansion ATM/Market, NoxZ Phone, traders and DeutschZ CriminalZ remain responsible for deposits, withdrawals and rewards on the server.
 
-Bitcoin is not replaced by D-MarkZ and is not part of this mod.
+Existing configuration using NoxZ_Euro class names does not need to be rewritten immediately: the compatibility classes resolve to the new Expansion-based D-MarkZ banknotes. New configuration may use the DZDM class names directly.
 
 [hr][/hr]
 [h2]🛡️ SERVER AUTHORITY & CONFIGURATION[/h2]
 
-This mod supplies item classes and textures. Balances, payouts, purchases, sales and rewards remain controlled by the responsible server mods such as NoxZ Phone, Expansion Market, trader or event logic. D-MarkZ contains no client-side money generation.
+The banknotes contain no client-side money generation. Creation, deletion, payout, trading, balances and cooldowns must continue to be validated by the responsible server mods. D-MarkZ does not alter trader prices or ATM accounts automatically.
 
 [hr][/hr]
 [h2]🧩 DEPENDENCIES & COMPATIBILITY[/h2]
 
 [list]
-[*] required: [b]NoxZ_Phone[/b] or its bundled [b]NoxZCurrency[/b] package
-[*] compatible with the current DeutschZ Expansion and trader stack
-[*] compatible with CriminalZ payouts through NoxZ Euro class names
-[*] included in [b]@DeutschZ_only_core[/b] or available as [b]@DeutschZ_DMarkZ[/b]
-[*] never load the same DMarkZ PBO from Core and standalone at the same time
+[*] required for the money models: [b]DayZ Expansion Market Objects[/b] from the DayZ Expansion Bundle
+[*] the current DeutschZ stack loads [b]NoxZ_Phone / NoxZCurrency[/b] before D-MarkZ to preserve existing NoxZ_Euro configuration
+[*] compatible with Expansion ATM/Market, current trader data and CriminalZ payouts
+[*] included in [b]@DeutschZ_only_core[/b] or available separately as [b]@DeutschZ_DMarkZ[/b]
+[*] never load the same DMarkZ PBO from Core and Standalone at the same time
+[/list]
+
+[hr][/hr]
+[h2]⚠️ KNOWN NOTES[/h2]
+
+[list]
+[*] Complete in-game rendering of all nine values remains open until the live client test.
+[*] Stacking, splitting, ground/inventory views, ATM, phone, trader and CriminalZ payout require real gameplay validation.
+[*] The Workshop image sources contain the three current Expansion money atlases; older individual images are no longer the release state.
+[*] Server IP [b]193.135.10.126[/b] must be checked manually before Steam publication.
 [/list]
 
 [hr][/hr]
 [h2]📦 INSTALLATION[/h2]
 
 [list]
-[*] Load NoxZ_Phone/NoxZCurrency first.
-[*] Load D-MarkZ on client and server through [b]-mod[/b].
-[*] Place [b]DeutschZ.bikey[/b] in the server keys folder.
-[*] Client and server must use the same PBO build.
-[*] Do not load the standalone PBO when using [b]@DeutschZ_only_core[/b].
-[*] Configure trader/ATM values separately server-side; this mod does not change prices automatically.
+[*] Load CF/Dabs and DayZ Expansion according to the existing server stack.
+[*] Load NoxZ Phone/NoxZCurrency before D-MarkZ while existing NoxZ_Euro class names are used.
+[*] Load D-MarkZ on both client and server through [b]-mod[/b].
+[*] Place [b]DeutschZ.bikey[/b] in the server key directory.
+[*] Client and server must use the same PBO version.
+[*] Do not add the standalone PBO when [b]@DeutschZ_only_core[/b] already contains it.
 [/list]
 
 [hr][/hr]
 [h2]🧪 TECHNICAL STATUS — 14 JULY 2026[/h2]
 
 [list]
-[*] version: [b]1.0.0[/b]
-[*] current PBO signed with DeutschZ and loaded through the Core
-[*] all nine D-MarkZ classes are present in the server build
-[*] server start with the DMarkZ PBO loaded is technically confirmed
-[*] [b]NOT CLIENT-/GAMEPLAY-TESTED:[/b] complete rendering of all denominations, stacking, ATM, Phone, trader and CriminalZ payout
-[*] Workshop preview and denomination views were exported directly from the current nine PAA textures
+[*] version: [b]2.0.0-expansion[/b]
+[*] preflight, PBO build, PBO content inspection and DeutschZ signature: [b]CONFIRMED[/b]
+[*] DMarkZ loaded in the technical server run without config/compile errors: [b]CONFIRMED[/b]
+[*] all nine DZDM and NoxZ_Euro compatibility classes are present in the source/PBO state
+[*] [b]NOT GAMEPLAY TESTED:[/b] rendering, stacking, ATM, phone, trader and CriminalZ payout with a client
+[*] Steam upload/publication: [b]NOT PERFORMED[/b]
 [/list]
 
 [hr][/hr]
 [h2]📝 CURRENT CHANGES[/h2]
 
 [list]
-[*] created a complete standalone D-MarkZ Workshop package
-[*] documented the real 1 / 2 / 5 / 10 / 20 / 50 / 100 / 200 / 500 denominations
-[*] mapped Halftan and Patrick artwork to the current classes
-[*] explained NoxZCurrency, CriminalZ and Core compatibility
-[*] added the current Workshop preview plus exact front/back exports
+[*] moved all nine values to genuine Expansion banknote models
+[*] integrated three new DeutschZ money atlases
+[*] introduced the new DZDM primary classes
+[*] retained NoxZ_Euro class names for backwards compatibility
+[*] removed the previous coin models and old per-value PAA documentation from the current release state
+[*] updated Workshop copy, image sources, changelog and checklists for version 2.0.0-expansion
 [/list]
 
 [hr][/hr]
@@ -117,6 +132,6 @@ Port: [b]20076[/b]
 [hr][/hr]
 [h2]🏴 CREDITS & SUPPORT[/h2]
 
-Currency design, integration and operation: [b]DeutschZ[/b]. NoxZCurrency/NoxZ Phone remain technical dependencies by their respective authors. Report visual issues on Discord with denomination, item state, inventory view, screenshot and client log.
+Currency design, integration and operation: [b]DeutschZ[/b]. DayZ Expansion and NoxZ Phone/NoxZCurrency remain works of their respective authors. Please report rendering issues with value, class name, view, screenshot and matching client/server logs on Discord.
 
 [b]DeutschZ D-MarkZ — Your loot. Your economy. Your DeutschZ.[/b]

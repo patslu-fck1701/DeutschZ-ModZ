@@ -1,0 +1,10 @@
+name = "DeutschZ HalftanZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ HalftanZ";
+overview = "DeutschZ custom survivor selection with Halftan and two female body texture test classes.";
+action = "https://discord.gg/FHzZ7BykFk";
+author = "DeutschZ";
+version = "1.0.0";

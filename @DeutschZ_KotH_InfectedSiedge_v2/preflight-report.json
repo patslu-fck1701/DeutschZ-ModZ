@@ -3,9 +3,9 @@
   "ok": true,
   "errors": 0,
   "warnings": 1,
-  "info": 2,
-  "checked_files": 102,
-  "checked_references": 8,
+  "info": 3,
+  "checked_files": 97,
+  "checked_references": 18,
   "checked_configs": 1,
   "findings": [
     {
@@ -23,9 +23,16 @@
       "line": 0
     },
     {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): data\\ui\\dzkoth_status_darkglass.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "data\\ui\\dzkoth_status_darkglass.paa",
+      "line": 0
+    },
+    {
       "severity": "warning",
       "rule": "path-uppercase",
-      "message": "51 packed path(s) contain uppercase characters (e.g. AGENTS.md). Official guidance: keep packed files lowercase or the mod breaks on DayZ Linux Server binaries.",
+      "message": "49 packed path(s) contain uppercase characters (e.g. AGENTS.md). Official guidance: keep packed files lowercase or the mod breaks on DayZ Linux Server binaries.",
       "file": "",
       "line": 0
     }

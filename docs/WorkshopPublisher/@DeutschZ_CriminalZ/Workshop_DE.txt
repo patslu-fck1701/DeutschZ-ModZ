@@ -2,7 +2,7 @@
 
 [b]Halte die Hackaktion. Überlebe den Alarm. Nimm das Geld — wenn dich Chernarus lässt.[/b]
 
-DeutschZ CriminalZ erweitert den aktuellen DeutschZ-Expansion-Server um serverautoritativ geprüfte ATM-Überfälle, Fahrzeug-Hacks und ein automatisch aufgebautes City-Store-Netzwerk. Jeder erkannte Store erhält genau einen funktionierenden [b]ExpansionATM_2[/b] und ein eigenes DeutschZ-Hinweisschild.
+DeutschZ CriminalZ erweitert den DeutschZ-Expansion-Server um serverautoritativ geprüfte ATM-Überfälle, Fahrzeug-Hacks und ein automatisch aufgebautes City-Store-Netzwerk. Version 0.1.1 verwendet jetzt den vollständigen [b]ExpansionATM_2[/b]-Funktionsumfang mit eigener Klasse und neuem DeutschZ-Design. Jeder erkannte Store erhält genau einen [b]DZCRZ_ATM[/b] und ein neues Expansion-basiertes DeutschZ-Hinweisschild.
 
 [hr][/hr]
 [h2]🎯 KURZBESCHREIBUNG[/h2]
@@ -10,29 +10,32 @@ DeutschZ CriminalZ erweitert den aktuellen DeutschZ-Expansion-Server um serverau
 [list]
 [*] echte gehaltene ATM-Hackaktion statt einfachem Tastendruck
 [*] zufällige Hackdauer zwischen 300 und 600 Sekunden
+[*] serverseitige Validierung von Spieler, Werkzeug, Distanz, Zustand und Ziel
 [*] globale Alarmmeldung, roter Marker und Sirene
-[*] serverseitige Auszahlung in NoxZ-Euro-Klassen beziehungsweise D-MarkZ-Optik
+[*] Auszahlung über die aktuelle D-MarkZ-/NoxZ_Euro-Kompatibilität
 [*] persistente ATM-Cooldowns und Parallelhack-Schutz
-[*] Expansion-Fahrzeug-Hacks mit Werkzeugprüfung
-[*] automatische ATM- und Schildplatzierung an allen unterstützten City Stores
-[*] Duplikatschutz, JSON-Konfiguration und kompakte Serverlogs
+[*] Expansion-Fahrzeug-Hacks mit HackingTool_Lockpick
+[*] automatische ATM- und Schildplatzierung an unterstützten City Stores
+[*] Duplikatschutz, Alt-ATM-Migration, JSON-Konfiguration und kompakte Logs
 [/list]
 
 [hr][/hr]
 [h2]🏧 ATM-RAUB[/h2]
 
 [list]
+[*] ATM-Klasse: [b]DZCRZ_ATM : ExpansionATM_2[/b]
+[*] sichtbare Bereiche: [b]zbytek[/b] und [b]screen[/b] mit neuem DeutschZ-ATM-Design
 [*] benötigtes Werkzeug: [b]RobTool_Crowbar[/b] in den Händen
 [*] Hackdauer: zufällig [b]300 bis 600 Sekunden[/b]
-[*] maximale Entfernung: [b]15 Meter[/b]
+[*] maximale Distanz: [b]15 Meter[/b]
 [*] Cooldown nach Erfolg: [b]7200 Sekunden / 2 Stunden[/b]
-[*] Auszahlung: [b]45.000 bis 185.000[/b] in NoxZ-Euro-Klassen
+[*] Auszahlung: [b]45.000 bis 185.000[/b] über die konfigurierten Geldklassen
 [*] Bitcoin-Rewards: [b]deaktiviert[/b]
 [/list]
 
-Tod, Bewusstlosigkeit, Logout, falsches Werkzeug, Zielverlust oder zu große Distanz brechen die Aktion ab. Die finale Auszahlung wird ausschließlich vom Server berechnet und erzeugt.
+Tod, Bewusstlosigkeit, Logout, Werkzeugwechsel, Zielverlust oder zu große Distanz brechen die Aktion ab. Die finale Auszahlung wird ausschließlich vom Server berechnet und erzeugt.
 
-Ist [b]DeutschZ_DMarkZ[/b] geladen, verwenden die NoxZ-Euro-Klassen die aktuellen DeutschZ-D-MarkZ-Münzen und -Scheine.
+Der bisherige Fehlstatus [b]„Hack abgebrochen — Grund 1“[/b] nach natürlichem Abschluss wurde in Version 0.1.1 korrigiert: Das Ende der Continuous Action wird nur noch als Abbruch behandelt, wenn die serverseitige Hacksession tatsächlich noch nicht vollständig abgeschlossen ist.
 
 [hr][/hr]
 [h2]🏪 AUTOMATISCHES CITY-STORE-NETZWERK[/h2]
@@ -44,31 +47,43 @@ CriminalZ erkennt serverseitig exakt diese Gebäudeklassen:
 [*] [b]Land_City_Store_WithStairs[/b]
 [/list]
 
-Die Objekte werden relativ zur Position und Drehung des jeweiligen Stores berechnet. Es gibt keine manuell gepflegte Liste fester Weltkoordinaten.
+Die Objekte werden relativ zur Position und vollständigen Ausrichtung des Stores berechnet. Es gibt keine manuell gepflegte Weltkoordinatenliste.
 
 [list]
-[*] ATM-Klasse: [b]ExpansionATM_2[/b]
-[*] DeutschZ-Schild: [b]DZCRZ_StoreInfoSign[/b]
+[*] ATM: [b]DZCRZ_ATM[/b] mit voller ExpansionATM_2-Funktion
+[*] Hinweisschild: [b]DZCRZ_StoreInfoSign : ExpansionSign_Trader_Bandit[/b]
+[*] Schildauswahl: [b]camo[/b] mit neuem DeutschZ-Cash-Design
 [*] Duplikatradius: [b]0,75 Meter[/b]
 [*] Spawnverzögerung: [b]2000 Millisekunden[/b]
-[*] vorhandene passende Objekte werden wiederverwendet und auf Sollposition korrigiert
-[*] Map-Loader-Stores können über denselben serverseitigen Hook verarbeitet werden
+[*] ein passender alter ExpansionATM_2 am exakten Ziel kann auf DZCRZ_ATM migriert werden
+[*] fremde Objekte außerhalb der engen Zielprüfung werden nicht gelöscht
+[*] später durch Map-Loader erzeugte Stores können über denselben serverseitigen Hook verarbeitet werden
 [/list]
 
-[b]Frischer technischer Servernachweis:[/b] 19 Stores erkannt, 19 ATMs und 19 Schilder erzeugt, 0 StorePlacement-Fehler; Referenztransform-Test erfolgreich.
+Der frische 0.1.1-Serverlauf fand [b]19 Stores[/b]: 11 × Land_City_Store und 8 × Land_City_Store_WithStairs. Er erzeugte 19 DZCRZ_ATM und 19 Schilder, meldete 0 StorePlacement-Fehler und bestand den Referenztransform-Test. Sichtbarkeit, Banking und Doppelstart-Deduplizierung bleiben bis zum Live-Clienttest offen.
 
 [hr][/hr]
-[h2]🚙 FAHRZEUGE & GARAGEN[/h2]
+[h2]🚙 FAHRZEUG-HACK[/h2]
 
 [list]
-[*] Fahrzeug-Hacks verwenden [b]HackingTool_Lockpick[/b]
+[*] Werkzeug: [b]HackingTool_Lockpick[/b]
 [*] Hackdauer: zufällig [b]300 bis 600 Sekunden[/b]
-[*] maximale Entfernung: [b]15 Meter[/b]
+[*] maximale Distanz: [b]15 Meter[/b]
 [*] Fahrzeug, Schlossstatus, Werkzeug, Spielerzustand und Distanz werden serverseitig geprüft
-[*] die aktuelle Implementierung nutzt die lokal bestätigte Expansion-Vehicle-API
+[*] derselbe „Grund 1“-Fehler nach erfolgreichem Continuous-Action-Ende wurde für Fahrzeughacks korrigiert
 [/list]
 
-[b]Wichtiger Hinweis:[/b] Das Garage-Modul ist in der Konfiguration vorbereitet, bleibt aber ohne eine in der installierten Expansion-Version bestätigte allgemeine Garage-Unlock-API technisch inaktiv. Es wird nicht als fertiges Gameplayfeature beworben.
+[b]Garage-Hinweis:[/b] Das Garage-Modul bleibt vorbereitet, aber ohne bestätigte allgemeine Unlock-API der installierten Expansion-Version technisch inaktiv. Es wird nicht als fertiges Gameplayfeature beworben.
+
+[hr][/hr]
+[h2]🧰 WERKZEUGE & DARSTELLUNG[/h2]
+
+[list]
+[*] [b]RobTool_Crowbar[/b]: Textur-/Renderpfad gegen die grüne Fehldarstellung korrigiert
+[*] [b]HackingTool_Lockpick[/b]: bestehende funktionierende Optik beibehalten
+[*] beide Werkzeuge bleiben serverseitig auf den jeweils erlaubten Hacktyp beschränkt
+[*] die sichtbare Crowbar-Korrektur muss noch im Client-Live-Test bestätigt werden
+[/list]
 
 [hr][/hr]
 [h2]🛡️ SERVERAUTORITÄT & PERSISTENZ[/h2]
@@ -80,24 +95,33 @@ Die Objekte werden relativ zur Position und Drehung des jeweiligen Stores berech
 [*] Marker, Alarm, Werkzeugschaden und Reward werden serverseitig ausgelöst
 [*] Konfiguration: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/[/b]
 [*] Logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_CriminalZ/[/b]
-[*] StorePlacement-Konfiguration: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/StorePlacementSettings.json[/b]
+[*] StorePlacement: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/StorePlacementSettings.json[/b]
 [/list]
 
 [hr][/hr]
 [h2]⚙️ KONFIGURATION[/h2]
 
-ATM-, Fahrzeug-, Marker-, Alarm-, Reward-, Werkzeug-, Cooldown- und StorePlacement-Werte sind über JSON einstellbar. Ungültige StorePlacement-Konfigurationen fallen auf sichere Standardwerte zurück, statt den Server zu beenden.
+ATM-, Fahrzeug-, Marker-, Alarm-, Reward-, Werkzeug-, Cooldown- und StorePlacement-Werte sind per JSON einstellbar. Ungültige StorePlacement-Konfigurationen fallen auf sichere Standardwerte zurück, statt den Server zu beenden. Der aktuelle Standard verwendet [b]DZCRZ_ATM[/b] und [b]DZCRZ_StoreInfoSign[/b].
 
 [hr][/hr]
 [h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
 
 [list]
-[*] Pflicht: [b]NoxZ_Phone[/b] beziehungsweise dessen [b]NoxZCurrency[/b]-Paket
-[*] Pflicht für ATM-, Market-, Vehicle-, Garage- und Markerklassen: [b]DayZ Expansion Bundle[/b] und [b]DayZ Expansion Licensed[/b]
+[*] [b]DayZ Expansion Bundle[/b] und [b]DayZ Expansion Licensed[/b] für ATM, Market, Vehicle, Garage und Marker
 [*] aktueller DeutschZ-Basisstack: [b]CF[/b] und [b]Dabs Framework[/b]
-[*] optional für DeutschZ-Währungsoptik: [b]DeutschZ_DMarkZ[/b]
+[*] [b]NoxZ_Phone / NoxZCurrency[/b] und [b]DeutschZ_DMarkZ[/b] für die aktuelle Geldklassen-Kompatibilität
 [*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_CriminalZ[/b]
-[*] niemals dieselbe PBO aus Core und Standalone doppelt laden
+[*] niemals dieselbe CriminalZ-PBO aus Core und Standalone gleichzeitig laden
+[/list]
+
+[hr][/hr]
+[h2]⚠️ BEKANNTE HINWEISE[/h2]
+
+[list]
+[*] ATM-Menü/Banking, kompletter Hack, Auszahlung, Marker/Sirene und Fahrzeug-Hack sind mit Version 0.1.1 noch nicht gameplay-validiert.
+[*] Die neue ATM-/Schilddarstellung und Crowbar-Korrektur benötigen einen echten Client-Sichttest.
+[*] Doppelstart, zwei Clients und ein nachgeladener Map-Loader-Store bleiben offen.
+[*] Die Server-IP [b]193.135.10.126[/b] ist vor einer Steam-Veröffentlichung manuell zu bestätigen.
 [/list]
 
 [hr][/hr]
@@ -105,7 +129,7 @@ ATM-, Fahrzeug-, Marker-, Alarm-, Reward-, Werkzeug-, Cooldown- und StorePlaceme
 
 [list]
 [*] CF und Dabs Framework zuerst laden.
-[*] Danach DayZ Expansion Bundle, DayZ Expansion Licensed und NoxZ_Phone laden.
+[*] Danach DayZ Expansion Bundle, DayZ Expansion Licensed, NoxZ Phone und DeutschZ D-MarkZ laden.
 [*] CriminalZ anschließend auf Client und Server über [b]-mod[/b] laden.
 [*] [b]DeutschZ.bikey[/b] im Server-Keyordner bereitstellen.
 [*] Profil-, Cooldown- und Runtime-Daten bei Updates nicht löschen.
@@ -116,22 +140,27 @@ ATM-, Fahrzeug-, Marker-, Alarm-, Reward-, Werkzeug-, Cooldown- und StorePlaceme
 [h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
 
 [list]
-[*] Version: [b]0.1.0[/b]
-[*] aktueller PBO mit DeutschZ signiert und im Core geladen
-[*] Serverstart, Managerinitialisierung und StorePlacement technisch bestätigt
-[*] 19 Stores / 19 ATMs / 19 Schilder / 0 StorePlacement-Fehler im frischen Lauf
-[*] [b]NICHT GAMEPLAY-GETESTET:[/b] vollständiger ATM-Hack, Auszahlung, Marker/Sirene und Fahrzeug-Hack mit Client
-[*] Garage-Unlock bleibt technisch offen und wird nicht als aktiv behauptet
+[*] Version: [b]0.1.1[/b]
+[*] Preflight, PBO-Build, PBO-Inhaltsprüfung und DeutschZ-Signatur: [b]BESTÄTIGT[/b]
+[*] CriminalZ wurde im technischen Serverlauf ohne Compilefehler geladen: [b]BESTÄTIGT[/b]
+[*] neue DZCRZ_ATM-/Schildklassen und Continuous-Action-Fix im PBO enthalten
+[*] StorePlacement: [b]19 Stores / 19 DZCRZ_ATM / 19 Schilder / 0 Fehler / Referenztest true[/b]
+[*] [b]NICHT GAMEPLAY-GETESTET:[/b] vollständiger ATM-/Fahrzeug-Hack und neue Darstellung mit Client
+[*] Steam-Upload/Veröffentlichung: [b]NICHT DURCHGEFÜHRT[/b]
 [/list]
 
 [hr][/hr]
 [h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
 
 [list]
-[*] ExpansionATM_2 und aktuelles DeutschZ-Schild als reale Store-Objekte dokumentiert
-[*] aktuelle Hackzeiten, Rewards, Cooldown und Duplikatschutz synchronisiert
-[*] D-MarkZ-Zusammenspiel und Garage-Status präzisiert
-[*] frischen StorePlacement-Servernachweis ergänzt
+[*] StorePlacement von nacktem ExpansionATM_2 auf DZCRZ_ATM umgestellt
+[*] volle ExpansionATM_2-Funktion mit neuem DeutschZ-ATM-Design kombiniert
+[*] DZCRZ_StoreInfoSign auf ExpansionSign_Trader_Bandit mit neuem Cash-Design umgestellt
+[*] sichere Alt-ATM-Migration innerhalb des Duplikatradius ergänzt
+[*] RobTool_Crowbar gegen grüne Fehldarstellung korrigiert
+[*] falsches „Grund 1“-Cancel nach regulärem ATM- und Fahrzeughack-Abschluss behoben
+[*] Workshoptexte, Bildquellen, Changelog und Checklisten auf Version 0.1.1 aktualisiert
+[*] frischen 0.1.1-StorePlacement-Lauf mit 19/19/19 und 0 Fehlern technisch bestätigt
 [/list]
 
 [hr][/hr]
@@ -150,6 +179,6 @@ Port: [b]20076[/b]
 [hr][/hr]
 [h2]🏴 CREDITS & SUPPORT[/h2]
 
-Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Store-/ATM-Position, Aktion, Restzeit, Screenshot/Video und passenden Logs im Discord melden.
+Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Store-/ATM-Position, Aktion, Restzeit, Classname, Screenshot/Video und passenden Logs im Discord melden.
 
 [b]DeutschZ CriminalZ — Das Risiko ist öffentlich. Der Reward gehört dem Überlebenden.[/b]

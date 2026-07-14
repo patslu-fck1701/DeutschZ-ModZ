@@ -136,8 +136,8 @@ class DZKOTH_BossManager
 			return;
 		}
 
-		infected.GetInputController().OverrideMovementSpeed(true, 0.75);
-		DZKOTH_Utils.Log("BosZ Zombie movement locked to slow walk.");
+		infected.GetInputController().OverrideMovementSpeed(true, 1.0);
+		DZKOTH_Utils.Log("BosZ Zombie movement locked to the valid walk stage (1); running remains disabled.");
 	}
 
 	protected EntityAI CreateBossEntity(string className, vector bossPos)

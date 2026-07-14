@@ -15,7 +15,7 @@ class DZCRZ_Const
 	static const int CANCEL_TARGET_INVALID = 5;
 	static const int CANCEL_SERVER_SHUTDOWN = 6;
 	static const int CANCEL_ADMIN = 7;
-	static const string VERSION = "0.1.0";
+	static const string VERSION = "0.1.1";
 	static const string PREFIX = "[DZCRZ] ";
 	static const string ATM_CLASS = "DZCRZ_ATM";
 	static const string ATM_TOOL_CLASS = "RobTool_Crowbar";

@@ -21,6 +21,7 @@ class DZKOTH_MainConfig
 	int EventCooldownMinutes;
 	int CleanupDelayMinutes;
 	int RewardDespawnMinutes;
+	int RewardMinimumItems;
 	float ProgressHudRadius;
 	float TickSeconds;
 	float SpawnMinDistance;
@@ -63,6 +64,7 @@ class DZKOTH_MainConfig
 		EventCooldownMinutes = 60;
 		CleanupDelayMinutes = 10;
 		RewardDespawnMinutes = 10;
+		RewardMinimumItems = 24;
 		ProgressHudRadius = 500.0;
 		TickSeconds = 1.0;
 		SpawnMinDistance = 6.0;
@@ -556,6 +558,10 @@ class DZKOTH_Config
 			bundle.Main.ProgressHudRadius = 500.0;
 		if (bundle.Main.RewardDespawnMinutes < 1)
 			bundle.Main.RewardDespawnMinutes = 10;
+		if (bundle.Main.RewardMinimumItems < 12)
+			bundle.Main.RewardMinimumItems = 24;
+		if (bundle.Main.RewardMinimumItems > 40)
+			bundle.Main.RewardMinimumItems = 40;
 		if (bundle.Main.CleanupDelayMinutes < 1)
 			bundle.Main.CleanupDelayMinutes = 10;
 		if (bundle.Main.BossDamageMultiplier < 1.0)

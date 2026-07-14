@@ -93,12 +93,13 @@ class ActionDZCRZ_HackVehicle: ActionContinuousBase
 	override void OnEndServer(ActionData action_data)
 	{
 		super.OnEndServer(action_data);
-		if (action_data && action_data.m_Player && action_data.m_Target)
+		if (action_data && action_data.m_State != UA_FINISHED && action_data.m_Player && action_data.m_Target)
 			DZCRZ_Manager.GetInstance().CancelHack(action_data.m_Player, action_data.m_Target.GetParentOrObject(), DZCRZ_Const.CANCEL_ACTION_ENDED);
 	}
 
 	override void OnFinishProgressServer(ActionData action_data)
 	{
+		super.OnFinishProgressServer(action_data);
 		if (action_data && action_data.m_Player && action_data.m_Target)
 			DZCRZ_Manager.GetInstance().CompleteHack(action_data.m_Player, action_data.m_Target.GetParentOrObject());
 	}

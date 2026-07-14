@@ -69,6 +69,20 @@ class DZCRZ_ATMManager
 		m_ATMs.Set(atmId, atm);
 	}
 
+	void UnregisterObject(Object atmObject)
+	{
+		if (!atmObject)
+			return;
+		array<string> removeIds = new array<string>;
+		foreach (string atmId, Object registeredATM: m_ATMs)
+		{
+			if (registeredATM == atmObject)
+				removeIds.Insert(atmId);
+		}
+		foreach (string removeId: removeIds)
+			m_ATMs.Remove(removeId);
+	}
+
 	int GetCount()
 	{
 		return m_ATMs.Count();

@@ -1,14 +1,20 @@
 [h1]💶 DeutschZ D-MarkZ — Changelog[/h1]
 
-[h2]1.0.0 — Dokumentationsstand 14.07.2026[/h2]
+[h2]2.0.0-expansion — 14.07.2026[/h2]
 [list]
-[*] vollständiges deutsches und englisches Workshoppaket angelegt
-[*] neun reale Werte dokumentiert: 1 / 2 / 5 / 10 / 20 / 50 / 100 / 200 / 500
-[*] Münz- und Scheinbasisklassen sowie NoxZ-Euro-Classnames aufgeführt
-[*] 50er Halftan, 100er Patrick und 500er Patrick dem aktuellen Quellstand zugeordnet
-[*] NoxZCurrency-, CriminalZ-, ATM-, Trader- und Core-Kompatibilität beschrieben
-[*] Serverstart als technisch bestätigt, vollständige Clientdarstellung und Ökonomie als offen markiert
-[*] Workshop-Preview und Einzelansichten direkt aus den aktuellen PAA-Texturen erstellt
+[*] alle neun Werte auf DayZ-Expansion-Banknotenmodelle umgestellt
+[*] 1/10/200 D-MarkZ verwenden die Expansion-Hryvnia-Vorlage
+[*] 2/5/50 D-MarkZ verwenden die Expansion-100-Dollar-Vorlage
+[*] 20/100/500 D-MarkZ verwenden die Expansion-500-Euro-Vorlage
+[*] neue Hauptklassen DZDM_1 bis DZDM_500 eingeführt
+[*] NoxZ_Euro1 bis NoxZ_Euro500 als Kompatibilitätsklassen für bestehende Settings erhalten
+[*] drei neue 2048×2048-Geldatlanten eingebunden
+[*] frühere Münzmodelle und alte Einzel-PAA-Releasebilder aus dem aktuellen Workshoppaket entfernt
+[*] deutsche/englische Workshoptexte, Update Notes, Bildquellen und Checklisten aktualisiert
 [/list]
 
-[i]Das Workshoppaket dokumentiert den bestehenden 1.0.0-PBO; es führt keine neue Geldlogik ein.[/i]
+[b]Technische Validierung:[/b] Preflight, PBO-Build, PBO-Inhaltsprüfung, DeutschZ-Signatur und technisches Laden auf dem Server bestätigt.
+
+[b]Offen:[/b] Clientdarstellung aller Werte, Stapeln/Teilen, ATM, Phone, Trader und CriminalZ-Payout im Live-Gameplay.
+
+[i]Kein Steam-Upload und keine Gameplay-Abnahme allein aus Build oder Serverstart abgeleitet.[/i]

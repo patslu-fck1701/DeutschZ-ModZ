@@ -19,12 +19,14 @@ class CfgPatches
             "DZ_Gear_Tools",
             "DZ_Structures_Specific",
             "NoxZCurrency",
+            "DeutschZ_DMarkZ",
             "DayZExpansion_Core_Scripts",
             "DayZExpansion_Navigation_Scripts",
             "DayZExpansion_Vehicles_Scripts",
             "DayZExpansion_Garage_Scripts",
             "DayZExpansion_Market_Scripts",
-            "DayZExpansion_Market_Objects"
+            "DayZExpansion_Market_Objects",
+            "DayZExpansion_Market_Structures"
         };
     };
 };
@@ -38,7 +40,7 @@ class CfgMods
         credits = "DeutschZ";
         author = "DeutschZ";
         authorID = "";
-        version = "0.1.0";
+        version = "0.1.1";
         type = "mod";
         dependencies[] = {"Game", "World", "Mission"};
         class defs
@@ -68,13 +70,19 @@ class CfgVehicles
     class Crowbar;
     class Lockpick;
     class Inventory_Base;
-    class StaticObj_FueldStation_Sign;
+    class ExpansionSign_Trader_Bandit;
 
     class DZCRZ_ATM : ExpansionATM_2
     {
         scope = 2;
         displayName = "DeutschZ CriminalZ ATM";
         descriptionShort = "Ein vernetzter Geldautomat. Kriminelle Aktivitaeten werden global gemeldet.";
+        hiddenSelections[] = {"zbytek", "screen"};
+        hiddenSelectionsTextures[] =
+        {
+            "\DeutschZ_CriminalZ\PAA\CriminalZ\DeutschZ_expansion_atm_02_co.paa",
+            "\DeutschZ_CriminalZ\PAA\CriminalZ\DeutschZ_expansion_atm_02_co.paa"
+        };
     };
 
     class RobTool_Crowbar : Crowbar
@@ -105,11 +113,12 @@ class CfgVehicles
         weight = 1;
     };
 
-    class DZCRZ_StoreInfoSign : StaticObj_FueldStation_Sign
+    class DZCRZ_StoreInfoSign : ExpansionSign_Trader_Bandit
     {
         scope = 2;
         displayName = "DeutschZ CriminalZ Hinweisschild";
         descriptionShort = "Hinweisschild fuer die DeutschZ CriminalZ Aktivitaeten an City Stores.";
-        model = "\DeutschZ_CriminalZ\models\DZCRZ_FuelStation_Sign.p3d";
+        hiddenSelections[] = {"camo"};
+        hiddenSelectionsTextures[] = {"\DeutschZ_CriminalZ\PAA\SignsDZ\DeutschZxCash_sign_trader_bandit.paa"};
     };
 };

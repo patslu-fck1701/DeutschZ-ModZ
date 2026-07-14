@@ -1,103 +1,127 @@
-[h1]💰 DEUTSCHZ CRIMINALZ — ATM ROBBERY & CITY-STORE NETWORK[/h1]
+[h1]💰 DEUTSCHZ CRIMINALZ — ATM ROBBERY & CITY STORE NETWORK[/h1]
 
 [b]Hold the hack. Survive the alarm. Take the money — if Chernarus lets you.[/b]
 
-DeutschZ CriminalZ extends the current DeutschZ Expansion server with server-authoritative ATM robberies, vehicle hacks and an automatically deployed city-store network. Every detected store receives exactly one functional [b]ExpansionATM_2[/b] and one custom DeutschZ information sign.
+DeutschZ CriminalZ adds server-authoritative ATM robberies, vehicle hacking and an automatically deployed City Store network to the DeutschZ Expansion server. Version 0.1.1 now combines full [b]ExpansionATM_2[/b] functionality with a dedicated class and new DeutschZ artwork. Every detected store receives exactly one [b]DZCRZ_ATM[/b] and one new Expansion-based DeutschZ information sign.
 
 [hr][/hr]
 [h2]🎯 OVERVIEW[/h2]
 
 [list]
-[*] true held ATM action instead of a single key press
-[*] randomized hack duration between 300 and 600 seconds
-[*] global alarm message, red marker and siren
-[*] server-side payout using NoxZ Euro classes or D-MarkZ visuals
-[*] persistent ATM cooldowns and parallel-hack protection
-[*] Expansion vehicle hacking with tool validation
-[*] automatic ATM and sign placement at all supported city stores
-[*] duplicate protection, JSON configuration and compact server logs
+[*] real held ATM hacking action instead of a short key press
+[*] randomized duration between 300 and 600 seconds
+[*] server validation of player, tool, distance, state and target
+[*] global alarm notification, red marker and siren
+[*] payouts through the current D-MarkZ/NoxZ_Euro compatibility layer
+[*] persistent ATM cooldowns and concurrent-hack protection
+[*] Expansion vehicle hacking with HackingTool_Lockpick
+[*] automatic ATM and sign placement at supported City Stores
+[*] duplicate protection, legacy ATM migration, JSON configuration and compact logs
 [/list]
 
 [hr][/hr]
 [h2]🏧 ATM ROBBERY[/h2]
 
 [list]
+[*] ATM class: [b]DZCRZ_ATM : ExpansionATM_2[/b]
+[*] visual selections: [b]zbytek[/b] and [b]screen[/b] using the new DeutschZ ATM design
 [*] required tool: [b]RobTool_Crowbar[/b] in hands
-[*] hack duration: randomized [b]300 to 600 seconds[/b]
+[*] duration: randomized [b]300 to 600 seconds[/b]
 [*] maximum distance: [b]15 metres[/b]
-[*] successful cooldown: [b]7,200 seconds / 2 hours[/b]
-[*] payout: [b]45,000 to 185,000[/b] using NoxZ Euro classes
+[*] successful cooldown: [b]7200 seconds / 2 hours[/b]
+[*] payout: [b]45,000 to 185,000[/b] through configured money classes
 [*] Bitcoin rewards: [b]disabled[/b]
 [/list]
 
-Death, unconsciousness, logout, the wrong tool, losing the target or exceeding the distance cancels the action. Only the server calculates and spawns the final payout.
+Death, unconsciousness, logout, tool change, target loss or excessive distance abort the action. The final payout is calculated and created exclusively by the server.
 
-When [b]DeutschZ_DMarkZ[/b] is loaded, the NoxZ Euro classes use the current DeutschZ D-MarkZ coin and banknote visuals.
+The previous [b]“Hack cancelled — reason 1”[/b] status after natural completion was fixed in 0.1.1: the end of the continuous action is only treated as a cancellation while the authoritative hack session is actually incomplete.
 
 [hr][/hr]
-[h2]🏪 AUTOMATIC CITY-STORE NETWORK[/h2]
+[h2]🏪 AUTOMATIC CITY STORE NETWORK[/h2]
 
-CriminalZ detects exactly these building classes server-side:
+CriminalZ detects exactly these server-side building classes:
 
 [list]
 [*] [b]Land_City_Store[/b]
 [*] [b]Land_City_Store_WithStairs[/b]
 [/list]
 
-Objects are transformed relative to each store position and orientation. There is no manually maintained list of fixed world coordinates.
+Objects are calculated relative to each store's position and complete orientation. There is no manually maintained world-coordinate list.
 
 [list]
-[*] ATM class: [b]ExpansionATM_2[/b]
-[*] custom sign: [b]DZCRZ_StoreInfoSign[/b]
+[*] ATM: [b]DZCRZ_ATM[/b] with complete ExpansionATM_2 functionality
+[*] information sign: [b]DZCRZ_StoreInfoSign : ExpansionSign_Trader_Bandit[/b]
+[*] sign selection: [b]camo[/b] with new DeutschZ cash artwork
 [*] duplicate radius: [b]0.75 metres[/b]
-[*] spawn delay: [b]2,000 milliseconds[/b]
-[*] existing matching objects are reused and corrected to their target transform
-[*] map-loader stores can be processed by the same server hook
+[*] spawn delay: [b]2000 milliseconds[/b]
+[*] a matching legacy ExpansionATM_2 at the exact target may be migrated to DZCRZ_ATM
+[*] foreign objects outside the strict target check are not deleted
+[*] stores created later by a map loader may be processed by the same server hook
 [/list]
 
-[b]Fresh technical server evidence:[/b] 19 stores detected, 19 ATMs and 19 signs created, zero StorePlacement errors; reference transform test passed.
+The fresh 0.1.1 server run found [b]19 stores[/b]: 11 × Land_City_Store and 8 × Land_City_Store_WithStairs. It created 19 DZCRZ_ATMs and 19 signs, reported 0 StorePlacement errors and passed the reference-transform test. Visibility, banking and double-start deduplication remain open until live client testing.
 
 [hr][/hr]
-[h2]🚙 VEHICLES & GARAGES[/h2]
+[h2]🚙 VEHICLE HACKING[/h2]
 
 [list]
-[*] vehicle hacks use [b]HackingTool_Lockpick[/b]
-[*] hack duration: randomized [b]300 to 600 seconds[/b]
+[*] tool: [b]HackingTool_Lockpick[/b]
+[*] duration: randomized [b]300 to 600 seconds[/b]
 [*] maximum distance: [b]15 metres[/b]
 [*] vehicle, lock state, tool, player state and distance are validated by the server
-[*] the current implementation uses the locally confirmed Expansion vehicle API
+[*] the same reason-1 cancellation after successful continuous-action completion was corrected for vehicle hacks
 [/list]
 
-[b]Important:[/b] The garage module is represented in configuration, but remains technically inactive without a confirmed general garage-unlock API in the installed Expansion version. It is not advertised as completed gameplay.
+[b]Garage note:[/b] The garage module remains prepared but technically inactive without a confirmed generic unlock API in the installed Expansion version. It is not advertised as completed gameplay.
+
+[hr][/hr]
+[h2]🧰 TOOLS & RENDERING[/h2]
+
+[list]
+[*] [b]RobTool_Crowbar[/b]: texture/render path corrected against the green fallback rendering
+[*] [b]HackingTool_Lockpick[/b]: existing working visual retained
+[*] both tools remain server-restricted to their allowed hack type
+[*] visible validation of the crowbar correction still requires the client live test
+[/list]
 
 [hr][/hr]
 [h2]🛡️ SERVER AUTHORITY & PERSISTENCE[/h2]
 
 [list]
-[*] clients never decide success, payout or cooldown
-[*] parallel hacks on the same target are blocked
-[*] cooldowns are persisted
-[*] markers, alarm, tool damage and reward are triggered by the server
-[*] config: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/[/b]
+[*] no client decides success, payout or cooldown
+[*] concurrent hacks of the same target are prevented
+[*] cooldowns are saved persistently
+[*] marker, alarm, tool damage and reward are triggered by the server
+[*] configuration: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/[/b]
 [*] logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_CriminalZ/[/b]
-[*] StorePlacement config: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/StorePlacementSettings.json[/b]
+[*] StorePlacement: [b]$profile:DeutschZ-System/DeutschZ_CriminalZ/Config/StorePlacementSettings.json[/b]
 [/list]
 
 [hr][/hr]
 [h2]⚙️ CONFIGURATION[/h2]
 
-ATM, vehicle, marker, alarm, reward, tool, cooldown and StorePlacement values are configurable through JSON. Invalid StorePlacement data falls back to safe defaults instead of shutting the server down.
+ATM, vehicle, marker, alarm, reward, tool, cooldown and StorePlacement values are configurable through JSON. Invalid StorePlacement JSON falls back to safe defaults instead of stopping the server. The current default uses [b]DZCRZ_ATM[/b] and [b]DZCRZ_StoreInfoSign[/b].
 
 [hr][/hr]
 [h2]🧩 DEPENDENCIES & COMPATIBILITY[/h2]
 
 [list]
-[*] required: [b]NoxZ_Phone[/b] or its [b]NoxZCurrency[/b] package
-[*] required for ATM, Market, vehicle, garage and marker classes: [b]DayZ Expansion Bundle[/b] and [b]DayZ Expansion Licensed[/b]
+[*] [b]DayZ Expansion Bundle[/b] and [b]DayZ Expansion Licensed[/b] for ATM, Market, Vehicle, Garage and marker systems
 [*] current DeutschZ base stack: [b]CF[/b] and [b]Dabs Framework[/b]
-[*] optional DeutschZ currency visuals: [b]DeutschZ_DMarkZ[/b]
-[*] included in [b]@DeutschZ_only_core[/b] or available as [b]@DeutschZ_CriminalZ[/b]
-[*] never load the same PBO from Core and standalone at the same time
+[*] [b]NoxZ_Phone / NoxZCurrency[/b] and [b]DeutschZ_DMarkZ[/b] for the current money-class compatibility layer
+[*] included in [b]@DeutschZ_only_core[/b] or available separately as [b]@DeutschZ_CriminalZ[/b]
+[*] never load the same CriminalZ PBO from Core and Standalone at the same time
+[/list]
+
+[hr][/hr]
+[h2]⚠️ KNOWN NOTES[/h2]
+
+[list]
+[*] ATM menu/banking, a full hack, payout, marker/siren and vehicle hacking are not yet gameplay validated with 0.1.1.
+[*] The new ATM/sign rendering and crowbar correction require a real client visibility test.
+[*] Double start, two-client synchronization and a map-loader-created store remain open.
+[*] Server IP [b]193.135.10.126[/b] must be checked manually before Steam publication.
 [/list]
 
 [hr][/hr]
@@ -105,33 +129,38 @@ ATM, vehicle, marker, alarm, reward, tool, cooldown and StorePlacement values ar
 
 [list]
 [*] Load CF and Dabs Framework first.
-[*] Then load DayZ Expansion Bundle, DayZ Expansion Licensed and NoxZ_Phone.
+[*] Then load DayZ Expansion Bundle, DayZ Expansion Licensed, NoxZ Phone and DeutschZ D-MarkZ.
 [*] Load CriminalZ on client and server through [b]-mod[/b].
-[*] Place [b]DeutschZ.bikey[/b] in the server keys folder.
-[*] Never delete profile, cooldown or runtime data during updates.
-[*] Do not load a second CriminalZ PBO when using [b]@DeutschZ_only_core[/b].
+[*] Place [b]DeutschZ.bikey[/b] in the server key directory.
+[*] Do not delete profile, cooldown or runtime data during updates.
+[*] Do not add a second CriminalZ PBO when using [b]@DeutschZ_only_core[/b].
 [/list]
 
 [hr][/hr]
 [h2]🧪 TECHNICAL STATUS — 14 JULY 2026[/h2]
 
 [list]
-[*] version: [b]0.1.0[/b]
-[*] current PBO signed with DeutschZ and loaded through the Core
-[*] server start, manager initialization and StorePlacement technically confirmed
-[*] 19 stores / 19 ATMs / 19 signs / zero StorePlacement errors in the fresh run
-[*] [b]NOT GAMEPLAY-TESTED:[/b] complete ATM hack, payout, marker/siren and vehicle hack with a client
-[*] garage unlock remains technically open and is not claimed as active
+[*] version: [b]0.1.1[/b]
+[*] preflight, PBO build, PBO content inspection and DeutschZ signature: [b]CONFIRMED[/b]
+[*] CriminalZ loaded in the technical server run without compile errors: [b]CONFIRMED[/b]
+[*] new DZCRZ_ATM/sign classes and continuous-action fix are present in the PBO
+[*] StorePlacement: [b]19 stores / 19 DZCRZ_ATMs / 19 signs / 0 errors / reference test true[/b]
+[*] [b]NOT GAMEPLAY TESTED:[/b] complete ATM/vehicle hack and new rendering with a client
+[*] Steam upload/publication: [b]NOT PERFORMED[/b]
 [/list]
 
 [hr][/hr]
 [h2]📝 CURRENT CHANGES[/h2]
 
 [list]
-[*] documented ExpansionATM_2 and the current custom sign as the real store objects
-[*] synchronized current hack times, rewards, cooldown and duplicate protection
-[*] clarified D-MarkZ integration and garage status
-[*] added fresh StorePlacement server evidence
+[*] changed StorePlacement from a bare ExpansionATM_2 to DZCRZ_ATM
+[*] combined full ExpansionATM_2 functionality with new DeutschZ ATM artwork
+[*] moved DZCRZ_StoreInfoSign to ExpansionSign_Trader_Bandit with new cash artwork
+[*] added safe legacy ATM migration within the duplicate radius
+[*] corrected RobTool_Crowbar against green fallback rendering
+[*] fixed false reason-1 cancellation after successful ATM and vehicle hack completion
+[*] updated Workshop copy, image sources, changelog and checklists for version 0.1.1
+[*] technically confirmed the fresh 0.1.1 StorePlacement run with 19/19/19 and 0 errors
 [/list]
 
 [hr][/hr]
@@ -150,6 +179,6 @@ Port: [b]20076[/b]
 [hr][/hr]
 [h2]🏴 CREDITS & SUPPORT[/h2]
 
-Concept, development and operation: [b]DeutschZ[/b]. Report issues on Discord with time, store/ATM position, action, remaining time, screenshots/video and matching logs.
+Concept, development and operation: [b]DeutschZ[/b]. Please report issues with timestamp, store/ATM position, action, remaining time, class name, screenshot/video and matching logs on Discord.
 
 [b]DeutschZ CriminalZ — The risk is public. The reward belongs to the survivor.[/b]

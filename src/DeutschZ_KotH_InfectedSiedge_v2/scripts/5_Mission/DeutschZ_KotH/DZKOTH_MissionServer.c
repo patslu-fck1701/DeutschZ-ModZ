@@ -29,9 +29,9 @@ class DZKOTH_MissionServer
 
 		float maxHealth = infected.GetMaxHealth("", "Health");
 		if (infected.GetInputController())
-			infected.GetInputController().OverrideMovementSpeed(true, 0.75);
+			infected.GetInputController().OverrideMovementSpeed(true, 1.0);
 
-		DZKOTH_Utils.Log("DIAG infected test: DZKOTH_Infected_600 maxHealth=" + maxHealth.ToString() + " movementOverride=0.75");
+		DZKOTH_Utils.Log("DIAG infected test: DZKOTH_Infected_600 maxHealth=" + maxHealth.ToString() + " movementOverride=walk-stage-1");
 		GetGame().ObjectDelete(infected);
 	}
 #endif

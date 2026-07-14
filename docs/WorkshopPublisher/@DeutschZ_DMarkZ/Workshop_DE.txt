@@ -1,104 +1,119 @@
-[h1]💶 DEUTSCHZ D-MARKZ — DIE OFFIZIELLE DEUTSCHZ WÄHRUNG[/h1]
+[h1]💶 DEUTSCHZ D-MARKZ — EXPANSION-BANKNOTEN FÜR DEUTSCHZ[/h1]
 
-[b]Neun Werte. Eine Ökonomie. Ein unverwechselbares DeutschZ-Design.[/b]
+[b]Neun Werte. Drei echte Expansion-Scheinvorlagen. Eine unverwechselbare DeutschZ-Ökonomie.[/b]
 
-DeutschZ D-MarkZ ersetzt die sichtbaren NoxZ-Euro-Münzen und -Scheine durch eine eigene fiktive DeutschZ-Währung. Die Klassen bleiben mit NoxZ Phone, ATMs, Tradern und CriminalZ kompatibel, während Namen und Texturen die DeutschZ-D-MarkZ-Identität tragen.
+DeutschZ D-MarkZ bringt die Werte 1, 2, 5, 10, 20, 50, 100, 200 und 500 als eigene DeutschZ-Banknoten ins Spiel. Version 2.0.0-expansion verwendet die nativen DayZ-Expansion-Geldmodelle und behält zusätzlich die bisherigen NoxZ_Euro-Classnames als Kompatibilitätsklassen für vorhandene Trader-, ATM-, CE- und CriminalZ-Einstellungen.
 
 [hr][/hr]
 [h2]🎯 KURZBESCHREIBUNG[/h2]
 
 [list]
-[*] eigene DeutschZ-Währungsoptik für die bestehenden NoxZCurrency-Klassen
-[*] zwei Münzen und sieben Scheine
-[*] direkte Kompatibilität mit NoxZ Phone und NoxZ-Euro-Auszahlungen
-[*] geeignet für Expansion-ATMs, Trader, Events und CriminalZ-Rewards
-[*] eigenständige PAA-Texturen pro Wert
-[*] als Standalone-PBO und im @DeutschZ_only_core verfügbar
+[*] neun D-MarkZ-Banknoten statt der bisherigen Münz-/NoxZ-Modellmischung
+[*] native Expansion-Hryvnia-, 100-Dollar- und 500-Euro-Scheinmodelle
+[*] drei aktuelle 2048×2048-Geldatlanten mit DeutschZ-Design
+[*] neue Hauptklassen [b]DZDM_1[/b] bis [b]DZDM_500[/b]
+[*] bestehende [b]NoxZ_Euro1[/b] bis [b]NoxZ_Euro500[/b] bleiben als Kompatibilitätsklassen erhalten
+[*] serverseitige Ökonomie bleibt bei ATM, Trader, Phone und Eventlogik
+[*] Standalone-PBO und Integration in [b]@DeutschZ_only_core[/b]
 [/list]
 
 [hr][/hr]
-[h2]💰 AKTUELLE WERTE[/h2]
+[h2]📜 WERTE & EXPANSION-VORLAGEN[/h2]
 
 [list]
-[*] [b]1 D-MarkZ[/b] — Münze
-[*] [b]2 D-MarkZ[/b] — Münze
-[*] [b]5 D-MarkZ[/b] — Schein
-[*] [b]10 D-MarkZ[/b] — Schein
-[*] [b]20 D-MarkZ[/b] — Schein
-[*] [b]50 D-MarkZ[/b] — Halftan-Motiv
-[*] [b]100 D-MarkZ[/b] — Patrick-Motiv
-[*] [b]200 D-MarkZ[/b] — Schein
-[*] [b]500 D-MarkZ[/b] — Patrick-Motiv
+[*] [b]1 D-MarkZ[/b] — Expansion-Hryvnia-Vorlage
+[*] [b]2 D-MarkZ[/b] — Expansion-100-Dollar-Vorlage
+[*] [b]5 D-MarkZ[/b] — Expansion-100-Dollar-Vorlage
+[*] [b]10 D-MarkZ[/b] — Expansion-Hryvnia-Vorlage
+[*] [b]20 D-MarkZ[/b] — Expansion-500-Euro-Vorlage
+[*] [b]50 D-MarkZ[/b] — Expansion-100-Dollar-Vorlage, Halftan-Motiv
+[*] [b]100 D-MarkZ[/b] — Expansion-500-Euro-Vorlage
+[*] [b]200 D-MarkZ[/b] — Expansion-Hryvnia-Vorlage
+[*] [b]500 D-MarkZ[/b] — Expansion-500-Euro-Vorlage
 [/list]
 
+Die Zahl bezeichnet immer den D-MarkZ-Wert. Die genannte Expansion-Vorlage beschreibt ausschließlich Modell und UV-Aufteilung des sichtbaren Scheins.
+
 [hr][/hr]
-[h2]🔧 TECHNISCHE UMSETZUNG[/h2]
+[h2]🧩 TECHNISCHE UMSETZUNG[/h2]
 
 [list]
-[*] Münzen erben von [b]NoxZ_Currency_Coin_Base[/b]
-[*] Scheine erben von [b]NoxZ_Euro_Base[/b]
-[*] verwendete Klassen: [b]NoxZ_Euro1, NoxZ_Euro2, NoxZ_Euro5, NoxZ_Euro10, NoxZ_Euro20, NoxZ_Euro50, NoxZ_Euro100, NoxZ_Euro200, NoxZ_Euro500[/b]
-[*] die bestehenden Classnames sichern Kompatibilität mit NoxZ Phone, ATMs und Rewards
-[*] jede Klasse verweist auf eine eigene DeutschZ-PAA
-[*] Version: [b]1.0.0[/b]
+[*] Hryvnia-Basis: [b]ExpansionBanknoteHryvnia[/b]
+[*] Dollar-Basis: [b]ExpansionBanknoteUSD[/b]
+[*] Euro-Basis: [b]ExpansionBanknoteEuro[/b]
+[*] Hauptklassen: [b]DZDM_1, DZDM_2, DZDM_5, DZDM_10, DZDM_20, DZDM_50, DZDM_100, DZDM_200, DZDM_500[/b]
+[*] Kompatibilitätsklassen: [b]NoxZ_Euro1, NoxZ_Euro2, NoxZ_Euro5, NoxZ_Euro10, NoxZ_Euro20, NoxZ_Euro50, NoxZ_Euro100, NoxZ_Euro200, NoxZ_Euro500[/b]
+[*] Geldatlanten: [b]1/2/500[/b], [b]5/10/20[/b] und [b]50/100/200[/b]
+[*] Version: [b]2.0.0-expansion[/b]
 [/list]
 
 [hr][/hr]
-[h2]🏧 ÖKONOMIE & CRIMINALZ[/h2]
+[h2]🏦 ÖKONOMIE, ATM & CRIMINALZ[/h2]
 
-CriminalZ zahlt technisch weiterhin über die NoxZ-Euro-Klassen aus. Ist DeutschZ D-MarkZ geladen, erscheinen diese Klassen mit den DeutschZ-Münzen und -Scheinen. Dadurch bleibt das vorhandene Banking- und Trader-System kompatibel, ohne eine zweite konkurrierende Währungslogik einzubauen.
+Die Mod entscheidet nicht über Kontostände, Kaufpreise oder Rewards. Sie stellt die sichtbaren Banknotenklassen bereit. Expansion ATM/Market, NoxZ Phone, Trader und DeutschZ CriminalZ bleiben für Einzahlungen, Auszahlungen und Belohnungen serverseitig verantwortlich.
 
-Bitcoin wird durch D-MarkZ nicht ersetzt und ist kein Bestandteil dieser Mod.
+Vorhandene Konfigurationen mit NoxZ_Euro-Classnames müssen nicht sofort umgeschrieben werden: Die Kompatibilitätsklassen zeigen auf die neuen Expansion-basierten D-MarkZ-Scheine. Neue Konfigurationen können direkt die DZDM-Classnames verwenden.
 
 [hr][/hr]
 [h2]🛡️ SERVERAUTORITÄT & KONFIGURATION[/h2]
 
-Die Mod liefert Itemklassen und Texturen. Kontostände, Auszahlungen, Käufe, Verkäufe und Rewards werden weiterhin von den jeweils zuständigen Servermods wie NoxZ Phone, Expansion Market, Trader- oder Eventlogik entschieden. D-MarkZ enthält keine clientseitige Geldgenerierung.
+Die Banknoten enthalten keine clientseitige Geldgenerierung. Erzeugung, Löschung, Auszahlung, Handel, Kontostand und Cooldowns müssen weiterhin von den jeweils zuständigen Servermods validiert werden. D-MarkZ ändert keine Traderpreise oder ATM-Konten automatisch.
 
 [hr][/hr]
 [h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
 
 [list]
-[*] Pflicht: [b]NoxZ_Phone[/b] beziehungsweise das enthaltene [b]NoxZCurrency[/b]-Paket
-[*] kompatibel mit dem aktuellen DeutschZ-Expansion- und Trader-Stack
-[*] kompatibel mit CriminalZ-Auszahlungen über NoxZ-Euro-Classnames
+[*] Pflicht für die Geldmodelle: [b]DayZ Expansion Market Objects[/b] aus dem DayZ Expansion Bundle
+[*] der aktuelle DeutschZ-Stack lädt [b]NoxZ_Phone / NoxZCurrency[/b] vor D-MarkZ, damit bestehende NoxZ_Euro-Konfigurationen kompatibel bleiben
+[*] kompatibel mit Expansion ATM/Market, aktuellen Traderdaten und CriminalZ-Auszahlungen
 [*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_DMarkZ[/b]
-[*] niemals dieselbe DMarkZ-PBO aus Core und Standalone doppelt laden
+[*] niemals dieselbe DMarkZ-PBO aus Core und Standalone gleichzeitig laden
+[/list]
+
+[hr][/hr]
+[h2]⚠️ BEKANNTE HINWEISE[/h2]
+
+[list]
+[*] Die vollständige Ingame-Darstellung aller neun Werte ist bis zum Live-Clienttest offen.
+[*] Stapeln, Teilen, Boden-/Inventaransicht, ATM, Phone, Trader und CriminalZ-Payout benötigen einen echten Gameplaytest.
+[*] Die Workshop-Bildquellen zeigen die drei aktuellen Expansion-Geldatlanten; ältere Einzelansichten der vorherigen Serie sind nicht mehr der Release-Stand.
+[*] Die Server-IP [b]193.135.10.126[/b] ist vor einer Steam-Veröffentlichung manuell zu bestätigen.
 [/list]
 
 [hr][/hr]
 [h2]📦 INSTALLATION[/h2]
 
 [list]
-[*] NoxZ_Phone/NoxZCurrency zuerst laden.
+[*] CF/Dabs und DayZ Expansion gemäß dem bestehenden Serverstack laden.
+[*] NoxZ Phone/NoxZCurrency vor D-MarkZ laden, solange bestehende NoxZ_Euro-Classnames genutzt werden.
 [*] D-MarkZ anschließend auf Client und Server über [b]-mod[/b] laden.
 [*] [b]DeutschZ.bikey[/b] im Server-Keyordner bereitstellen.
 [*] Client und Server müssen denselben PBO-Stand verwenden.
 [*] Bei Nutzung von [b]@DeutschZ_only_core[/b] die Standalone-PBO nicht zusätzlich laden.
-[*] Trader-/ATM-Werte serverseitig separat konfigurieren; diese Mod ändert keine Preise automatisch.
 [/list]
 
 [hr][/hr]
 [h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
 
 [list]
-[*] Version: [b]1.0.0[/b]
-[*] aktueller PBO mit DeutschZ signiert und im Core geladen
-[*] alle neun D-MarkZ-Klassen im Serverbuild vorhanden
-[*] Serverstart mit geladenem DMarkZ-PBO technisch bestätigt
-[*] [b]NICHT CLIENT-/GAMEPLAY-GETESTET:[/b] vollständige Darstellung aller Werte, Inventarstapel, ATM, Phone, Trader und CriminalZ-Auszahlung
-[*] Workshop-Preview und Einzelansichten wurden direkt aus den aktuellen neun PAA-Texturen erzeugt
+[*] Version: [b]2.0.0-expansion[/b]
+[*] Preflight, PBO-Build, PBO-Inhaltsprüfung und DeutschZ-Signatur: [b]BESTÄTIGT[/b]
+[*] DMarkZ wurde im technischen Serverlauf ohne Config-/Compilefehler geladen: [b]BESTÄTIGT[/b]
+[*] alle neun DZDM- und NoxZ_Euro-Kompatibilitätsklassen sind im Quell-/PBO-Stand enthalten
+[*] [b]NICHT GAMEPLAY-GETESTET:[/b] Darstellung, Stapel, ATM, Phone, Trader und CriminalZ-Auszahlung mit Client
+[*] Steam-Upload/Veröffentlichung: [b]NICHT DURCHGEFÜHRT[/b]
 [/list]
 
 [hr][/hr]
 [h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
 
 [list]
-[*] vollständiges eigenständiges D-MarkZ-Workshoppaket angelegt
-[*] reale Werte 1 / 2 / 5 / 10 / 20 / 50 / 100 / 200 / 500 dokumentiert
-[*] Halftan- und Patrick-Motive den aktuellen Klassen zugeordnet
-[*] NoxZCurrency-, CriminalZ- und Core-Kompatibilität erklärt
-[*] aktuelles Workshop-Preview und exakte Vorder-/Rückseiten-Exporte ergänzt
+[*] sämtliche neun Werte auf echte Expansion-Banknotenmodelle umgestellt
+[*] drei neue DeutschZ-Geldatlanten eingebunden
+[*] neue DZDM-Hauptklassen eingeführt
+[*] NoxZ_Euro-Classnames als Abwärtskompatibilität erhalten
+[*] frühere Münzmodelle und alte Einzel-PAA-Dokumentation aus dem aktuellen Release-Stand entfernt
+[*] Workshoptexte, Bildquellen, Changelog und Checklisten auf Version 2.0.0-expansion aktualisiert
 [/list]
 
 [hr][/hr]
@@ -117,6 +132,6 @@ Port: [b]20076[/b]
 [hr][/hr]
 [h2]🏴 CREDITS & SUPPORT[/h2]
 
-Währungsdesign, Integration und Betrieb: [b]DeutschZ[/b]. NoxZCurrency/NoxZ Phone bleiben technische Abhängigkeiten ihrer jeweiligen Autoren. Bitte Darstellungsfehler mit Wert, Zustand, Inventaransicht, Screenshot und Clientlog im Discord melden.
+Währungsdesign, Integration und Betrieb: [b]DeutschZ[/b]. DayZ Expansion und NoxZ Phone/NoxZCurrency bleiben Werke ihrer jeweiligen Autoren. Bitte Darstellungsfehler mit Wert, Classname, Ansicht, Screenshot und passenden Client-/Serverlogs im Discord melden.
 
 [b]DeutschZ D-MarkZ — Deine Beute. Deine Wirtschaft. Dein DeutschZ.[/b]

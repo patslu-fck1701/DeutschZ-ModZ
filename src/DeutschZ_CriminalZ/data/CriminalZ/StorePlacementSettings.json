@@ -6,7 +6,7 @@
   ],
   "Placements": [
     {
-      "Type": "ExpansionATM_2",
+      "Type": "DZCRZ_ATM",
       "LocalPosition": [-8.898676, -1.205345, -3.431599],
       "LocalOrientation": [-90.035360, 0.0, 0.0],
       "Scale": 1.0
@@ -22,14 +22,14 @@
     {
       "StoreType": "Land_City_Store",
       "Placements": [
-        {"Type": "ExpansionATM_2", "LocalPosition": [-8.898676, -1.205345, -3.431599], "LocalOrientation": [-90.035360, 0.0, 0.0], "Scale": 1.0},
+        {"Type": "DZCRZ_ATM", "LocalPosition": [-8.898676, -1.205345, -3.431599], "LocalOrientation": [-90.035360, 0.0, 0.0], "Scale": 1.0},
         {"Type": "DZCRZ_StoreInfoSign", "LocalPosition": [0.725949, 1.643461, 10.425142], "LocalOrientation": [-174.602692, 0.0, 0.0], "Scale": 1.0}
       ]
     },
     {
       "StoreType": "Land_City_Store_WithStairs",
       "Placements": [
-        {"Type": "ExpansionATM_2", "LocalPosition": [-8.898676, -1.205345, -3.431599], "LocalOrientation": [-90.035360, 0.0, 0.0], "Scale": 1.0},
+        {"Type": "DZCRZ_ATM", "LocalPosition": [-8.898676, -1.205345, -3.431599], "LocalOrientation": [-90.035360, 0.0, 0.0], "Scale": 1.0},
         {"Type": "DZCRZ_StoreInfoSign", "LocalPosition": [0.725949, 1.643461, 10.425142], "LocalOrientation": [-174.602692, 0.0, 0.0], "Scale": 1.0}
       ]
     }
@@ -37,5 +37,6 @@
   "DuplicateRadius": 0.75,
   "SpawnDelayMilliseconds": 2000,
   "EnableDebugLogging": false,
+  "CustomATMClassname": "DZCRZ_ATM",
   "CustomSignClassname": "DZCRZ_StoreInfoSign"
 }

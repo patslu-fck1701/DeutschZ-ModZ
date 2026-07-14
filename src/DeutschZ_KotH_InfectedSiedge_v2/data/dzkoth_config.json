@@ -38,6 +38,7 @@
                       "KId676nm-HhEmsBOdgv02VHFwD-JMQS76IJ1bVe3kYI="
                   ],
     "RewardDespawnMinutes":  10,
+    "RewardMinimumItems":  24,
     "ProgressHudRadius":  500,
     "BossSpawnMinDistance":  8,
     "BossSpawnMaxDistance":  12

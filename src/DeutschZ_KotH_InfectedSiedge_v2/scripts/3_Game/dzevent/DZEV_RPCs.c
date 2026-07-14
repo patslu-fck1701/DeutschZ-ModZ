@@ -9,17 +9,7 @@ class DZEV_RPCIds
 class DZEV_Paths
 {
 	static const string PROFILE_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2";
-	static const string CONFIG_PATH = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Config/dzevent_config.json";
 	static const string GROUPS_PATH = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Persistence/groups.json";
-}
-
-class DZEV_States
-{
-	static const int READY = 0;
-	static const int CAPTURING = 1;
-	static const int BOSS = 2;
-	static const int COMPLETED = 3;
-	static const int CLEANUP = 4;
 }
 
 class DZEV_ProgressModes

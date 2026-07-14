@@ -14,6 +14,9 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 		m_DZKOTH_SmokeStateLocal = -2;
 		RegisterNetSyncVariableFloat("m_DZKOTH_RaisedAmount");
 		RegisterNetSyncVariableInt("m_DZKOTH_SmokeState");
+
+		if (GetGame() && GetGame().IsServer())
+			SetAllowDamage(false);
 	}
 
 	override void EEDelete(EntityAI parent)
@@ -47,12 +50,39 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 		FullyBuild();
 		AnimateFlagEx(1.0);
 
-		EntityAI current = FindAttachmentBySlotName("Material_FPole_Flag");
+		EntityAI current;
+		array<EntityAI> redundantFlags = new array<EntityAI>;
+		int attachmentCount = GetInventory().AttachmentCount();
+		for (int attachmentIndex = 0; attachmentIndex < attachmentCount; attachmentIndex++)
+		{
+			EntityAI attachment = GetInventory().GetAttachmentFromIndex(attachmentIndex);
+			if (!attachment || !Flag_Base.Cast(attachment))
+				continue;
+
+			if (!current && attachment.GetType() == DZKOTH_Const.FLAG_CLASSNAME)
+				current = attachment;
+			else
+				redundantFlags.Insert(attachment);
+		}
+
+		foreach (EntityAI redundantFlag: redundantFlags)
+		{
+			if (redundantFlag)
+				redundantFlag.Delete();
+		}
+
 		if (!current)
 			current = GetInventory().CreateAttachment(DZKOTH_Const.FLAG_CLASSNAME);
 
 		DZKOTH_SetRaisedAmount(0.0);
 		DZKOTH_Utils.Log("Flagpole visual state forced: built=yes flag=" + BoolText(current != null) + " raised=no");
+	}
+
+	void DZKOTH_DeleteEventFlag()
+	{
+		EntityAI current = FindAttachmentBySlotName("Material_FPole_Flag");
+		if (current && GetGame())
+			GetGame().ObjectDelete(current);
 	}
 
 	void DZKOTH_SetSmokeState(int state)
@@ -143,6 +173,18 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 	{
 	}
 
+	override void SetActions()
+	{
+		super.SetActions();
+		RemoveAction(ActionRaiseFlag);
+		RemoveAction(ActionLowerFlag);
+		RemoveAction(ActionFoldBaseBuildingObject);
+#ifdef EXPANSIONMODBASEBUILDING
+		RemoveAction(ExpansionActionEnterFlagMenu);
+		RemoveAction(ExpansionActionDismantleFlag);
+#endif
+	}
+
 	protected string BoolText(bool value)
 	{
 		if (value)
@@ -158,6 +200,7 @@ class DZKOTH_SmokeManager
 	static const float SMOKE_HEIGHT_OFFSET = 13.0;
 
 	protected DZKOTH_EventFlagpole m_Flagpole;
+	protected vector m_FlagpolePosition;
 	protected Object m_ServerSmoke;
 	protected string m_CurrentSmokeType;
 	protected bool m_SmokeRefreshActive;
@@ -168,12 +211,14 @@ class DZKOTH_SmokeManager
 			return;
 
 		vector pos = DZKOTH_Utils.Grounded(flagPosition);
+		m_FlagpolePosition = pos;
 		RemoveStaleEventFlagpoles(pos);
-		m_Flagpole = TrySpawnFlagpole(pos, ECE_SETUP | ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE);
+		int runtimeFlags = ECE_NOLIFETIME | ECE_NOPERSISTENCY_WORLD;
+		m_Flagpole = TrySpawnFlagpole(pos, ECE_SETUP | ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE | runtimeFlags);
 		if (!m_Flagpole)
-			m_Flagpole = TrySpawnFlagpole(pos, ECE_SETUP | ECE_PLACE_ON_SURFACE);
+			m_Flagpole = TrySpawnFlagpole(pos, ECE_SETUP | ECE_PLACE_ON_SURFACE | runtimeFlags);
 		if (!m_Flagpole)
-			m_Flagpole = TrySpawnFlagpole(pos, ECE_NONE);
+			m_Flagpole = TrySpawnFlagpole(pos, runtimeFlags);
 		if (!m_Flagpole)
 		{
 			DZKOTH_Utils.Warn("Could not spawn event flagpole at " + pos.ToString());
@@ -189,9 +234,14 @@ class DZKOTH_SmokeManager
 
 	protected void RemoveStaleEventFlagpoles(vector pos)
 	{
+		if (!GetGame() || pos == vector.Zero)
+			return;
+
 		array<Object> objects = new array<Object>;
 		array<CargoBase> proxies = new array<CargoBase>;
-		GetGame().GetObjectsAtPosition3D(pos, 6.0, objects, proxies);
+		array<Object> staleFlags = new array<Object>;
+		array<Object> stalePoles = new array<Object>;
+		GetGame().GetObjectsAtPosition3D(pos, 20.0, objects, proxies);
 
 		foreach (Object object: objects)
 		{
@@ -199,8 +249,22 @@ class DZKOTH_SmokeManager
 				continue;
 
 			string typeName = object.GetType();
-			if (typeName == DZKOTH_Const.FLAGPOLE_CLASSNAME || typeName == "DZEV_KOTH_Flagpole")
-				GetGame().ObjectDelete(object);
+			if (typeName == DZKOTH_Const.FLAG_CLASSNAME || typeName == "DZEV_KOTH_Flag")
+				staleFlags.Insert(object);
+			else if (typeName == DZKOTH_Const.FLAGPOLE_CLASSNAME || typeName == "DZEV_KOTH_Flagpole")
+				stalePoles.Insert(object);
+		}
+
+		foreach (Object staleFlag: staleFlags)
+		{
+			if (staleFlag)
+				GetGame().ObjectDelete(staleFlag);
+		}
+
+		foreach (Object stalePole: stalePoles)
+		{
+			if (stalePole)
+				GetGame().ObjectDelete(stalePole);
 		}
 	}
 
@@ -261,11 +325,22 @@ class DZKOTH_SmokeManager
 	void DeleteFlagpole()
 	{
 		Cleanup();
+		vector oldPosition = m_FlagpolePosition;
 
 		if (m_Flagpole && GetGame())
+		{
+			oldPosition = m_Flagpole.GetPosition();
+			m_Flagpole.DZKOTH_DeleteEventFlag();
 			GetGame().ObjectDelete(m_Flagpole);
+		}
 
 		m_Flagpole = null;
+		m_FlagpolePosition = vector.Zero;
+		if (oldPosition != vector.Zero && GetGame())
+		{
+			RemoveStaleEventFlagpoles(oldPosition);
+			GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(RemoveStaleEventFlagpoles, 250, false, oldPosition);
+		}
 	}
 
 	protected void SetSmoke(string smokeType)

@@ -102,6 +102,12 @@ class DZCRZ_Manager
 			m_ATMs.RegisterExpansionATM(atm);
 	}
 
+	void UnregisterATMObject(Object atmObject)
+	{
+		if (m_ATMs)
+			m_ATMs.UnregisterObject(atmObject);
+	}
+
 	bool StartATMHack(PlayerBase player, Object atmObject)
 	{
 		if (!m_Initialized)
@@ -411,9 +417,10 @@ class DZCRZ_Manager
 		session.State = DZCRZ_Const.STATE_CANCELLED;
 		if (reason != DZCRZ_Const.CANCEL_SERVER_SHUTDOWN && reason != DZCRZ_Const.CANCEL_ADMIN)
 			DamageToolOnFail(session);
+		string reasonLabel = DZCRZ_Utils.CancelReasonLabel(reason);
 		if (session.Player)
-			m_Notifications.Personal(session.Player, "CriminalZ", "Hack abgebrochen. Grund=" + reason.ToString());
-		DZCRZ_Log.Warn("Hack abgebrochen: session=" + session.SessionId + " reason=" + reason.ToString());
+			m_Notifications.Personal(session.Player, "CriminalZ", "Hack abgebrochen: " + reasonLabel + ".");
+		DZCRZ_Log.Warn("Hack abgebrochen: session=" + session.SessionId + " reason=" + reason.ToString() + " label=" + reasonLabel + " elapsed=" + session.GetElapsedSeconds().ToString() + " progress=" + session.Progress.ToString());
 		CleanupSession(session);
 	}
 

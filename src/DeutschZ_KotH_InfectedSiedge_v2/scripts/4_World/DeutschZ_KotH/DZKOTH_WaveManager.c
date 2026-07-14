@@ -235,7 +235,7 @@ class DZKOTH_WaveManager
 		{
 			DayZInfected infectedAgent = DayZInfected.Cast(infected);
 			if (infectedAgent && infectedAgent.GetInputController())
-				infectedAgent.GetInputController().OverrideMovementSpeed(true, 0.75);
+				infectedAgent.GetInputController().OverrideMovementSpeed(true, 1.0);
 		}
 
 		DZKOTH_Utils.Log("Applied zombie stats type=" + infected.GetType() + " health=" + actualHealth.ToString() + "/" + actualMaxHealth.ToString() + " walkOnly=" + wave.DisableRunning.ToString());

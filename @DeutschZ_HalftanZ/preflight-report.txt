@@ -1,0 +1,5 @@
+dzl preflight — DeutschZ_HalftanZ
+errors: 0  warnings: 0  info: 0
+checked: 27 files, 121 references, 1 configs
+
+No findings.

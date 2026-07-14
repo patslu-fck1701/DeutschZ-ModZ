@@ -1,11 +1,13 @@
-[h1]💰 DEUTSCHZ CRIMINALZ — UPDATE 14.07.2026[/h1]
+[h1]💰 CRIMINALZ 0.1.1 — ATM & HACK FIX[/h1]
 
 [list]
-[*] kompletter DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
-[*] ATM-Hack, Auszahlung, Cooldown und Fahrzeug-Hack aus aktueller Config dokumentiert
-[*] StorePlacement mit ExpansionATM_2 und DeutschZ-Schild präzisiert
-[*] technischer Nachweis: 19 Stores, 19 ATMs, 19 Schilder, 0 Fehler
-[*] Garage-Status und Abhängigkeiten ehrlich getrennt
+[*] funktionierender ExpansionATM_2 jetzt als DZCRZ_ATM mit neuem DeutschZ-Design
+[*] neues Expansion-basiertes City-Store-Hinweisschild
+[*] sichere Migration alter Standard-ATMs am berechneten Store-Ziel
+[*] RobTool_Crowbar gegen grüne Fehldarstellung korrigiert
+[*] falschen „Grund 1“-Abbruch nach regulärem ATM- und Fahrzeughack-Abschluss behoben
+[*] technisch gebaut, PBO-geprüft und mit DeutschZ signiert
+[*] Serverlauf bestätigt: 19 Stores, 19 DZCRZ_ATM, 19 Schilder, 0 StorePlacement-Fehler
 [/list]
 
-[b]Status:[/b] Serverstart und StorePlacement technisch bestätigt. Client-Gameplaytest bleibt offen.
+[b]Live-Clienttest offen:[/b] ATM-Menü, vollständige Hackaktionen, Auszahlung, Alarm/Marker sowie neue ATM-, Schild- und Crowbar-Optik prüfen.

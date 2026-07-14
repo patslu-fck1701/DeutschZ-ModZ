@@ -1,7 +1,8 @@
 dzl preflight — DeutschZ_KotH_InfectedSiedge_v2
-errors: 0  warnings: 1  info: 2
-checked: 102 files, 8 references, 1 configs
+errors: 0  warnings: 1  info: 3
+checked: 97 files, 18 references, 1 configs
 
-WARNING path-uppercase: 51 packed path(s) contain uppercase characters (e.g. AGENTS.md). Official guidance: keep packed files lowercase or the mod breaks on DayZ Linux Server binaries.
+WARNING path-uppercase: 49 packed path(s) contain uppercase characters (e.g. AGENTS.md). Official guidance: keep packed files lowercase or the mod breaks on DayZ Linux Server binaries.
 INFO    prefix-mismatch: Prefix 'DeutschZ_KOTH_InfectedSiege' looks unrelated to the mod folder 'DeutschZ_KotH_InfectedSiedge_v2' — double-check it's intentional. [$PBOPREFIX$]
 INFO    texture-suffix: Texture has no role suffix (_co/_nohq/_smdi): data\ui\dzkoth_logo_dark.paa — fine for UI images, wrong for model textures. [data\ui\dzkoth_logo_dark.paa]
+INFO    texture-suffix: Texture has no role suffix (_co/_nohq/_smdi): data\ui\dzkoth_status_darkglass.paa — fine for UI images, wrong for model textures. [data\ui\dzkoth_status_darkglass.paa]

@@ -72,6 +72,7 @@ class DZCRZ_StorePlacementSettings
 	float DuplicateRadius = 0.75;
 	int SpawnDelayMilliseconds = 2000;
 	bool EnableDebugLogging = false;
+	string CustomATMClassname = "DZCRZ_ATM";
 	string CustomSignClassname = "DZCRZ_StoreInfoSign";
 
 	void DZCRZ_StorePlacementSettings()
@@ -89,7 +90,7 @@ class DZCRZ_StorePlacementSettings
 		StoreTypes.Insert("Land_City_Store_WithStairs");
 		Placements.Clear();
 		DZCRZ_StorePlacementEntry atm = new DZCRZ_StorePlacementEntry;
-		atm.Type = "ExpansionATM_2";
+		atm.Type = CustomATMClassname;
 		atm.SetLocalPosition("-8.898676 -1.205345 -3.431599");
 		atm.SetLocalOrientation("-90.035360 0 0");
 		Placements.Insert(atm);
@@ -126,17 +127,23 @@ class DZCRZ_StorePlacementSettings
 		SpawnDelayMilliseconds = Math.Clamp(SpawnDelayMilliseconds, 250, 30000);
 		if (!StoreProfiles || StoreProfiles.Count() == 0)
 			BuildDefaultProfiles();
-		UpgradeLegacySignPlacements();
+		UpgradeLegacyPlacements();
 		return valid;
 	}
 
-	protected void UpgradeLegacySignPlacements()
+	protected void UpgradeLegacyPlacements()
 	{
+		if (CustomATMClassname == "")
+			CustomATMClassname = "DZCRZ_ATM";
 		if (CustomSignClassname == "")
 			CustomSignClassname = "DZCRZ_StoreInfoSign";
 		foreach (DZCRZ_StorePlacementEntry placement: Placements)
 		{
-			if (placement && placement.Type == "StaticObj_FueldStation_Sign")
+			if (!placement)
+				continue;
+			if (placement.Type == "ExpansionATM_2")
+				placement.Type = CustomATMClassname;
+			else if (placement.Type == "StaticObj_FueldStation_Sign")
 				placement.Type = CustomSignClassname;
 		}
 		foreach (DZCRZ_StorePlacementProfile profile: StoreProfiles)
@@ -145,7 +152,11 @@ class DZCRZ_StorePlacementSettings
 				continue;
 			foreach (DZCRZ_StorePlacementEntry profilePlacement: profile.Placements)
 			{
-				if (profilePlacement && profilePlacement.Type == "StaticObj_FueldStation_Sign")
+				if (!profilePlacement)
+					continue;
+				if (profilePlacement.Type == "ExpansionATM_2")
+					profilePlacement.Type = CustomATMClassname;
+				else if (profilePlacement.Type == "StaticObj_FueldStation_Sign")
 					profilePlacement.Type = CustomSignClassname;
 			}
 		}

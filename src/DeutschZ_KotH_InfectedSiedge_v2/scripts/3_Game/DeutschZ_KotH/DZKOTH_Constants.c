@@ -1,6 +1,6 @@
 class DZKOTH_Const
 {
-	static const string VERSION = "0.4.3-livefix";
+	static const string VERSION = "0.4.5-eventruntime";
 	static const string LOG_PREFIX = "[DeutschZ_KotH] ";
 	static const string MOD_PREFIX = "DeutschZ_KOTH_InfectedSiege";
 	static const string PROFILE_NAME = "DeutschZ_KotH_InfectedSiedge_v2";
@@ -61,7 +61,6 @@ class DZKOTH_ProfilePaths
 
 		MigrateFile("$profile:KotH/KotHConfig.json", DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON);
 		MigrateFile("$profile:DZKOTH/state.json", DZKOTH_Const.PROFILE_STATE_JSON);
-		MigrateFile("$profile:DZEventVanilla/config.json", DZEV_Paths.CONFIG_PATH);
 		MigrateFile("$profile:DZEventVanilla/groups.json", DZEV_Paths.GROUPS_PATH);
 	}
 

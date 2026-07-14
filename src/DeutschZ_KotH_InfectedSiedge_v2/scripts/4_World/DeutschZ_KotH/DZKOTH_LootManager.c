@@ -24,7 +24,10 @@ class DZKOTH_LootManager
 
 		EnsureRewardMinimumLoot(m_RewardCrate);
 		if (m_RewardCrate && lootConfig)
+		{
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
+			EnsureRewardPoolVolume(m_RewardCrate, lootConfig.RewardCrateLoot, GetRewardMinimumItems(mainConfig));
+		}
 		TryCreateEventReward(m_RewardCrate, DZKOTH_Const.FIREWORKS_BATTERY_CLASSNAME, 10.0);
 		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
 		LogRewardContents(m_RewardCrate);
@@ -56,7 +59,10 @@ class DZKOTH_LootManager
 
 		EnsureRewardMinimumLoot(m_RewardCrate);
 		if (m_RewardCrate && lootConfig)
+		{
 			FillContainer(m_RewardCrate, lootConfig.RewardCrateLoot);
+			EnsureRewardPoolVolume(m_RewardCrate, lootConfig.RewardCrateLoot, GetRewardMinimumItems(mainConfig));
+		}
 		TryCreateEventReward(m_RewardCrate, DZKOTH_Const.FIREWORKS_BATTERY_CLASSNAME, 10.0);
 		m_RewardWasFilled = CountInventoryItems(m_RewardCrate) > 0;
 		LogRewardContents(m_RewardCrate);
@@ -249,6 +255,52 @@ class DZKOTH_LootManager
 		CreateGuaranteedItems(container, "M67Grenade", 1, true);
 
 		DZKOTH_Utils.Log("Reward minimum check: " + before.ToString() + " -> " + CountInventoryItems(container).ToString() + " items.");
+	}
+
+	protected void EnsureRewardPoolVolume(EntityAI container, array<ref DZKOTH_LootEntry> entries, int minimumItems)
+	{
+		if (!container || !container.GetInventory() || !entries || entries.Count() == 0)
+			return;
+		if (minimumItems < 1)
+			return;
+
+		int attempts = 0;
+		while (CountInventoryItems(container) < minimumItems && attempts < 120)
+		{
+			attempts++;
+			DZKOTH_LootEntry entry = entries.Get(Math.RandomIntInclusive(0, entries.Count() - 1));
+			if (!entry || entry.ClassName == "")
+				continue;
+
+			int classLimit = 3;
+			if (IsUniqueRewardClass(entry.ClassName))
+				classLimit = 1;
+			else if (GetGame().ConfigIsExisting("CfgMagazines " + entry.ClassName))
+				classLimit = 2;
+
+			if (CountInventoryClass(container, entry.ClassName) >= classLimit)
+				continue;
+			if (!GetGame().ConfigIsExisting("CfgVehicles " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgWeapons " + entry.ClassName) && !GetGame().ConfigIsExisting("CfgMagazines " + entry.ClassName))
+				continue;
+
+			EntityAI item = container.GetInventory().CreateInInventory(entry.ClassName);
+			if (item)
+				DZKOTH_Utils.Log("Reward item added source=minimum-volume class=" + entry.ClassName);
+		}
+
+		int finalCount = CountInventoryItems(container);
+		if (finalCount < minimumItems)
+			DZKOTH_Utils.Warn("Reward barrel minimum volume not reached: " + finalCount.ToString() + "/" + minimumItems.ToString());
+		else
+			DZKOTH_Utils.Log("Reward barrel minimum volume reached: " + finalCount.ToString() + " items with per-class duplicate caps.");
+	}
+
+	protected int GetRewardMinimumItems(DZKOTH_MainConfig mainConfig)
+	{
+		if (mainConfig && mainConfig.RewardMinimumItems >= 12 && mainConfig.RewardMinimumItems <= 40)
+			return mainConfig.RewardMinimumItems;
+
+		return 24;
 	}
 
 	protected void CreateGuaranteedItems(EntityAI container, string className, int count, bool unique = false)

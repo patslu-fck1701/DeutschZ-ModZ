@@ -1,21 +1,18 @@
 [h1]💰 DeutschZ CriminalZ — Changelog[/h1]
 
-[h2]Dokumentationsstand 14.07.2026[/h2]
+[h2]0.1.1 — 14.07.2026[/h2]
 [list]
-[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
-[*] ExpansionATM_2 und aktuelles DZCRZ_StoreInfoSign als echte Storeobjekte dokumentiert
-[*] ATM-Hack 300–600 Sekunden, 15-Meter-Radius, 2-Stunden-Cooldown und Auszahlung aktualisiert
-[*] automatische Store-Erkennung, relative Transformation und Duplikatschutz präzisiert
-[*] frischen Servernachweis mit 19 Stores, 19 ATMs, 19 Schildern und 0 Fehlern ergänzt
-[*] Garage-Modul korrekt als technisch vorbereitet, aber nicht aktiv bestätigt markiert
-[*] NoxZCurrency-/D-MarkZ-Zusammenspiel und Expansion-Abhängigkeiten korrigiert
+[*] DZCRZ_ATM erbt weiterhin die vollständige ExpansionATM_2-Funktion und verwendet jetzt das neue DeutschZ-ATM-Design
+[*] StorePlacement-Standard von ExpansionATM_2 auf DZCRZ_ATM umgestellt
+[*] sichere Migration eines passenden alten ExpansionATM_2 innerhalb des 0,75-m-Zielradius ergänzt
+[*] DZCRZ_StoreInfoSign auf ExpansionSign_Trader_Bandit mit camo-Auswahl und neuem DeutschZ-Cash-Design umgestellt
+[*] RobTool_Crowbar-Textur-/Renderpfad gegen grüne Fehldarstellung korrigiert
+[*] falschen Abbruch „Grund 1“ nach natürlichem Abschluss von ATM- und Fahrzeug-Continuous-Actions behoben
+[*] vollständige deutsche/englische Workshoptexte, Update Notes, Bildquellen und Checklisten aktualisiert
 [/list]
 
-[h2]Aktueller Build 0.1.0[/h2]
-[list]
-[*] serverautoritative ATM- und Fahrzeug-Hackmanager
-[*] persistente Cooldowns, Marker, Alarm und Rewardlogik
-[*] dynamisches StorePlacement ohne feste Weltkoordinaten
-[/list]
+[b]Technische Validierung:[/b] Preflight, PBO-Build, PBO-Inhaltsprüfung, DeutschZ-Signatur und compile-sauberes Laden auf dem Server bestätigt. StorePlacement fand 19 Stores (11 + 8), erzeugte 19 DZCRZ_ATM und 19 Schilder, meldete 0 Fehler und bestand den Referenztest.
 
-[i]Diese Aktualisierung ändert Workshoptexte und keine Gameplay-PBO.[/i]
+[b]Offen:[/b] Clientdarstellung, vollständiger ATM-/Fahrzeughack, Auszahlung, Marker/Sirene, Doppelstart, zwei Clients und Map-Loader-Store.
+
+[i]Kein Steam-Upload und keine Gameplay-Abnahme allein aus Build oder Serverstart abgeleitet.[/i]

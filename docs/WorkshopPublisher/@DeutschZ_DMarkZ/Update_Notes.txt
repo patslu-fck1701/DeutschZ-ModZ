@@ -1,11 +1,11 @@
-[h1]💶 DEUTSCHZ D-MARKZ — RELEASE NOTES 14.07.2026[/h1]
+[h1]💶 D-MARKZ 2.0.0-expansion — EXPANSION BANKNOTE UPDATE[/h1]
 
 [list]
-[*] vollständige DE-/EN-Workshopbeschreibung für Version 1.0.0
-[*] 1- und 2-D-MarkZ-Münzen
-[*] 5-, 10-, 20-, 50-, 100-, 200- und 500-D-MarkZ-Scheine
-[*] NoxZCurrency-, CriminalZ-, ATM- und Trader-Kompatibilität dokumentiert
-[*] aktuelles Workshop-Preview sowie exakte Vorder- und Rückseitenansichten ergänzt
+[*] neun D-MarkZ-Werte vollständig auf native Expansion-Scheinmodelle umgestellt
+[*] drei neue DeutschZ-Geldatlanten für 1/2/500, 5/10/20 und 50/100/200
+[*] neue DZDM-Classnames plus kompatible NoxZ_Euro-Aliasse
+[*] bisherige Trader-, ATM-, CE- und CriminalZ-Konfiguration bleibt über die Aliasse nutzbar
+[*] technisch gebaut, PBO-geprüft und mit DeutschZ signiert
 [/list]
 
-[b]Status:[/b] PBO serverseitig geladen. Vollständige Clientdarstellung und Wirtschaftsintegration bleiben Live-Tests.
+[b]Live-Clienttest offen:[/b] Bitte alle neun Werte in Inventar, Hand und Bodenansicht sowie ATM, Phone, Trader und CriminalZ-Auszahlung prüfen.

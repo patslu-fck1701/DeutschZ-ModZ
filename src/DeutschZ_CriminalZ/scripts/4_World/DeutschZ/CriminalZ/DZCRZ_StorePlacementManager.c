@@ -11,6 +11,8 @@ class DZCRZ_StorePlacementManager
 	protected int m_ATMsCreated;
 	protected int m_SignsCreated;
 	protected int m_Reused;
+	protected int m_LegacyObjectsReplaced;
+	protected int m_DuplicatesRemoved;
 	protected int m_Errors;
 	protected bool m_ReferenceTestPassed;
 
@@ -120,7 +122,7 @@ class DZCRZ_StorePlacementManager
 		object.SetScale(placement.Scale);
 		if (reused)
 			m_Reused++;
-		else if (placement.Type == "ExpansionATM_2")
+		else if (placement.Type == DZCRZ_Const.ATM_CLASS || placement.Type == "ExpansionATM_2")
 			m_ATMsCreated++;
 		else if (placement.Type == "StaticObj_FueldStation_Sign" || placement.Type == "DZCRZ_StoreInfoSign")
 			m_SignsCreated++;
@@ -137,13 +139,55 @@ class DZCRZ_StorePlacementManager
 	{
 		array<Object> objects = new array<Object>;
 		array<CargoBase> proxies = new array<CargoBase>;
+		array<Object> legacyObjects = new array<Object>;
+		Object exactMatch;
 		GetGame().GetObjectsAtPosition3D(position, m_Settings.DuplicateRadius, objects, proxies);
 		foreach (Object candidate: objects)
 		{
-			if (candidate && candidate.GetType() == typeName && vector.Distance(candidate.GetPosition(), position) <= m_Settings.DuplicateRadius)
-				return candidate;
+			if (!candidate || vector.Distance(candidate.GetPosition(), position) > m_Settings.DuplicateRadius)
+				continue;
+			string candidateType = candidate.GetType();
+			if (candidateType == typeName)
+			{
+				if (!exactMatch)
+					exactMatch = candidate;
+				else
+				{
+					DeletePlacementObject(candidate);
+					m_DuplicatesRemoved++;
+				}
+			}
+			else if (IsLegacyPlacementType(typeName, candidateType))
+				legacyObjects.Insert(candidate);
 		}
-		return null;
+		foreach (Object legacyObject: legacyObjects)
+		{
+			if (legacyObject)
+			{
+				DeletePlacementObject(legacyObject);
+				m_LegacyObjectsReplaced++;
+			}
+		}
+		return exactMatch;
+	}
+
+	protected void DeletePlacementObject(Object placementObject)
+	{
+		if (!placementObject)
+			return;
+		string objectType = placementObject.GetType();
+		if (objectType == DZCRZ_Const.ATM_CLASS || objectType == "ExpansionATM_2")
+			DZCRZ_Manager.GetInstance().UnregisterATMObject(placementObject);
+		GetGame().ObjectDelete(placementObject);
+	}
+
+	protected bool IsLegacyPlacementType(string desiredType, string candidateType)
+	{
+		if (desiredType == DZCRZ_Const.ATM_CLASS && candidateType == "ExpansionATM_2")
+			return true;
+		if (desiredType == "DZCRZ_StoreInfoSign" && candidateType == "StaticObj_FueldStation_Sign")
+			return true;
+		return false;
 	}
 
 	protected vector ComposeOrientation(Object store, vector localOrientation)
@@ -220,6 +264,8 @@ class DZCRZ_StorePlacementManager
 		Print("[DeutschZ StorePlacement] ATMs erstellt: " + m_ATMsCreated.ToString());
 		Print("[DeutschZ StorePlacement] Schilder erstellt: " + m_SignsCreated.ToString());
 		Print("[DeutschZ StorePlacement] Vorhandene Objekte wiederverwendet: " + m_Reused.ToString());
+		Print("[DeutschZ StorePlacement] Legacy-Objekte ersetzt: " + m_LegacyObjectsReplaced.ToString());
+		Print("[DeutschZ StorePlacement] Duplikate entfernt: " + m_DuplicatesRemoved.ToString());
 		Print("[DeutschZ StorePlacement] Fehler: " + m_Errors.ToString());
 		Print("[DeutschZ StorePlacement] Referenztest: " + m_ReferenceTestPassed.ToString());
 	}

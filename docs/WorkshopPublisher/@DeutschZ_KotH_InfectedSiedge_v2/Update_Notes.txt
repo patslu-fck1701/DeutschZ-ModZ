@@ -1,11 +1,16 @@
-[h1]👑 DEUTSCHZ KOTHZ — UPDATE 14.07.2026[/h1]
+[h1]👑 KOTHZ 0.4.5-eventruntime — EVENTRUNTIME FIX[/h1]
 
 [list]
-[*] kompletter DE-/EN-Workshoptext im einheitlichen DeutschZ-Stil
-[*] 300 Sekunden Capture und Wellen bei 0 / 20 / 40 / 60 / 80 bestätigt
-[*] Rauchfarben, BosZ-Werte, Storyrewards und Cleanup korrigiert
-[*] Vor-Capture-Terminalhack korrekt als deaktiviert dokumentiert
-[*] Dependencies und technischer Beweisstatus ergänzt
+[*] exakt eine Eventflagge statt drei sichtbarer Flaggen
+[*] Flaggen-/Territory-Aktionen am Mast entfernt
+[*] nicht persistenter Mast und erweitertes Orphan-/Voll-Cleanup
+[*] Zombies ab 60 % bewegen sich mit gültiger Gehstufe statt einzufrieren
+[*] BosZ-Mumie geht schneller, kann aber weiterhin nicht rennen
+[*] Reward-Fass: Mindestziel 24 und weniger Waffen-/Magazin-Duplikate
+[*] altes sichtbares DZEV-Doppelevent entfernt
+[*] neue PunchedCard- und CardReader-Texturen integriert
+[*] Mast-Scope-Hotfix in 0.4.5 neu gebaut und DeutschZ-signiert
+[*] frischer Serverstart compile-/init-sauber; Eventmanager und Flagpole initialisiert
 [/list]
 
-[b]Status:[/b] Serverstart technisch bestätigt. Der vollständige Capture- und Gameplaylauf bleibt offen.
+[b]Live-Clienttest offen:[/b] Eine Flagge, Mastaktionen, Bewegung, Lootmenge, Kartenoptik und beide Cleanup-Phasen prüfen.

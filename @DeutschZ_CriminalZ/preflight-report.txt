@@ -1,0 +1,7 @@
+dzl preflight — DeutschZ_CriminalZ
+errors: 0  warnings: 2  info: 1
+checked: 77 files, 21 references, 1 configs
+
+WARNING p3d-odol: P3D is already binarized (ODOL): models\DZCRZ_FuelStation_Sign.p3d — feeding it to Binarize crashes with an access violation (0xC0000005). Pack it without re-binarizing. [models\DZCRZ_FuelStation_Sign.p3d]
+WARNING path-uppercase: 43 packed path(s) contain uppercase characters (e.g. models\DZCRZ_FuelStation_Sign.p3d). Official guidance: keep packed files lowercase or the mod breaks on DayZ Linux Server binaries.
+INFO    texture-suffix: Texture has no role suffix (_co/_nohq/_smdi): PAA\SignsDZ\DeutschZxCash_sign_trader_bandit.paa — fine for UI images, wrong for model textures. [PAA\SignsDZ\DeutschZxCash_sign_trader_bandit.paa]

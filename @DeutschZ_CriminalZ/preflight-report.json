@@ -1,0 +1,33 @@
+{
+  "mod": "DeutschZ_CriminalZ",
+  "ok": true,
+  "errors": 0,
+  "warnings": 2,
+  "info": 1,
+  "checked_files": 77,
+  "checked_references": 21,
+  "checked_configs": 1,
+  "findings": [
+    {
+      "severity": "info",
+      "rule": "texture-suffix",
+      "message": "Texture has no role suffix (_co/_nohq/_smdi): PAA\\SignsDZ\\DeutschZxCash_sign_trader_bandit.paa \u2014 fine for UI images, wrong for model textures.",
+      "file": "PAA\\SignsDZ\\DeutschZxCash_sign_trader_bandit.paa",
+      "line": 0
+    },
+    {
+      "severity": "warning",
+      "rule": "p3d-odol",
+      "message": "P3D is already binarized (ODOL): models\\DZCRZ_FuelStation_Sign.p3d \u2014 feeding it to Binarize crashes with an access violation (0xC0000005). Pack it without re-binarizing.",
+      "file": "models\\DZCRZ_FuelStation_Sign.p3d",
+      "line": 0
+    },
+    {
+      "severity": "warning",
+      "rule": "path-uppercase",
+      "message": "43 packed path(s) contain uppercase characters (e.g. models\\DZCRZ_FuelStation_Sign.p3d). Official guidance: keep packed files lowercase or the mod breaks on DayZ Linux Server binaries.",
+      "file": "",
+      "line": 0
+    }
+  ]
+}

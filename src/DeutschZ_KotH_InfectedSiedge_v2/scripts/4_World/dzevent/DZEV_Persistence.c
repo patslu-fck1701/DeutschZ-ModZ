@@ -5,41 +5,6 @@ class DZEV_Persistence
 		DZKOTH_ProfilePaths.Ensure();
 	}
 
-	static ref DZEV_EventConfig LoadConfig()
-	{
-		EnsureProfileDirectory();
-
-		ref DZEV_EventConfig config = new DZEV_EventConfig;
-		string errorMessage;
-
-		if (FileExist(DZEV_Paths.CONFIG_PATH))
-		{
-			if (!JsonFileLoader<ref DZEV_EventConfig>.LoadFile(DZEV_Paths.CONFIG_PATH, config, errorMessage))
-			{
-				Print("[DZEV] Config load failed, using defaults: " + errorMessage);
-				config = new DZEV_EventConfig;
-				SaveConfig(config);
-			}
-		}
-		else
-		{
-			SaveConfig(config);
-		}
-
-		return config;
-	}
-
-	static void SaveConfig(DZEV_EventConfig config)
-	{
-		if (!config)
-			return;
-
-		EnsureProfileDirectory();
-		string errorMessage;
-		if (!JsonFileLoader<ref DZEV_EventConfig>.SaveFile(DZEV_Paths.CONFIG_PATH, config, errorMessage))
-			Print("[DZEV] Config save failed: " + errorMessage);
-	}
-
 	static ref DZEV_GroupsSave LoadGroups()
 	{
 		EnsureProfileDirectory();

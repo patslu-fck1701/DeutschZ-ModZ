@@ -65,7 +65,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "0.4.3-livefix";
+		version = "0.4.5-eventruntime";
 		type = "mod";
 		dependencies[] =
 		{
@@ -105,9 +105,7 @@ class CfgMods
 
 class CfgVehicles
 {
-	class TerritoryFlag;
 	class StaticFlagPole;
-	class BaseBuildingBase;
 	class Flag_Base;
 	class PunchedCard;
 	class Paper;
@@ -222,7 +220,7 @@ class CfgVehicles
 		hiddenSelections[] = {"component01"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\keycard_punchedcard_co.paa"
+			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\DeutschZxKOTHZ_punchedcard_co.paa"
 		};
 	};
 
@@ -330,10 +328,12 @@ class CfgVehicles
 
 	class DZKOTH_EventFlagpole : StaticFlagPole
 	{
+		// Runtime-spawnable; scope 0 makes DayZ treat the class as abstract.
+		// Admin/territory interactions are removed in script instead.
 		scope = 2;
 		displayName = "DeutschZ K.o.t.H Eventmast";
 		descriptionShort = "Serverseitiger Eventmast fuer DeutschZ K.o.t.H Infected Siege.";
-		scopeCurator = 2;
+		scopeCurator = 0;
 		weight = 100000;
 		class DamageSystem
 		{
@@ -390,7 +390,7 @@ class CfgVehicles
 		};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\cardreader_gpsreceiver_co.paa",
+			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\DeutschZxCardReader_gpsreceiver_co.paa",
 			"dz\gear\navigation\data\GPS_dash_ca.paa",
 			"dz\gear\navigation\data\GPS_dash_ca.paa",
 			"dz\gear\navigation\data\GPS_dash_ca.paa",
@@ -413,143 +413,6 @@ class CfgVehicles
 		hiddenSelectionsTextures[] =
 		{
 			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\KothZFlag_flag_white_co.paa"
-		};
-	};
-
-	class DZEV_KOTH_Flagpole : TerritoryFlag
-	{
-		scope = 2;
-		displayName = "DeutschZ K.o.t.H Flagpole";
-		descriptionShort = "Event flagpole for DeutschZ K.o.t.H Infected Siege.";
-	};
-
-	class DZEV_KOTH_Flag : Flag_Base
-	{
-		scope = 2;
-		displayName = "DeutschZ K.o.t.H Flag";
-		descriptionShort = "Flag for the Infected Siege event.";
-		hiddenSelections[] = {"camo"};
-		hiddenSelectionsTextures[] =
-		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\KothZFlag_flag_white_co.paa"
-		};
-	};
-
-	class DZEV_KOTH_KeyCard : PunchedCard
-	{
-		scope = 0;
-		displayName = "DeutschZ K.o.t.H Keycard";
-		descriptionShort = "Event keycard for the Infected Siege encounter.";
-		hiddenSelections[] = {"component01"};
-		hiddenSelectionsTextures[] =
-		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\keycard_punchedcard_co.paa"
-		};
-	};
-
-	class DZEV_KOTH_SeaChest : SeaChest
-	{
-		scope = 0;
-		displayName = "DeutschZ K.o.t.H Siege Chest";
-		descriptionShort = "Reward chest for the Infected Siege event.";
-		itemsCargoSize[] = {10,50};
-		hiddenSelections[] = {"camoGround"};
-		hiddenSelectionsTextures[] =
-		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\KOTH_sea_chest_co.paa"
-		};
-	};
-
-	class DZEV_Infected_Stage2 : ZmbM_PolicemanSpecForce_Heavy
-	{
-		scope = 2;
-		displayName = "DeutschZ Siege Infected";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health
-				{
-					hitpoints = 220;
-				};
-			};
-		};
-	};
-
-	class DZEV_Infected_Stage3 : ZmbM_Mummy
-	{
-		scope = 2;
-		displayName = "DeutschZ Heavy Siege Infected";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health
-				{
-					hitpoints = 500;
-				};
-			};
-		};
-	};
-
-	class DZEV_Boss_Mummy : ZmbM_Mummy
-	{
-		scope = 2;
-		displayName = "DeutschZ Bozz Zombie";
-		class DamageSystem
-		{
-			class GlobalHealth
-			{
-				class Health
-				{
-					hitpoints = 7500;
-				};
-			};
-			class DamageZones
-			{
-				class Head
-				{
-					class Health
-					{
-						hitpoints = 2500;
-					};
-				};
-				class Torso
-				{
-					class Health
-					{
-						hitpoints = 7500;
-					};
-				};
-				class LeftArm
-				{
-					class Health
-					{
-						hitpoints = 5000;
-					};
-				};
-				class RightArm
-				{
-					class Health
-					{
-						hitpoints = 5000;
-					};
-				};
-				class LeftLeg
-				{
-					class Health
-					{
-						hitpoints = 5000;
-					};
-				};
-				class RightLeg
-				{
-					class Health
-					{
-						hitpoints = 5000;
-					};
-				};
-			};
 		};
 	};
 };

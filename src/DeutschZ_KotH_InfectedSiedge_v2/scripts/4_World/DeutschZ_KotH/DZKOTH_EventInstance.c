@@ -223,6 +223,9 @@ class DZKOTH_EventInstance
 		CleanupRewardFireworks();
 		if (m_Smoke)
 			m_Smoke.DeleteFlagpole();
+		if (m_Trigger && GetGame())
+			GetGame().ObjectDelete(m_Trigger);
+		m_Trigger = null;
 		if (m_Markers)
 			m_Markers.Remove();
 

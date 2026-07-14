@@ -2,7 +2,7 @@
 
 [b]Erobere die Zone. Halte fünf Minuten stand. Überlebe fünf Eskalationsstufen und den BosZ.[/b]
 
-DeutschZ KotH Infected Siedge v2 ist ein serverautoritatives King-of-the-Hill-PvPvE-Event mit sichtbarem Rauchsignal, blockierbarer Capture-Zone, fünf Infiziertenwellen, einem 7500-HP-Boss und Storyrewards für die nächste Eventstufe.
+DeutschZ KotH Infected Siedge v2 ist ein serverautoritatives King-of-the-Hill-PvPvE-Event mit sichtbarem Rauchsignal, blockierbarer Capture-Zone, fünf Infiziertenwellen, einem 7500-HP-BosZ und Storyrewards für die nächste Eventstufe. Version 0.4.5-eventruntime repariert Flaggen-, Mast-, Bewegungs-, Loot- und Cleanup-Probleme des gemeldeten Live-Ablaufs.
 
 [hr][/hr]
 [h2]🎯 KURZBESCHREIBUNG[/h2]
@@ -16,6 +16,7 @@ DeutschZ KotH Infected Siedge v2 ist ein serverautoritatives King-of-the-Hill-Pv
 [*] fünf Wellen bei 0 / 20 / 40 / 60 / 80 Prozent
 [*] BosZ-Mumie mit 7500 HP
 [*] Reward-Fass, Boss-Überreste und Storyitems
+[*] exakt eine Eventflagge an einem nicht persistenten Eventmast
 [/list]
 
 [hr][/hr]
@@ -39,12 +40,12 @@ Der vorhandene 60-Sekunden-Terminal-/Kistenaktionscode ist nicht Teil des verpfl
 [list]
 [*] [b]0 %:[/b] 3 Infizierte mit je 250 HP
 [*] [b]20 %:[/b] 2 Infizierte mit je 400 HP
-[*] [b]40 %:[/b] 2 Infizierte mit je 600 HP; Laufen deaktiviert
-[*] [b]60 %:[/b] 3 Infizierte mit je 800 HP; Laufen deaktiviert
-[*] [b]80 %:[/b] 2 Infizierte mit je 1000 HP, rote Augen; Laufen deaktiviert
+[*] [b]40 %:[/b] 2 Infizierte mit je 600 HP; Rennen deaktiviert
+[*] [b]60 %:[/b] 3 Infizierte mit je 800 HP; Rennen deaktiviert
+[*] [b]80 %:[/b] 2 Infizierte mit je 1000 HP, rote Augen; Rennen deaktiviert
 [/list]
 
-Die Wellen werden vom Server an den Capture-Fortschritt gebunden. Der Client entscheidet weder Spawns noch Fortschritt oder Rewards.
+Die langsamen Wellen verwenden jetzt die gültige Vanilla-Gehstufe [b]1[/b] statt des ungültigen Werts 0,75. Dadurch sollen die Infizierten nicht mehr bei 60 Prozent einfrieren. Die BosZ-Mumie geht ebenfalls schneller, bleibt aber ausdrücklich ohne Rennfähigkeit.
 
 [hr][/hr]
 [h2]👹 BOSZ & REWARDS[/h2]
@@ -54,11 +55,27 @@ Die Wellen werden vom Server an den Capture-Fortschritt gebunden. Der Client ent
 [*] BosZ-Schadensmultiplikator: [b]10[/b]
 [*] BattlegroundZ-Keycard in den Boss-Überresten: [b]100 %[/b]
 [*] DeutschZ_FireworksLauncher-Chance: [b]10 %[/b]
+[*] Mindestziel im Reward-Fass: [b]24 Inventareinträge[/b]
+[*] Duplikatgrenzen für Hauptwaffen, Magazine, Optiken und Schalldämpfer
 [*] Reward und vollständiges Cleanup spätestens nach [b]10 Minuten[/b]
 [*] kein permanentes Keycard-Träger-Tracking
 [/list]
 
 Die BattlegroundZ-Keycard stammt aus den KotHZ-Boss-Überresten. Sie wird nicht von ConvoyZ erzeugt.
+
+[hr][/hr]
+[h2]🚩 FLAGGE, MAST & CLEANUP[/h2]
+
+[list]
+[*] pro Eventmast wird exakt eine [b]DZKOTH_EventFlag[/b] erzeugt
+[*] überzählige und verwaiste alte DZKOTH-/DZEV-Masten und -Flaggen werden im Eventradius bereinigt
+[*] der Mast ist ein nicht persistentes Runtime-Objekt
+[*] Vanilla-Flaggenaktionen und optionale Expansion-Territory-/Dismantle-Aktionen sind entfernt
+[*] nach BosZ-Sieg werden Mast, Flagge, Wellen und Eventeffekte bereinigt; Reward-Fass/Boss-Überreste bleiben für die Lootphase
+[*] spätestens nach zehn Minuten folgt das vollständige Cleanup einschließlich Reward-Fass
+[/list]
+
+Die früher sichtbaren/spawnbaren DZEV-Eventklassen für Mast, Flagge, Zombies, Boss und Kiste wurden entfernt. Interne DZEV-Gruppen-/RPC-/UI-Kompatibilität bleibt bestehen, erzeugt aber kein zweites KotH-Event mehr.
 
 [hr][/hr]
 [h2]🎮 EVENT-ABLAUF[/h2]
@@ -67,11 +84,21 @@ Die BattlegroundZ-Keycard stammt aus den KotHZ-Boss-Überresten. Sie wird nicht 
 
 [b]2. ZONE BETRETEN[/b] — das gültige Capture beginnt, der Rauch wechselt auf grün.
 
-[b]3. WELLEN ÜBERLEBEN[/b] — halte den Bereich, verteidige dich gegen Infizierte und feindliche Spieler.
+[b]3. WELLEN ÜBERLEBEN[/b] — halte den Bereich gegen Infizierte und feindliche Spieler.
 
-[b]4. BOSZ BESIEGEN[/b] — erst der echte Boss-Sieg schaltet den roten Rauch und die Reward-Phase frei.
+[b]4. BOSZ BESIEGEN[/b] — erst der echte Boss-Sieg schaltet roten Rauch und Rewardphase frei.
 
-[b]5. STORYITEMS SICHERN[/b] — prüfe Boss-Überreste und Reward-Fass, bevor das vollständige Cleanup einsetzt.
+[b]5. STORYITEMS SICHERN[/b] — die neue PunchedCard-/Keycard-Optik und der zugehörige CardReader unterstützen die nächste Eventstufe.
+
+[hr][/hr]
+[h2]🖼️ NEUE EVENT-ASSETS[/h2]
+
+[list]
+[*] [b]DeutschZxKOTHZ_punchedcard_co.paa[/b] für die KotHZ-/BattlegroundZ-Zugangskarte
+[*] [b]DeutschZxCardReader_gpsreceiver_co.paa[/b] für die GPSReceiver-basierte CardReader-Optik
+[*] beide Assets sind im aktuellen PBO-Inhalt vorhanden
+[*] sichtbare Darstellung und UV-Zuordnung bleiben bis zum Clienttest offen
+[/list]
 
 [hr][/hr]
 [h2]🛡️ SERVER, ADMIN & KONFIGURATION[/h2]
@@ -83,17 +110,29 @@ Die BattlegroundZ-Keycard stammt aus den KotHZ-Boss-Überresten. Sie wird nicht 
 [*] Profile: [b]$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/[/b]
 [*] Logs: [b]$profile:DeutschZ-System/LogZ/DeutschZ_KotH_InfectedSiedge_v2/[/b]
 [*] Positionen, Loot, Wellen und Hauptwerte sind getrennt konfigurierbar
+[*] [b]RewardMinimumItems=24[/b] definiert das aktuelle Mindestziel für das Reward-Fass
 [/list]
 
 [hr][/hr]
 [h2]🧩 ABHÄNGIGKEITEN & KOMPATIBILITÄT[/h2]
 
 [list]
-[*] keine harte externe CfgPatches-Abhängigkeit außer Vanilla DayZ
-[*] aktuelle DeutschZ-Konfiguration nutzt [b]DayZ Expansion Bundle[/b] für Marker und Benachrichtigungen
-[*] aktueller Serverstack lädt dafür [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b] und [b]DayZ Expansion Licensed[/b]
+[*] die Event-PBO besitzt keine harte fremde CfgPatches-Abhängigkeit außer Vanilla DayZ
+[*] die aktuelle DeutschZ-Konfiguration nutzt [b]DayZ Expansion Bundle[/b] für Marker und Benachrichtigungen
+[*] der aktuelle Serverstack lädt [b]CF[/b], [b]Dabs Framework[/b], [b]DayZ Expansion Bundle[/b] und [b]DayZ Expansion Licensed[/b]
 [*] enthalten in [b]@DeutschZ_only_core[/b] oder separat als [b]@DeutschZ_KotH_InfectedSiedge_v2[/b]
-[*] niemals dieselbe PBO aus Core und Standalone doppelt laden
+[*] niemals dieselbe KotH-PBO aus Core und Standalone gleichzeitig laden
+[/list]
+
+[hr][/hr]
+[h2]⚠️ BEKANNTE HINWEISE[/h2]
+
+[list]
+[*] Build, PBO-Inhalt und Signatur von 0.4.5 sind technisch bestätigt; der vollständige Eventablauf ist noch nicht gameplay-validiert.
+[*] Ein echter Clienttest muss eine Flagge, die entfernten Mastaktionen, Bewegung ab 60 %, Lootmenge und beide Cleanup-Phasen bestätigen.
+[*] Karten-/CardReader-Texturen müssen in der korrekten Ingame-Ansicht geprüft werden.
+[*] Zonenverteilung und Balance bleiben bis zum realen Spielertest offen.
+[*] Die Server-IP [b]193.135.10.126[/b] ist vor einer Steam-Veröffentlichung manuell zu bestätigen.
 [/list]
 
 [hr][/hr]
@@ -111,22 +150,27 @@ Die BattlegroundZ-Keycard stammt aus den KotHZ-Boss-Überresten. Sie wird nicht 
 [h2]🧪 TECHNISCHER STATUS — 14.07.2026[/h2]
 
 [list]
-[*] Version: [b]0.4.3-livefix[/b]
-[*] aktueller PBO mit DeutschZ signiert und im Core geladen
-[*] Serverstart, Eventmanager und ein Zonenstart bei Vybor technisch bestätigt
-[*] aktive Quelle bestätigt 300 Sekunden und Wellen 0 / 20 / 40 / 60 / 80
-[*] [b]NICHT GAMEPLAY-GETESTET:[/b] vollständiger Capture-, Rauch-, Wellen-, BosZ- und Rewardlauf mit Client
-[*] Zonenverteilung und Balance bleiben bis zum realen Spielertest offen
+[*] Version: [b]0.4.5-eventruntime[/b]
+[*] Preflight, PBO-Build, PBO-Inhaltsprüfung und DeutschZ-Signatur: [b]BESTÄTIGT[/b]
+[*] der 0.4.4-Mast-Scope-Fehler wurde in 0.4.5 korrigiert und neu gebaut
+[*] Serverinitialisierung von 0.4.5: [b]BESTÄTIGT[/b] — Game/World/Mission compile-sauber, Eventmanager initialisiert, Flagpole-Spawn akzeptiert und Event gestartet
+[*] [b]NICHT GAMEPLAY-GETESTET:[/b] vollständiger Capture-, Rauch-, Wellen-, BosZ-, Reward- und Cleanup-Lauf mit Client
+[*] Steam-Upload/Veröffentlichung: [b]NICHT DURCHGEFÜHRT[/b]
 [/list]
 
 [hr][/hr]
 [h2]📝 AKTUELLE ÄNDERUNGEN[/h2]
 
 [list]
-[*] veraltete Wellen- und Terminalpflicht-Angaben entfernt
-[*] aktuelle Rauchfarben, Capture-Regeln und fünf Wellen dokumentiert
-[*] Bosswerte, Keycard-Herkunft, Rewardchancen und Cleanup aktualisiert
-[*] Dependencies und technischer Beweisstatus eindeutig getrennt
+[*] dreifache Flaggenanzeige verhindert: exakt eine Eventflagge pro Mast
+[*] Flaggen-/Territory-Aktionen entfernt und robustes Runtime-/Orphan-Cleanup ergänzt
+[*] ungültige 0,75-Bewegungsstufe durch gültige Vanilla-Gehstufe 1 ersetzt
+[*] BosZ-Mumie schneller gehend, aber weiterhin ohne Rennfähigkeit
+[*] Reward-Fass mit Mindestziel 24 und Duplikatgrenzen ergänzt
+[*] obsolete sichtbare DZEV-Eventobjekte und alter EventController entfernt
+[*] neue CardReader- und PunchedCard-Texturen eingebunden
+[*] Mast-Scope-/Runtimefehler in 0.4.5 korrigiert
+[*] frischen 0.4.5-Serverstart technisch bestätigt; Client-Gameplay bleibt offen
 [/list]
 
 [hr][/hr]
@@ -146,6 +190,6 @@ Port: [b]20076[/b]
 [hr][/hr]
 [h2]🏴 CREDITS & SUPPORT[/h2]
 
-Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Zone, Capture-Prozent, Eventstatus, Screenshot/Video und passenden Logs im Discord melden.
+Konzept, Entwicklung und Betrieb: [b]DeutschZ[/b]. Bitte Fehler mit Uhrzeit, Zone, Capture-Prozent, Eventstatus, Screenshot/Video und frischen RPT-/Script-/ADM-Logs im Discord melden.
 
 [b]DeutschZ KotHZ — Halte die Zone. Überlebe den BosZ.[/b]

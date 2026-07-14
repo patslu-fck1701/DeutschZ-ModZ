@@ -1,21 +1,23 @@
 [h1]👑 DeutschZ KotHZ Infected Siedge v2 — Changelog[/h1]
 
-[h2]Dokumentationsstand 14.07.2026[/h2]
+[h2]0.4.5-eventruntime — 14.07.2026[/h2]
 [list]
-[*] vollständige deutsche und englische Workshopbeschreibung synchronisiert
-[*] Capture-Dauer von 300 Sekunden und Radius von 25 Metern aus aktiver Quelle bestätigt
-[*] Wellen bei 0 / 20 / 40 / 60 / 80 Prozent mit aktuellen Stückzahlen und HP dokumentiert
-[*] weiß/grün/roten Rauchablauf sowie blockierende Gegner und fehlenden Leerzonenverlust ergänzt
-[*] optionalen Vor-Capture-Terminalhack korrekt als deaktiviert markiert
-[*] BosZ-Werte, Keycard-Herkunft, 10-Prozent-FireworksLauncher-Chance und Cleanup aktualisiert
-[*] Serverstart als technisch bestätigt, vollständiger Client-Gameplaylauf als offen markiert
+[*] Eventmast auf exakt eine DZKOTH_EventFlag begrenzt
+[*] Vanilla-Flaggen- und optionale Expansion-Territory-/Dismantle-Aktionen entfernt
+[*] Mast als nicht persistentes Runtime-Objekt abgesichert und Orphan-Cleanup erweitert
+[*] alten DZEV-EventController sowie sicht-/spawnfähige DZEV-Mast-, Flaggen-, Zombie-, Boss- und Kistenklassen entfernt
+[*] interne DZEV-Gruppen-/RPC-/UI-Kompatibilität erhalten
+[*] ungültigen Bewegungswert 0,75 durch gültige Vanilla-Gehstufe 1 ersetzt
+[*] BosZ-Mumie schneller gehend, ohne Rennfähigkeit freizugeben
+[*] Reward-Fass mit Mindestziel 24 und Duplikatgrenzen ergänzt
+[*] DeutschZxKOTHZ_punchedcard_co.paa und DeutschZxCardReader_gpsreceiver_co.paa eingebunden
+[*] Mast-Scope-/Runtimefehler des ersten 0.4.4-Builds korrigiert und als 0.4.5 neu gebaut
 [/list]
 
-[h2]Aktueller Build 0.4.3-livefix[/h2]
-[list]
-[*] serverautoritatives Capture-, Wellen-, Boss-, Reward- und Cleanup-System
-[*] getrennte Configs für Hauptwerte, Positionen, Wellen und Loot
-[*] optionale Expansion-Marker und -Benachrichtigungen
-[/list]
+[b]Technische Validierung:[/b] Preflight, PBO-Build, PBO-Inhaltsprüfung und DeutschZ-Signatur bestätigt.
 
-[i]Diese Aktualisierung ändert Workshoptexte und keine Gameplay-PBO.[/i]
+[b]Serverstatus:[/b] Game/World/Mission compile-sauber; Eventmanager initialisiert; Flagpole-Spawn akzeptiert; Event gestartet.
+
+[b]Offen:[/b] echter Client-Gameplaytest von Capture, Bewegung, Loot und Cleanup.
+
+[i]Kein Steam-Upload und keine Gameplay-Abnahme allein aus Build oder Serverstart abgeleitet.[/i]
