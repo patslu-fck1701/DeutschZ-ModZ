@@ -30,8 +30,8 @@ FrameWidgetClass DZKOTHG_LoadingOverlay {
    style rover_sim_colorable
   }
   ImageWidgetClass DZKOTHG_LoadingLogo {
-   position 0.035 0.82
-   size 0.075 0.15
+   position 0.044375 0.82
+   size 0.05625 0.15
    hexactpos 0
    vexactpos 0
    hexactsize 0
@@ -42,8 +42,8 @@ FrameWidgetClass DZKOTHG_LoadingOverlay {
    "stretch mode" stretch_w_h
   }
   ImageWidgetClass DZKOTHG_LoadingLogoRight {
-   position 0.89 0.82
-   size 0.075 0.15
+   position 0.899375 0.82
+   size 0.05625 0.15
    hexactpos 0
    vexactpos 0
    hexactsize 0

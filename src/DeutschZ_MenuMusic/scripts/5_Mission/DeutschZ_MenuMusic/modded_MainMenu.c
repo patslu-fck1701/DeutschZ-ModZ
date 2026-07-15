@@ -13,6 +13,7 @@ modded class MainMenu
 	protected Widget m_DZKOTHG_VoteButton;
 	protected Widget m_DZKOTHG_DiscordButton;
 	protected TextWidget m_DZKOTHG_Tagline;
+	protected MultilineTextWidget m_DZKOTHG_DescriptionBody;
 	protected TextWidget m_DZKOTHG_StatusText;
 	protected TextWidget m_DZKOTHG_NewsTitle;
 	protected MultilineTextWidget m_DZKOTHG_NewsBody;
@@ -78,6 +79,7 @@ modded class MainMenu
 		m_DZKOTHG_VoteButton     = layoutRoot.FindAnyWidget("custom_button1");
 		m_DZKOTHG_DiscordButton  = layoutRoot.FindAnyWidget("custom_button2");
 		m_DZKOTHG_Tagline        = TextWidget.Cast(layoutRoot.FindAnyWidget("dz_tagline_text"));
+		m_DZKOTHG_DescriptionBody = MultilineTextWidget.Cast(layoutRoot.FindAnyWidget("dz_description_body"));
 		m_DZKOTHG_StatusText     = TextWidget.Cast(layoutRoot.FindAnyWidget("dz_status_text"));
 		m_DZKOTHG_NewsTitle      = TextWidget.Cast(layoutRoot.FindAnyWidget("dz_news_title"));
 		m_DZKOTHG_NewsBody       = MultilineTextWidget.Cast(layoutRoot.FindAnyWidget("dz_news_body"));
@@ -93,6 +95,8 @@ modded class MainMenu
 
 		if (m_DZKOTHG_Tagline)
 			m_DZKOTHG_Tagline.SetColor(DZKOTHG_UITheme.PrimaryText());
+		if (m_DZKOTHG_DescriptionBody)
+			m_DZKOTHG_DescriptionBody.SetColor(DZKOTHG_UITheme.PrimaryText());
 		if (m_DZKOTHG_StatusText)
 			m_DZKOTHG_StatusText.SetColor(DZKOTHG_UITheme.BrandGreen());
 		if (m_DZKOTHG_NewsTitle)
@@ -172,10 +176,13 @@ modded class MainMenu
 	protected void DZKOTHG_UpdateCustomText()
 	{
 		if (m_DZKOTHG_Tagline)
-			m_DZKOTHG_Tagline.SetText("DeutschZ - GunZ | HeliZ | TraderZ discord.gg/FHzZ7BykFk");
+			m_DZKOTHG_Tagline.SetText("DEUTSCHZ COMMUNITY");
+
+		if (m_DZKOTHG_DescriptionBody)
+			m_DZKOTHG_DescriptionBody.SetText("Survival, Events und Community auf Chernarus.\nDein Server. Deine Regeln. Dein Ueberleben.");
 
 		if (m_DZKOTHG_StatusText)
-			m_DZKOTHG_StatusText.SetText("ONLINE " + DZKOTHG_SERVER_IP + ":" + DZKOTHG_SERVER_PORT.ToString() + " | " + DZKOTHG_MenuContentStore.GetNextServerMessage());
+			m_DZKOTHG_StatusText.SetText("ONLINE | " + DZKOTHG_SERVER_IP + ":" + DZKOTHG_SERVER_PORT.ToString());
 
 		DZKOTHG_NewsEntry news = DZKOTHG_MenuContentStore.GetNextNews();
 		if (news)

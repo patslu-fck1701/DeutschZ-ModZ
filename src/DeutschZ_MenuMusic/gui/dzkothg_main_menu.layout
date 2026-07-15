@@ -21,7 +21,7 @@ FrameWidgetClass main_menu_root {
    vexactpos 1
    hexactsize 0
    vexactsize 0
-   image0 "DeutschZ_MenuMusic/gui/menu_assets/background/00_background_main.paa"
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/background/DeutschZ_Menu_4K_Silhouette_Transparent.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
@@ -66,8 +66,8 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_logo {
    ignorepointer 1
-   position 128 94
-   size 360 360
+   position 158 94
+   size 300 300
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -92,28 +92,42 @@ FrameWidgetClass main_menu_root {
   }
   TextWidgetClass dz_tagline_text {
    ignorepointer 1
-   position 82 407
-   size 452 34
+   position 82 402
+   size 452 28
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   text "DeutschZ"
-   font "gui/fonts/sdf_MetronBook18"
+   text "DEUTSCHZ COMMUNITY"
+   font "gui/fonts/sdf_MetronBook24"
    "text halign" center
    "text valign" center
    color 0.86 0.92 0.82 1
   }
-  TextWidgetClass dz_status_text {
+  MultilineTextWidgetClass dz_description_body {
    ignorepointer 1
-   position 78 446
-   size 460 46
+   position 82 434
+   size 452 42
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   text "Direct Connect"
-   font "gui/fonts/sdf_MetronBook24"
+   text "Survival, Events und Community auf Chernarus.\nDein Server. Deine Regeln. Dein Ueberleben."
+   font "gui/fonts/sdf_MetronBook18"
+   "text halign" center
+   "text valign" top
+   color 0.86 0.92 0.82 1
+  }
+  TextWidgetClass dz_status_text {
+   ignorepointer 1
+   position 78 480
+   size 460 24
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "ONLINE | 193.135.10.126:20076"
+   font "gui/fonts/sdf_MetronBook18"
    "text halign" center
    "text valign" center
    color 0.65 0.95 0.20 1
@@ -483,22 +497,36 @@ FrameWidgetClass main_menu_root {
   }
   TextWidgetClass dz_news_title {
    ignorepointer 1
-   position 1382 91
-   size 448 36
+   position 1382 88
+   size 448 32
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
    text "SERVER INFO"
-   font "gui/fonts/sdf_MetronBook30"
+   font "gui/fonts/sdf_MetronBook24"
    "text halign" center
    "text valign" center
    color 0.38 0.95 0.16 1
   }
+  TextWidgetClass dz_news_meta {
+   ignorepointer 1
+   position 1384 123
+   size 444 18
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text "LIVE | COMMUNITY UPDATE"
+   font "gui/fonts/sdf_MetronBook14"
+   "text halign" left
+   "text valign" center
+   color 0.62 0.72 0.58 1
+  }
   MultilineTextWidgetClass dz_news_body {
    ignorepointer 1
-   position 1384 137
-   size 444 128
+   position 1384 149
+   size 444 116
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -777,52 +805,52 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_event_koth {
    ignorepointer 1
-   position 1340 722
-   size 112 168
+   position 1338 722
+   size 116 168
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic/gui/darkglass_v1/05_event_cards/card_kothz_active.paa"
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/cards/14_card_kothz.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
   }
   ImageWidgetClass dz_event_convoy {
    ignorepointer 1
-   position 1468 722
-   size 112 168
+   position 1466 722
+   size 116 168
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic/gui/darkglass_v1/05_event_cards/card_tankz_normal.paa"
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/cards/15_card_convoyz.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
   }
   ImageWidgetClass dz_event_groundzero {
    ignorepointer 1
-   position 1596 722
-   size 112 168
+   position 1594 722
+   size 116 168
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic/gui/darkglass_v1/05_event_cards/card_dropz_normal.paa"
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/cards/17_card_groundzero.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
   }
   ImageWidgetClass dz_event_operation {
    ignorepointer 1
-   position 1724 722
-   size 112 168
+   position 1722 722
+   size 116 168
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic/gui/darkglass_v1/05_event_cards/card_crashz_normal.paa"
+   image0 "DeutschZ_MenuMusic/gui/menu_assets/cards/18_card_operationdeutschz.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h

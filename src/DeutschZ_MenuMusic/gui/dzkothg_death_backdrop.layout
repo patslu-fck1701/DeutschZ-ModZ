@@ -24,8 +24,8 @@ FrameWidgetClass DZKOTHG_DeathBackdrop {
   }
   ImageWidgetClass DZKOTHG_DeathLogo {
    ignorepointer 1
-   position 0.055 0.08
-   size 0.18 0.32
+   position 0.085 0.08
+   size 0.12 0.32
    hexactpos 0
    vexactpos 0
    hexactsize 0
