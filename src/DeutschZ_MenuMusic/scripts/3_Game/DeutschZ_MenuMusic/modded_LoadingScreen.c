@@ -149,7 +149,8 @@ modded class LoadingScreen
 			if (m_DZKOTHG_CurrentEntry)
 				title = "DEUTSCHZ " + m_DZKOTHG_CurrentEntry.Category;
 			m_TextWidgetTitle.SetText(title);
-			m_TextWidgetTitle.SetColor(DZKOTHG_UITheme.BrandGreen());
+			m_TextWidgetTitle.SetColor(DZKOTHG_UITheme.BrandRed());
+			m_TextWidgetTitle.SetTextExactSize(24);
 		}
 
 		if (m_TextWidgetStatus)
@@ -159,7 +160,8 @@ modded class LoadingScreen
 			if (m_DZKOTHG_CurrentEntry)
 				status = m_DZKOTHG_CurrentEntry.Text;
 			m_TextWidgetStatus.SetText(status);
-			m_TextWidgetStatus.SetColor(DZKOTHG_UITheme.PrimaryText());
+			m_TextWidgetStatus.SetColor(DZKOTHG_UITheme.BrandGreen());
+			m_TextWidgetStatus.SetTextExactSize(22);
 		}
 	}
 
@@ -170,10 +172,15 @@ modded class LoadingScreen
 
 		if (m_ProgressText && m_ProgressLoading)
 		{
-			float normalizedProgress = Math.Clamp(m_ProgressLoading.GetCurrent(), 0.0, 1.0);
+			float progressMin = m_ProgressLoading.GetMin();
+			float progressMax = m_ProgressLoading.GetMax();
+			float normalizedProgress = 0.0;
+			if (progressMax > progressMin)
+				normalizedProgress = Math.Clamp((m_ProgressLoading.GetCurrent() - progressMin) / (progressMax - progressMin), 0.0, 1.0);
 			int progressPercent = Math.Round(normalizedProgress * 100.0);
 			m_ProgressText.Show(true);
 			m_ProgressText.SetColor(DZKOTHG_UITheme.BrandGreen());
+			m_ProgressText.SetTextExactSize(16);
 			m_ProgressText.SetText("DEUTSCHZ LAEDT  " + progressPercent.ToString() + "%");
 		}
 	}

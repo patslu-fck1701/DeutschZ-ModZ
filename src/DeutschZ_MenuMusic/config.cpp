@@ -65,7 +65,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "1.2.4-menu-ui-4k";
+		version = "1.2.5-menu-clientfix";
 		type = "mod";
 		dependencies[] =
 		{

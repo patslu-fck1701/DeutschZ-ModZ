@@ -21,7 +21,7 @@ FrameWidgetClass DZKOTHG_LoadingOverlay {
   }
   PanelWidgetClass DZKOTHG_LoadingAccent {
    color 0.52 0.94 0.08 1
-   position 0 0.84
+   position 0 0.79
    size 1 0.004
    hexactpos 0
    vexactpos 0
@@ -62,9 +62,10 @@ FrameWidgetClass DZKOTHG_LoadingOverlay {
    vexactsize 0
    text "DEUTSCHZ"
    font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
    "text halign" center
    "text valign" center
-   color 0.52 0.94 0.08 1
+   color 0.76 0 0.09 1
   }
   TextWidgetClass DZKOTHG_LoadingStatus {
    position 0.14 0.875
@@ -74,10 +75,11 @@ FrameWidgetClass DZKOTHG_LoadingOverlay {
    hexactsize 0
    vexactsize 0
    text ""
-   font "gui/fonts/sdf_MetronBook20"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
    "text halign" center
    "text valign" center
-   color 0.95 0.95 0.93 1
+   color 0.52 0.94 0.08 1
   }
   TextWidgetClass DZKOTHG_LoadingProgressText {
    position 0.14 0.935
@@ -88,6 +90,7 @@ FrameWidgetClass DZKOTHG_LoadingOverlay {
    vexactsize 0
    text "DEUTSCHZ LAEDT"
    font "gui/fonts/sdf_MetronBook18"
+   "exact text" 1
    "text halign" center
    "text valign" center
    color 0.94 0.94 0.92 1

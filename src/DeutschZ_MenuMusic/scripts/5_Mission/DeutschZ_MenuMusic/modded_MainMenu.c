@@ -141,7 +141,10 @@ modded class MainMenu
 		{
 			m_ScenePC = m_Mission.GetIntroScenePC();
 			if (m_ScenePC)
+			{
 				m_ScenePC.ResetIntroCamera();
+				DZKOTHG_ZoomCharacterOut();
+			}
 		}
 
 		if (m_PlayVideo)
@@ -159,38 +162,71 @@ modded class MainMenu
 		if (m_Version)
 			m_Version.SetText("DeutschZ Menu | DayZ " + version);
 
-		if (m_ModdedWarning)
-		{
-			m_ModdedWarning.SetText("DeutschZModZ");
-			m_ModdedWarning.Show(false);
-		}
-
 		if (GetGame().GetUIManager())
 			GetGame().GetUIManager().ScreenFadeOut(0);
 
 		SetFocus(null);
 		Refresh();
+
+		if (m_ModdedWarning)
+		{
+			m_ModdedWarning.SetText("DeutschZ - Server #1");
+			m_ModdedWarning.SetColor(DZKOTHG_UITheme.BrandRed());
+			m_ModdedWarning.SetTextExactSize(18);
+			m_ModdedWarning.Show(true);
+		}
+
+		if (m_DZKOTHG_NewsTitle)
+			m_DZKOTHG_NewsTitle.SetTextExactSize(20);
+		if (m_DZKOTHG_NewsBody)
+			m_DZKOTHG_NewsBody.SetTextExactSize(14);
+
 		GetGame().SetLoadState(DayZLoadState.MAIN_MENU_CONTROLLER_SELECT);
+	}
+
+	protected void DZKOTHG_ZoomCharacterOut()
+	{
+		if (!m_ScenePC || !m_ScenePC.GetIntroCamera() || !m_ScenePC.GetIntroCharacter())
+			return;
+
+		IntroSceneCharacter introCharacter = m_ScenePC.GetIntroCharacter();
+		if (!introCharacter.GetCharacterObj())
+			return;
+
+		Camera introCamera = m_ScenePC.GetIntroCamera();
+		vector characterPosition = introCharacter.GetPosition();
+		vector cameraOffset = introCamera.GetPosition() - characterPosition;
+		introCamera.SetPosition(characterPosition + (cameraOffset * 1.08));
+		introCamera.LookAt(characterPosition + Vector(0, 1, 0));
 	}
 
 	protected void DZKOTHG_UpdateCustomText()
 	{
 		if (m_DZKOTHG_Tagline)
+		{
 			m_DZKOTHG_Tagline.SetText("DEUTSCHZ COMMUNITY");
+			m_DZKOTHG_Tagline.SetTextExactSize(22);
+		}
 
 		if (m_DZKOTHG_DescriptionBody)
+		{
 			m_DZKOTHG_DescriptionBody.SetText("Survival, Events und Community auf Chernarus.\nDein Server. Deine Regeln. Dein Ueberleben.");
+			m_DZKOTHG_DescriptionBody.SetTextExactSize(16);
+		}
 
 		if (m_DZKOTHG_StatusText)
+		{
 			m_DZKOTHG_StatusText.SetText("ONLINE | " + DZKOTHG_SERVER_IP + ":" + DZKOTHG_SERVER_PORT.ToString());
+			m_DZKOTHG_StatusText.SetTextExactSize(15);
+		}
 
 		DZKOTHG_NewsEntry news = DZKOTHG_MenuContentStore.GetNextNews();
 		if (news)
 		{
 			if (m_DZKOTHG_NewsTitle)
-				m_DZKOTHG_NewsTitle.SetText(news.Title);
+				m_DZKOTHG_NewsTitle.SetText("SERVERSTATUS");
 			if (m_DZKOTHG_NewsBody)
-				m_DZKOTHG_NewsBody.SetText(news.Body);
+				m_DZKOTHG_NewsBody.SetText("ONLINE | " + DZKOTHG_SERVER_IP + ":" + DZKOTHG_SERVER_PORT.ToString() + "\n" + news.Title + " | " + news.Body);
 		}
 	}
 
