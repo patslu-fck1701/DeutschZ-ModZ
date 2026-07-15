@@ -1,0 +1,12 @@
+{
+  "Enabled": true,
+  "AutoStart": true,
+  "AutoStartDelaySeconds": 3,
+  "AnnounceSeconds": 10,
+  "CaptureRadius": 25.0,
+  "CaptureTimeSeconds": 300,
+  "CaptureTickMilliseconds": 1000,
+  "CompletionCleanupDelaySeconds": 10,
+  "EventPosition": [4552.34668, 317.997314, 8350.974609],
+  "EventOrientation": [0.0, 0.0, 0.0]
+}

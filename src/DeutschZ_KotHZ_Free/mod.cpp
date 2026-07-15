@@ -7,4 +7,4 @@ tooltip = "DeutschZ KotHZ Free";
 overview = "Vanilla-basierte, serverautoritative KotH-Kernversion von DeutschZ.";
 action = "";
 author = "DeutschZ";
-version = "1.0.0-phase-a";
+version = "1.0.0-phase-b";

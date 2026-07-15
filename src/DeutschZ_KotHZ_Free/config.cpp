@@ -2,13 +2,18 @@ class CfgPatches
 {
 	class DeutschZ_KotHZ_Free
 	{
-		units[] = {};
+		units[] =
+		{
+			"DZKOTHF_EventFlagpole",
+			"DZKOTHF_EventFlag"
+		};
 		weapons[] = {};
 		requiredVersion = 0.1;
 		requiredAddons[] =
 		{
 			"DZ_Data",
-			"DZ_Scripts"
+			"DZ_Scripts",
+			"DZ_Gear_Camping"
 		};
 	};
 };
@@ -22,7 +27,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "1.0.0-phase-a";
+		version = "1.0.0-phase-b";
 		type = "mod";
 		dependencies[] =
 		{
@@ -60,5 +65,25 @@ class CfgMods
 				};
 			};
 		};
+	};
+};
+
+class CfgVehicles
+{
+	class StaticFlagPole;
+	class Flag_Chernarus;
+
+	class DZKOTHF_EventFlagpole: StaticFlagPole
+	{
+		scope = 2;
+		displayName = "DeutschZ KotHZ Mast";
+		descriptionShort = "Serververwalteter KotHZ-Capture-Mast.";
+	};
+
+	class DZKOTHF_EventFlag: Flag_Chernarus
+	{
+		scope = 2;
+		displayName = "DeutschZ KotHZ Fahne";
+		descriptionShort = "Serververwaltete KotHZ-Capture-Fahne.";
 	};
 };

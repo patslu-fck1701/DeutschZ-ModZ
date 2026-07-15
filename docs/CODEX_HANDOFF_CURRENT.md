@@ -2,84 +2,95 @@
 
 ## Aktueller Auftrag
 
-- Produkt: DeutschZ MenuZ / `@DeutschZ_MenuMusic`
-- Phase: gezielter Clientfix nach Screenshots vom 15.07.2026
-- KotHZ Auftrag 02: pausiert, keine KotHZ-Datei geaendert
-- Camo: keine Datei geaendert
-- Status: BUILD READY = JA, CLIENT TEST READY = JA, SALE READY = NEIN
-- Grund fuer SALE READY NEIN: erneuter visueller Clienttest durch Patrick erforderlich
+- Produkt: DeutschZ KotHZ Free / `@DeutschZ_KotHZ_Free`
+- Phase: B - Mast, eine Fahne, Capture-Radius, Capture-Fortschritt, Rauch und Cleanup
+- Branch: `codex/kothz-free-v1-core-20260715`
+- Status: BUILD READY = JA, SERVER TEST READY = JA, GAMEPLAY VALIDATED = NEIN
+- MenuZ bleibt unveraendert in `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic` und wird von Patrick parallel getestet.
 
-## Umgesetzte MenuZ-Korrekturen
+## Umgesetzter Phase-B-Umfang
 
-- `DeutschZModZ` als riesiger Debug-/Modded-Text entfernt.
-- kleine rote Serverkennung `DeutschZ - Server #1` nach dem Vanilla-`Refresh()` stabil gesetzt.
-- Intro-Kamera um 8 Prozent zurueckgesetzt; Figur dadurch proportional kleiner.
-- transparente Spieler-Aussparung im unveraenderten 4K-Motiv um 24 Source-Pixel erweitert.
-- rechte News-/Statusschriften auf exakte Pixelgroessen begrenzt; kein abgeschnittener Platzhaltertext mehr vorgesehen.
-- rechtes oberes Panel als `SERVERSTATUS` stabilisiert; es zeigt nur bestaetigte Serveradresse und vorhandene MenuZ-Meldungen, keine erfundenen Livewerte.
-- Eventbereich vergroessert; maximal drei Karten gleichzeitig sichtbar.
-- untere Navigation in die Reihenfolge HOME, SERVER, EVENTS, REGELN, SHOP, SUPPORT, PROFIL, OPTIONEN, ENDE gebracht.
-- Loading-Trennlinie an den oberen Rand des unteren Panels verschoben.
-- Loading-Titel rot, Untertitel gruen und groesser.
-- Prozentwert wird aus `GetMin()`, `GetMax()` und `GetCurrent()` derselben Progressbar berechnet.
+- genau ein serververwalteter Vanilla-Mast `DZKOTHF_EventFlagpole`
+- genau eine angehaengte Fahne `DZKOTHF_EventFlag`
+- synchronisierter Fahnenfortschritt von 0 bis 100 Prozent
+- konfigurierbarer Capture-Radius, Standard 25 Meter
+- serverseitige Pruefung lebender Spieler im Radius
+- Weiss in `ANNOUNCED`, Gruen in `ACTIVE`, Rot bei mehreren Spielern oder Abbruch
+- Fortschritt nur bei genau einem lebenden Spieler; Pause bei null oder mehreren Spielern
+- zentrale Objekt- und Zustandsverwaltung in `DZKOTHF_EventSession`
+- vollstaendiges Cleanup bei Abbruch, normalem Ende und Mission-Shutdown
+- Profilkonfiguration: `$profile:DeutschZ/KotHZ_Free/KotHZFreeSettings.json`
 
-## Geaenderte Source-Dateien
+Nicht enthalten: Gegner, Rewards, Marker, Notify, Progressbar, Boss, Wellen, Terminal, KOTHGate oder Premiumfunktionen.
 
-- `src/DeutschZ_MenuMusic/data/ui/loading/loading_content.json`
-- `src/DeutschZ_MenuMusic/config.cpp`
-- `src/DeutschZ_MenuMusic/gui/dzkothg_loading_overlay.layout`
-- `src/DeutschZ_MenuMusic/gui/dzkothg_main_menu.layout`
-- `src/DeutschZ_MenuMusic/gui/menu_assets/background/DeutschZ_Menu_4K_Silhouette_Transparent.png`
-- `src/DeutschZ_MenuMusic/gui/menu_assets/background/DeutschZ_Menu_4K_Silhouette_Transparent.paa`
-- `src/DeutschZ_MenuMusic/scripts/3_Game/DeutschZ_MenuMusic/modded_LoadingScreen.c`
-- `src/DeutschZ_MenuMusic/scripts/5_Mission/DeutschZ_MenuMusic/modded_MainMenu.c`
-- `src/DeutschZ_MenuMusic/mod.cpp`
-- `docs/products/MenuZ_CLIENT_TEST.md`
+## Geaenderte und neue Source-Dateien
+
+- `src/DeutschZ_KotHZ_Free/config.cpp`
+- `src/DeutschZ_KotHZ_Free/mod.cpp`
+- `src/DeutschZ_KotHZ_Free/scripts/3_Game/DeutschZ_KotHZ_Free/DZKOTHF_Constants.c`
+- `src/DeutschZ_KotHZ_Free/scripts/3_Game/DeutschZ_KotHZ_Free/DZKOTHF_Settings.c`
+- `src/DeutschZ_KotHZ_Free/scripts/3_Game/DeutschZ_KotHZ_Free/DZKOTHF_SmokeState.c`
+- `src/DeutschZ_KotHZ_Free/scripts/4_World/DeutschZ_KotHZ_Free/DZKOTHF_EventController.c`
+- `src/DeutschZ_KotHZ_Free/scripts/4_World/DeutschZ_KotHZ_Free/DZKOTHF_EventFlagpole.c`
+- `src/DeutschZ_KotHZ_Free/scripts/4_World/DeutschZ_KotHZ_Free/DZKOTHF_EventSession.c`
+- `src/DeutschZ_KotHZ_Free/example-settings/KotHZFreeSettings.json`
+- `src/DeutschZ_KotHZ_Free/docs/PHASE_B_ARCHITECTURE.md`
+- `src/DeutschZ_KotHZ_Free/docs/PHASE_B_TEST.md`
+- `docs/DeutschZ_KotHZ_Free/PHASE_B_DAYZ_LABS_COMPILETEST.md`
 - `docs/CODEX_HANDOFF_CURRENT.md`
 
-## Build- und Signaturstatus
+## Build- und Teststatus
 
-- Preflight: BESTANDEN, 0 Fehler, 1 bekannte Grossbuchstabenwarnung
-- Build: `dzl build DeutschZ_MenuMusic --clean --no-binarize --sign --key DeutschZ --force`
-- Build: BESTANDEN
-- PBO-Inhalt mit `BankRev -lf` geprueft: JA
-- Signatur mit `DSCheckSignatures.exe` geprueft: JA
-- Ergebnis: `Signature ...DeutschZ.bisign is OK`
+- Preflight: PASS, 0 Fehler, 1 bekannte Windows-Grossbuchstabenwarnung
+- Clean Build: PASS
+- PBO-Inhalt: PASS, 17 erwartete Dateien
+- Signatur: PASS, `DeutschZ.bisign is OK`
+- DayZ-Labs-Preset: `deutschz_kothz_free_compile`
+- aktive Testmod: ausschliesslich `P:\Mods\@DeutschZ_KotHZ_Free`
+- Script-Compile: PASS
+- Missionstart / `Player connect enabled`: PASS
+- stabil mindestens 2 Minuten nach Missionstart: PASS
+- kontrollierter Stopp: PASS
+- Script-Fatalfehler: 0
+- KotHZ-Free-spezifische RPT-Fehler: 0
 - Gameplay-/Clientbeweis: OFFEN
 
 ## Letzter aktualisierter Ausgabeordner
 
-- Zeitpunkt der Synchronisierung: 15.07.2026, 19 Uhr Europe/Berlin
-- Vollstaendiger Ausgabeordner: `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic`
+- Vollstaendiger Ausgabeordner: `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_Free`
+- Zeitpunkt der Synchronisierung: 16.07.2026 00:33 Europe/Berlin
 - Synchronisierung: atomar ueber externes Staging
-- alte aktive PBO/BISIGN ersetzt: JA
-- gemischte Altversion im aktiven Modordner: NEIN
+- Build-/Signaturstatus: PASS / PASS
+- alte PBO/BISIGN ersetzt: JA
+- gemischte Altversionen: NEIN
 
 ### Uebertragene Dateien
 
-- `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic\Addons\DeutschZ_MenuMusic.pbo`
-- `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic\Addons\DeutschZ_MenuMusic.pbo.DeutschZ.bisign`
-- `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic\keys\DeutschZ.bikey`
-- `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic\mod.cpp`
-- `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic\meta.cpp`
-- `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic\MenuZ_CLIENT_TEST.md`
+- `Addons/DeutschZ_KotHZ_Free.pbo`
+- `Addons/DeutschZ_KotHZ_Free.pbo.DeutschZ.bisign`
+- `keys/DeutschZ.bikey`
+- `mod.cpp`
+- `meta.cpp`
+- `Settings/KotHZFreeSettings.json`
+- `docs/PHASE_A_ARCHITECTURE.md`
+- `docs/PHASE_A_TEST.md`
+- `docs/PHASE_B_ARCHITECTURE.md`
+- `docs/PHASE_B_TEST.md`
+- `docs/PHASE_B_DAYZ_LABS_COMPILETEST.md`
 
 ## Installation und Test
 
-1. Den kompletten Ordner `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic` als aktuelle Client-/Servermod verwenden.
-2. Sicherstellen, dass nur diese MenuZ-PBO aktiv ist.
-3. Hauptmenue bei 1920x1080 testen; danach 2560x1440, 1280x720 und optional 3440x1440.
-4. Serverbeitritt starten und Loading-Titel, Untertitel, Linie, Balken und Prozent vergleichen.
-5. Screenshots sowie bei Scriptfehlern frische Client-RPT und Scriptlogs liefern.
-6. Vollstaendige Kriterien stehen in `MenuZ_CLIENT_TEST.md` im Ausgabeordner.
+1. Den kompletten Ausgabeordner als Client- und Servermod laden.
+2. Den oeffentlichen `DeutschZ.bikey` im Server-Keys-Ordner bereitstellen.
+3. Server starten und an der konfigurierten `EventPosition` exakt einen Mast und eine Fahne pruefen.
+4. Weiss waehrend Ankuendigung und Gruen nach Aktivierung pruefen.
+5. Mit genau einem Spieler im Radius die Fahnenbewegung pruefen.
+6. Mit zwei Spielern Rot und pausierenden Fortschritt pruefen.
+7. Abbruch und normalen Abschluss getrennt auf vollstaendiges Cleanup pruefen.
+8. Bei Fehlern frische RPT- und Scriptlogs sowie einen Screenshot liefern.
 
 ## Bekannte Grenzen
 
-- Spielerzahl, Ping, Wetter, Restart und Eventcountdown haben im bestehenden MenuZ keine bestaetigte Live-Datenquelle. Sie wurden deshalb nicht erfunden.
-- Camo ist kein MenuZ-Widget und wurde wegen der ausdruecklichen Scopegrenze nicht veraendert.
-- Die weitergehende Komplett-Neugestaltung aus der spaeteren Fehlerliste ist nur teilweise als sichere Layoutkorrektur umgesetzt; neue Live-Datenfunktionen bleiben ausserhalb dieses Clientfixes.
-- Erneuter visueller Clienttest ist zwingend.
-
-## Naechster Schritt
-
-Patrick testet exakt den Stand aus `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic` und liefert Hauptmenue- sowie Loading-Screenshot bei 1920x1080.
+- Visuelle Fahnen-, Rauch- und Mehrspieler-Capture-Pruefung ist ohne Client nicht bewiesen.
+- Das kontrollierte DayZ-Labs-Stoppen beendet den Prozess; ein Gameplay-Abbruch wurde nicht simuliert.
+- Die bekannte Animation-Rootmeldung betrifft auch Vanilla `sakhal` und blockiert den Windows-Serverstart nicht.
