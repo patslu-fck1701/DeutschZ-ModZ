@@ -1,5 +1,7 @@
 # CODEX HANDOFF CURRENT
 
+Letzte Aktualisierung: 16.07.2026, 04:26 Uhr
+
 ## KotHZ Free Phase C
 
 - Branch: `codex/kothz-free-v1-core-20260715`
@@ -9,7 +11,7 @@
 
 ## Verbindliche Profilpfade
 
-- Config: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json`
+- Config: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json`
 - Log: `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`
 - Hoster: `/gameserver/profiles/DeutschZ-System/DeutschZ_KotHZ/` und `/gameserver/profiles/DeutschZ-System/LogZ/DeutschZ_KotHZ/`
 - Altpfad wird einmalig gelesen/migriert und niemals still geloescht.
@@ -21,7 +23,9 @@
 - Preflight: PASS, 0 Fehler, 1 bekannte Windows-Grossbuchstabenwarnung
 - Clean Build / PBO / DeutschZ-Signatur: PASS
 - Script-Compile / Missionstart / `Player connect enabled`: PASS
-- C1, C2, C3, C4 und C5 jeweils mindestens zwei Minuten stabil: PASS
+- Nachtauftrag Gate 1 erneut frisch getestet: 16.07.2026, 04:23 bis 04:25 Uhr, mehr als zwei Minuten stabil: PASS
+- Runtime-Beleg: Mast 1, Fahne 1, Smoke WHITE -> GREEN, 15/15 Vanilla-Infizierte, Wellen/Boss/Expansion AI 0/0/0
+- Settings-Migration und UTF-8 ohne BOM: PASS; beide Altdateien bleiben erhalten
 - modbezogene Script-/RPT-Fehler: 0
 - Sichtbarkeit, MapWidget, Popup, Progressbar, Capture, Reward und Cleanup im Gameplay: PATRICK_REQUIRED
 
@@ -29,9 +33,34 @@
 
 - letzter Ausgabeordner: `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_Free`
 - Synchronisierung: 16.07.2026, atomar ueber externes Staging
-- enthalten: PBO, BISIGN, oeffentlicher BIKEY, `mod.cpp`, `meta.cpp`, Settings und Phase-A-bis-C5-Testdokumentation
+- enthalten: PBO, BISIGN, oeffentlicher BIKEY, `mod.cpp`, `meta.cpp`, `KotHZSettings.json`, Testanleitung und Phase-A-bis-C5-/Gate-1-Testdokumentation
 - alte aktive PBO/BISIGN ersetzt: JA
 - gemischte Altversionen: NEIN
+
+### Uebertragene Dateien Gate 1
+
+- `Addons/DeutschZ_KotHZ_Free.pbo`
+- `Addons/DeutschZ_KotHZ_Free.pbo.DeutschZ.bisign`
+- `keys/DeutschZ.bikey`
+- `mod.cpp`
+- `meta.cpp`
+- `Settings/KotHZSettings.json`
+- `docs/NIGHT_PHASE_1_GATE.md`
+- `docs/PHASE_A_ARCHITECTURE.md`
+- `docs/PHASE_A_TEST.md`
+- `docs/PHASE_B_ARCHITECTURE.md`
+- `docs/PHASE_B_TEST.md`
+- `docs/PHASE_C1_DAYZ_LABS_COMPILETEST.md`
+- `docs/PHASE_C1_TEST.md`
+- `docs/PHASE_C2_DAYZ_LABS_COMPILETEST.md`
+- `docs/PHASE_C2_TEST.md`
+- `docs/PHASE_C3_DAYZ_LABS_COMPILETEST.md`
+- `docs/PHASE_C3_TEST.md`
+- `docs/PHASE_C4_DAYZ_LABS_COMPILETEST.md`
+- `docs/PHASE_C4_TEST.md`
+- `docs/PHASE_C5_DAYZ_LABS_COMPILETEST.md`
+- `docs/PHASE_C5_TEST.md`
+- `docs/TESTANLEITUNG.md`
 
 ## Installation und Test
 

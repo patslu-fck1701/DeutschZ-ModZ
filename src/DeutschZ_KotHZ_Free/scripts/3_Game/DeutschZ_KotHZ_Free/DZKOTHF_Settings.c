@@ -169,6 +169,16 @@ class DZKOTHF_SettingsLoader
 				settings = new DZKOTHF_Settings;
 			}
 		}
+		else if (FileExist(DZKOTHF_Constants.PREVIOUS_SETTINGS_PATH))
+		{
+			if (JsonFileLoader<ref DZKOTHF_Settings>.LoadFile(DZKOTHF_Constants.PREVIOUS_SETTINGS_PATH, settings, errorMessage) && settings)
+				DZKOTHF_Log.Warning("Previous settings filename detected and migrated once to KotHZSettings.json. Previous file retained: " + DZKOTHF_Constants.PREVIOUS_SETTINGS_PATH + ".");
+			else
+			{
+				DZKOTHF_Log.Error("Previous settings filename was detected but could not be loaded; safe defaults are used. Previous file retained. " + errorMessage);
+				settings = new DZKOTHF_Settings;
+			}
+		}
 		else if (FileExist(DZKOTHF_Constants.LEGACY_SETTINGS_PATH))
 		{
 			if (JsonFileLoader<ref DZKOTHF_Settings>.LoadFile(DZKOTHF_Constants.LEGACY_SETTINGS_PATH, settings, errorMessage) && settings)
@@ -188,6 +198,9 @@ class DZKOTHF_SettingsLoader
 
 		if (FileExist(DZKOTHF_Constants.LEGACY_SETTINGS_PATH) && FileExist(DZKOTHF_Constants.SETTINGS_PATH))
 			DZKOTHF_Log.Warning("Legacy settings remain untouched at " + DZKOTHF_Constants.LEGACY_SETTINGS_PATH + "; the new config path is authoritative.");
+
+		if (FileExist(DZKOTHF_Constants.PREVIOUS_SETTINGS_PATH) && FileExist(DZKOTHF_Constants.SETTINGS_PATH))
+			DZKOTHF_Log.Warning("Previous settings file remains untouched at " + DZKOTHF_Constants.PREVIOUS_SETTINGS_PATH + "; KotHZSettings.json is authoritative.");
 
 		return settings;
 	}

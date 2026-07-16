@@ -16,7 +16,7 @@
 
 ## Pfad- und Migrationstest
 
-- neue Config erzeugt: `profiles/DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json`
+- neue Config erzeugt: `profiles/DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json`
 - neues Log erzeugt: `profiles/DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`
 - alte Config erkannt: `profiles/DeutschZ/KotHZ_Free/KotHZFreeSettings.json`
 - Migration: PASS

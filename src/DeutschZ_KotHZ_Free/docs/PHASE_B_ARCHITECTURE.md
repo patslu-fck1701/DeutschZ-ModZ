@@ -8,7 +8,7 @@ Phase B erweitert den serverautoritativen Kern um genau einen Vanilla-Mast, gena
 - `DZKOTHF_EventSession`: alleiniger Besitzer der Laufzeitreferenzen auf Mast und Fahne sowie Capture- und Rauchzustand.
 - `DZKOTHF_EventFlagpole`: Vanilla-`StaticFlagPole` mit synchronisiertem Fahnenfortschritt und M18-Rauchpartikeln.
 - Historischer Phase-B-Pfad (ersetzt): `$profile:DeutschZ/KotHZ_Free/KotHZFreeSettings.json`.
-- Aktuell verbindlich: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json`; Logs getrennt unter `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`.
+- Aktuell verbindlich: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json`; Logs getrennt unter `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`.
 
 ## Rauch
 

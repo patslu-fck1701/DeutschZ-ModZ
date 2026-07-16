@@ -9,5 +9,5 @@
 
 Profilpfade bleiben getrennt unter:
 
-- `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json`
+- `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json`
 - `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`

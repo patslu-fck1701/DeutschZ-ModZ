@@ -8,8 +8,9 @@ class DZKOTHF_Constants
 	static const string CONFIG_ROOT = "$profile:DeutschZ-System/DeutschZ_KotHZ";
 	static const string LOG_SYSTEM_ROOT = "$profile:DeutschZ-System/LogZ";
 	static const string LOG_ROOT = "$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ";
-	static const string SETTINGS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json";
+	static const string SETTINGS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json";
 	static const string LOG_PATH = "$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log";
+	static const string PREVIOUS_SETTINGS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json";
 	static const string LEGACY_PROFILE_ROOT = "$profile:DeutschZ";
 	static const string LEGACY_CONFIG_ROOT = "$profile:DeutschZ/KotHZ_Free";
 	static const string LEGACY_SETTINGS_PATH = "$profile:DeutschZ/KotHZ_Free/KotHZFreeSettings.json";

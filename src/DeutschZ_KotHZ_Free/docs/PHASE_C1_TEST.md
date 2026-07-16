@@ -2,12 +2,12 @@
 
 ## Profilpfade
 
-- Config: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json`
+- Config: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json`
 - Log: `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`
-- Hoster-Config: `/gameserver/profiles/DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json`
+- Hoster-Config: `/gameserver/profiles/DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json`
 - Hoster-Log: `/gameserver/profiles/DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`
 
-Der fruehere Pfad `$profile:DeutschZ/KotHZ_Free/KotHZFreeSettings.json` wird nur zur einmaligen Migration gelesen. Die alte Datei wird nicht geloescht. Existieren beide Dateien, ist der neue Pfad autoritativ.
+Die bisherigen Dateien `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json` und `$profile:DeutschZ/KotHZ_Free/KotHZFreeSettings.json` werden nur zur einmaligen Migration gelesen. Alte Dateien werden nicht geloescht. Existiert `KotHZSettings.json`, ist sie autoritativ.
 
 ## Servertest
 
