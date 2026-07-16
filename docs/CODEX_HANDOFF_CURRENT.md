@@ -1,13 +1,25 @@
 # CODEX HANDOFF CURRENT
 
-Letzte Aktualisierung: 16.07.2026, 05:55 Uhr
+Letzte Aktualisierung: 16.07.2026, 06:16 Uhr
 
 ## Nachtauftrag - Phasenstatus
 
 - Phase 1 KotHZ Free Phase C: PASS
 - Phase 2 DeutschZ UiAdminZ / Admin Lite: PASS
-- Phase 3 DeutschZ LicenseCore: noch nicht begonnen
-- Phasen 4 bis 7: durch Gate-Reihenfolge noch gesperrt
+- Phase 3 DeutschZ LicenseCore: BLOCKIERT - keine sichere asymmetrische Signatur-API in Enforce Script
+- Phasen 4 bis 7: gemaess Hard Gate nicht begonnen
+
+## LicenseCore Gate 3
+
+- Status: `BLOCKED`
+- Es wurde kein LicenseCore-Quellbereich und keine Fake-Lizenzpruefung angelegt.
+- Lokale Referenzpruefung: `P:\scripts\1_Core`, `3_Game`, `4_World`, `5_Mission` sowie installierte DayZ-Tools.
+- Keine RSA-, ECDSA-, Ed25519-, Public-Key- oder VerifySignature-API fuer Enforce Script gefunden.
+- Einziger relevanter Treffer: `P:\scripts\1_Core\DayZ\proto\EnString.c` mit `proto native int Hash();`; dieser Integer-Hash ist keine Kryptografie und keine Signatur.
+- Bewusst ausgeschlossen: Hash/Checksumme, PBO-HMAC-Geheimnis, selbst erfundene Kryptografie und reine UI-Sperren.
+- Empfohlener naechster Architekturpruefpunkt: separater lokaler Vorstart-Verifier mit etablierter Kryptobibliothek; noch nicht freigegeben oder implementiert.
+- Vollstaendige Evidenz und Optionen: `docs/LICENSECORE_GATE_3_BLOCKER.md`.
+- Wegen des verbindlichen Nachtauftrag-Gates wurden KotHZ Premium, MenuZ V2, HUDZ und RadioMissionZ nicht begonnen.
 
 ## KotHZ Free
 
@@ -67,6 +79,8 @@ Sicherheit:
 
 Synchronisierung: 16.07.2026, 05:55 Uhr, atomar ueber `E:\DeutschZ\_codex_phase2_staging`; Staging danach entfernt. Alte aktive PBO/BISIGN wurden ersetzt, keine gemischten Altversionen und keine Backupordner im Ausgabeordner.
 
+Phase 3 erzeugte wegen des Sicherheitsblockers keinen Build und keine neue Produktausgabe. Die unten dokumentierten, geprueften Phase-1/2-Ausgaben bleiben der aktuelle Teststand.
+
 Uebertragen nach `E:\DeutschZ\DeutschZServer\@DeutschZ_UiAdminZ`:
 
 - `Addons/DeutschZ_UiAdminZ.pbo`
@@ -110,4 +124,5 @@ Aktualisiert in `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_Free`:
 
 - Visueller Clienttest fehlt.
 - Admin- und Nicht-Admin-Klicktest fehlt.
+- LicenseCore benoetigt eine neue, ausdruecklich freigegebene Architektur ausserhalb einer rein in Enforce Script erfundenen Signaturpruefung.
 - Windows-DayZ-Server akzeptiert die bekannten Grossbuchstabenpfade; sie sind fuer diesen Auftrag kein Releaseblocker.
