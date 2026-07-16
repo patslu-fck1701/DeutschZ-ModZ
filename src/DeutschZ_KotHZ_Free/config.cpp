@@ -5,7 +5,8 @@ class CfgPatches
 		units[] =
 		{
 			"DZKOTHF_EventFlagpole",
-			"DZKOTHF_EventFlag"
+			"DZKOTHF_EventFlag",
+			"DZKOTHF_RewardCrate"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
@@ -27,7 +28,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "1.0.0-phase-b";
+		version = "1.0.0-phase-c5";
 		type = "mod";
 		dependencies[] =
 		{
@@ -72,6 +73,7 @@ class CfgVehicles
 {
 	class StaticFlagPole;
 	class Flag_Chernarus;
+	class SeaChest;
 
 	class DZKOTHF_EventFlagpole: StaticFlagPole
 	{
@@ -85,5 +87,13 @@ class CfgVehicles
 		scope = 2;
 		displayName = "DeutschZ KotHZ Fahne";
 		descriptionShort = "Serververwaltete KotHZ-Capture-Fahne.";
+	};
+
+	class DZKOTHF_RewardCrate: SeaChest
+	{
+		scope = 2;
+		displayName = "DeutschZ KotHZ Belohnungskiste";
+		descriptionShort = "Serververwaltete KotHZ-Free-Belohnungskiste.";
+		itemsCargoSize[] = {10, 50};
 	};
 };

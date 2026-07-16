@@ -15,4 +15,10 @@ modded class MissionServer
 
 		super.OnMissionFinish();
 	}
+
+	override void InvokeOnConnect(PlayerBase player, PlayerIdentity identity)
+	{
+		super.InvokeOnConnect(player, identity);
+		DZKOTHF_EventController.GetInstance().SyncPlayer(player);
+	}
 }

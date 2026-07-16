@@ -50,6 +50,7 @@ class DZKOTHF_EventController
 		{
 			m_Session.SetAbortReason("Mission shutdown");
 			m_Session.CleanupWorldObjects();
+			m_Session.CleanupRewardCrate("mission shutdown");
 			m_Session.SetState(DZKOTHF_EventState.IDLE);
 		}
 
@@ -71,6 +72,8 @@ class DZKOTHF_EventController
 			return false;
 		}
 
+		m_Session.CleanupRewardCrate("new event start duplicate protection");
+
 		m_Session.MarkStarted();
 		if (!m_Session.SpawnWorldObjects(m_Settings))
 		{
@@ -85,6 +88,9 @@ class DZKOTHF_EventController
 		}
 
 		m_Session.SetSmokeState(DZKOTHF_SmokeState.WHITE);
+		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, true, m_Session.GetCenter(), "ANGEKUENDIGT");
+		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, true, "ANGEKUENDIGT", 0.0);
+		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Ein KotHZ-Event wurde angekuendigt.");
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(ActivateEvent, m_Settings.AnnounceSeconds * 1000, false);
 		return true;
 	}
@@ -95,9 +101,21 @@ class DZKOTHF_EventController
 			return false;
 
 		m_Session.SetSmokeState(DZKOTHF_SmokeState.GREEN);
+		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, true, m_Session.GetCenter(), "AKTIV");
+		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, true, "AKTIV - WARTE AUF SPIELER", m_Session.GetCaptureProgress());
+		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Die Capture-Phase ist aktiv.");
 		m_CaptureTickRunning = true;
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(SpawnEnemyBlock, m_Settings.SpawnDelaySeconds * 1000, false);
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CaptureTick, m_Settings.CaptureTickMilliseconds, false);
 		return true;
+	}
+
+	protected void SpawnEnemyBlock()
+	{
+		if (GetState() != DZKOTHF_EventState.ACTIVE || !m_Session)
+			return;
+
+		m_Session.SpawnEnemies(m_Settings);
 	}
 
 	protected void CaptureTick()
@@ -107,13 +125,17 @@ class DZKOTHF_EventController
 
 		int playerCount = CountAlivePlayersInRadius();
 		m_Session.SetPlayerCount(playerCount);
+		string progressStatus = "AKTIV";
 		if (playerCount > 1)
 		{
 			m_Session.SetSmokeState(DZKOTHF_SmokeState.RED);
+			progressStatus = "PAUSIERT - UMKAEMPFT";
 		}
 		else
 		{
 			m_Session.SetSmokeState(DZKOTHF_SmokeState.GREEN);
+			if (playerCount == 0)
+				progressStatus = "PAUSIERT - KEIN SPIELER";
 			if (playerCount == 1)
 			{
 				float tickSeconds = m_Settings.CaptureTickMilliseconds / 1000.0;
@@ -126,6 +148,8 @@ class DZKOTHF_EventController
 				}
 			}
 		}
+
+		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, true, progressStatus, m_Session.GetCaptureProgress());
 
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CaptureTick, m_Settings.CaptureTickMilliseconds, false);
 	}
@@ -156,21 +180,35 @@ class DZKOTHF_EventController
 
 		m_Session.SetCaptureProgress(1.0);
 		m_Session.SetSmokeState(DZKOTHF_SmokeState.WHITE);
+		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, false, vector.Zero, "");
+		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, false, "ABGESCHLOSSEN", 1.0);
+		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Capture erfolgreich abgeschlossen.");
+		if (!m_Session.SpawnRewardCrate(m_Settings))
+			DZKOTHF_Log.Error("Capture completed but reward crate creation failed.");
+
 		TransitionTo(DZKOTHF_EventState.REWARD);
-		DZKOTHF_Log.Info("Phase B capture complete. No reward system is active in this phase.");
+		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Die Belohnungskiste wurde freigegeben.");
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CleanupRewardCrate, m_Settings.RewardLifetimeMinutes * 60000, false);
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(BeginCleanup, m_Settings.CompletionCleanupDelaySeconds * 1000, false);
 		return true;
 	}
 
+	protected void CleanupRewardCrate()
+	{
+		if (m_Session)
+			m_Session.CleanupRewardCrate("configured lifetime expired");
+	}
+
 	bool BeginCleanup()
 	{
-		StopCaptureTick();
-		if (GetGame())
-			GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(ActivateEvent);
+		RemoveActiveEventCalls();
 
 		if (!TransitionTo(DZKOTHF_EventState.CLEANUP))
 			return false;
 
+		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, false, vector.Zero, "");
+		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, false, "CLEANUP", 0.0);
+		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "KotHZ-Cleanup abgeschlossen.");
 		m_Session.CleanupWorldObjects();
 		return FinishCleanup();
 	}
@@ -192,6 +230,7 @@ class DZKOTHF_EventController
 		StopCaptureTick();
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(ActivateEvent);
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(BeginCleanup);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(SpawnEnemyBlock);
 		m_Session.SetAbortReason(reason);
 		m_Session.SetSmokeState(DZKOTHF_SmokeState.RED);
 		DZKOTHF_Log.Warning("Event abort requested: " + reason + ".");
@@ -207,6 +246,16 @@ class DZKOTHF_EventController
 		return m_Session.GetState();
 	}
 
+	void SyncPlayer(PlayerBase player)
+	{
+		if (!player || !m_Settings || !m_Session)
+			return;
+
+		bool visible = GetState() == DZKOTHF_EventState.ANNOUNCED || GetState() == DZKOTHF_EventState.ACTIVE;
+		DZKOTHF_ClientBridge.SendMarker(player, m_Settings, visible, m_Session.GetCenter(), GetStateName());
+		DZKOTHF_ClientBridge.SendProgress(player, m_Settings, visible, GetStateName(), m_Session.GetCaptureProgress());
+	}
+
 	string GetStateName()
 	{
 		return DZKOTHF_EventState.ToString(GetState());
@@ -219,16 +268,25 @@ class DZKOTHF_EventController
 			GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(CaptureTick);
 	}
 
+	protected void RemoveActiveEventCalls()
+	{
+		StopCaptureTick();
+		if (!GetGame())
+			return;
+
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(StartEvent);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(ActivateEvent);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(SpawnEnemyBlock);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(BeginCleanup);
+	}
+
 	protected void RemoveScheduledCalls()
 	{
 		if (!GetGame())
 			return;
 
-		m_CaptureTickRunning = false;
-		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(StartEvent);
-		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(ActivateEvent);
-		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(CaptureTick);
-		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(BeginCleanup);
+		RemoveActiveEventCalls();
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(CleanupRewardCrate);
 	}
 
 	protected bool TransitionTo(int nextState)

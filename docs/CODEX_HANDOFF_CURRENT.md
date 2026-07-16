@@ -1,96 +1,50 @@
 # CODEX HANDOFF CURRENT
 
-## Aktueller Auftrag
+## KotHZ Free Phase C
 
-- Produkt: DeutschZ KotHZ Free / `@DeutschZ_KotHZ_Free`
-- Phase: B - Mast, eine Fahne, Capture-Radius, Capture-Fortschritt, Rauch und Cleanup
 - Branch: `codex/kothz-free-v1-core-20260715`
-- Status: BUILD READY = JA, SERVER TEST READY = JA, GAMEPLAY VALIDATED = NEIN
-- MenuZ bleibt unveraendert in `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic` und wird von Patrick parallel getestet.
+- Status: BUILD READY = JA, SERVER TEST READY = JA, CLIENT/GAMEPLAY VALIDATED = NEIN
+- Funktionen: Mast, exakt eine Fahne, Capture/Radius, White/Green/Red Smoke, 15 konfigurierbare Vanilla-Infizierte, eine JSON-RewardCrate, Vanilla Notify/Chat-Fallback, genau ein Vanilla-Marker-System, genau eine neutrale Progressbar, zentraler Cleanup.
+- Nicht enthalten: Expansion-Pflicht, CF-Pflicht, Wellen, Boss, Spezial-Infected, Terminal, KOTHGate, Keycard, Premium.
 
-## Umgesetzter Phase-B-Umfang
+## Verbindliche Profilpfade
 
-- genau ein serververwalteter Vanilla-Mast `DZKOTHF_EventFlagpole`
-- genau eine angehaengte Fahne `DZKOTHF_EventFlag`
-- synchronisierter Fahnenfortschritt von 0 bis 100 Prozent
-- konfigurierbarer Capture-Radius, Standard 25 Meter
-- serverseitige Pruefung lebender Spieler im Radius
-- Weiss in `ANNOUNCED`, Gruen in `ACTIVE`, Rot bei mehreren Spielern oder Abbruch
-- Fortschritt nur bei genau einem lebenden Spieler; Pause bei null oder mehreren Spielern
-- zentrale Objekt- und Zustandsverwaltung in `DZKOTHF_EventSession`
-- vollstaendiges Cleanup bei Abbruch, normalem Ende und Mission-Shutdown
-- Profilkonfiguration: `$profile:DeutschZ/KotHZ_Free/KotHZFreeSettings.json`
+- Config: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json`
+- Log: `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`
+- Hoster: `/gameserver/profiles/DeutschZ-System/DeutschZ_KotHZ/` und `/gameserver/profiles/DeutschZ-System/LogZ/DeutschZ_KotHZ/`
+- Altpfad wird einmalig gelesen/migriert und niemals still geloescht.
 
-Nicht enthalten: Gegner, Rewards, Marker, Notify, Progressbar, Boss, Wellen, Terminal, KOTHGate oder Premiumfunktionen.
+## Build und Test
 
-## Geaenderte und neue Source-Dateien
-
-- `src/DeutschZ_KotHZ_Free/config.cpp`
-- `src/DeutschZ_KotHZ_Free/mod.cpp`
-- `src/DeutschZ_KotHZ_Free/scripts/3_Game/DeutschZ_KotHZ_Free/DZKOTHF_Constants.c`
-- `src/DeutschZ_KotHZ_Free/scripts/3_Game/DeutschZ_KotHZ_Free/DZKOTHF_Settings.c`
-- `src/DeutschZ_KotHZ_Free/scripts/3_Game/DeutschZ_KotHZ_Free/DZKOTHF_SmokeState.c`
-- `src/DeutschZ_KotHZ_Free/scripts/4_World/DeutschZ_KotHZ_Free/DZKOTHF_EventController.c`
-- `src/DeutschZ_KotHZ_Free/scripts/4_World/DeutschZ_KotHZ_Free/DZKOTHF_EventFlagpole.c`
-- `src/DeutschZ_KotHZ_Free/scripts/4_World/DeutschZ_KotHZ_Free/DZKOTHF_EventSession.c`
-- `src/DeutschZ_KotHZ_Free/example-settings/KotHZFreeSettings.json`
-- `src/DeutschZ_KotHZ_Free/docs/PHASE_B_ARCHITECTURE.md`
-- `src/DeutschZ_KotHZ_Free/docs/PHASE_B_TEST.md`
-- `docs/DeutschZ_KotHZ_Free/PHASE_B_DAYZ_LABS_COMPILETEST.md`
-- `docs/CODEX_HANDOFF_CURRENT.md`
-
-## Build- und Teststatus
-
+- Preset: `deutschz_kothz_free_compile`
+- aktive Mod: nur `P:\Mods\@DeutschZ_KotHZ_Free`
 - Preflight: PASS, 0 Fehler, 1 bekannte Windows-Grossbuchstabenwarnung
-- Clean Build: PASS
-- PBO-Inhalt: PASS, 17 erwartete Dateien
-- Signatur: PASS, `DeutschZ.bisign is OK`
-- DayZ-Labs-Preset: `deutschz_kothz_free_compile`
-- aktive Testmod: ausschliesslich `P:\Mods\@DeutschZ_KotHZ_Free`
-- Script-Compile: PASS
-- Missionstart / `Player connect enabled`: PASS
-- stabil mindestens 2 Minuten nach Missionstart: PASS
-- kontrollierter Stopp: PASS
-- Script-Fatalfehler: 0
-- KotHZ-Free-spezifische RPT-Fehler: 0
-- Gameplay-/Clientbeweis: OFFEN
+- Clean Build / PBO / DeutschZ-Signatur: PASS
+- Script-Compile / Missionstart / `Player connect enabled`: PASS
+- C1, C2, C3, C4 und C5 jeweils mindestens zwei Minuten stabil: PASS
+- modbezogene Script-/RPT-Fehler: 0
+- Sichtbarkeit, MapWidget, Popup, Progressbar, Capture, Reward und Cleanup im Gameplay: PATRICK_REQUIRED
 
-## Letzter aktualisierter Ausgabeordner
+## Ausgabe
 
-- Vollstaendiger Ausgabeordner: `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_Free`
-- Zeitpunkt der Synchronisierung: 16.07.2026 00:33 Europe/Berlin
-- Synchronisierung: atomar ueber externes Staging
-- Build-/Signaturstatus: PASS / PASS
-- alte PBO/BISIGN ersetzt: JA
+- letzter Ausgabeordner: `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_Free`
+- Synchronisierung: 16.07.2026, atomar ueber externes Staging
+- enthalten: PBO, BISIGN, oeffentlicher BIKEY, `mod.cpp`, `meta.cpp`, Settings und Phase-A-bis-C5-Testdokumentation
+- alte aktive PBO/BISIGN ersetzt: JA
 - gemischte Altversionen: NEIN
-
-### Uebertragene Dateien
-
-- `Addons/DeutschZ_KotHZ_Free.pbo`
-- `Addons/DeutschZ_KotHZ_Free.pbo.DeutschZ.bisign`
-- `keys/DeutschZ.bikey`
-- `mod.cpp`
-- `meta.cpp`
-- `Settings/KotHZFreeSettings.json`
-- `docs/PHASE_A_ARCHITECTURE.md`
-- `docs/PHASE_A_TEST.md`
-- `docs/PHASE_B_ARCHITECTURE.md`
-- `docs/PHASE_B_TEST.md`
-- `docs/PHASE_B_DAYZ_LABS_COMPILETEST.md`
 
 ## Installation und Test
 
-1. Den kompletten Ausgabeordner als Client- und Servermod laden.
-2. Den oeffentlichen `DeutschZ.bikey` im Server-Keys-Ordner bereitstellen.
-3. Server starten und an der konfigurierten `EventPosition` exakt einen Mast und eine Fahne pruefen.
-4. Weiss waehrend Ankuendigung und Gruen nach Aktivierung pruefen.
-5. Mit genau einem Spieler im Radius die Fahnenbewegung pruefen.
-6. Mit zwei Spielern Rot und pausierenden Fortschritt pruefen.
-7. Abbruch und normalen Abschluss getrennt auf vollstaendiges Cleanup pruefen.
-8. Bei Fehlern frische RPT- und Scriptlogs sowie einen Screenshot liefern.
+1. Kompletten Ausgabeordner auf Client und Server laden und `keys/DeutschZ.bikey` serverseitig bereitstellen.
+2. Settings nach dem ersten Start ausschließlich im neuen Configpfad bearbeiten.
+3. Capture mit einem und umkaempften Capture mit mehreren Spielern pruefen.
+4. Marker, Notify und Progressbar visuell pruefen.
+5. RewardCrate-Inhalt, 500 Slots, Nicht-Aufnehmbarkeit und zehn Minuten Lifetime pruefen.
+6. Abbruch, Abschluss, Disconnect und Serverrestart auf vollstaendiges Cleanup pruefen.
 
-## Bekannte Grenzen
+## DeutschZ UiAdminZ
 
-- Visuelle Fahnen-, Rauch- und Mehrspieler-Capture-Pruefung ist ohne Client nicht bewiesen.
-- Das kontrollierte DayZ-Labs-Stoppen beendet den Prozess; ein Gameplay-Abbruch wurde nicht simuliert.
-- Die bekannte Animation-Rootmeldung betrifft auch Vanilla `sakhal` und blockiert den Windows-Serverstart nicht.
+- Assetbestand inventarisiert: 2.885 Dateien, Originale unveraendert.
+- Quellmod noch nicht angelegt.
+- Sicherheitsblocker: In den installierten Vanilla-Skripten wurde keine belastbare serverseitige Adminrechte-API gefunden. Eine UID-Liste wird nicht erfunden. Start/Stop muss bis zur Festlegung einer sicheren vorhandenen Adminquelle deaktiviert bleiben.
+- KotHZ Free ist von UiAdminZ vollstaendig unabhaengig.
