@@ -131,20 +131,40 @@ class DZKOTHF_EventSession
 			return 0;
 
 		int createdItems = 0;
-		foreach (DZKOTHF_RewardItemSetting reward: settings.RewardItems)
+		ref array<ref DZKOTHF_RewardItemSetting> guaranteedKit = new array<ref DZKOTHF_RewardItemSetting>;
+		guaranteedKit.Insert(new DZKOTHF_RewardItemSetting("M4A1", 1, 1, 1, 1.0));
+		guaranteedKit.Insert(new DZKOTHF_RewardItemSetting("Mag_STANAG_30Rnd", 1, 30, 30, 1.0));
+		guaranteedKit.Insert(new DZKOTHF_RewardItemSetting("Ammo_556x45", 1, 20, 40, 1.0));
+		createdItems += FillRewardGroup("GuaranteedWeapons", guaranteedKit, true);
+		createdItems += FillRewardGroup("RewardItems", settings.RewardItems, false);
+		return createdItems;
+	}
+
+	protected int FillRewardGroup(string groupName, array<ref DZKOTHF_RewardItemSetting> rewards, bool guaranteed)
+	{
+		if (!rewards || !m_RewardCrate || !m_RewardCrate.GetInventory())
+			return 0;
+
+		int createdItems = 0;
+		foreach (DZKOTHF_RewardItemSetting reward: rewards)
 		{
 			if (!reward || reward.Type == "")
+				continue;
+			if (groupName == "RewardItems" && reward.Type == "M4A1")
 				continue;
 
 			for (int index = 0; index < reward.Count; index++)
 			{
-				if (Math.RandomFloatInclusive(0.0, 1.0) > reward.Chance)
+				if (!guaranteed && Math.RandomFloatInclusive(0.0, 1.0) > reward.Chance)
+				{
+					DZKOTHF_Log.Info("Reward item class=" + reward.Type + " success=NO target=" + m_RewardCrate.GetType() + " count=0 group=" + groupName + " reason=chance_roll.");
 					continue;
+				}
 
 				EntityAI entity = m_RewardCrate.GetInventory().CreateInInventory(reward.Type);
 				if (!entity)
 				{
-					DZKOTHF_Log.Warning("Reward item could not be created in crate: " + reward.Type + ".");
+					DZKOTHF_Log.Warning("Reward item class=" + reward.Type + " success=NO target=" + m_RewardCrate.GetType() + " count=0 group=" + groupName + " reason=CreateInInventory_failed_or_no_cargo_space.");
 					continue;
 				}
 
@@ -153,6 +173,7 @@ class DZKOTHF_EventSession
 					item.SetQuantity(Math.RandomIntInclusive(reward.MinQuantity, reward.MaxQuantity));
 
 				createdItems++;
+				DZKOTHF_Log.Info("Reward item class=" + reward.Type + " success=YES target=" + m_RewardCrate.GetType() + " count=1 group=" + groupName + " reason=created.");
 			}
 		}
 

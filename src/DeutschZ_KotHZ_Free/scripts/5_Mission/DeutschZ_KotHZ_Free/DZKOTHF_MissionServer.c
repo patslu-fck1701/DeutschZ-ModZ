@@ -21,4 +21,10 @@ modded class MissionServer
 		super.InvokeOnConnect(player, identity);
 		DZKOTHF_EventController.GetInstance().SyncPlayer(player);
 	}
+
+	override void InvokeOnDisconnect(PlayerBase player)
+	{
+		DZKOTHF_EventController.GetInstance().OnPlayerDisconnect(player);
+		super.InvokeOnDisconnect(player);
+	}
 }

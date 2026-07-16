@@ -6,6 +6,7 @@ modded class PlayerBase
 		if (rpc_type != DZUIAZ_Constants.RPC_ADMIN || GetGame().IsServer()) return;
 		int protocol; if (!ctx.Read(protocol) || protocol != DZUIAZ_Constants.RPC_PROTOCOL_VERSION) return;
 		if (!ctx.Read(DZUIAZ_ClientState.Authorized) || !ctx.Read(DZUIAZ_ClientState.ModuleAvailable)) return;
+		DZUIAZ_ClientState.AuthorizationResponseReceived = true;
 		ctx.Read(DZUIAZ_ClientState.EventState);
 		ctx.Read(DZUIAZ_ClientState.EventPosition);
 		ctx.Read(DZUIAZ_ClientState.Radius);

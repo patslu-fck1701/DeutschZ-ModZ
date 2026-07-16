@@ -6,6 +6,10 @@ class DZKOTHF_EventController
 	protected bool m_Initialized;
 	protected bool m_CaptureTickRunning;
 	protected ref map<string, bool> m_ProgressRecipients;
+	protected ref map<string, bool> m_MusicRecipients;
+	protected string m_CurrentMusicTrack;
+	protected int m_LastMusicTrackIndex;
+	protected ref array<string> m_MusicTracks;
 
 	static DZKOTHF_EventController GetInstance()
 	{
@@ -27,6 +31,10 @@ class DZKOTHF_EventController
 	{
 		m_Session = new DZKOTHF_EventSession;
 		m_ProgressRecipients = new map<string, bool>;
+		m_MusicRecipients = new map<string, bool>;
+		m_LastMusicTrackIndex = -1;
+		m_MusicTracks = new array<string>;
+		for (int i = 1; i <= 8; i++) m_MusicTracks.Insert(string.Format("DZKOTHF_Music%1_SoundSet", i.ToStringLen(2)));
 	}
 
 	void InitServer()
@@ -48,6 +56,7 @@ class DZKOTHF_EventController
 			return;
 
 		RemoveScheduledCalls();
+		StopMusicForAll();
 		if (m_Session)
 		{
 			HideProgressForAll("MISSION ENDE", 0.0);
@@ -77,6 +86,7 @@ class DZKOTHF_EventController
 
 		m_Session.CleanupRewardCrate("new event start duplicate protection");
 		m_ProgressRecipients.Clear();
+		StopMusicForAll();
 
 		m_Session.MarkStarted();
 		if (!m_Session.SpawnWorldObjects(m_Settings))
@@ -109,6 +119,8 @@ class DZKOTHF_EventController
 		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, true, m_Session.GetCenter(), "AKTIV");
 		SyncProgressForPlayers("AKTIV - WARTE AUF SPIELER", m_Session.GetCaptureProgress());
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Die Capture-Phase ist aktiv.");
+		SelectMusicTrack();
+		SyncMusicForPlayers();
 		m_CaptureTickRunning = true;
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(SpawnEnemyBlock, m_Settings.SpawnDelaySeconds * 1000, false);
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CaptureTick, m_Settings.CaptureTickMilliseconds, false);
@@ -157,6 +169,7 @@ class DZKOTHF_EventController
 		}
 
 		SyncProgressForPlayers(progressStatus, m_Session.GetCaptureProgress());
+		SyncMusicForPlayers();
 
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CaptureTick, m_Settings.CaptureTickMilliseconds, false);
 	}
@@ -204,6 +217,7 @@ class DZKOTHF_EventController
 		m_Session.SetCaptureProgress(1.0);
 		m_Session.SetSmokeState(DZKOTHF_SmokeState.WHITE);
 		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, false, vector.Zero, "");
+		StopMusicForAll();
 		HideProgressForAll("ABGESCHLOSSEN", 1.0);
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Capture erfolgreich abgeschlossen.");
 		if (!m_Session.SpawnRewardCrate(m_Settings))
@@ -230,6 +244,7 @@ class DZKOTHF_EventController
 			return false;
 
 		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, false, vector.Zero, "");
+		StopMusicForAll();
 		HideProgressForAll("CLEANUP", 0.0);
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "KotHZ-Cleanup abgeschlossen.");
 		m_Session.CleanupWorldObjects();
@@ -322,6 +337,16 @@ class DZKOTHF_EventController
 			progressVisible = m_Settings.ShowProgressDuringAnnouncement;
 		DZKOTHF_ClientBridge.SendProgress(player, m_Settings, progressVisible, GetStateName(), m_Session.GetCaptureProgress());
 		SetProgressRecipient(player, progressVisible);
+		SyncMusicForPlayer(player);
+	}
+
+	void OnPlayerDisconnect(PlayerBase player)
+	{
+		if (!player || !player.GetIdentity())
+			return;
+		string playerId = player.GetIdentity().GetPlainId();
+		m_ProgressRecipients.Remove(playerId);
+		m_MusicRecipients.Remove(playerId);
 	}
 
 	protected bool IsPlayerInCaptureRadius(PlayerBase player)
@@ -384,6 +409,75 @@ class DZKOTHF_EventController
 			m_ProgressRecipients.Set(playerId, true);
 		else
 			m_ProgressRecipients.Remove(playerId);
+	}
+
+	protected void SelectMusicTrack()
+	{
+		m_CurrentMusicTrack = "";
+		if (!m_MusicTracks || m_MusicTracks.Count() == 0)
+			return;
+
+		int count = m_MusicTracks.Count();
+		int selectedIndex = Math.RandomInt(0, count);
+		if (count > 1 && selectedIndex == m_LastMusicTrackIndex)
+			selectedIndex = (selectedIndex + 1 + Math.RandomInt(0, count - 1)) % count;
+
+		m_LastMusicTrackIndex = selectedIndex;
+		m_CurrentMusicTrack = m_MusicTracks[selectedIndex];
+		DZKOTHF_Log.Info("Music selected: index=" + selectedIndex.ToString() + " soundSet=" + m_CurrentMusicTrack + " volume=0.33 max=0.33.");
+	}
+
+	protected bool IsMusicPhaseActive()
+	{
+		if (m_CurrentMusicTrack == "")
+			return false;
+		return GetState() == DZKOTHF_EventState.ACTIVE;
+	}
+
+	protected void SyncMusicForPlayers()
+	{
+		if (!GetGame() || !m_Settings)
+			return;
+		array<Man> players = new array<Man>;
+		GetGame().GetPlayers(players);
+		foreach (Man man: players)
+			SyncMusicForPlayer(PlayerBase.Cast(man));
+	}
+
+	protected void SyncMusicForPlayer(PlayerBase player)
+	{
+		if (!player || !player.GetIdentity() || !m_Settings)
+			return;
+		string playerId = player.GetIdentity().GetPlainId();
+		bool shouldPlay = IsMusicPhaseActive() && IsPlayerInCaptureRadius(player);
+		bool isRecipient = m_MusicRecipients.Contains(playerId);
+		if (shouldPlay && !isRecipient)
+		{
+			DZKOTHF_ClientBridge.SendMusic(player, m_Settings, true, m_CurrentMusicTrack);
+			m_MusicRecipients.Set(playerId, true);
+		}
+		else if (!shouldPlay && isRecipient)
+		{
+			DZKOTHF_ClientBridge.SendMusic(player, m_Settings, false, "");
+			m_MusicRecipients.Remove(playerId);
+		}
+	}
+
+	protected void StopMusicForAll()
+	{
+		if (GetGame() && m_Settings)
+		{
+			array<Man> players = new array<Man>;
+			GetGame().GetPlayers(players);
+			foreach (Man man: players)
+			{
+				PlayerBase player = PlayerBase.Cast(man);
+				if (player && player.GetIdentity() && m_MusicRecipients.Contains(player.GetIdentity().GetPlainId()))
+					DZKOTHF_ClientBridge.SendMusic(player, m_Settings, false, "");
+			}
+		}
+		m_MusicRecipients.Clear();
+		m_CurrentMusicTrack = "";
 	}
 
 	string GetStateName()

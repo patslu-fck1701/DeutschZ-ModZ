@@ -18,7 +18,7 @@ class CfgSoundShaders
 {
 	class DZKOTHG_MenuMusic_Base_SoundShader
 	{
-		volume = 0.75;
+		volume = 1;
 	};
 	class DZKOTHG_MenuMusic01_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music01", 1}}; };
 	class DZKOTHG_MenuMusic02_SoundShader : DZKOTHG_MenuMusic_Base_SoundShader { samples[] = {{"\DeutschZ_MenuMusic\sounds\music02", 1}}; };
@@ -37,7 +37,7 @@ class CfgSoundSets
 {
 	class DZKOTHG_MenuMusic_Base_SoundSet
 	{
-		volumeFactor = 1;
+		volumeFactor = 0.66;
 		frequencyFactor = 1;
 		spatial = 0;
 	};
@@ -65,7 +65,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "1.2.5-menu-clientfix";
+		version = "1.2.6-random-music";
 		type = "mod";
 		dependencies[] =
 		{

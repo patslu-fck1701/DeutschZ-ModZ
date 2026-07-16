@@ -5,7 +5,10 @@ class DZKOTHF_ClientBridge
 		array<Man> players = new array<Man>;
 		GetGame().GetPlayers(players);
 		foreach (Man man: players)
-			SendNotify(PlayerBase.Cast(man), settings, message);
+		{
+			PlayerBase player = PlayerBase.Cast(man);
+			SendNotify(player, settings, message);
+		}
 	}
 
 	static void SendNotify(PlayerBase player, DZKOTHF_Settings settings, string message)
@@ -36,7 +39,10 @@ class DZKOTHF_ClientBridge
 		array<Man> players = new array<Man>;
 		GetGame().GetPlayers(players);
 		foreach (Man man: players)
-			SendMarker(PlayerBase.Cast(man), settings, visible && !expansionHandled, position, status);
+		{
+			PlayerBase player = PlayerBase.Cast(man);
+			SendMarker(player, settings, visible && !expansionHandled, position, status);
+		}
 	}
 
 	static void SendMarker(PlayerBase player, DZKOTHF_Settings settings, bool visible, vector position, string status)
@@ -62,7 +68,10 @@ class DZKOTHF_ClientBridge
 		array<Man> players = new array<Man>;
 		GetGame().GetPlayers(players);
 		foreach (Man man: players)
-			SendProgress(PlayerBase.Cast(man), settings, visible, status, progress);
+		{
+			PlayerBase player = PlayerBase.Cast(man);
+			SendProgress(player, settings, visible, status, progress);
+		}
 	}
 
 	static void SendProgress(PlayerBase player, DZKOTHF_Settings settings, bool visible, string status, float progress)
@@ -77,6 +86,20 @@ class DZKOTHF_ClientBridge
 		rpc.Write(settings.EventName);
 		rpc.Write(status);
 		rpc.Write(Math.Clamp(progress, 0.0, 1.0));
+		rpc.Send(player, DZKOTHF_Constants.RPC_SYNC, true, player.GetIdentity());
+	}
+
+	static void SendMusic(PlayerBase player, DZKOTHF_Settings settings, bool play, string soundSet)
+	{
+		if (!player || !player.GetIdentity() || !settings)
+			return;
+
+		ScriptRPC rpc = new ScriptRPC;
+		rpc.Write(DZKOTHF_Constants.RPC_PROTOCOL_VERSION);
+		rpc.Write(DZKOTHF_RPCMessage.MUSIC);
+		rpc.Write(play);
+		rpc.Write(soundSet);
+		rpc.Write(0.33);
 		rpc.Send(player, DZKOTHF_Constants.RPC_SYNC, true, player.GetIdentity());
 	}
 }

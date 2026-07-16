@@ -47,6 +47,17 @@ modded class PlayerBase
 			if (ctx.Read(progressVisible) && ctx.Read(eventName) && ctx.Read(status) && ctx.Read(progress))
 				DZKOTHF_ClientState.SetProgress(progressVisible, eventName, status, progress);
 		}
+		else if (messageType == DZKOTHF_RPCMessage.MUSIC)
+		{
+			bool playMusic;
+			string soundSet;
+			float volume;
+			if (ctx.Read(playMusic) && ctx.Read(soundSet) && ctx.Read(volume))
+			{
+				if (playMusic) DZKOTHF_MusicPlayer.Play(soundSet, volume);
+				else DZKOTHF_MusicPlayer.Stop();
+			}
+		}
 	}
 
 	protected void HandleDZKOTHFAdminRPC(PlayerIdentity sender, ParamsReadContext ctx)
@@ -95,7 +106,9 @@ modded class PlayerBase
 		else if (action != DZKOTHF_AdminAction.STATUS)
 			return;
 
-		DZKOTHF_Log.Info("AdminRPC steamId=" + sender.GetPlainId() + " action=" + action.ToString() + " authorized=" + authorized.ToString() + " result=" + result + ".");
+		string accessResult = "DENIED";
+		if (authorized) accessResult = "ALLOWED";
+		DZKOTHF_Log.Info("AdminRPC timeMs=" + GetGame().GetTime().ToString() + " steam64=" + sender.GetPlainId() + " name=" + sender.GetName() + " access=" + accessResult + " source=" + DZKOTHF_Constants.SETTINGS_PATH + " action=" + action.ToString() + " result=" + result + ".");
 		ScriptRPC response = new ScriptRPC;
 		response.Write(DZKOTHF_Constants.RPC_PROTOCOL_VERSION);
 		response.Write(authorized);

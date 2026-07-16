@@ -1,5 +1,7 @@
 modded class MissionGameplay
 {
+	protected int m_DZUIAZ_LastDeniedNotice;
+
 	override UIScriptedMenu CreateScriptedMenu(int id)
 	{
 		if (id == DZUIAZ_Constants.MENU_ID) return new DZUIAZ_AdminMenu;
@@ -20,8 +22,53 @@ modded class MissionGameplay
 			return;
 		}
 
+		if (DZUIAZ_ClientState.PendingOpen)
+			return;
+
 		DZUIAZ_ClientState.Reset();
-		GetGame().GetUIManager().EnterScriptedMenu(DZUIAZ_Constants.MENU_ID, null);
+		DZUIAZ_ClientState.PendingOpen = true;
+		DZUIAZ_ClientState.AuthorizationRequestedAt = GetGame().GetTime();
+		DZUIAZ_RequestAuthorization();
+	}
+
+	override void OnUpdate(float timeslice)
+	{
+		super.OnUpdate(timeslice);
+		if (!DZUIAZ_ClientState.PendingOpen)
+			return;
+
+		if (DZUIAZ_ClientState.AuthorizationResponseReceived)
+		{
+			DZUIAZ_ClientState.PendingOpen = false;
+			if (DZUIAZ_ClientState.Authorized)
+				GetGame().GetUIManager().EnterScriptedMenu(DZUIAZ_Constants.MENU_ID, null);
+			else
+				DZUIAZ_ShowDenied();
+		}
+		else if (GetGame().GetTime() - DZUIAZ_ClientState.AuthorizationRequestedAt > 5000)
+		{
+			DZUIAZ_ClientState.PendingOpen = false;
+			DZUIAZ_ShowDenied();
+		}
+	}
+
+	protected void DZUIAZ_RequestAuthorization()
+	{
+		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+		if (!player) return;
+		ScriptRPC rpc = new ScriptRPC;
+		rpc.Write(DZUIAZ_Constants.RPC_PROTOCOL_VERSION);
+		rpc.Write(DZUIAZ_AdminAction.STATUS);
+		rpc.Send(player, DZUIAZ_Constants.RPC_ADMIN, true, null);
+	}
+
+	protected void DZUIAZ_ShowDenied()
+	{
+		int now = GetGame().GetTime();
+		if (now - m_DZUIAZ_LastDeniedNotice < 5000)
+			return;
+		m_DZUIAZ_LastDeniedNotice = now;
+		NotificationSystem.AddNotificationExtended(4.0, "DeutschZ UiAdminZ", "Keine Berechtigung fuer DeutschZ UiAdminZ.", "");
 	}
 
 	override void OnMissionFinish()

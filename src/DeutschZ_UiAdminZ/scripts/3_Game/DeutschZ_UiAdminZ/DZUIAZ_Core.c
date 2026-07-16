@@ -71,6 +71,9 @@ class DZUIAZ_ClientState
 {
 	static bool ModuleAvailable;
 	static bool Authorized;
+	static bool AuthorizationResponseReceived;
+	static bool PendingOpen;
+	static int AuthorizationRequestedAt;
 	static string EventState = "KEINE ANTWORT";
 	static vector EventPosition;
 	static float Radius;
@@ -82,6 +85,7 @@ class DZUIAZ_ClientState
 	static void Reset()
 	{
 		ModuleAvailable = false; Authorized = false; EventState = "KEINE ANTWORT";
+		AuthorizationResponseReceived = false; PendingOpen = false; AuthorizationRequestedAt = 0;
 		EventPosition = vector.Zero; Radius = 0; Progress = 0; EnemyCount = 0; RewardReady = false;
 		Result = "Keine Antwort vom Eventmodul";
 	}

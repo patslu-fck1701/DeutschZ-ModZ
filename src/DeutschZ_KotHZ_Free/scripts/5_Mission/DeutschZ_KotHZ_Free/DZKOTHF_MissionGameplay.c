@@ -8,6 +8,7 @@ modded class MissionGameplay
 
 	override void OnMissionFinish()
 	{
+		DZKOTHF_MusicPlayer.Stop();
 		DZKOTHF_ClientState.Reset();
 		DZKOTHF_ProgressRenderer.Get().Cleanup();
 		super.OnMissionFinish();

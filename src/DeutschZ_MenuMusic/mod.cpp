@@ -7,4 +7,4 @@ tooltip = "DeutschZ Menu Music";
 overview = "DeutschZ 4K menu, loading screen, deathscreen and music.";
 action = "";
 author = "DeutschZ";
-version = "1.2.5-menu-clientfix";
+version = "1.2.6-random-music";
