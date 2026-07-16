@@ -1,0 +1,9 @@
+name = "DeutschZ UiAdminZ";
+picture = "";
+logo = "";
+logoSmall = "";
+logoOver = "";
+tooltip = "DeutschZ UiAdminZ";
+overview = "Optionale serverautorisierte Admin-Lite-Oberflaeche fuer DeutschZ Events.";
+author = "DeutschZ";
+version = "1.0.0-admin-lite";

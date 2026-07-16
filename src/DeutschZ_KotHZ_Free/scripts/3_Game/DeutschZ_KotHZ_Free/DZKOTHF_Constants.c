@@ -2,6 +2,7 @@ class DZKOTHF_Constants
 {
 	static const string VERSION = "1.0.0-phase-c5";
 	static const int RPC_SYNC = 24871;
+	static const int RPC_ADMIN = 24872;
 	static const int RPC_PROTOCOL_VERSION = 1;
 	static const string LOG_PREFIX = "[DeutschZ KotHZ Free] ";
 	static const string PROFILE_SYSTEM_ROOT = "$profile:DeutschZ-System";
@@ -24,6 +25,13 @@ enum DZKOTHF_RPCMessage
 	NOTIFY = 1,
 	MARKER = 2,
 	PROGRESS = 3
+}
+
+enum DZKOTHF_AdminAction
+{
+	STATUS = 1,
+	START = 2,
+	STOP = 3
 }
 
 class DZKOTHF_ClientState

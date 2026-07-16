@@ -246,6 +246,44 @@ class DZKOTHF_EventController
 		return m_Session.GetState();
 	}
 
+	DZKOTHF_Settings GetSettings()
+	{
+		return m_Settings;
+	}
+
+	vector GetCenter()
+	{
+		if (!m_Session)
+			return vector.Zero;
+		return m_Session.GetCenter();
+	}
+
+	float GetCaptureRadius()
+	{
+		if (!m_Session)
+			return 0.0;
+		return m_Session.GetCaptureRadius();
+	}
+
+	float GetCaptureProgress()
+	{
+		if (!m_Session)
+			return 0.0;
+		return m_Session.GetCaptureProgress();
+	}
+
+	int GetEnemyCount()
+	{
+		if (!m_Session)
+			return 0;
+		return m_Session.GetEnemyCount();
+	}
+
+	bool HasRewardCrate()
+	{
+		return m_Session && m_Session.HasRewardCrate();
+	}
+
 	void SyncPlayer(PlayerBase player)
 	{
 		if (!player || !m_Settings || !m_Session)

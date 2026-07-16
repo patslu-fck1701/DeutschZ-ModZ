@@ -47,6 +47,7 @@ class DZKOTHF_Settings
 	bool NotifyUseChatFallback;
 	ref array<float> EventPosition;
 	ref array<float> EventOrientation;
+	ref array<string> AdminSteamIds;
 
 	void DZKOTHF_Settings()
 	{
@@ -85,6 +86,7 @@ class DZKOTHF_Settings
 		NotifyUseChatFallback = false;
 		EventPosition = {4552.346680, 317.997314, 8350.974609};
 		EventOrientation = {0.0, 0.0, 0.0};
+		AdminSteamIds = {};
 	}
 
 	void Validate()
@@ -135,6 +137,14 @@ class DZKOTHF_Settings
 
 		if (!EventOrientation || EventOrientation.Count() != 3)
 			EventOrientation = {0.0, 0.0, 0.0};
+
+		if (!AdminSteamIds)
+			AdminSteamIds = {};
+	}
+
+	bool IsAdmin(string steamId)
+	{
+		return steamId != "" && AdminSteamIds && AdminSteamIds.Find(steamId) != -1;
 	}
 
 	vector GetEventPosition()
