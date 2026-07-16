@@ -13,6 +13,9 @@ class DZKOTHF_ClientBridge
 		if (!player || !player.GetIdentity() || !settings)
 			return;
 
+		if (DZKOTHF_ExpansionBridge.SendNotification(player, settings, message))
+			return;
+
 		if (settings.NotifyUseChatFallback)
 		{
 			GetGame().ChatMP(player, message, "colorAction");
@@ -29,16 +32,20 @@ class DZKOTHF_ClientBridge
 
 	static void BroadcastMarker(DZKOTHF_Settings settings, bool visible, vector position, string status)
 	{
+		bool expansionHandled = DZKOTHF_ExpansionBridge.UpdateMarker(settings, visible, position, status);
 		array<Man> players = new array<Man>;
 		GetGame().GetPlayers(players);
 		foreach (Man man: players)
-			SendMarker(PlayerBase.Cast(man), settings, visible, position, status);
+			SendMarker(PlayerBase.Cast(man), settings, visible && !expansionHandled, position, status);
 	}
 
 	static void SendMarker(PlayerBase player, DZKOTHF_Settings settings, bool visible, vector position, string status)
 	{
 		if (!player || !player.GetIdentity() || !settings)
 			return;
+
+		if (DZKOTHF_ExpansionBridge.IsMarkerPreferred(settings))
+			visible = false;
 
 		ScriptRPC rpc = new ScriptRPC;
 		rpc.Write(DZKOTHF_Constants.RPC_PROTOCOL_VERSION);

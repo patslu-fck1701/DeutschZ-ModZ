@@ -1,58 +1,239 @@
 FrameWidgetClass DZUIAZ_Root {
- position 0.02 0.03
- size 0.96 0.94
- halign left_ref
- valign top_ref
+ visible 1
+ clipchildren 0
+ color 1 1 1 1
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
  priority 9500
  {
-  PanelWidgetClass DZUIAZ_Background {color 0.006 0.010 0.008 0.985 position 0 0 size 1 1 style rover_sim_colorable}
-
-  PanelWidgetClass DZUIAZ_HeaderPanel {color 0.025 0.035 0.025 1 position 0.01 0.015 size 0.98 0.085 style rover_sim_colorable}
-  TextWidgetClass DZUIAZ_Brand {position 0.025 0.030 size 0.25 0.045 text "DEUTSCHZ EVENT ADMIN" font "gui/fonts/sdf_MetronBook24" color 0.55 0.95 0.05 1}
-  TextWidgetClass DZUIAZ_HeaderState {position 0.285 0.032 size 0.36 0.040 text "SERVERSTATUS  |  EVENTMODUL  |  ADMIN LITE" font "gui/fonts/sdf_MetronBook18" color 0.82 0.86 0.82 1}
-  TextWidgetClass DZUIAZ_FreeBadge {position 0.68 0.032 size 0.12 0.040 text "FREE" font "gui/fonts/sdf_MetronBook24" color 0.55 0.95 0.05 1}
-  ButtonWidgetClass DZUIAZ_Close {position 0.945 0.027 size 0.035 0.052 text "X"}
-
-  PanelWidgetClass DZUIAZ_Sidebar {color 0.018 0.027 0.020 1 position 0.01 0.115 size 0.145 0.62 style rover_sim_colorable}
-  TextWidgetClass DZUIAZ_NavTitle {position 0.025 0.132 size 0.11 0.035 text "NAVIGATION" font "gui/fonts/sdf_MetronBook18" color 0.55 0.95 0.05 1}
-  ButtonWidgetClass DZUIAZ_NavDashboard {position 0.02 0.180 size 0.125 0.060 text "DASHBOARD" color 0.20 0.36 0.05 1}
-  TextWidgetClass DZUIAZ_NavEvents {position 0.03 0.265 size 0.11 0.035 text "EVENTS" font "gui/fonts/sdf_MetronBook18" color 0.42 0.47 0.42 1}
-  TextWidgetClass DZUIAZ_NavZones {position 0.03 0.335 size 0.11 0.035 text "ZONEN & POSITION" font "gui/fonts/sdf_MetronBook18" color 0.42 0.47 0.42 1}
-  TextWidgetClass DZUIAZ_NavNotify {position 0.03 0.405 size 0.11 0.035 text "MELDUNGEN" font "gui/fonts/sdf_MetronBook18" color 0.42 0.47 0.42 1}
-  TextWidgetClass DZUIAZ_NavLogs {position 0.03 0.475 size 0.11 0.035 text "LOGS" font "gui/fonts/sdf_MetronBook18" color 0.42 0.47 0.42 1}
-  TextWidgetClass DZUIAZ_NavSettings {position 0.03 0.545 size 0.11 0.035 text "EINSTELLUNGEN" font "gui/fonts/sdf_MetronBook18" color 0.42 0.47 0.42 1}
-  TextWidgetClass DZUIAZ_NavPremium {position 0.03 0.630 size 0.11 0.045 text "PRO  [GESPERRT]" font "gui/fonts/sdf_MetronBook18" color 0.65 0.16 0.10 1}
-  TextWidgetClass DZUIAZ_Version {position 0.025 0.700 size 0.115 0.025 text "ADMIN LITE 0.1" font "gui/fonts/sdf_MetronBook18" color 0.38 0.48 0.38 1}
-
-  PanelWidgetClass DZUIAZ_Dashboard {color 0.018 0.027 0.020 1 position 0.165 0.115 size 0.575 0.46 style rover_sim_colorable}
-  TextWidgetClass DZUIAZ_DashboardTitle {position 0.18 0.132 size 0.25 0.04 text "KOTHZ FREE - DASHBOARD" font "gui/fonts/sdf_MetronBook24" color 0.55 0.95 0.05 1}
-  TextWidgetClass DZUIAZ_Status {position 0.18 0.185 size 0.54 0.055 text "STATUS WIRD ANGEFORDERT" font "gui/fonts/sdf_MetronBook18" color 0.90 0.92 0.90 1}
-  PanelWidgetClass DZUIAZ_StatusCard1 {color 0.025 0.040 0.028 1 position 0.18 0.255 size 0.255 0.225 style rover_sim_colorable}
-  TextWidgetClass DZUIAZ_StatusCard1Title {position 0.195 0.270 size 0.22 0.035 text "EVENTSTATUS" font "gui/fonts/sdf_MetronBook18" color 0.55 0.95 0.05 1}
-  TextWidgetClass DZUIAZ_Details {position 0.195 0.310 size 0.225 0.155 text "Keine Daten" font "gui/fonts/sdf_MetronBook18" color 0.78 0.84 0.78 1 "text valign" top}
-  PanelWidgetClass DZUIAZ_StatusCard2 {color 0.025 0.040 0.028 1 position 0.45 0.255 size 0.27 0.225 style rover_sim_colorable}
-  TextWidgetClass DZUIAZ_StatusCard2Title {position 0.465 0.270 size 0.24 0.035 text "DIAGNOSE" font "gui/fonts/sdf_MetronBook18" color 0.55 0.95 0.05 1}
-  TextWidgetClass DZUIAZ_Result {position 0.465 0.315 size 0.235 0.125 text "Bereit" font "gui/fonts/sdf_MetronBook18" color 0.88 0.70 0.12 1 "text valign" top}
-
-  TextWidgetClass DZUIAZ_QuickTitle {position 0.18 0.505 size 0.20 0.035 text "SCHNELLZUGRIFF" font "gui/fonts/sdf_MetronBook18" color 0.55 0.95 0.05 1}
-  ButtonWidgetClass DZUIAZ_Start {position 0.18 0.540 size 0.165 0.070 text "EVENT STARTEN"}
-  ButtonWidgetClass DZUIAZ_Stop {position 0.355 0.540 size 0.165 0.070 text "EVENT STOPPEN"}
-  ButtonWidgetClass DZUIAZ_Refresh {position 0.53 0.540 size 0.19 0.070 text "STATUS AKTUALISIEREN"}
-
-  PanelWidgetClass DZUIAZ_LicensePanel {color 0.018 0.027 0.020 1 position 0.75 0.115 size 0.24 0.46 style rover_sim_colorable}
-  TextWidgetClass DZUIAZ_LicenseTitle {position 0.765 0.132 size 0.21 0.04 text "FREE / PRO" font "gui/fonts/sdf_MetronBook24" color 0.55 0.95 0.05 1}
-  TextWidgetClass DZUIAZ_FreeTitle {position 0.765 0.190 size 0.20 0.035 text "FREE - AKTIV" font "gui/fonts/sdf_MetronBook18" color 0.78 0.90 0.65 1}
-  TextWidgetClass DZUIAZ_FreeFeatures {position 0.765 0.230 size 0.205 0.120 text "+ Status und Diagnose\n+ Start / Stop\n+ Position und Radius\n+ Capture und Gegner" font "gui/fonts/sdf_MetronBook18" color 0.72 0.78 0.72 1 "text valign" top}
-  TextWidgetClass DZUIAZ_ProTitle {position 0.765 0.370 size 0.20 0.035 text "PRO - GESPERRT" font "gui/fonts/sdf_MetronBook18" color 0.85 0.20 0.10 1}
-  TextWidgetClass DZUIAZ_ProFeatures {position 0.765 0.410 size 0.205 0.120 text "Wellen und Boss\nLive-Karteneditor\nZeitplanung\nErweiterte Historie" font "gui/fonts/sdf_MetronBook18" color 0.48 0.50 0.48 1 "text valign" top}
-
-  PanelWidgetClass DZUIAZ_EditorPanel {color 0.018 0.027 0.020 1 position 0.165 0.625 size 0.575 0.31 style rover_sim_colorable}
-  TextWidgetClass DZUIAZ_EditorTitle {position 0.18 0.642 size 0.28 0.04 text "EVENTDETAILS - KOTHZ FREE" font "gui/fonts/sdf_MetronBook24" color 0.55 0.95 0.05 1}
-  TextWidgetClass DZUIAZ_EditorInfo {position 0.18 0.700 size 0.53 0.17 text "Die Eventlogik bleibt vollständig in DeutschZ_KotHZ_Free.\nUiAdminZ ist eine optionale Komfortschicht.\nAlle Aktionen werden serverseitig validiert und protokolliert.\nErweiterte Editorfunktionen bleiben bis zur Premiumphase gesperrt." font "gui/fonts/sdf_MetronBook18" color 0.70 0.76 0.70 1 "text valign" top}
-
-  PanelWidgetClass DZUIAZ_ProPanel {color 0.018 0.027 0.020 1 position 0.75 0.625 size 0.24 0.31 style rover_sim_colorable}
-  TextWidgetClass DZUIAZ_ProPanelTitle {position 0.765 0.642 size 0.20 0.04 text "LIVE / LOGS / PRO" font "gui/fonts/sdf_MetronBook24" color 0.85 0.20 0.10 1}
-  TextWidgetClass DZUIAZ_ProPanelText {position 0.765 0.700 size 0.205 0.15 text "Noch nicht verfügbar\n\nKeine LicenseCore-Prüfung\nin Admin Lite." font "gui/fonts/sdf_MetronBook18" color 0.50 0.55 0.50 1 "text valign" top}
-  TextWidgetClass DZUIAZ_Footer {position 0.18 0.900 size 0.53 0.025 text "F7 | UI OPTIONAL | SERVERAUTORITATIV | KEINE EXPANSION-PFLICHT" font "gui/fonts/sdf_MetronBook18" color 0.38 0.50 0.38 1}
+  WindowWidgetClass DZUIAZ_Window {
+   visible 1
+   color 1 1 1 1
+   position 0.02 0.03
+   size 0.96 0.94
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style rover_sim_black
+   {
+    PanelWidgetClass DZUIAZ_Background {
+     visible 1
+     color 0.006 0.010 0.008 0.97
+     position 0 0
+     size 1 1
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_colorable
+    }
+    TextWidgetClass DZUIAZ_Brand {
+     visible 1
+     color 0.55 0.95 0.05 1
+     position 0.025 0.025
+     size 0.42 0.055
+     text "DEUTSCHZ EVENT ADMIN"
+     font "gui/fonts/sdf_MetronBook24"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    ButtonWidgetClass DZUIAZ_Close {
+     visible 1
+     position 0.93 0.02
+     size 0.045 0.055
+     text "X"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    PanelWidgetClass DZUIAZ_Sidebar {
+     visible 1
+     color 0.018 0.027 0.020 1
+     position 0.015 0.105
+     size 0.18 0.84
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_colorable
+    }
+    TextWidgetClass DZUIAZ_Navigation {
+     visible 1
+     color 0.55 0.95 0.05 1
+     position 0.035 0.13
+     size 0.14 0.045
+     text "DASHBOARD"
+     font "gui/fonts/sdf_MetronBook18"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass DZUIAZ_NavigationInfo {
+     visible 1
+     color 0.58 0.64 0.58 1
+     position 0.035 0.20
+     size 0.14 0.55
+     text "EVENTS\n\nZONEN\n\nMELDUNGEN\n\nLOGS\n\nEINSTELLUNGEN\n\nPRO GESPERRT"
+     font "gui/fonts/sdf_MetronBook18"
+     "text valign" top
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    PanelWidgetClass DZUIAZ_MainPanel {
+     visible 1
+     color 0.018 0.027 0.020 1
+     position 0.21 0.105
+     size 0.52 0.84
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_colorable
+    }
+    TextWidgetClass DZUIAZ_MainTitle {
+     visible 1
+     color 0.55 0.95 0.05 1
+     position 0.23 0.13
+     size 0.46 0.045
+     text "KOTHZ FREE - ADMIN LITE"
+     font "gui/fonts/sdf_MetronBook24"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass DZUIAZ_Status {
+     visible 1
+     color 0.90 0.92 0.90 1
+     position 0.23 0.20
+     size 0.46 0.055
+     text "STATUS WIRD ANGEFORDERT"
+     font "gui/fonts/sdf_MetronBook18"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass DZUIAZ_Details {
+     visible 1
+     color 0.78 0.84 0.78 1
+     position 0.23 0.285
+     size 0.28 0.30
+     text "Keine Daten"
+     font "gui/fonts/sdf_MetronBook18"
+     "text valign" top
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass DZUIAZ_Result {
+     visible 1
+     color 0.88 0.70 0.12 1
+     position 0.53 0.285
+     size 0.16 0.30
+     text "Bereit"
+     font "gui/fonts/sdf_MetronBook18"
+     "text valign" top
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    ButtonWidgetClass DZUIAZ_Start {
+     visible 1
+     position 0.23 0.65
+     size 0.14 0.08
+     text "EVENT STARTEN"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    ButtonWidgetClass DZUIAZ_Stop {
+     visible 1
+     position 0.385 0.65
+     size 0.14 0.08
+     text "EVENT STOPPEN"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    ButtonWidgetClass DZUIAZ_Refresh {
+     visible 1
+     position 0.54 0.65
+     size 0.15 0.08
+     text "AKTUALISIEREN"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass DZUIAZ_Help {
+     visible 1
+     color 0.50 0.58 0.50 1
+     position 0.23 0.79
+     size 0.46 0.10
+     text "F7 oder ESC schliesst das Menue. Alle Aktionen werden serverseitig geprueft."
+     font "gui/fonts/sdf_MetronBook18"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    PanelWidgetClass DZUIAZ_LicensePanel {
+     visible 1
+     color 0.018 0.027 0.020 1
+     position 0.745 0.105
+     size 0.24 0.84
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style rover_sim_colorable
+    }
+    TextWidgetClass DZUIAZ_LicenseTitle {
+     visible 1
+     color 0.55 0.95 0.05 1
+     position 0.77 0.13
+     size 0.19 0.045
+     text "FREE / PRO"
+     font "gui/fonts/sdf_MetronBook24"
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextWidgetClass DZUIAZ_LicenseInfo {
+     visible 1
+     color 0.68 0.75 0.68 1
+     position 0.77 0.21
+     size 0.19 0.58
+     text "FREE AKTIV\n\nStatus und Diagnose\nStart und Stop\nPosition und Radius\nCapture und Gegner\n\nPRO GESPERRT\n\nWellen und Boss\nLive-Karteneditor\nZeitplanung\nHistorie"
+     font "gui/fonts/sdf_MetronBook18"
+     "text valign" top
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+   }
+  }
  }
 }

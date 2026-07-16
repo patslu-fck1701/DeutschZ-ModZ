@@ -28,7 +28,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "1.0.0-clientfix-1";
+		version = "1.0.0-clientfix-2";
 		type = "mod";
 		dependencies[] =
 		{

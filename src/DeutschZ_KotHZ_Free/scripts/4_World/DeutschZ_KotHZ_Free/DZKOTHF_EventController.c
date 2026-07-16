@@ -128,10 +128,12 @@ class DZKOTHF_EventController
 		if (!m_CaptureTickRunning || GetState() != DZKOTHF_EventState.ACTIVE || !GetGame())
 			return;
 
-		int playerCount = CountAlivePlayersInRadius();
+		array<PlayerBase> capturePlayers = new array<PlayerBase>;
+		int playerCount = GetAlivePlayersInRadius(capturePlayers);
+		int captureSideCount = CountCaptureSides(capturePlayers);
 		m_Session.SetPlayerCount(playerCount);
 		string progressStatus = "AKTIV";
-		if (playerCount > 1)
+		if (captureSideCount > 1)
 		{
 			m_Session.SetSmokeState(DZKOTHF_SmokeState.RED);
 			progressStatus = "PAUSIERT - UMKAEMPFT";
@@ -141,7 +143,7 @@ class DZKOTHF_EventController
 			m_Session.SetSmokeState(DZKOTHF_SmokeState.GREEN);
 			if (playerCount == 0)
 				progressStatus = "PAUSIERT - KEIN SPIELER";
-			if (playerCount == 1)
+			if (playerCount > 0 && captureSideCount == 1)
 			{
 				float tickSeconds = m_Settings.CaptureTickMilliseconds / 1000.0;
 				float nextProgress = m_Session.GetCaptureProgress() + (tickSeconds / m_Settings.CaptureTimeSeconds);
@@ -159,7 +161,7 @@ class DZKOTHF_EventController
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CaptureTick, m_Settings.CaptureTickMilliseconds, false);
 	}
 
-	protected int CountAlivePlayersInRadius()
+	protected int GetAlivePlayersInRadius(array<PlayerBase> capturePlayers)
 	{
 		array<Man> players = new array<Man>;
 		GetGame().GetPlayers(players);
@@ -171,10 +173,26 @@ class DZKOTHF_EventController
 				continue;
 
 			if (IsPlayerInCaptureRadius(player))
+			{
 				playerCount++;
+				capturePlayers.Insert(player);
+			}
 		}
 
 		return playerCount;
+	}
+
+	protected int CountCaptureSides(array<PlayerBase> capturePlayers)
+	{
+		array<string> sideKeys = new array<string>;
+		foreach (PlayerBase player: capturePlayers)
+		{
+			string sideKey = DZKOTHF_ExpansionBridge.GetCaptureSideKey(player, m_Settings);
+			if (sideKey != "" && sideKeys.Find(sideKey) == -1)
+				sideKeys.Insert(sideKey);
+		}
+
+		return sideKeys.Count();
 	}
 
 	bool CompleteCapture()

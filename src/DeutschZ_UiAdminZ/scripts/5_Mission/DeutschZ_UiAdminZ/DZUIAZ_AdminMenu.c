@@ -28,7 +28,16 @@ class DZUIAZ_AdminMenu: UIScriptedMenu
 		m_Close = ButtonWidget.Cast(layoutRoot.FindAnyWidget("DZUIAZ_Close"));
 		m_BindingsReady = m_Status && m_Details && m_Result && m_Start && m_Stop && m_Refresh && m_Close;
 		if (!m_BindingsReady)
+		{
 			Print("[DeutschZ UiAdminZ] ERROR: Required Admin Lite widgets are missing from the loaded layout.");
+			if (!m_Status) Print("[DeutschZ UiAdminZ] Missing widget: DZUIAZ_Status");
+			if (!m_Details) Print("[DeutschZ UiAdminZ] Missing widget: DZUIAZ_Details");
+			if (!m_Result) Print("[DeutschZ UiAdminZ] Missing widget: DZUIAZ_Result");
+			if (!m_Start) Print("[DeutschZ UiAdminZ] Missing widget: DZUIAZ_Start");
+			if (!m_Stop) Print("[DeutschZ UiAdminZ] Missing widget: DZUIAZ_Stop");
+			if (!m_Refresh) Print("[DeutschZ UiAdminZ] Missing widget: DZUIAZ_Refresh");
+			if (!m_Close) Print("[DeutschZ UiAdminZ] Missing widget: DZUIAZ_Close");
+		}
 		else
 			Print("[DeutschZ UiAdminZ] Admin Lite layout and widget bindings loaded.");
 

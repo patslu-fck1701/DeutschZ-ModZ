@@ -1,6 +1,17 @@
 # CODEX HANDOFF CURRENT
 
-Letzte Aktualisierung: 16.07.2026, 15:06 Uhr
+Letzte Aktualisierung: 16.07.2026, 16:27 Uhr
+
+## Clientfix 2 - aktueller Stand
+
+- `DeutschZ_KotHZ_Free` Version `1.0.0-clientfix-2`: neue RewardChest-PAA eingebunden; optionaler Expansion-3D-Servermarker mit Icon `Skull 3`; optionale Expansion-Notification; Vanilla-/RPC-Fallback ohne Expansion bleibt aktiv.
+- Expansion-Gruppen werden serverautoritativ als eine Capture-Seite behandelt. Mehrere Mitglieder derselben Party blockieren den Fortschritt nicht; fremde Seiten bleiben umkaempft.
+- `DeutschZ_UiAdminZ`: kompaktes fehlerhaftes Layout durch vollstaendig ausgeschriebenes Vanilla-Window-Layout ersetzt; Pflichtwidgets sind sichtbar angelegt und werden einzeln diagnostiziert. F7 und Escape schliessen weiterhin.
+- Preflight: beide Mods 0 Fehler. PBO-Inhalt und beide DeutschZ-Signaturen geprueft.
+- DayZ-Labs ohne Expansion: Script-Compile, Missionstart, `IDLE -> ANNOUNCED -> ACTIVE`, 15 Infizierte und stabiler Lauf bestanden.
+- DayZ-Labs mit CF, Dabs Framework, Expansion Bundle und Expansion Licensed: Script-Compile, Missionstart und `IDLE -> ANNOUNCED -> ACTIVE` bestanden; keine KotHZ-/UiAdminZ-Compilefehler.
+- Sichtbarer Admin-Layout-, Escape-, 3D-Marker-, Notify-, Gruppen- und RewardChest-Test bleibt Patrick vorbehalten.
+- Synchronisierung 16.07.2026, 16:25 Uhr atomar aus geprueftem Staging. Aktive Ausgabeordner wurden gespiegelt; keine Alt-PBOs oder Alt-BISIGNs gemischt.
 
 ## Clientfix KotHZ Free + UiAdminZ
 

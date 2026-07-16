@@ -1,6 +1,6 @@
 class DZKOTHF_Constants
 {
-	static const string VERSION = "1.0.0-clientfix-1";
+	static const string VERSION = "1.0.0-clientfix-2";
 	static const int RPC_SYNC = 24871;
 	static const int RPC_ADMIN = 24872;
 	static const int RPC_PROTOCOL_VERSION = 1;

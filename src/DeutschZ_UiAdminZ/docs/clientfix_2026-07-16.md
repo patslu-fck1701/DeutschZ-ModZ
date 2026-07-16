@@ -2,7 +2,7 @@
 
 ## Behobene Ursachen
 
-- Das Root-Layout wurde geladen, aber die Widget-Erzeugung brach vor `DZUIAZ_Status` ab. Die vier gelieferten PAA-Icons bleiben im PBO, sind bis zur erneuten Clientpruefung jedoch nicht als `ImageWidget` gebunden.
+- Das fehlerhafte kompakte Root-Layout wurde durch ein vollstaendig ausgeschriebenes Vanilla-Window-Layout ersetzt. Alle Pflichtwidgets stehen als direkte, sichtbare Kinder im Hauptfenster. Die vier gelieferten PAA-Icons bleiben im PBO, sind bis zur erneuten Clientpruefung jedoch nicht als `ImageWidget` gebunden.
 - Alle Pflichtbindungen werden einmalig validiert. Fehlende Widgets erzeugen eine klare Logzeile statt eines Nullpointers pro Frame.
 - `UIScriptedMenu.OnShow()` sperrt Maus, Tastatur und Gamepad und zeigt den Cursor. Zusaetzlich wird der Vanilla-Input-Exclude `menu` gesetzt.
 - `OnHide()`, `Cleanup()` und `OnMissionFinish()` geben den Input sicher zurueck.

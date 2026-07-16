@@ -44,6 +44,10 @@ class DZKOTHF_Settings
 	ref array<float> RewardSpawnOffset;
 	string EventName;
 	string MarkerIcon;
+	bool UseExpansionMarkerWhenAvailable;
+	string ExpansionMarkerIcon;
+	bool UseExpansionNotificationsWhenAvailable;
+	bool RespectExpansionParties;
 	bool ShowProgressDuringAnnouncement;
 	bool NotifyUseChatFallback;
 	ref array<float> EventPosition;
@@ -84,6 +88,10 @@ class DZKOTHF_Settings
 		RewardSpawnOffset = {3.0, 0.0, 0.0};
 		EventName = "DeutschZ KotHZ Free";
 		MarkerIcon = DZKOTHF_Constants.DEFAULT_MARKER_ICON;
+		UseExpansionMarkerWhenAvailable = true;
+		ExpansionMarkerIcon = "Skull 3";
+		UseExpansionNotificationsWhenAvailable = true;
+		RespectExpansionParties = true;
 		ShowProgressDuringAnnouncement = false;
 		NotifyUseChatFallback = false;
 		EventPosition = {4552.346680, 317.997314, 8350.974609};
@@ -136,6 +144,9 @@ class DZKOTHF_Settings
 
 		if (MarkerIcon == "" || MarkerIcon == "DZ\\gear\\navigation\\data\\map_tree_ca.paa" || MarkerIcon == "dz\\gear\\navigation\\data\\map_tree_ca.paa")
 			MarkerIcon = DZKOTHF_Constants.DEFAULT_MARKER_ICON;
+
+		if (ExpansionMarkerIcon == "")
+			ExpansionMarkerIcon = "Skull 3";
 
 		if (!EventPosition || EventPosition.Count() != 3)
 			EventPosition = {4552.346680, 317.997314, 8350.974609};
