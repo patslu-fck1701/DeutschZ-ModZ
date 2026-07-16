@@ -6,7 +6,7 @@ class DZKOTHF_MusicPlayer
 	static void Play(string soundSet, float volume)
 	{
 		if (!s_Instance) s_Instance = new DZKOTHF_MusicPlayer;
-		s_Instance.PlayInternal(soundSet, Math.Clamp(volume, 0.0, 0.33));
+		s_Instance.PlayInternal(soundSet, Math.Clamp(volume, 0.0, 0.45));
 	}
 
 	protected void PlayInternal(string soundSet, float volume)

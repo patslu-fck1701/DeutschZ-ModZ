@@ -41,7 +41,10 @@ class DZKOTHF_Settings
 	string RewardCrateClass;
 	ref array<ref DZKOTHF_RewardItemSetting> RewardItems;
 	int RewardLifetimeMinutes;
-	ref array<float> RewardSpawnOffset;
+	ref array<float> RewardCrateOffset;
+	bool FireworkEnabled;
+	ref array<float> FireworkOffset;
+	float MusicVolume;
 	string EventName;
 	string MarkerIcon;
 	bool UseExpansionMarkerWhenAvailable;
@@ -85,7 +88,10 @@ class DZKOTHF_Settings
 			new DZKOTHF_RewardItemSetting("TacticalBaconCan", 2, 50, 100, 0.90)
 		};
 		RewardLifetimeMinutes = 10;
-		RewardSpawnOffset = {3.0, 0.0, 0.0};
+		RewardCrateOffset = {-3.0, 0.0, 0.0};
+		FireworkEnabled = true;
+		FireworkOffset = {3.0, 0.0, 0.0};
+		MusicVolume = 0.45;
 		EventName = "DeutschZ KotHZ Free";
 		MarkerIcon = DZKOTHF_Constants.DEFAULT_MARKER_ICON;
 		UseExpansionMarkerWhenAvailable = true;
@@ -111,6 +117,7 @@ class DZKOTHF_Settings
 		SpawnRadius = Math.Clamp(SpawnRadius, 10.0, 250.0);
 		SpawnDelaySeconds = Math.Clamp(SpawnDelaySeconds, 0, 300);
 		RewardLifetimeMinutes = Math.Clamp(RewardLifetimeMinutes, 1, 120);
+		MusicVolume = Math.Clamp(MusicVolume, 0.0, 0.45);
 
 		if (!EnemyClassNames || EnemyClassNames.Count() == 0)
 			EnemyClassNames = {"ZmbM_HermitSkinny_Beige"};
@@ -136,8 +143,11 @@ class DZKOTHF_Settings
 				rewardItem.Validate();
 		}
 
-		if (!RewardSpawnOffset || RewardSpawnOffset.Count() != 3)
-			RewardSpawnOffset = {3.0, 0.0, 0.0};
+		if (!RewardCrateOffset || RewardCrateOffset.Count() != 3)
+			RewardCrateOffset = {-3.0, 0.0, 0.0};
+
+		if (!FireworkOffset || FireworkOffset.Count() != 3)
+			FireworkOffset = {3.0, 0.0, 0.0};
 
 		if (EventName == "")
 			EventName = "DeutschZ KotHZ Free";
@@ -173,9 +183,14 @@ class DZKOTHF_Settings
 		return Vector(EventOrientation[0], EventOrientation[1], EventOrientation[2]);
 	}
 
-	vector GetRewardSpawnOffset()
+	vector GetRewardCrateOffset()
 	{
-		return Vector(RewardSpawnOffset[0], RewardSpawnOffset[1], RewardSpawnOffset[2]);
+		return Vector(RewardCrateOffset[0], RewardCrateOffset[1], RewardCrateOffset[2]);
+	}
+
+	vector GetFireworkOffset()
+	{
+		return Vector(FireworkOffset[0], FireworkOffset[1], FireworkOffset[2]);
 	}
 }
 

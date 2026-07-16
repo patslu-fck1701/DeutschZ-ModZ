@@ -19,7 +19,10 @@
     {"Type": "TacticalBaconCan", "Count": 2, "MinQuantity": 50, "MaxQuantity": 100, "Chance": 0.9}
   ],
   "RewardLifetimeMinutes": 10,
-  "RewardSpawnOffset": [3.0, 0.0, 0.0],
+  "RewardCrateOffset": [-3.0, 0.0, 0.0],
+  "FireworkEnabled": true,
+  "FireworkOffset": [3.0, 0.0, 0.0],
+  "MusicVolume": 0.45,
   "EventName": "DeutschZ KotHZ Free",
   "MarkerIcon": "\\dz\\gear\\navigation\\data\\map_tree_ca.paa",
   "UseExpansionMarkerWhenAvailable": true,

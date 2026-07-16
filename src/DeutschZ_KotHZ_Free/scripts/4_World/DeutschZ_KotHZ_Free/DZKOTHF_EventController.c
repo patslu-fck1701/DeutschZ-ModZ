@@ -10,6 +10,8 @@ class DZKOTHF_EventController
 	protected string m_CurrentMusicTrack;
 	protected int m_LastMusicTrackIndex;
 	protected ref array<string> m_MusicTracks;
+	protected ref DZKOTHF_LocationsSettings m_Locations;
+	protected ref DZKOTHF_LocationHistory m_LocationHistory;
 
 	static DZKOTHF_EventController GetInstance()
 	{
@@ -43,6 +45,8 @@ class DZKOTHF_EventController
 			return;
 
 		m_Settings = DZKOTHF_SettingsLoader.Load();
+		m_Locations = DZKOTHF_LocationLoader.LoadLocations();
+		m_LocationHistory = DZKOTHF_LocationLoader.LoadHistory();
 		m_Initialized = true;
 		DZKOTHF_Log.Info("Controller initialized. Version " + DZKOTHF_Constants.VERSION + ". State " + GetStateName() + ".");
 
@@ -87,6 +91,11 @@ class DZKOTHF_EventController
 		m_Session.CleanupRewardCrate("new event start duplicate protection");
 		m_ProgressRecipients.Clear();
 		StopMusicForAll();
+		if (!SelectRandomLocation())
+		{
+			DZKOTHF_Log.Error("Start rejected: no valid random event location is available.");
+			return false;
+		}
 
 		m_Session.MarkStarted();
 		if (!m_Session.SpawnWorldObjects(m_Settings))
@@ -222,6 +231,8 @@ class DZKOTHF_EventController
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Capture erfolgreich abgeschlossen.");
 		if (!m_Session.SpawnRewardCrate(m_Settings))
 			DZKOTHF_Log.Error("Capture completed but reward crate creation failed.");
+		if (m_Settings.FireworkEnabled && !m_Session.SpawnWinFirework(m_Settings))
+			DZKOTHF_Log.Error("Capture completed but win firework creation failed.");
 
 		TransitionTo(DZKOTHF_EventState.REWARD);
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Die Belohnungskiste wurde freigegeben.");
@@ -424,7 +435,64 @@ class DZKOTHF_EventController
 
 		m_LastMusicTrackIndex = selectedIndex;
 		m_CurrentMusicTrack = m_MusicTracks[selectedIndex];
-		DZKOTHF_Log.Info("Music selected: index=" + selectedIndex.ToString() + " soundSet=" + m_CurrentMusicTrack + " volume=0.33 max=0.33.");
+		DZKOTHF_Log.Info("Music selected: index=" + selectedIndex.ToString() + " soundSet=" + m_CurrentMusicTrack + " volume=" + m_Settings.MusicVolume.ToString() + " max=0.45.");
+	}
+
+	protected bool SelectRandomLocation()
+	{
+		if (!m_Locations || !m_Locations.Locations || !m_Settings)
+			return false;
+
+		ref array<int> candidates = new array<int>;
+		for (int index = 0; index < m_Locations.Locations.Count(); index++)
+		{
+			DZKOTHF_LocationSetting candidate = m_Locations.Locations[index];
+			if (candidate && candidate.IsValid())
+				candidates.Insert(index);
+		}
+
+		DZKOTHF_Log.Info("LOCATION CANDIDATES: " + candidates.Count().ToString());
+		if (candidates.Count() == 0)
+			return false;
+
+		if (!m_LocationHistory)
+			m_LocationHistory = new DZKOTHF_LocationHistory;
+		DZKOTHF_Log.Info("LAST LOCATION: " + m_LocationHistory.LastName + "/" + m_LocationHistory.LastIndex.ToString());
+
+		int candidatePosition = Math.RandomInt(0, candidates.Count());
+		int selectedIndex = candidates[candidatePosition];
+		bool repeatAvoided = false;
+		if (candidates.Count() > 1 && selectedIndex == m_LocationHistory.LastIndex)
+		{
+			int shift = Math.RandomInt(1, candidates.Count());
+			candidatePosition = (candidatePosition + shift) % candidates.Count();
+			selectedIndex = candidates[candidatePosition];
+			repeatAvoided = true;
+		}
+
+		DZKOTHF_LocationSetting selected = m_Locations.Locations[selectedIndex];
+		vector selectedPosition = selected.GetPosition();
+		vector selectedOrientation = selected.GetOrientation();
+		m_Settings.EventPosition.Clear();
+		m_Settings.EventPosition.Insert(selectedPosition[0]);
+		m_Settings.EventPosition.Insert(selectedPosition[1]);
+		m_Settings.EventPosition.Insert(selectedPosition[2]);
+		m_Settings.EventOrientation.Clear();
+		m_Settings.EventOrientation.Insert(selectedOrientation[0]);
+		m_Settings.EventOrientation.Insert(selectedOrientation[1]);
+		m_Settings.EventOrientation.Insert(selectedOrientation[2]);
+		if (selected.CaptureRadius >= 5.0)
+			m_Settings.CaptureRadius = Math.Clamp(selected.CaptureRadius, 5.0, 250.0);
+
+		m_LocationHistory.LastIndex = selectedIndex;
+		m_LocationHistory.LastName = selected.Name;
+		DZKOTHF_LocationLoader.SaveHistory(m_LocationHistory);
+		DZKOTHF_Log.Info("SELECTED LOCATION: " + selected.Name + "/" + selectedIndex.ToString());
+		if (repeatAvoided)
+			DZKOTHF_Log.Info("REPEAT AVOIDED: JA");
+		else
+			DZKOTHF_Log.Info("REPEAT AVOIDED: NEIN");
+		return true;
 	}
 
 	protected bool IsMusicPhaseActive()

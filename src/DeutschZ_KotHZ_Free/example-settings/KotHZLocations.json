@@ -1,0 +1,15 @@
+{
+  "Locations": [
+    {"Enabled": true, "Name": "Kamensk", "Position": [8000.134766, 339.335907, 14637.155273], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "VMC", "Position": [4552.346680, 317.997314, 8350.974609], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "Grozovny", "Position": [3780.909912, 361.331116, 14801.656250], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "Lopatino", "Position": [2934.925049, 270.860352, 9679.623047], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "Mishkyno", "Position": [1101.278931, 182.950562, 7196.391602], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "NWAF", "Position": [4905.860352, 338.039642, 9430.402344], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "Tri-Kresta", "Position": [315.089233, 295.005219, 9339.625977], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "YRAP", "Position": [1246.114502, 173.139984, 5848.398926], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "Gorka Military", "Position": [9707.442383, 299.003113, 8890.658203], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "Krasnostav Airfield", "Position": [12138.583984, 140.082520, 12658.378906], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0},
+    {"Enabled": true, "Name": "Pustoshka Military", "Position": [3630.406494, 333.893066, 6921.706543], "Orientation": [0.0, 0.0, 0.0], "CaptureRadius": 25.0}
+  ]
+}

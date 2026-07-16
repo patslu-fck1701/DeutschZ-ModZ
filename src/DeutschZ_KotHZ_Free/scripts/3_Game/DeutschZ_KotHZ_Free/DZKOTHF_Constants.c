@@ -1,6 +1,6 @@
 class DZKOTHF_Constants
 {
-	static const string VERSION = "1.0.1-gameplayfix";
+	static const string VERSION = "1.0.2-gameplayfix";
 	static const int RPC_SYNC = 24871;
 	static const int RPC_ADMIN = 24872;
 	static const int RPC_PROTOCOL_VERSION = 1;
@@ -10,6 +10,9 @@ class DZKOTHF_Constants
 	static const string LOG_SYSTEM_ROOT = "$profile:DeutschZ-System/LogZ";
 	static const string LOG_ROOT = "$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ";
 	static const string SETTINGS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json";
+	static const string LOCATIONS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZLocations.json";
+	static const string PERSISTENCE_ROOT = "$profile:DeutschZ-System/DeutschZ_KotHZ/Persistence";
+	static const string LOCATION_STATE_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/Persistence/location_rotation.json";
 	static const string LOG_PATH = "$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log";
 	static const string PREVIOUS_SETTINGS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZFreeSettings.json";
 	static const string LEGACY_PROFILE_ROOT = "$profile:DeutschZ";
@@ -18,6 +21,7 @@ class DZKOTHF_Constants
 	static const string FLAGPOLE_CLASSNAME = "DZKOTHF_EventFlagpole";
 	static const string FLAG_CLASSNAME = "DZKOTHF_EventFlag";
 	static const string DEFAULT_REWARD_CRATE_CLASSNAME = "DZKOTHF_RewardCrate";
+	static const string FIREWORK_CLASSNAME = "DZKOTHF_FireworksLauncher";
 	static const string DEFAULT_MARKER_ICON = "\\dz\\gear\\navigation\\data\\map_tree_ca.paa";
 }
 
@@ -80,6 +84,7 @@ class DZKOTHF_ProfilePaths
 	{
 		EnsureDirectory(DZKOTHF_Constants.PROFILE_SYSTEM_ROOT);
 		EnsureDirectory(DZKOTHF_Constants.CONFIG_ROOT);
+		EnsureDirectory(DZKOTHF_Constants.PERSISTENCE_ROOT);
 		EnsureDirectory(DZKOTHF_Constants.LOG_SYSTEM_ROOT);
 		EnsureDirectory(DZKOTHF_Constants.LOG_ROOT);
 	}

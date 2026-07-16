@@ -99,7 +99,7 @@ class DZKOTHF_ClientBridge
 		rpc.Write(DZKOTHF_RPCMessage.MUSIC);
 		rpc.Write(play);
 		rpc.Write(soundSet);
-		rpc.Write(0.33);
+		rpc.Write(Math.Clamp(settings.MusicVolume, 0.0, 0.45));
 		rpc.Send(player, DZKOTHF_Constants.RPC_SYNC, true, player.GetIdentity());
 	}
 }

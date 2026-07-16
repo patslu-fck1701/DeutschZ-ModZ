@@ -13,6 +13,8 @@ class DZKOTHF_EventSession
 	protected ref array<DayZInfected> m_Enemies;
 	protected bool m_EnemySpawnAttempted;
 	protected EntityAI m_RewardCrate;
+	protected FireworksLauncher m_FireworkLauncher;
+	protected bool m_FireworkTriggered;
 
 	void DZKOTHF_EventSession()
 	{
@@ -107,9 +109,8 @@ class DZKOTHF_EventSession
 			return false;
 		}
 
-		vector offset = settings.GetRewardSpawnOffset();
-		vector position = m_Center + offset;
-		position[1] = GetGame().SurfaceY(position[0], position[2]) + offset[1];
+		vector offset = settings.GetRewardCrateOffset();
+		vector position = GetWorldPositionFromMastOffset(offset);
 		int flags = ECE_SETUP | ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE | ECE_NOLIFETIME | ECE_NOPERSISTENCY_WORLD;
 		m_RewardCrate = EntityAI.Cast(GetGame().CreateObjectEx(settings.RewardCrateClass, position, flags));
 		if (!m_RewardCrate)
@@ -123,6 +124,55 @@ class DZKOTHF_EventSession
 		int createdItems = FillRewardCrate(settings);
 		DZKOTHF_Log.Info("Reward crate spawned: class=" + settings.RewardCrateClass + " count=1 items=" + createdItems.ToString() + " lifetime=" + settings.RewardLifetimeMinutes.ToString() + "min.");
 		return true;
+	}
+
+	bool SpawnWinFirework(DZKOTHF_Settings settings)
+	{
+		if (!GetGame() || !GetGame().IsServer() || !settings || !settings.FireworkEnabled || m_State != DZKOTHF_EventState.CAPTURE_COMPLETE)
+			return false;
+
+		if (m_FireworkTriggered || m_FireworkLauncher)
+		{
+			DZKOTHF_Log.Warning("Firework spawn rejected: win firework was already triggered.");
+			return false;
+		}
+
+		vector position = GetWorldPositionFromMastOffset(settings.GetFireworkOffset());
+		int flags = ECE_SETUP | ECE_CREATEPHYSICS | ECE_NOLIFETIME | ECE_NOPERSISTENCY_WORLD;
+		m_FireworkLauncher = FireworksLauncher.Cast(GetGame().CreateObjectEx(DZKOTHF_Constants.FIREWORK_CLASSNAME, position, flags));
+		if (!m_FireworkLauncher)
+		{
+			DZKOTHF_Log.Error("Firework creation failed: class=" + DZKOTHF_Constants.FIREWORK_CLASSNAME + " position=" + position.ToString() + ".");
+			return false;
+		}
+
+		m_FireworkLauncher.SetPosition(position);
+		if (m_Flagpole)
+			m_FireworkLauncher.SetOrientation(m_Flagpole.GetOrientation());
+		m_FireworkTriggered = true;
+		DZKOTHF_Log.Info("FIREWORK SPAWNED class=" + DZKOTHF_Constants.FIREWORK_CLASSNAME + " position=" + position.ToString() + ".");
+		m_FireworkLauncher.OnIgnitedThis(null);
+		DZKOTHF_Log.Info("FIREWORK STARTED class=" + DZKOTHF_Constants.FIREWORK_CLASSNAME + ".");
+		return true;
+	}
+
+	void CleanupFirework(string reason)
+	{
+		if (m_FireworkLauncher && GetGame())
+			GetGame().ObjectDelete(m_FireworkLauncher);
+		if (m_FireworkLauncher || m_FireworkTriggered)
+			DZKOTHF_Log.Info("FIREWORK CLEANED reason=" + reason + ".");
+		m_FireworkLauncher = null;
+		m_FireworkTriggered = false;
+	}
+
+	protected vector GetWorldPositionFromMastOffset(vector localOffset)
+	{
+		vector position = m_Center + localOffset;
+		if (m_Flagpole)
+			position = m_Flagpole.ModelToWorld(localOffset);
+		position[1] = GetGame().SurfaceY(position[0], position[2]) + localOffset[1];
+		return position;
 	}
 
 	protected int FillRewardCrate(DZKOTHF_Settings settings)
@@ -232,6 +282,7 @@ class DZKOTHF_EventSession
 	void CleanupWorldObjects()
 	{
 		CleanupEnemies();
+		CleanupFirework("event cleanup");
 		bool hadWorldObjects = m_EventFlag || m_Flagpole || m_SmokeState != DZKOTHF_SmokeState.NONE;
 		SetSmokeState(DZKOTHF_SmokeState.NONE);
 
@@ -342,5 +393,7 @@ class DZKOTHF_EventSession
 		m_EventFlag = null;
 		m_Enemies = new array<DayZInfected>;
 		m_EnemySpawnAttempted = false;
+		m_FireworkLauncher = null;
+		m_FireworkTriggered = false;
 	}
 }

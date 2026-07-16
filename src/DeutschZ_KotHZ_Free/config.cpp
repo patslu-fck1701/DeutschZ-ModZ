@@ -6,7 +6,8 @@ class CfgPatches
 		{
 			"DZKOTHF_EventFlagpole",
 			"DZKOTHF_EventFlag",
-			"DZKOTHF_RewardCrate"
+			"DZKOTHF_RewardCrate",
+			"DZKOTHF_FireworksLauncher"
 		};
 		weapons[] = {};
 		requiredVersion = 0.1;
@@ -15,6 +16,7 @@ class CfgPatches
 			"DZ_Data",
 			"DZ_Scripts",
 			"DZ_Gear_Camping",
+			"DZ_Gear_Tools",
 			"DZ_Sounds_Effects"
 		};
 	};
@@ -35,7 +37,7 @@ class CfgSoundShaders
 
 class CfgSoundSets
 {
-	class DZKOTHF_Music_Base_SoundSet { volumeFactor = 0.33; frequencyFactor = 1; spatial = 0; };
+	class DZKOTHF_Music_Base_SoundSet { volumeFactor = 0.45; frequencyFactor = 1; spatial = 0; };
 	class DZKOTHF_Music01_SoundSet: DZKOTHF_Music_Base_SoundSet { soundShaders[] = {"DZKOTHF_Music01_SoundShader"}; };
 	class DZKOTHF_Music02_SoundSet: DZKOTHF_Music_Base_SoundSet { soundShaders[] = {"DZKOTHF_Music02_SoundShader"}; };
 	class DZKOTHF_Music03_SoundSet: DZKOTHF_Music_Base_SoundSet { soundShaders[] = {"DZKOTHF_Music03_SoundShader"}; };
@@ -101,6 +103,7 @@ class CfgVehicles
 	class StaticFlagPole;
 	class Flag_Chernarus;
 	class SeaChest;
+	class FireworksLauncher;
 
 	class DZKOTHF_EventFlagpole: StaticFlagPole
 	{
@@ -126,5 +129,18 @@ class CfgVehicles
 		itemsCargoSize[] = {10, 50};
 		hiddenSelections[] = {"camoGround"};
 		hiddenSelectionsTextures[] = {"\DeutschZ_KotHZ_Free\data\kothz_free_sea_chest_co.paa"};
+	};
+
+	class DZKOTHF_FireworksLauncher: FireworksLauncher
+	{
+		scope = 2;
+		displayName = "DeutschZ KotHZ Feuerwerk";
+		descriptionShort = "Serververwaltetes Gewinnfeuerwerk.";
+		hiddenSelections[] = {"camo", "placing"};
+		hiddenSelectionsTextures[] =
+		{
+			"\DeutschZ_KotHZ_Free\data\deutschz_fireworkslauncher_co.paa",
+			"\DeutschZ_KotHZ_Free\data\deutschz_fireworkslauncher_co.paa"
+		};
 	};
 };
