@@ -28,7 +28,7 @@ class CfgMods
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "1.0.0-phase-c5";
+		version = "1.0.0-clientfix-1";
 		type = "mod";
 		dependencies[] =
 		{
@@ -87,6 +87,8 @@ class CfgVehicles
 		scope = 2;
 		displayName = "DeutschZ KotHZ Fahne";
 		descriptionShort = "Serververwaltete KotHZ-Capture-Fahne.";
+		hiddenSelections[] = {"camo"};
+		hiddenSelectionsTextures[] = {"\DeutschZ_KotHZ_Free\data\kothz_free_flag_dayz_co.paa"};
 	};
 
 	class DZKOTHF_RewardCrate: SeaChest
@@ -95,5 +97,7 @@ class CfgVehicles
 		displayName = "DeutschZ KotHZ Belohnungskiste";
 		descriptionShort = "Serververwaltete KotHZ-Free-Belohnungskiste.";
 		itemsCargoSize[] = {10, 50};
+		hiddenSelections[] = {"camoGround"};
+		hiddenSelectionsTextures[] = {"\DeutschZ_KotHZ_Free\data\kothz_free_sea_chest_co.paa"};
 	};
 };

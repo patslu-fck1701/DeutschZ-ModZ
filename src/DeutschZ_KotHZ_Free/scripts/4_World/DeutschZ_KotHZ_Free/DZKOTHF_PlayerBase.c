@@ -33,7 +33,10 @@ modded class PlayerBase
 			string text;
 			string icon;
 			if (ctx.Read(visible) && ctx.Read(position) && ctx.Read(text) && ctx.Read(icon))
+			{
 				DZKOTHF_ClientState.SetMarker(visible, position, text, icon);
+				Print("[DeutschZ KotHZ Free] Client marker sync: visible=" + visible.ToString() + " position=" + position.ToString() + " icon=" + icon + ".");
+			}
 		}
 		else if (messageType == DZKOTHF_RPCMessage.PROGRESS)
 		{

@@ -5,6 +5,7 @@ class DZKOTHF_EventController
 	protected ref DZKOTHF_Settings m_Settings;
 	protected bool m_Initialized;
 	protected bool m_CaptureTickRunning;
+	protected ref map<string, bool> m_ProgressRecipients;
 
 	static DZKOTHF_EventController GetInstance()
 	{
@@ -25,6 +26,7 @@ class DZKOTHF_EventController
 	void DZKOTHF_EventController()
 	{
 		m_Session = new DZKOTHF_EventSession;
+		m_ProgressRecipients = new map<string, bool>;
 	}
 
 	void InitServer()
@@ -48,6 +50,7 @@ class DZKOTHF_EventController
 		RemoveScheduledCalls();
 		if (m_Session)
 		{
+			HideProgressForAll("MISSION ENDE", 0.0);
 			m_Session.SetAbortReason("Mission shutdown");
 			m_Session.CleanupWorldObjects();
 			m_Session.CleanupRewardCrate("mission shutdown");
@@ -73,6 +76,7 @@ class DZKOTHF_EventController
 		}
 
 		m_Session.CleanupRewardCrate("new event start duplicate protection");
+		m_ProgressRecipients.Clear();
 
 		m_Session.MarkStarted();
 		if (!m_Session.SpawnWorldObjects(m_Settings))
@@ -89,7 +93,8 @@ class DZKOTHF_EventController
 
 		m_Session.SetSmokeState(DZKOTHF_SmokeState.WHITE);
 		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, true, m_Session.GetCenter(), "ANGEKUENDIGT");
-		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, true, "ANGEKUENDIGT", 0.0);
+		if (m_Settings.ShowProgressDuringAnnouncement)
+			DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, true, "ANGEKUENDIGT", 0.0);
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Ein KotHZ-Event wurde angekuendigt.");
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(ActivateEvent, m_Settings.AnnounceSeconds * 1000, false);
 		return true;
@@ -102,7 +107,7 @@ class DZKOTHF_EventController
 
 		m_Session.SetSmokeState(DZKOTHF_SmokeState.GREEN);
 		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, true, m_Session.GetCenter(), "AKTIV");
-		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, true, "AKTIV - WARTE AUF SPIELER", m_Session.GetCaptureProgress());
+		SyncProgressForPlayers("AKTIV - WARTE AUF SPIELER", m_Session.GetCaptureProgress());
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Die Capture-Phase ist aktiv.");
 		m_CaptureTickRunning = true;
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(SpawnEnemyBlock, m_Settings.SpawnDelaySeconds * 1000, false);
@@ -149,7 +154,7 @@ class DZKOTHF_EventController
 			}
 		}
 
-		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, true, progressStatus, m_Session.GetCaptureProgress());
+		SyncProgressForPlayers(progressStatus, m_Session.GetCaptureProgress());
 
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CaptureTick, m_Settings.CaptureTickMilliseconds, false);
 	}
@@ -165,7 +170,7 @@ class DZKOTHF_EventController
 			if (!player || !player.IsAlive())
 				continue;
 
-			if (vector.Distance(player.GetPosition(), m_Session.GetCenter()) <= m_Session.GetCaptureRadius())
+			if (IsPlayerInCaptureRadius(player))
 				playerCount++;
 		}
 
@@ -181,7 +186,7 @@ class DZKOTHF_EventController
 		m_Session.SetCaptureProgress(1.0);
 		m_Session.SetSmokeState(DZKOTHF_SmokeState.WHITE);
 		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, false, vector.Zero, "");
-		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, false, "ABGESCHLOSSEN", 1.0);
+		HideProgressForAll("ABGESCHLOSSEN", 1.0);
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Capture erfolgreich abgeschlossen.");
 		if (!m_Session.SpawnRewardCrate(m_Settings))
 			DZKOTHF_Log.Error("Capture completed but reward crate creation failed.");
@@ -207,7 +212,7 @@ class DZKOTHF_EventController
 			return false;
 
 		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, false, vector.Zero, "");
-		DZKOTHF_ClientBridge.BroadcastProgress(m_Settings, false, "CLEANUP", 0.0);
+		HideProgressForAll("CLEANUP", 0.0);
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "KotHZ-Cleanup abgeschlossen.");
 		m_Session.CleanupWorldObjects();
 		return FinishCleanup();
@@ -289,9 +294,78 @@ class DZKOTHF_EventController
 		if (!player || !m_Settings || !m_Session)
 			return;
 
-		bool visible = GetState() == DZKOTHF_EventState.ANNOUNCED || GetState() == DZKOTHF_EventState.ACTIVE;
-		DZKOTHF_ClientBridge.SendMarker(player, m_Settings, visible, m_Session.GetCenter(), GetStateName());
-		DZKOTHF_ClientBridge.SendProgress(player, m_Settings, visible, GetStateName(), m_Session.GetCaptureProgress());
+		bool markerVisible = GetState() == DZKOTHF_EventState.ANNOUNCED || GetState() == DZKOTHF_EventState.ACTIVE;
+		DZKOTHF_ClientBridge.SendMarker(player, m_Settings, markerVisible, m_Session.GetCenter(), GetStateName());
+
+		bool progressVisible = false;
+		if (GetState() == DZKOTHF_EventState.ACTIVE)
+			progressVisible = IsPlayerInCaptureRadius(player);
+		else if (GetState() == DZKOTHF_EventState.ANNOUNCED)
+			progressVisible = m_Settings.ShowProgressDuringAnnouncement;
+		DZKOTHF_ClientBridge.SendProgress(player, m_Settings, progressVisible, GetStateName(), m_Session.GetCaptureProgress());
+		SetProgressRecipient(player, progressVisible);
+	}
+
+	protected bool IsPlayerInCaptureRadius(PlayerBase player)
+	{
+		return player && player.IsAlive() && m_Session && vector.Distance(player.GetPosition(), m_Session.GetCenter()) <= m_Session.GetCaptureRadius();
+	}
+
+	protected void SyncProgressForPlayers(string status, float progress)
+	{
+		if (!GetGame() || !m_Settings || !m_Session)
+			return;
+
+		array<Man> players = new array<Man>;
+		GetGame().GetPlayers(players);
+		foreach (Man man: players)
+		{
+			PlayerBase player = PlayerBase.Cast(man);
+			if (!player || !player.GetIdentity())
+				continue;
+
+			bool visible = IsPlayerInCaptureRadius(player);
+			if (visible)
+			{
+				DZKOTHF_ClientBridge.SendProgress(player, m_Settings, true, status, progress);
+				SetProgressRecipient(player, true);
+			}
+			else if (IsProgressRecipient(player))
+			{
+				DZKOTHF_ClientBridge.SendProgress(player, m_Settings, false, status, progress);
+				SetProgressRecipient(player, false);
+			}
+		}
+	}
+
+	protected void HideProgressForAll(string status, float progress)
+	{
+		if (!GetGame() || !m_Settings)
+			return;
+
+		array<Man> players = new array<Man>;
+		GetGame().GetPlayers(players);
+		foreach (Man man: players)
+			DZKOTHF_ClientBridge.SendProgress(PlayerBase.Cast(man), m_Settings, false, status, progress);
+		m_ProgressRecipients.Clear();
+	}
+
+	protected bool IsProgressRecipient(PlayerBase player)
+	{
+		if (!player || !player.GetIdentity())
+			return false;
+		return m_ProgressRecipients.Contains(player.GetIdentity().GetPlainId());
+	}
+
+	protected void SetProgressRecipient(PlayerBase player, bool visible)
+	{
+		if (!player || !player.GetIdentity())
+			return;
+		string playerId = player.GetIdentity().GetPlainId();
+		if (visible)
+			m_ProgressRecipients.Set(playerId, true);
+		else
+			m_ProgressRecipients.Remove(playerId);
 	}
 
 	string GetStateName()

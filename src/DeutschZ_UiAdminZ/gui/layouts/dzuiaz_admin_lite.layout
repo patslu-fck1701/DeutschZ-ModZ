@@ -16,7 +16,6 @@ FrameWidgetClass DZUIAZ_Root {
   PanelWidgetClass DZUIAZ_Sidebar {color 0.018 0.027 0.020 1 position 0.01 0.115 size 0.145 0.62 style rover_sim_colorable}
   TextWidgetClass DZUIAZ_NavTitle {position 0.025 0.132 size 0.11 0.035 text "NAVIGATION" font "gui/fonts/sdf_MetronBook18" color 0.55 0.95 0.05 1}
   ButtonWidgetClass DZUIAZ_NavDashboard {position 0.02 0.180 size 0.125 0.060 text "DASHBOARD" color 0.20 0.36 0.05 1}
-  ImageWidgetClass DZUIAZ_DashboardIcon {ignorepointer 1 position 0.025 0.190 size 0.022 0.038 image0 "DeutschZ_UiAdminZ/gui/icons/dashboard_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h}
   TextWidgetClass DZUIAZ_NavEvents {position 0.03 0.265 size 0.11 0.035 text "EVENTS" font "gui/fonts/sdf_MetronBook18" color 0.42 0.47 0.42 1}
   TextWidgetClass DZUIAZ_NavZones {position 0.03 0.335 size 0.11 0.035 text "ZONEN & POSITION" font "gui/fonts/sdf_MetronBook18" color 0.42 0.47 0.42 1}
   TextWidgetClass DZUIAZ_NavNotify {position 0.03 0.405 size 0.11 0.035 text "MELDUNGEN" font "gui/fonts/sdf_MetronBook18" color 0.42 0.47 0.42 1}
@@ -39,9 +38,6 @@ FrameWidgetClass DZUIAZ_Root {
   ButtonWidgetClass DZUIAZ_Start {position 0.18 0.540 size 0.165 0.070 text "EVENT STARTEN"}
   ButtonWidgetClass DZUIAZ_Stop {position 0.355 0.540 size 0.165 0.070 text "EVENT STOPPEN"}
   ButtonWidgetClass DZUIAZ_Refresh {position 0.53 0.540 size 0.19 0.070 text "STATUS AKTUALISIEREN"}
-  ImageWidgetClass DZUIAZ_StartIcon {ignorepointer 1 position 0.187 0.552 size 0.026 0.044 image0 "DeutschZ_UiAdminZ/gui/icons/start_event_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h}
-  ImageWidgetClass DZUIAZ_StopIcon {ignorepointer 1 position 0.362 0.552 size 0.026 0.044 image0 "DeutschZ_UiAdminZ/gui/icons/stop_event_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h}
-  ImageWidgetClass DZUIAZ_RefreshIcon {ignorepointer 1 position 0.537 0.552 size 0.026 0.044 image0 "DeutschZ_UiAdminZ/gui/icons/refresh_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h}
 
   PanelWidgetClass DZUIAZ_LicensePanel {color 0.018 0.027 0.020 1 position 0.75 0.115 size 0.24 0.46 style rover_sim_colorable}
   TextWidgetClass DZUIAZ_LicenseTitle {position 0.765 0.132 size 0.21 0.04 text "FREE / PRO" font "gui/fonts/sdf_MetronBook24" color 0.55 0.95 0.05 1}

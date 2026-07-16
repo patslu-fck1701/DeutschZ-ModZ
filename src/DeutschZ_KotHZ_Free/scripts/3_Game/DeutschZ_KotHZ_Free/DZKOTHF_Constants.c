@@ -1,6 +1,6 @@
 class DZKOTHF_Constants
 {
-	static const string VERSION = "1.0.0-phase-c5";
+	static const string VERSION = "1.0.0-clientfix-1";
 	static const int RPC_SYNC = 24871;
 	static const int RPC_ADMIN = 24872;
 	static const int RPC_PROTOCOL_VERSION = 1;
@@ -18,6 +18,7 @@ class DZKOTHF_Constants
 	static const string FLAGPOLE_CLASSNAME = "DZKOTHF_EventFlagpole";
 	static const string FLAG_CLASSNAME = "DZKOTHF_EventFlag";
 	static const string DEFAULT_REWARD_CRATE_CLASSNAME = "DZKOTHF_RewardCrate";
+	static const string DEFAULT_MARKER_ICON = "\\dz\\gear\\navigation\\data\\map_tree_ca.paa";
 }
 
 enum DZKOTHF_RPCMessage

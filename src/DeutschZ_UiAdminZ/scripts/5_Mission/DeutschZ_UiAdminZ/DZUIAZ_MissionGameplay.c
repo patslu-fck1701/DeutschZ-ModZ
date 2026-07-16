@@ -9,13 +9,26 @@ modded class MissionGameplay
 	override void OnKeyPress(int key)
 	{
 		super.OnKeyPress(key);
-		if (key != KeyCode.KC_F7 || GetGame().GetUIManager().GetMenu()) return;
+		if (key != KeyCode.KC_F7)
+			return;
+
+		UIScriptedMenu currentMenu = GetGame().GetUIManager().GetMenu();
+		if (currentMenu)
+		{
+			if (currentMenu.GetID() == DZUIAZ_Constants.MENU_ID)
+				currentMenu.Close();
+			return;
+		}
+
 		DZUIAZ_ClientState.Reset();
 		GetGame().GetUIManager().EnterScriptedMenu(DZUIAZ_Constants.MENU_ID, null);
 	}
 
 	override void OnMissionFinish()
 	{
+		UIScriptedMenu currentMenu = GetGame().GetUIManager().GetMenu();
+		if (currentMenu && currentMenu.GetID() == DZUIAZ_Constants.MENU_ID)
+			currentMenu.Close();
 		DZUIAZ_ClientState.Reset();
 		super.OnMissionFinish();
 	}

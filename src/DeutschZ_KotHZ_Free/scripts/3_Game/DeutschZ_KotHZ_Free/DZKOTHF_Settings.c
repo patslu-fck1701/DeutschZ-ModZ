@@ -44,6 +44,7 @@ class DZKOTHF_Settings
 	ref array<float> RewardSpawnOffset;
 	string EventName;
 	string MarkerIcon;
+	bool ShowProgressDuringAnnouncement;
 	bool NotifyUseChatFallback;
 	ref array<float> EventPosition;
 	ref array<float> EventOrientation;
@@ -82,7 +83,8 @@ class DZKOTHF_Settings
 		RewardLifetimeMinutes = 10;
 		RewardSpawnOffset = {3.0, 0.0, 0.0};
 		EventName = "DeutschZ KotHZ Free";
-		MarkerIcon = "DZ\\gear\\navigation\\data\\map_tree_ca.paa";
+		MarkerIcon = DZKOTHF_Constants.DEFAULT_MARKER_ICON;
+		ShowProgressDuringAnnouncement = false;
 		NotifyUseChatFallback = false;
 		EventPosition = {4552.346680, 317.997314, 8350.974609};
 		EventOrientation = {0.0, 0.0, 0.0};
@@ -131,6 +133,9 @@ class DZKOTHF_Settings
 
 		if (EventName == "")
 			EventName = "DeutschZ KotHZ Free";
+
+		if (MarkerIcon == "" || MarkerIcon == "DZ\\gear\\navigation\\data\\map_tree_ca.paa" || MarkerIcon == "dz\\gear\\navigation\\data\\map_tree_ca.paa")
+			MarkerIcon = DZKOTHF_Constants.DEFAULT_MARKER_ICON;
 
 		if (!EventPosition || EventPosition.Count() != 3)
 			EventPosition = {4552.346680, 317.997314, 8350.974609};
