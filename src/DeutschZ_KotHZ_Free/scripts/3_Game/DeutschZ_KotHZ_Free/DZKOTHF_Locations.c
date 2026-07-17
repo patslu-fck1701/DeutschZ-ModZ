@@ -73,17 +73,39 @@ class DZKOTHF_LocationLoader
 		DZKOTHF_ProfilePaths.EnsureDirectories();
 		ref DZKOTHF_LocationsSettings locations = new DZKOTHF_LocationsSettings;
 		string errorMessage;
+		bool writeLocations;
 		if (FileExist(DZKOTHF_Constants.LOCATIONS_PATH))
 		{
 			if (!JsonFileLoader<ref DZKOTHF_LocationsSettings>.LoadFile(DZKOTHF_Constants.LOCATIONS_PATH, locations, errorMessage) || !locations || !locations.Locations)
 			{
-				DZKOTHF_Log.Error("Locations could not be loaded; defaults are used. " + errorMessage);
+				DZKOTHF_Log.Error("Locations are corrupt and will be regenerated from defaults. " + errorMessage);
+				if (!FileExist(DZKOTHF_Constants.CORRUPT_LOCATIONS_BACKUP_PATH))
+				{
+					if (CopyFile(DZKOTHF_Constants.LOCATIONS_PATH, DZKOTHF_Constants.CORRUPT_LOCATIONS_BACKUP_PATH))
+						DZKOTHF_Log.Warning("Corrupt locations were preserved at " + DZKOTHF_Constants.CORRUPT_LOCATIONS_BACKUP_PATH + ".");
+					else
+						DZKOTHF_Log.Error("Corrupt locations could not be copied to the backup path before regeneration.");
+				}
 				locations = new DZKOTHF_LocationsSettings;
+				writeLocations = true;
+			}
+			else
+			{
+				DZKOTHF_Log.Info("Valid locations loaded without rewriting: " + DZKOTHF_Constants.LOCATIONS_PATH + ".");
 			}
 		}
+		else
+		{
+			writeLocations = true;
+		}
 
-		if (!JsonFileLoader<ref DZKOTHF_LocationsSettings>.SaveFile(DZKOTHF_Constants.LOCATIONS_PATH, locations, errorMessage))
-			DZKOTHF_Log.Error("Locations could not be saved. " + errorMessage);
+		if (writeLocations)
+		{
+			if (!JsonFileLoader<ref DZKOTHF_LocationsSettings>.SaveFile(DZKOTHF_Constants.LOCATIONS_PATH, locations, errorMessage))
+				DZKOTHF_Log.Error("Locations could not be written. " + errorMessage);
+			else
+				DZKOTHF_Log.Info("Locations written once because the file was missing or corrupt: " + DZKOTHF_Constants.LOCATIONS_PATH + ".");
+		}
 		return locations;
 	}
 

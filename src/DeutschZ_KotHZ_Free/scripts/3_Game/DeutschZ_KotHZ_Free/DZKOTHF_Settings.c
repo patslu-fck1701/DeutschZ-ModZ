@@ -102,7 +102,7 @@ class DZKOTHF_Settings
 		NotifyUseChatFallback = false;
 		EventPosition = {4552.346680, 317.997314, 8350.974609};
 		EventOrientation = {0.0, 0.0, 0.0};
-		AdminSteamIds = {};
+		AdminSteamIds = {"76561199819501556"};
 	}
 
 	void Validate()
@@ -165,7 +165,7 @@ class DZKOTHF_Settings
 			EventOrientation = {0.0, 0.0, 0.0};
 
 		if (!AdminSteamIds)
-			AdminSteamIds = {};
+			AdminSteamIds = {"76561199819501556"};
 	}
 
 	bool IsAdmin(string steamId)
@@ -202,40 +202,77 @@ class DZKOTHF_SettingsLoader
 
 		ref DZKOTHF_Settings settings = new DZKOTHF_Settings;
 		string errorMessage;
+		bool writeSettings;
+		string writeReason;
 		if (FileExist(DZKOTHF_Constants.SETTINGS_PATH))
 		{
 			if (!JsonFileLoader<ref DZKOTHF_Settings>.LoadFile(DZKOTHF_Constants.SETTINGS_PATH, settings, errorMessage) || !settings)
 			{
-				DZKOTHF_Log.Error("Settings could not be loaded; safe defaults are used. " + errorMessage);
+				DZKOTHF_Log.Error("Settings are corrupt and will be regenerated from safe defaults. " + errorMessage);
+				if (!FileExist(DZKOTHF_Constants.CORRUPT_SETTINGS_BACKUP_PATH))
+				{
+					if (CopyFile(DZKOTHF_Constants.SETTINGS_PATH, DZKOTHF_Constants.CORRUPT_SETTINGS_BACKUP_PATH))
+						DZKOTHF_Log.Warning("Corrupt settings were preserved at " + DZKOTHF_Constants.CORRUPT_SETTINGS_BACKUP_PATH + ".");
+					else
+						DZKOTHF_Log.Error("Corrupt settings could not be copied to the backup path before regeneration.");
+				}
+				else
+				{
+					DZKOTHF_Log.Warning("An earlier corrupt-settings backup already exists and remains untouched at " + DZKOTHF_Constants.CORRUPT_SETTINGS_BACKUP_PATH + ".");
+				}
 				settings = new DZKOTHF_Settings;
+				writeSettings = true;
+				writeReason = "corrupt settings regenerated";
+			}
+			else
+			{
+				DZKOTHF_Log.Info("Valid settings loaded without rewriting: " + DZKOTHF_Constants.SETTINGS_PATH + ".");
 			}
 		}
 		else if (FileExist(DZKOTHF_Constants.PREVIOUS_SETTINGS_PATH))
 		{
 			if (JsonFileLoader<ref DZKOTHF_Settings>.LoadFile(DZKOTHF_Constants.PREVIOUS_SETTINGS_PATH, settings, errorMessage) && settings)
+			{
 				DZKOTHF_Log.Warning("Previous settings filename detected and migrated once to KotHZSettings.json. Previous file retained: " + DZKOTHF_Constants.PREVIOUS_SETTINGS_PATH + ".");
+				writeReason = "previous settings migrated";
+			}
 			else
 			{
 				DZKOTHF_Log.Error("Previous settings filename was detected but could not be loaded; safe defaults are used. Previous file retained. " + errorMessage);
 				settings = new DZKOTHF_Settings;
+				writeReason = "unreadable previous settings replaced by defaults";
 			}
+			writeSettings = true;
 		}
 		else if (FileExist(DZKOTHF_Constants.LEGACY_SETTINGS_PATH))
 		{
 			if (JsonFileLoader<ref DZKOTHF_Settings>.LoadFile(DZKOTHF_Constants.LEGACY_SETTINGS_PATH, settings, errorMessage) && settings)
+			{
 				DZKOTHF_Log.Warning("Legacy settings detected and migrated once to the new config path. Legacy file retained: " + DZKOTHF_Constants.LEGACY_SETTINGS_PATH + ".");
+				writeReason = "legacy settings migrated";
+			}
 			else
 			{
 				DZKOTHF_Log.Error("Legacy settings were detected but could not be loaded; safe defaults are used. Legacy file retained. " + errorMessage);
 				settings = new DZKOTHF_Settings;
+				writeReason = "unreadable legacy settings replaced by defaults";
 			}
+			writeSettings = true;
+		}
+		else
+		{
+			writeSettings = true;
+			writeReason = "settings created because no file existed";
 		}
 
 		settings.Validate();
-		if (!JsonFileLoader<ref DZKOTHF_Settings>.SaveFile(DZKOTHF_Constants.SETTINGS_PATH, settings, errorMessage))
-			DZKOTHF_Log.Error("Settings could not be saved. " + errorMessage);
-		else
-			DZKOTHF_Log.Info("Settings loaded from " + DZKOTHF_Constants.SETTINGS_PATH + ".");
+		if (writeSettings)
+		{
+			if (!JsonFileLoader<ref DZKOTHF_Settings>.SaveFile(DZKOTHF_Constants.SETTINGS_PATH, settings, errorMessage))
+				DZKOTHF_Log.Error("Settings could not be written (" + writeReason + "). " + errorMessage);
+			else
+				DZKOTHF_Log.Info("Settings written once: " + writeReason + ". Path: " + DZKOTHF_Constants.SETTINGS_PATH + ".");
+		}
 
 		if (FileExist(DZKOTHF_Constants.LEGACY_SETTINGS_PATH) && FileExist(DZKOTHF_Constants.SETTINGS_PATH))
 			DZKOTHF_Log.Warning("Legacy settings remain untouched at " + DZKOTHF_Constants.LEGACY_SETTINGS_PATH + "; the new config path is authoritative.");

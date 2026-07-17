@@ -1,6 +1,6 @@
 class DZKOTHF_Constants
 {
-	static const string VERSION = "1.0.2-gameplayfix";
+	static const string VERSION = "1.0.3-settings-preserve";
 	static const int RPC_SYNC = 24871;
 	static const int RPC_ADMIN = 24872;
 	static const int RPC_PROTOCOL_VERSION = 1;
@@ -10,7 +10,9 @@ class DZKOTHF_Constants
 	static const string LOG_SYSTEM_ROOT = "$profile:DeutschZ-System/LogZ";
 	static const string LOG_ROOT = "$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ";
 	static const string SETTINGS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json";
+	static const string CORRUPT_SETTINGS_BACKUP_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.corrupt.backup.json";
 	static const string LOCATIONS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZLocations.json";
+	static const string CORRUPT_LOCATIONS_BACKUP_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZLocations.corrupt.backup.json";
 	static const string PERSISTENCE_ROOT = "$profile:DeutschZ-System/DeutschZ_KotHZ/Persistence";
 	static const string LOCATION_STATE_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ/Persistence/location_rotation.json";
 	static const string LOG_PATH = "$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log";

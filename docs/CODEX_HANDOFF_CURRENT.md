@@ -1,6 +1,13 @@
 # CODEX HANDOFF CURRENT
 
-Synchronisiert: 17.07.2026
+Synchronisiert: 17.07.2026 02:05 CEST
+
+## KotHZ Free 1.0.3 Settings Preserve
+
+- Restartschutz: gueltige `KotHZSettings.json` und `KotHZLocations.json` werden nur geladen und nicht mehr bei jedem Serverstart neu geschrieben.
+- Neuerzeugung erfolgt nur, wenn die jeweilige Datei fehlt oder nicht lesbar ist. Vor der Neuerzeugung einer defekten Datei bleibt eine unveraenderte `*.corrupt.backup.json` erhalten.
+- Standard-Admin: Steam-ID `76561199819501556` ist im Code-Default und in der ausgelieferten Beispielkonfiguration eingetragen.
+- Restart-Nachweis: zwei echte Serverstarts mit identischem SHA-256 `D8FE894865A623A4A5BB0D4DB96438EC7FC386EF533F8E86F100547EF95B1302`, identischem Zeitstempel und erhaltener Admin-ID.
 
 ## KotHZ Free 1.0.2 Gameplayfix
 
@@ -12,6 +19,8 @@ Synchronisiert: 17.07.2026
 
 ## Nachweise
 
+- Settings-Restarttest: zwei echte Starts im Preset `kothz_free_compile`; SHA-256 und Zeitstempel der gueltigen Config blieben bytegenau unveraendert, die Standard-Admin-ID blieb enthalten.
+- Frische Logs: `script_2026-07-17_02-01-20.log` und `DayZServer_x64_2026-07-17_02-01-09.RPT`; Script-Compile und Missionstart ohne KotHZ-Fehler.
 - Preflight und Clean Build: PASS
 - PBO-Inhalt: drei PAAs, Locations-Script und acht Musiktracks vorhanden
 - Signatur: `DeutschZ.bikey` / `.pbo.DeutschZ.bisign` PASS
@@ -26,3 +35,16 @@ Synchronisiert: 17.07.2026
 - Locations: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZLocations.json`
 - History: `$profile:DeutschZ-System/DeutschZ_KotHZ/Persistence/location_rotation.json`
 - Log: `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`
+
+Uebertragene Dateien:
+
+- `Addons/DeutschZ_KotHZ_Free.pbo`
+- `Addons/DeutschZ_KotHZ_Free.pbo.DeutschZ.bisign`
+- `keys/DeutschZ.bikey`
+- `mod.cpp`
+- `meta.cpp`
+- `Settings/KotHZSettings.json`
+- `Settings/KotHZLocations.json`
+- `TESTANLEITUNG.md`
+
+Build: PASS. Signatur: PASS. Servertest: PASS. Gameplaytest fuer den Settings-Restartschutz nicht erforderlich; sichtbare Gameplay-Resttests aus 1.0.2 bleiben bestehen.
