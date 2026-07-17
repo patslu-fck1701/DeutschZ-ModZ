@@ -96,3 +96,12 @@ Synchronisiert: 17.07.2026 05:36 CEST
 - UIADMINZ VISUAL READY: NEIN
 - AUSGABE AKTUELL: JA
 - CLIENTTEST ERFORDERLICH: JA
+
+## Git und Codex
+
+- Branch: `codex/menuz-v2-paa-pipeline-20260717`
+- Implementierungscommit: `8703979`
+- Push: `origin/codex/menuz-v2-paa-pipeline-20260717` erfolgreich.
+- Nicht zum Auftrag gehoerende lokale Aenderungen blieben ungestaged und unangetastet.
+- Installierte Codex-Version: `26.707.12708.0`.
+- Microsoft-Store-/winget-Updatepruefung: kein neueres Upgrade verfuegbar; installierter Stand ist aktuell laut Storequelle.
