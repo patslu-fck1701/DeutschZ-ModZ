@@ -1,5 +1,69 @@
 # CODEX HANDOFF CURRENT
 
+## RUSForma / only_core / KotHZ Finalfix - 17.07.2026 18:57 CEST
+
+- Letzter aktualisierter Ausgabeordner: `E:\DeutschZ\DeutschZServer\@DeutschZ_only_core`
+- Zusaetzlich aktualisiert: `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_Free`, Server-Settings unter `E:\DeutschZ\DeutschZServer\mpmissions` und `E:\DeutschZ\DeutschZServer\profiles`
+- Lokaler Spiegel: `C:\Program Files (x86)\Steam\steamapps\common\DayZServer`
+- Live-Settings-Sync: 555 Dateien aus dem zentralen Ausgabeordner lokal uebernommen; `storage_1`, `Logs`/`LogZ` und Laufzeitlogs explizit ausgeschlossen; keine Mirror-/Loeschoperation.
+- RUSForma bleibt separate Workshop-Mod: `@RUSForma_vehicles`, Workshop-ID `2536888090`; kein Workshop-PBO wurde veraendert oder repackt.
+- RUSForma: 242 echte Fahrzeug-/Variantenklassen mit `nominal=0`; 34 nominal=1 Rad-/Tuer-/Haubenteile bewusst nicht als Fahrzeuge einsortiert.
+- CE: `types_rusforma.xml`, 242 eindeutige Klassen, `nominal=0`, `min=0`, `restock=0`, `cost=100`, genau einmal in `cfgeconomycore.xml` eingebunden.
+- Market: sechs Kategorien, 242 eindeutige Klassen, keine Duplikate in anderen Market-Dateien.
+- Haendler: Civilian/Utility/Offroad in `Vehicles.json`; Military/Armored/Special in `Blackmarket_Vehicles.json`.
+- KotHZ: neue RewardChest-PAA byteidentisch zur Downloadquelle; Gewinnrauch rot; Feuerwerk 30 Sekunden; Post-Win-Cleanup 30 Sekunden; gewichtete Rewardpools mit einer garantierten plus 1-3 zufaelligen Vanilla-Waffen und Duplikatschutz.
+- KotHZ Clean Build/Preflight: PASS (0 Fehler, bekannte Windows-Pfadwarnung).
+- Signatur: PASS mit `DeutschZ.bikey`.
+- DayZ-Labs-Preset: `C:\Users\patsl\DayZProjects\mod-presets\deutschz_full_rusforma_only_core.json`, 22 eindeutige vorhandene Modpfade. Nicht gestartet, gemaess reduziertem Testumfang.
+
+### Uebertragene Dateien
+
+`E:\DeutschZ\DeutschZServer\@DeutschZ_only_core`:
+
+- `Addons/DeutschZ_MenuMusic_V2_Test.pbo` + `.DeutschZ.bisign`
+- `Addons/DeutschZ_KotHZ_Free.pbo` + `.DeutschZ.bisign`
+- `Addons/DeutschZ_UiAdminZ.pbo` + `.DeutschZ.bisign`
+- `keys/DeutschZ.bikey`
+- `mod.cpp`
+- `meta.cpp`
+- `TESTANLEITUNG.md`
+
+Settings-Overlay in Ausgabe und lokalem Server:
+
+- `modlist.txt`
+- `DeutschZ_Start_local.bat`
+- `mpmissions/dayzOffline.chernarusplus/cfgeconomycore.xml`
+- `mpmissions/dayzOffline.chernarusplus/dz_mod_ce/types_rusforma.xml`
+- sechs `profiles/ExpansionMod/Market/DeutschZ_RUSForma_*.json`
+- `profiles/ExpansionMod/Market/DeutschZ_RUSForma_Civilian.json`
+- `profiles/ExpansionMod/Market/DeutschZ_RUSForma_Utility.json`
+- `profiles/ExpansionMod/Market/DeutschZ_RUSForma_Offroad.json`
+- `profiles/ExpansionMod/Market/DeutschZ_RUSForma_Military.json`
+- `profiles/ExpansionMod/Market/DeutschZ_RUSForma_Armored.json`
+- `profiles/ExpansionMod/Market/DeutschZ_RUSForma_Special.json`
+- `profiles/ExpansionMod/Traders/Vehicles.json`
+- `profiles/ExpansionMod/Traders/Blackmarket_Vehicles.json`
+- `keys/RUS67pak.bikey`
+
+### Hashes und Status
+
+- KotHZ PBO: `7E73A10B836A798C2F004AF73E4330937F313C4AB61534822D561578D637557F`
+- MenuMusic V2 Test PBO: `067583AEAF7DFA7B89467BDB9B462E680E624D61C9BBAB47657197C5EC43960F`
+- UiAdminZ PBO: `658C5AEFC1DB28F8906C9C3EDA58003C296624426D5BC9D4CD20B2DF67609EA0`
+- DeutschZ BIKEY: `429C0D163341BC3A56CF8B88A28849AEBE949026B0D4A24D79056736DCD3328D`
+- RUSForma CE XML: `8A7736B1DCBF7E291C928A8449E07E0F4D3D5A3F9A2AA1C10CB69DEDD610C819`
+- Build/Signatur/JSON/XML/Duplikate/Pfade: PASS
+- Lokaler Gameplaytest: PATRICK_REQUIRED
+- Markettest: PATRICK_REQUIRED
+- Economytest: PATRICK_REQUIRED
+
+### Installation und Test
+
+1. Preset `deutschz_full_rusforma_only_core` laden oder die identische `modlist.txt` verwenden.
+2. Keine separaten MenuMusic-/KotHZ-/UiAdmin-Modzeilen zusaetzlich laden.
+3. `C:\Users\patsl\Desktop\CodexChanged\RUSFORMA_LOCAL_TESTPLAN.md`, `ONLY_CORE_TESTPLAN.md` und `KOTHZ_FINAL_RETEST.md` abarbeiten.
+4. Vollstaendigen Server-/Gameplay-/Market-/Economy-Test durch Patrick ausfuehren und frische Fehlerlogs zurueckgeben.
+
 Synchronisiert: 17.07.2026 05:36 CEST
 
 ## MenuZ V2

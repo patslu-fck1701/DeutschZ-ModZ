@@ -181,53 +181,173 @@ class DZKOTHF_EventSession
 			return 0;
 
 		int createdItems = 0;
-		ref array<ref DZKOTHF_RewardItemSetting> guaranteedKit = new array<ref DZKOTHF_RewardItemSetting>;
-		guaranteedKit.Insert(new DZKOTHF_RewardItemSetting("M4A1", 1, 1, 1, 1.0));
-		guaranteedKit.Insert(new DZKOTHF_RewardItemSetting("Mag_STANAG_30Rnd", 1, 30, 30, 1.0));
-		guaranteedKit.Insert(new DZKOTHF_RewardItemSetting("Ammo_556x45", 1, 20, 40, 1.0));
-		createdItems += FillRewardGroup("GuaranteedWeapons", guaranteedKit, true);
-		createdItems += FillRewardGroup("RewardItems", settings.RewardItems, false);
+		ref array<string> selectedWeapons = new array<string>;
+		DZKOTHF_RewardItemSetting selectedWeapon = SelectWeightedReward(settings.GuaranteedWeaponPool, selectedWeapons);
+		if (selectedWeapon)
+			createdItems += CreateWeaponPackage(selectedWeapon, selectedWeapons, createdItems, settings.MaxTotalRewardItems, "GuaranteedWeapons");
+
+		int randomWeaponCount = Math.RandomIntInclusive(settings.RandomWeaponMin, settings.RandomWeaponMax);
+		for (int weaponIndex = 0; weaponIndex < randomWeaponCount && createdItems < settings.MaxTotalRewardItems; weaponIndex++)
+		{
+			array<string> excludedWeapons = null;
+			if (!settings.AllowDuplicateWeapons)
+				excludedWeapons = selectedWeapons;
+			selectedWeapon = SelectWeightedReward(settings.RandomWeaponPool, excludedWeapons);
+			if (!selectedWeapon)
+				break;
+			createdItems += CreateWeaponPackage(selectedWeapon, selectedWeapons, createdItems, settings.MaxTotalRewardItems, "RandomWeapons");
+		}
+
+		createdItems += CreateWeightedPoolRewards(settings.MagazineAmmoPool, 2, createdItems, settings.MaxTotalRewardItems, "MagazineAmmo");
+		createdItems += CreateWeightedPoolRewards(settings.AttachmentPool, 1, createdItems, settings.MaxTotalRewardItems, "Attachments");
+		createdItems += CreateWeightedPoolRewards(settings.MedicalPool, 2, createdItems, settings.MaxTotalRewardItems, "Medical");
+		createdItems += CreateWeightedPoolRewards(settings.UtilityPool, 2, createdItems, settings.MaxTotalRewardItems, "Utility");
+		if (Math.RandomFloatInclusive(0.0, 1.0) <= 0.50)
+			createdItems += CreateWeightedPoolRewards(settings.RarePool, 1, createdItems, settings.MaxTotalRewardItems, "Rare");
+
+		createdItems += CreateLegacyRewards(settings.RewardItems, createdItems, settings.MaxTotalRewardItems);
+		DZKOTHF_Log.Info("Reward summary: guaranteedWeapons=1 randomWeapons=" + randomWeaponCount.ToString() + " uniqueWeapons=" + selectedWeapons.Count().ToString() + " totalItems=" + createdItems.ToString() + " maxItems=" + settings.MaxTotalRewardItems.ToString() + ".");
 		return createdItems;
 	}
 
-	protected int FillRewardGroup(string groupName, array<ref DZKOTHF_RewardItemSetting> rewards, bool guaranteed)
+	protected int CreateWeaponPackage(DZKOTHF_RewardItemSetting weaponEntry, array<string> selectedWeapons, int currentCount, int maxTotal, string groupName)
 	{
-		if (!rewards || !m_RewardCrate || !m_RewardCrate.GetInventory())
+		if (!weaponEntry || currentCount >= maxTotal)
+			return 0;
+
+		int createdItems = 0;
+		createdItems += CreateRewardItem(weaponEntry.Type, 1, 1, groupName);
+		if (createdItems == 0)
+			return 0;
+
+		if (selectedWeapons && selectedWeapons.Find(weaponEntry.Type) == -1)
+			selectedWeapons.Insert(weaponEntry.Type);
+
+		string magazineType = GetWeaponMagazineType(weaponEntry.Type);
+		if (magazineType != "" && currentCount + createdItems < maxTotal)
+			createdItems += CreateRewardItem(magazineType, 10, 30, groupName + "Support");
+
+		string ammoType = GetWeaponAmmoType(weaponEntry.Type);
+		if (ammoType != "" && currentCount + createdItems < maxTotal)
+			createdItems += CreateRewardItem(ammoType, 20, 40, groupName + "Support");
+
+		return createdItems;
+	}
+
+	protected int CreateWeightedPoolRewards(array<ref DZKOTHF_RewardItemSetting> pool, int rolls, int currentCount, int maxTotal, string groupName)
+	{
+		if (!pool || rolls <= 0 || currentCount >= maxTotal)
+			return 0;
+
+		int createdItems = 0;
+		for (int roll = 0; roll < rolls && currentCount + createdItems < maxTotal; roll++)
+		{
+			DZKOTHF_RewardItemSetting reward = SelectWeightedReward(pool, null);
+			if (reward)
+				createdItems += CreateRewardItem(reward.Type, reward.MinQuantity, reward.MaxQuantity, groupName);
+		}
+
+		return createdItems;
+	}
+
+	protected int CreateLegacyRewards(array<ref DZKOTHF_RewardItemSetting> rewards, int currentCount, int maxTotal)
+	{
+		if (!rewards || currentCount >= maxTotal)
 			return 0;
 
 		int createdItems = 0;
 		foreach (DZKOTHF_RewardItemSetting reward: rewards)
 		{
-			if (!reward || reward.Type == "")
+			if (!reward || reward.Type == "" || currentCount + createdItems >= maxTotal)
 				continue;
-			if (groupName == "RewardItems" && reward.Type == "M4A1")
+			if (Math.RandomFloatInclusive(0.0, 1.0) > reward.Chance)
 				continue;
 
-			for (int index = 0; index < reward.Count; index++)
-			{
-				if (!guaranteed && Math.RandomFloatInclusive(0.0, 1.0) > reward.Chance)
-				{
-					DZKOTHF_Log.Info("Reward item class=" + reward.Type + " success=NO target=" + m_RewardCrate.GetType() + " count=0 group=" + groupName + " reason=chance_roll.");
-					continue;
-				}
-
-				EntityAI entity = m_RewardCrate.GetInventory().CreateInInventory(reward.Type);
-				if (!entity)
-				{
-					DZKOTHF_Log.Warning("Reward item class=" + reward.Type + " success=NO target=" + m_RewardCrate.GetType() + " count=0 group=" + groupName + " reason=CreateInInventory_failed_or_no_cargo_space.");
-					continue;
-				}
-
-				ItemBase item = ItemBase.Cast(entity);
-				if (item && item.HasQuantity())
-					item.SetQuantity(Math.RandomIntInclusive(reward.MinQuantity, reward.MaxQuantity));
-
-				createdItems++;
-				DZKOTHF_Log.Info("Reward item class=" + reward.Type + " success=YES target=" + m_RewardCrate.GetType() + " count=1 group=" + groupName + " reason=created.");
-			}
+			for (int index = 0; index < reward.Count && currentCount + createdItems < maxTotal; index++)
+				createdItems += CreateRewardItem(reward.Type, reward.MinQuantity, reward.MaxQuantity, "RewardItems");
 		}
 
 		return createdItems;
+	}
+
+	protected DZKOTHF_RewardItemSetting SelectWeightedReward(array<ref DZKOTHF_RewardItemSetting> pool, array<string> excludedTypes)
+	{
+		if (!pool || pool.Count() == 0)
+			return null;
+
+		float totalWeight = 0.0;
+		foreach (DZKOTHF_RewardItemSetting candidate: pool)
+		{
+			if (!candidate || candidate.Type == "" || candidate.Chance <= 0.0)
+				continue;
+			if (excludedTypes && excludedTypes.Find(candidate.Type) != -1)
+				continue;
+			totalWeight += candidate.Chance;
+		}
+
+		if (totalWeight <= 0.0)
+			return null;
+
+		float roll = Math.RandomFloatInclusive(0.0, totalWeight);
+		float cursor = 0.0;
+		foreach (DZKOTHF_RewardItemSetting entry: pool)
+		{
+			if (!entry || entry.Type == "" || entry.Chance <= 0.0)
+				continue;
+			if (excludedTypes && excludedTypes.Find(entry.Type) != -1)
+				continue;
+			cursor += entry.Chance;
+			if (roll <= cursor)
+				return entry;
+		}
+
+		return null;
+	}
+
+	protected int CreateRewardItem(string type, int minQuantity, int maxQuantity, string groupName)
+	{
+		if (type == "" || !m_RewardCrate || !m_RewardCrate.GetInventory())
+			return 0;
+
+		EntityAI entity = m_RewardCrate.GetInventory().CreateInInventory(type);
+		if (!entity)
+		{
+			DZKOTHF_Log.Warning("Reward item class=" + type + " success=NO target=" + m_RewardCrate.GetType() + " count=0 group=" + groupName + " reason=CreateInInventory_failed_or_no_cargo_space.");
+			return 0;
+		}
+
+		ItemBase item = ItemBase.Cast(entity);
+		if (item && item.HasQuantity())
+			item.SetQuantity(Math.RandomIntInclusive(minQuantity, maxQuantity));
+
+		DZKOTHF_Log.Info("Reward item class=" + type + " success=YES target=" + m_RewardCrate.GetType() + " count=1 group=" + groupName + " reason=created.");
+		return 1;
+	}
+
+	protected string GetWeaponMagazineType(string weaponType)
+	{
+		if (weaponType == "M4A1" || weaponType == "M16A2") return "Mag_STANAG_30Rnd";
+		if (weaponType == "AKM") return "Mag_AKM_30Rnd";
+		if (weaponType == "AK74") return "Mag_AK74_30Rnd";
+		if (weaponType == "FAL") return "Mag_FAL_20Rnd";
+		if (weaponType == "SVD") return "Mag_SVD_10Rnd";
+		if (weaponType == "Saiga") return "Mag_Saiga_8Rnd";
+		if (weaponType == "MP5K") return "Mag_MP5_30Rnd";
+		if (weaponType == "UMP45") return "Mag_UMP_25Rnd";
+		return "";
+	}
+
+	protected string GetWeaponAmmoType(string weaponType)
+	{
+		if (weaponType == "M4A1" || weaponType == "M16A2") return "Ammo_556x45";
+		if (weaponType == "AKM" || weaponType == "SKS") return "Ammo_762x39";
+		if (weaponType == "AK74") return "Ammo_545x39";
+		if (weaponType == "FAL" || weaponType == "Winchester70") return "Ammo_308Win";
+		if (weaponType == "SVD" || weaponType == "Mosin9130") return "Ammo_762x54";
+		if (weaponType == "Saiga") return "Ammo_12gaPellets";
+		if (weaponType == "MP5K") return "Ammo_9x19";
+		if (weaponType == "UMP45") return "Ammo_45ACP";
+		return "";
 	}
 
 	void CleanupRewardCrate(string reason)

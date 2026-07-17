@@ -34,12 +34,25 @@ class DZKOTHF_Settings
 	int CaptureTimeSeconds;
 	int CaptureTickMilliseconds;
 	int CompletionCleanupDelaySeconds;
+	int PostWinCleanupDelaySeconds;
+	int FireworkDurationSeconds;
 	int EnemyCount;
 	ref array<string> EnemyClassNames;
 	float SpawnRadius;
 	int SpawnDelaySeconds;
 	string RewardCrateClass;
 	ref array<ref DZKOTHF_RewardItemSetting> RewardItems;
+	ref array<ref DZKOTHF_RewardItemSetting> GuaranteedWeaponPool;
+	ref array<ref DZKOTHF_RewardItemSetting> RandomWeaponPool;
+	ref array<ref DZKOTHF_RewardItemSetting> MagazineAmmoPool;
+	ref array<ref DZKOTHF_RewardItemSetting> AttachmentPool;
+	ref array<ref DZKOTHF_RewardItemSetting> MedicalPool;
+	ref array<ref DZKOTHF_RewardItemSetting> UtilityPool;
+	ref array<ref DZKOTHF_RewardItemSetting> RarePool;
+	int RandomWeaponMin;
+	int RandomWeaponMax;
+	bool AllowDuplicateWeapons;
+	int MaxTotalRewardItems;
 	int RewardLifetimeMinutes;
 	ref array<float> RewardCrateOffset;
 	bool FireworkEnabled;
@@ -66,7 +79,9 @@ class DZKOTHF_Settings
 		CaptureRadius = 25.0;
 		CaptureTimeSeconds = 300;
 		CaptureTickMilliseconds = 1000;
-		CompletionCleanupDelaySeconds = 10;
+		CompletionCleanupDelaySeconds = 30;
+		PostWinCleanupDelaySeconds = 30;
+		FireworkDurationSeconds = 30;
 		EnemyCount = 15;
 		EnemyClassNames = {
 			"ZmbM_HermitSkinny_Beige",
@@ -80,13 +95,15 @@ class DZKOTHF_Settings
 		SpawnDelaySeconds = 2;
 		RewardCrateClass = DZKOTHF_Constants.DEFAULT_REWARD_CRATE_CLASSNAME;
 		RewardItems = {
-			new DZKOTHF_RewardItemSetting("M4A1", 1, 1, 1, 0.25),
-			new DZKOTHF_RewardItemSetting("Mag_STANAG_30Rnd", 2, 20, 30, 0.75),
-			new DZKOTHF_RewardItemSetting("Ammo_556x45", 2, 20, 40, 0.80),
-			new DZKOTHF_RewardItemSetting("BandageDressing", 3, 1, 1, 1.00),
+			new DZKOTHF_RewardItemSetting("BandageDressing", 1, 1, 1, 1.00),
 			new DZKOTHF_RewardItemSetting("Canteen", 1, 50, 100, 0.80),
-			new DZKOTHF_RewardItemSetting("TacticalBaconCan", 2, 50, 100, 0.90)
+			new DZKOTHF_RewardItemSetting("TacticalBaconCan", 1, 50, 100, 0.90)
 		};
+		RandomWeaponMin = 1;
+		RandomWeaponMax = 3;
+		AllowDuplicateWeapons = false;
+		MaxTotalRewardItems = 32;
+		EnsureRewardPools();
 		RewardLifetimeMinutes = 10;
 		RewardCrateOffset = {-3.0, 0.0, 0.0};
 		FireworkEnabled = true;
@@ -113,11 +130,17 @@ class DZKOTHF_Settings
 		CaptureTimeSeconds = Math.Clamp(CaptureTimeSeconds, 10, 7200);
 		CaptureTickMilliseconds = Math.Clamp(CaptureTickMilliseconds, 250, 5000);
 		CompletionCleanupDelaySeconds = Math.Clamp(CompletionCleanupDelaySeconds, 1, 600);
+		PostWinCleanupDelaySeconds = Math.Clamp(PostWinCleanupDelaySeconds, 5, 600);
+		FireworkDurationSeconds = Math.Clamp(FireworkDurationSeconds, 5, 120);
 		EnemyCount = Math.Clamp(EnemyCount, 0, 100);
 		SpawnRadius = Math.Clamp(SpawnRadius, 10.0, 250.0);
 		SpawnDelaySeconds = Math.Clamp(SpawnDelaySeconds, 0, 300);
 		RewardLifetimeMinutes = Math.Clamp(RewardLifetimeMinutes, 1, 120);
+		RandomWeaponMin = Math.Clamp(RandomWeaponMin, 1, 3);
+		RandomWeaponMax = Math.Clamp(RandomWeaponMax, RandomWeaponMin, 3);
+		MaxTotalRewardItems = Math.Clamp(MaxTotalRewardItems, 8, 100);
 		MusicVolume = Math.Clamp(MusicVolume, 0.0, 0.45);
+		EnsureRewardPools();
 
 		if (!EnemyClassNames || EnemyClassNames.Count() == 0)
 			EnemyClassNames = {"ZmbM_HermitSkinny_Beige"};
@@ -142,6 +165,14 @@ class DZKOTHF_Settings
 			if (rewardItem)
 				rewardItem.Validate();
 		}
+
+		ValidateRewardPool(GuaranteedWeaponPool);
+		ValidateRewardPool(RandomWeaponPool);
+		ValidateRewardPool(MagazineAmmoPool);
+		ValidateRewardPool(AttachmentPool);
+		ValidateRewardPool(MedicalPool);
+		ValidateRewardPool(UtilityPool);
+		ValidateRewardPool(RarePool);
 
 		if (!RewardCrateOffset || RewardCrateOffset.Count() != 3)
 			RewardCrateOffset = {-3.0, 0.0, 0.0};
@@ -191,6 +222,107 @@ class DZKOTHF_Settings
 	vector GetFireworkOffset()
 	{
 		return Vector(FireworkOffset[0], FireworkOffset[1], FireworkOffset[2]);
+	}
+
+	protected void ValidateRewardPool(array<ref DZKOTHF_RewardItemSetting> pool)
+	{
+		if (!pool)
+			return;
+
+		foreach (DZKOTHF_RewardItemSetting entry: pool)
+		{
+			if (entry)
+				entry.Validate();
+		}
+	}
+
+	protected void EnsureRewardPools()
+	{
+		if (!GuaranteedWeaponPool || GuaranteedWeaponPool.Count() == 0)
+		{
+			GuaranteedWeaponPool = {
+				new DZKOTHF_RewardItemSetting("M4A1", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("M16A2", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("AKM", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("AK74", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("SKS", 1, 1, 1, 0.80),
+				new DZKOTHF_RewardItemSetting("Mosin9130", 1, 1, 1, 0.70),
+				new DZKOTHF_RewardItemSetting("Winchester70", 1, 1, 1, 0.70)
+			};
+		}
+
+		if (!RandomWeaponPool || RandomWeaponPool.Count() == 0)
+		{
+			RandomWeaponPool = {
+				new DZKOTHF_RewardItemSetting("M4A1", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("M16A2", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("AKM", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("AK74", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("SKS", 1, 1, 1, 0.90),
+				new DZKOTHF_RewardItemSetting("Mosin9130", 1, 1, 1, 0.80),
+				new DZKOTHF_RewardItemSetting("Winchester70", 1, 1, 1, 0.80),
+				new DZKOTHF_RewardItemSetting("FAL", 1, 1, 1, 0.45),
+				new DZKOTHF_RewardItemSetting("SVD", 1, 1, 1, 0.35),
+				new DZKOTHF_RewardItemSetting("Saiga", 1, 1, 1, 0.50),
+				new DZKOTHF_RewardItemSetting("MP5K", 1, 1, 1, 0.80),
+				new DZKOTHF_RewardItemSetting("UMP45", 1, 1, 1, 0.60)
+			};
+		}
+
+		if (!MagazineAmmoPool || MagazineAmmoPool.Count() == 0)
+		{
+			MagazineAmmoPool = {
+				new DZKOTHF_RewardItemSetting("Mag_STANAG_30Rnd", 1, 20, 30, 1.00),
+				new DZKOTHF_RewardItemSetting("Mag_AKM_30Rnd", 1, 20, 30, 0.90),
+				new DZKOTHF_RewardItemSetting("Mag_AK74_30Rnd", 1, 20, 30, 0.90),
+				new DZKOTHF_RewardItemSetting("Mag_FAL_20Rnd", 1, 12, 20, 0.55),
+				new DZKOTHF_RewardItemSetting("Mag_SVD_10Rnd", 1, 6, 10, 0.45),
+				new DZKOTHF_RewardItemSetting("Ammo_556x45", 1, 20, 40, 1.00),
+				new DZKOTHF_RewardItemSetting("Ammo_762x39", 1, 20, 40, 0.90),
+				new DZKOTHF_RewardItemSetting("Ammo_762x54", 1, 10, 20, 0.70),
+				new DZKOTHF_RewardItemSetting("Ammo_308Win", 1, 10, 20, 0.70)
+			};
+		}
+
+		if (!AttachmentPool || AttachmentPool.Count() == 0)
+		{
+			AttachmentPool = {
+				new DZKOTHF_RewardItemSetting("ACOGOptic", 1, 1, 1, 0.75),
+				new DZKOTHF_RewardItemSetting("KobraOptic", 1, 1, 1, 0.75),
+				new DZKOTHF_RewardItemSetting("PUOptic", 1, 1, 1, 0.70),
+				new DZKOTHF_RewardItemSetting("HuntingOptic", 1, 1, 1, 0.60),
+				new DZKOTHF_RewardItemSetting("PSO1Optic", 1, 1, 1, 0.45)
+			};
+		}
+
+		if (!MedicalPool || MedicalPool.Count() == 0)
+		{
+			MedicalPool = {
+				new DZKOTHF_RewardItemSetting("BandageDressing", 1, 1, 1, 1.00),
+				new DZKOTHF_RewardItemSetting("Morphine", 1, 1, 1, 0.70),
+				new DZKOTHF_RewardItemSetting("Epinephrine", 1, 1, 1, 0.60),
+				new DZKOTHF_RewardItemSetting("SalineBagIV", 1, 1, 1, 0.50)
+			};
+		}
+
+		if (!UtilityPool || UtilityPool.Count() == 0)
+		{
+			UtilityPool = {
+				new DZKOTHF_RewardItemSetting("WeaponCleaningKit", 1, 20, 100, 1.00),
+				new DZKOTHF_RewardItemSetting("Canteen", 1, 50, 100, 0.90),
+				new DZKOTHF_RewardItemSetting("CombatKnife", 1, 1, 1, 0.70),
+				new DZKOTHF_RewardItemSetting("TacticalBaconCan", 1, 50, 100, 0.80)
+			};
+		}
+
+		if (!RarePool || RarePool.Count() == 0)
+		{
+			RarePool = {
+				new DZKOTHF_RewardItemSetting("NVGoggles", 1, 1, 1, 0.35),
+				new DZKOTHF_RewardItemSetting("Rangefinder", 1, 1, 1, 0.45),
+				new DZKOTHF_RewardItemSetting("PlateCarrierVest", 1, 1, 1, 0.55)
+			};
+		}
 	}
 }
 

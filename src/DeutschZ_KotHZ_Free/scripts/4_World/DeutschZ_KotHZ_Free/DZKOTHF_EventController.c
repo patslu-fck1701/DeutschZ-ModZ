@@ -224,10 +224,9 @@ class DZKOTHF_EventController
 			return false;
 
 		m_Session.SetCaptureProgress(1.0);
-		m_Session.SetSmokeState(DZKOTHF_SmokeState.WHITE);
-		DZKOTHF_ClientBridge.BroadcastMarker(m_Settings, false, vector.Zero, "");
+		m_Session.SetSmokeState(DZKOTHF_SmokeState.RED);
 		StopMusicForAll();
-		HideProgressForAll("ABGESCHLOSSEN", 1.0);
+		SyncProgressForPlayers("GEWONNEN", 1.0);
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Capture erfolgreich abgeschlossen.");
 		if (!m_Session.SpawnRewardCrate(m_Settings))
 			DZKOTHF_Log.Error("Capture completed but reward crate creation failed.");
@@ -237,7 +236,8 @@ class DZKOTHF_EventController
 		TransitionTo(DZKOTHF_EventState.REWARD);
 		DZKOTHF_ClientBridge.BroadcastNotify(m_Settings, "Die Belohnungskiste wurde freigegeben.");
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CleanupRewardCrate, m_Settings.RewardLifetimeMinutes * 60000, false);
-		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(BeginCleanup, m_Settings.CompletionCleanupDelaySeconds * 1000, false);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(CleanupWinFirework, m_Settings.FireworkDurationSeconds * 1000, false);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(BeginCleanup, m_Settings.PostWinCleanupDelaySeconds * 1000, false);
 		return true;
 	}
 
@@ -245,6 +245,12 @@ class DZKOTHF_EventController
 	{
 		if (m_Session)
 			m_Session.CleanupRewardCrate("configured lifetime expired");
+	}
+
+	protected void CleanupWinFirework()
+	{
+		if (m_Session)
+			m_Session.CleanupFirework("configured win duration expired");
 	}
 
 	bool BeginCleanup()
@@ -570,6 +576,7 @@ class DZKOTHF_EventController
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(ActivateEvent);
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(SpawnEnemyBlock);
 		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(BeginCleanup);
+		GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(CleanupWinFirework);
 	}
 
 	protected void RemoveScheduledCalls()

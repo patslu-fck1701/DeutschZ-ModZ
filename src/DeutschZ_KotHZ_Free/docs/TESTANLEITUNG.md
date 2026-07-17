@@ -7,8 +7,8 @@
 4. Eventstart pruefen: genau ein Mast, genau eine Fahne, weisser Rauch in der Ankuendigung und gruener Rauch in der aktiven Phase.
 5. Capture mit einem Spieler pruefen. Mit Expansion und `RespectExpansionParties=true` duerfen mehrere Mitglieder derselben Expansion-Gruppe weiter capturen; eine fremde Gruppe beziehungsweise ein ungruppierter Fremder muss Rot/pausiert ausloesen.
 6. Marker, Notify und neutrale Progressbar visuell pruefen; Balken und Prozent muessen dieselbe Capture-Quelle verwenden. Mit Expansion sind 3D-Marker `Skull 3` und Expansion-Notify optional aktiv, ohne Expansion greifen die Vanilla-/RPC-Fallbacks.
-7. Nach Abschluss genau eine RewardCrate, Inhalt, 500 Slots, Nicht-Aufnehmbarkeit und konfigurierte Lifetime pruefen.
-8. Gewinn pruefen: RewardChest bei lokalem Offset `[-3,0,0]`, genau ein `DZKOTHF_FireworksLauncher` bei `[3,0,0]`, Logs `FIREWORK SPAWNED/STARTED/CLEANED`.
+7. Nach Abschluss genau eine RewardCrate, Inhalt, 500 Slots, Nicht-Aufnehmbarkeit und konfigurierte Lifetime pruefen. Erwartet werden genau eine garantierte Vanilla-Waffe, zusaetzlich 1 bis 3 zufaellige Vanilla-Waffen, passende Magazine/Munition sowie gemischte Attachment-, Medizin-, Utility- und seltene Pools. `AllowDuplicateWeapons=false` verhindert gleiche Waffen innerhalb derselben Kiste; `MaxTotalRewardItems` begrenzt die Gesamtmenge.
+8. Gewinn pruefen: Rauch wird sofort rot, RewardChest erscheint bei lokalem Offset `[-3,0,0]`, genau ein `DZKOTHF_FireworksLauncher` bei `[3,0,0]`, Logs `FIREWORK SPAWNED/STARTED/CLEANED`. Mast, Fahne und roter Rauch bleiben fuer `PostWinCleanupDelaySeconds` (Standard 30 Sekunden) bestehen; der Launcher wird nach `FireworkDurationSeconds` (Standard 30 Sekunden) entfernt.
 9. Musik nur im Eventradius, maximal `0.45`; Verlassen, Abbruch, Ende und Cleanup muessen sie stoppen.
 10. Mehrere Eventstarts pruefen: zufaellige Auswahl aus `KotHZLocations.json`, kein unmittelbarer Repeat bei mindestens zwei aktiven Standorten.
 11. Abbruch, Abschluss, Disconnect und Serverrestart auf Marker-, UI-, Gegner-, Smoke-, Mast-, Fahnen-, Feuerwerk-, Timer- und Objekt-Cleanup pruefen.

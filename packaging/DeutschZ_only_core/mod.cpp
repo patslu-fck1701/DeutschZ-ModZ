@@ -1,0 +1,10 @@
+name = "DeutschZ only core";
+picture = "";
+logo = "";
+logoSmall = "";
+logoOver = "";
+tooltip = "DeutschZ only core";
+overview = "DeutschZ client core package: MenuMusic V2 Test, KotHZ Free and UiAdminZ.";
+action = "https://discord.gg/FHzZ7BykFk";
+author = "DeutschZ";
+version = "2026.07.17";

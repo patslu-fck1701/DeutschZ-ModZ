@@ -6,18 +6,78 @@
   "CaptureRadius": 25.0,
   "CaptureTimeSeconds": 300,
   "CaptureTickMilliseconds": 1000,
-  "CompletionCleanupDelaySeconds": 10,
+  "CompletionCleanupDelaySeconds": 30,
+  "PostWinCleanupDelaySeconds": 30,
+  "FireworkDurationSeconds": 30,
   "EnemyCount": 15,
   "EnemyClassNames": ["ZmbM_HermitSkinny_Beige", "ZmbM_FarmerFat_Blue", "ZmbF_CitizenANormal_Beige", "ZmbM_CitizenASkinny_Blue", "ZmbF_CitizenBSkinny", "ZmbM_HikerSkinny_Green"],
   "SpawnRadius": 40.0,
   "SpawnDelaySeconds": 2,
   "RewardCrateClass": "DZKOTHF_RewardCrate",
   "RewardItems": [
-    {"Type": "SKS", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.35},
-    {"Type": "BandageDressing", "Count": 3, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "BandageDressing", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
     {"Type": "Canteen", "Count": 1, "MinQuantity": 50, "MaxQuantity": 100, "Chance": 0.8},
-    {"Type": "TacticalBaconCan", "Count": 2, "MinQuantity": 50, "MaxQuantity": 100, "Chance": 0.9}
+    {"Type": "TacticalBaconCan", "Count": 1, "MinQuantity": 50, "MaxQuantity": 100, "Chance": 0.9}
   ],
+  "GuaranteedWeaponPool": [
+    {"Type": "M4A1", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "M16A2", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "AKM", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "AK74", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "SKS", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.8},
+    {"Type": "Mosin9130", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.7},
+    {"Type": "Winchester70", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.7}
+  ],
+  "RandomWeaponPool": [
+    {"Type": "M4A1", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "M16A2", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "AKM", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "AK74", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "SKS", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.9},
+    {"Type": "Mosin9130", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.8},
+    {"Type": "Winchester70", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.8},
+    {"Type": "FAL", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.45},
+    {"Type": "SVD", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.35},
+    {"Type": "Saiga", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.5},
+    {"Type": "MP5K", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.8},
+    {"Type": "UMP45", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.6}
+  ],
+  "MagazineAmmoPool": [
+    {"Type": "Mag_STANAG_30Rnd", "Count": 1, "MinQuantity": 20, "MaxQuantity": 30, "Chance": 1.0},
+    {"Type": "Mag_AKM_30Rnd", "Count": 1, "MinQuantity": 20, "MaxQuantity": 30, "Chance": 0.9},
+    {"Type": "Mag_AK74_30Rnd", "Count": 1, "MinQuantity": 20, "MaxQuantity": 30, "Chance": 0.9},
+    {"Type": "Ammo_556x45", "Count": 1, "MinQuantity": 20, "MaxQuantity": 40, "Chance": 1.0},
+    {"Type": "Ammo_762x39", "Count": 1, "MinQuantity": 20, "MaxQuantity": 40, "Chance": 0.9},
+    {"Type": "Ammo_762x54", "Count": 1, "MinQuantity": 10, "MaxQuantity": 20, "Chance": 0.7},
+    {"Type": "Ammo_308Win", "Count": 1, "MinQuantity": 10, "MaxQuantity": 20, "Chance": 0.7}
+  ],
+  "AttachmentPool": [
+    {"Type": "ACOGOptic", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.75},
+    {"Type": "KobraOptic", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.75},
+    {"Type": "PUOptic", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.7},
+    {"Type": "HuntingOptic", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.6}
+  ],
+  "MedicalPool": [
+    {"Type": "BandageDressing", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 1.0},
+    {"Type": "Morphine", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.7},
+    {"Type": "Epinephrine", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.6},
+    {"Type": "SalineBagIV", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.5}
+  ],
+  "UtilityPool": [
+    {"Type": "WeaponCleaningKit", "Count": 1, "MinQuantity": 20, "MaxQuantity": 100, "Chance": 1.0},
+    {"Type": "Canteen", "Count": 1, "MinQuantity": 50, "MaxQuantity": 100, "Chance": 0.9},
+    {"Type": "CombatKnife", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.7},
+    {"Type": "TacticalBaconCan", "Count": 1, "MinQuantity": 50, "MaxQuantity": 100, "Chance": 0.8}
+  ],
+  "RarePool": [
+    {"Type": "NVGoggles", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.35},
+    {"Type": "Rangefinder", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.45},
+    {"Type": "PlateCarrierVest", "Count": 1, "MinQuantity": 1, "MaxQuantity": 1, "Chance": 0.55}
+  ],
+  "RandomWeaponMin": 1,
+  "RandomWeaponMax": 3,
+  "AllowDuplicateWeapons": false,
+  "MaxTotalRewardItems": 32,
   "RewardLifetimeMinutes": 10,
   "RewardCrateOffset": [-3.0, 0.0, 0.0],
   "FireworkEnabled": true,
