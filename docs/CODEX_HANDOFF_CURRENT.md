@@ -20,6 +20,7 @@ Synchronisiert: 17.07.2026 02:05 CEST
 ## Nachweise
 
 - Settings-Restarttest: zwei echte Starts im Preset `kothz_free_compile`; SHA-256 und Zeitstempel der gueltigen Config blieben bytegenau unveraendert, die Standard-Admin-ID blieb enthalten.
+- Defekt-Test: absichtlich unlesbare JSON wurde als `KotHZSettings.corrupt.backup.json` bytegetreu gesichert und danach mit gueltigen Defaults samt Standard-Admin-ID neu erzeugt; das isolierte Testprofil wurde anschliessend sauber wiederhergestellt.
 - Frische Logs: `script_2026-07-17_02-01-20.log` und `DayZServer_x64_2026-07-17_02-01-09.RPT`; Script-Compile und Missionstart ohne KotHZ-Fehler.
 - Preflight und Clean Build: PASS
 - PBO-Inhalt: drei PAAs, Locations-Script und acht Musiktracks vorhanden
