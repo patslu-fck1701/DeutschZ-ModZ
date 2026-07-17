@@ -1,5 +1,102 @@
 # CODEX HANDOFF CURRENT
 
+## MenuZ V2 Quick Overhaul / only_core Sync - 17.07.2026 21:48 CEST
+
+- Letzter aktualisierter Ausgabeordner: `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic_V2_Test`
+- Zusaetzlich atomar aktualisiert: `E:\DeutschZ\DeutschZServer\@DeutschZ_only_core`
+- Source/Branch: `E:\DeutschZ\DeutschZ-Worktrees\MenuV2Quick`, `codex/menuz-v2-quick-overhaul-20260717`
+- MenuZ V1 blieb unangetastet.
+- UI-Basis: vorherige funktionierende MenuZ-V2-Version; Layout und Styling wurden auf das neue PAA-Pack umgestellt.
+- Assetquelle: `E:\DeutschZ\PAAs\DeutschZ_MainMenu_UI_Pack_v2`; nur vorhandene PAA-Dateien verwendet, keine Konvertierung.
+- Innenflaechen neutral schwarz; Giftgruen nur fuer Rahmen, Hover, Aktivstatus und kleine technische Akzente.
+- Leaderboard mit Rang, Name, Kills und Punkten als Platzhalter-Schnittstelle vorbereitet.
+- Musiksteuerung: Previous, Play/Pause, Next und Mute eindeutig getrennt; Zustand und Position werden erhalten.
+- Clean Build: PASS, 483 PBO-Dateien.
+- PBO-Inhaltspruefung: PASS.
+- Signatur: PASS mit `DeutschZ.bikey`.
+- DayZ-Labs-Preset `deutschz_menuz_v2_compile`: Serverstart, Script-Compile, Missionstart und mehr als zwei Minuten stabil: PASS.
+- Client-/Sichttest: PATRICK_REQUIRED.
+- Synchronisiert: 17.07.2026 21:48 CEST.
+
+### MenuZ-V2-Ausgabe
+
+- PBO: `Addons/DeutschZ_MenuMusic_V2_Test.pbo`
+- BISIGN: `Addons/DeutschZ_MenuMusic_V2_Test.pbo.DeutschZ.bisign`
+- BIKEY: `keys/DeutschZ.bikey`
+- `mod.cpp`: JA
+- `meta.cpp`: JA
+- Settings: `Settings/MenuZSettings.json`
+- Dokumentation: `TESTANLEITUNG.md`, `MENUZ_V2_USED_PAA.md`
+- PBO SHA-256: `F1AD64ACF57B6F69345C1316907BF6A0951387D9592D9E96CEC628B070E3E660`
+- BIKEY SHA-256: `429C0D163341BC3A56CF8B88A28849AEBE949026B0D4A24D79056736DCD3328D`
+
+### only_core-Synchronisierung
+
+`@DeutschZ_only_core` wurde nicht bereinigt oder neu zusammengesetzt. Der komplette vorhandene Bestand wurde bytegleich erhalten; ausschliesslich MenuZ V2, dessen Signatur, der DeutschZ-Key sowie `mod.cpp`, `meta.cpp` und die Testanleitung wurden eingesetzt beziehungsweise aktualisiert. Vollstaendiger aktiver Dateibestand:
+
+```text
+addons/Auto_Transfer_Items_By_Category.pbo
+addons/Auto_Transfer_Items_By_Category.pbo.Enclave.bisign
+addons/Axiao_VPPCheck_Items.pbo
+addons/Axiao_VPPCheck_Items.pbo.Axiao.bisign
+addons/COT_Override.pbo
+addons/COT_Override.pbo.DevCarlosKey.bisign
+addons/DeutschZ_KotHZ_Free.pbo
+addons/DeutschZ_KotHZ_Free.pbo.DeutschZ.bisign
+addons/DeutschZ_MenuMusic_V2_Test.pbo
+addons/DeutschZ_MenuMusic_V2_Test.pbo.DeutschZ.bisign
+addons/DeutschZ_UiAdminZ.pbo
+addons/DeutschZ_UiAdminZ.pbo.DeutschZ.bisign
+addons/HB_FlipVehicle.pbo
+addons/HB_FlipVehicle.pbo.TestZ.bisign
+addons/InventoryInCar.pbo
+addons/InventoryInCar.pbo.TestZ.bisign
+addons/JGC_G63W463.pbo
+addons/JGC_G63W463.pbo.TestZ.bisign
+addons/MB_Batteries.pbo
+addons/MB_Batteries.pbo.TestZ.bisign
+addons/MBM_BMWAlpina.pbo
+addons/MBM_BMWAlpina.pbo.TestZ.bisign
+addons/MBM_CanAM_Maverick.pbo
+addons/MBM_CanAM_Maverick.pbo.TestZ.bisign
+addons/MBM_DodgeRam.pbo
+addons/MBM_DodgeRam.pbo.TestZ.bisign
+addons/MBM_DuneBuggy.pbo
+addons/MBM_DuneBuggy.pbo.TestZ.bisign
+addons/MBM_JLTV.pbo
+addons/MBM_JLTV.pbo.TestZ.bisign
+addons/MBM_MonteCarloSS.pbo
+addons/MBM_MonteCarloSS.pbo.TestZ.bisign
+addons/MBM_RamRebel.pbo
+addons/MBM_RamRebel.pbo.TestZ.bisign
+addons/ZenCOT.pbo
+addons/ZenCOT.pbo.Zenarchist.bisign
+extra/stringtable.csv
+extra/types.xml
+keys/5Dimencao.bikey
+keys/Axiao.bikey
+keys/CZCookup.bikey
+keys/DaMadesTx_Public_Key.bikey
+keys/DeutschZ.bikey
+keys/Enclave.bikey
+keys/Indra.bikey
+keys/MBMv2.bikey
+keys/MBMv3.bikey
+keys/mebrad.bikey
+keys/TestZ.bikey
+keys/Zenarchist.bikey
+meta.cpp
+mod.cpp
+TESTANLEITUNG.md
+```
+
+### Installation und Sichttest
+
+1. Fuer den Einzeltest `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic_V2_Test` laden.
+2. Fuer den gebuendelten Serverstand nur `@DeutschZ_only_core` laden und MenuZ V2 nicht zusaetzlich separat eintragen.
+3. Hauptmenue bei 1920x1080 oeffnen und schwarze Panelinnenflaechen, Hover-/Aktivzustand, Navigation, Eventkarten, Leaderboard und Musikbuttons pruefen.
+4. Bei einem sichtbaren Fehler Screenshot sowie frische Client-RPT-/Scriptlogs liefern.
+
 ## RUSForma / only_core / KotHZ Finalfix - 17.07.2026 18:57 CEST
 
 - Letzter aktualisierter Ausgabeordner: `E:\DeutschZ\DeutschZServer\@DeutschZ_only_core`

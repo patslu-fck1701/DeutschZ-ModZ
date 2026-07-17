@@ -7,7 +7,7 @@ class DZKOTHG_UITheme
 
 	static int BrandGreen()
 	{
-		return ARGB(255, 83, 190, 38);
+		return ARGB(255, 168, 255, 0);
 	}
 
 	static int PrimaryText()

@@ -28,7 +28,12 @@ modded class MainMenu
 	protected Widget m_DZKOTHG_NavProfile;
 	protected Widget m_DZKOTHG_NavExit;
 	protected Widget m_DZKOTHG_MusicPlay;
+	protected Widget m_DZKOTHG_MusicPrevious;
 	protected Widget m_DZKOTHG_MusicNext;
+	protected Widget m_DZKOTHG_MusicMute;
+	protected TextWidget m_DZKOTHG_MusicTitle;
+	protected TextWidget m_DZKOTHG_MusicState;
+	protected float m_DZKOTHG_MusicUiTimer;
 
 	override Widget Init()
 	{
@@ -55,6 +60,15 @@ modded class MainMenu
 
 		DZKOTHG_BootVanillaMenuState();
 		DZKOTHG_UpdateCustomText();
+		DZKOTHG_UpdateMusicUi();
+		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavServer, "normal");
+		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavRules, "normal");
+		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavSupport, "normal");
+		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavEvents, "normal");
+		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavShop, "normal");
+		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavSettings, "normal");
+		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavProfile, "normal");
+		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavExit, "normal");
 		DZKOTHG_SetNavButtonState(m_DZKOTHG_NavHome, "active");
 
 		Print("[DZKOTHG][CLIENT] MainMenu Init OK");
@@ -96,7 +110,11 @@ modded class MainMenu
 		m_DZKOTHG_NavProfile     = layoutRoot.FindAnyWidget("dz_nav_profile");
 		m_DZKOTHG_NavExit        = layoutRoot.FindAnyWidget("dz_nav_exit");
 		m_DZKOTHG_MusicPlay      = layoutRoot.FindAnyWidget("dz_music_play");
+		m_DZKOTHG_MusicPrevious  = layoutRoot.FindAnyWidget("dz_music_prev");
 		m_DZKOTHG_MusicNext      = layoutRoot.FindAnyWidget("dz_music_next");
+		m_DZKOTHG_MusicMute      = layoutRoot.FindAnyWidget("dz_music_mute");
+		m_DZKOTHG_MusicTitle     = TextWidget.Cast(layoutRoot.FindAnyWidget("dz_music_title"));
+		m_DZKOTHG_MusicState     = TextWidget.Cast(layoutRoot.FindAnyWidget("dz_music_state"));
 
 		if (m_DZKOTHG_Tagline)
 			m_DZKOTHG_Tagline.SetColor(DZKOTHG_UITheme.PrimaryText());
@@ -244,6 +262,13 @@ modded class MainMenu
 			m_DZKOTHG_ContentTimer = 0.0;
 			DZKOTHG_UpdateCustomText();
 		}
+
+		m_DZKOTHG_MusicUiTimer += timeslice;
+		if (m_DZKOTHG_MusicUiTimer >= 0.5)
+		{
+			m_DZKOTHG_MusicUiTimer = 0.0;
+			DZKOTHG_UpdateMusicUi();
+		}
 	}
 
 	protected void DZKOTHG_ConnectToServer()
@@ -272,10 +297,7 @@ modded class MainMenu
 	{
 		if (!button)
 			return;
-		string state = "normal";
-		if (hovered)
-			state = "hover";
-		DZKOTHG_SetMenuImage("dz_nav_" + name + "_icon", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_" + name + "_" + state + ".paa");
+		DZKOTHG_SetMenuImage("dz_nav_" + name + "_icon", DZMV2_UIAssets.Icon(name, hovered));
 	}
 
 	protected void DZKOTHG_SetNavButtonState(Widget button, string state)
@@ -306,31 +328,77 @@ modded class MainMenu
 		string widgetName = "dz_nav_" + name + "_icon";
 		if (button == m_DZKOTHG_NavExit)
 			widgetName = "dz_nav_exit_icon";
-		DZKOTHG_SetMenuImage(widgetName, "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_" + name + "_" + state + ".paa");
+		DZKOTHG_SetMenuImage(widgetName, DZMV2_UIAssets.Icon(name, state != "normal"));
 	}
 
 	protected void DZKOTHG_SetMainButtonState(Widget button, string state)
 	{
+		string buttonImage = DZMV2_UIAssets.Button(state);
 		if (button == m_Play)
-			DZKOTHG_SetMenuImage("play_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/buttons/play_now_" + state + ".paa");
+			DZKOTHG_SetMenuImage("play_image", buttonImage);
 		else if (button == m_ChooseServer)
-			DZKOTHG_SetMenuImage("choose_server_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/buttons/server_suchen_" + state + ".paa");
+			DZKOTHG_SetMenuImage("choose_server_image", buttonImage);
 		else if (button == m_CustomizeCharacter)
-			DZKOTHG_SetMenuImage("customize_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/buttons/charakter_" + state + ".paa");
+			DZKOTHG_SetMenuImage("customize_image", buttonImage);
 		else if (button == m_DZKOTHG_VoteButton)
-			DZKOTHG_SetMenuImage("vote_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/buttons/vote_" + state + ".paa");
+			DZKOTHG_SetMenuImage("vote_image", buttonImage);
 		else if (button == m_DZKOTHG_DiscordButton)
-			DZKOTHG_SetMenuImage("discord_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/buttons/discord_" + state + ".paa");
+			DZKOTHG_SetMenuImage("discord_image", buttonImage);
 		else if (button == m_MessageButton)
-			DZKOTHG_SetMenuImage("website_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/buttons/website_" + state + ".paa");
+			DZKOTHG_SetMenuImage("website_image", buttonImage);
 	}
 
 	protected void DZKOTHG_SetMusicControlState(Widget button, string state)
 	{
-		if (button == m_DZKOTHG_MusicPlay)
-			DZKOTHG_SetMenuImage("dz_music_play_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/music/play_" + state + ".paa");
+		bool highlighted = state != "normal";
+		if (button == m_DZKOTHG_MusicPrevious)
+			DZKOTHG_SetMenuImage("dz_music_prev_image", DZMV2_UIAssets.Icon("prev", highlighted));
+		else if (button == m_DZKOTHG_MusicPlay)
+		{
+			string playIcon = "pause";
+			DynamicMusicPlayer player = DZKOTHG_GetMusicPlayer();
+			if (player && player.DZMV2_IsPaused())
+				playIcon = "play";
+			DZKOTHG_SetMenuImage("dz_music_play_image", DZMV2_UIAssets.Icon(playIcon, highlighted));
+		}
 		else if (button == m_DZKOTHG_MusicNext)
-			DZKOTHG_SetMenuImage("dz_music_next_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/music/next_" + state + ".paa");
+			DZKOTHG_SetMenuImage("dz_music_next_image", DZMV2_UIAssets.Icon("next", highlighted));
+		else if (button == m_DZKOTHG_MusicMute)
+			DZKOTHG_SetMenuImage("dz_music_mute_image", DZMV2_UIAssets.Icon("volume", highlighted));
+	}
+
+	protected DynamicMusicPlayer DZKOTHG_GetMusicPlayer()
+	{
+		if (!GetGame() || !GetGame().GetMission())
+			return null;
+
+		return GetGame().GetMission().GetDynamicMusicPlayer();
+	}
+
+	protected void DZKOTHG_UpdateMusicUi()
+	{
+		DynamicMusicPlayer player = DZKOTHG_GetMusicPlayer();
+		if (!player)
+			return;
+
+		if (m_DZKOTHG_MusicTitle)
+			m_DZKOTHG_MusicTitle.SetText(player.DZMV2_GetCurrentTrackName());
+
+		if (m_DZKOTHG_MusicState)
+		{
+			string stateText = "WIEDERGABE | MAX 66%";
+			if (player.DZMV2_IsPaused())
+				stateText = "PAUSE | MAX 66%";
+			if (player.DZMV2_IsMuted())
+				stateText = stateText + " | STUMM";
+			m_DZKOTHG_MusicState.SetText(stateText);
+		}
+
+		string playIcon = "pause";
+		if (player.DZMV2_IsPaused())
+			playIcon = "play";
+		DZKOTHG_SetMenuImage("dz_music_play_image", DZMV2_UIAssets.Icon(playIcon, false));
+		DZKOTHG_SetMenuImage("dz_music_mute_image", DZMV2_UIAssets.Icon("volume", player.DZMV2_IsMuted()));
 	}
 
 	protected void DZKOTHG_RequestMenuMusic(bool fadeCurrent)
@@ -359,14 +427,14 @@ modded class MainMenu
 		else if (w == m_DZKOTHG_VoteButton)
 			DZKOTHG_SetMainButtonState(w, "hover");
 		else if (w == m_SettingsButton)
-			DZKOTHG_SetMenuImage("settings_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_settings_hover.paa");
+			DZKOTHG_SetMenuImage("settings_image", DZMV2_UIAssets.Icon("options", true));
 		else if (w == m_Exit)
-			DZKOTHG_SetMenuImage("exit_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_power_hover.paa");
+			DZKOTHG_SetMenuImage("exit_image", DZMV2_UIAssets.Icon("power", true));
 		else if (w == m_DZKOTHG_DiscordButton)
 			DZKOTHG_SetMainButtonState(w, "hover");
 		else if (w == m_MessageButton)
 			DZKOTHG_SetMainButtonState(w, "hover");
-		else if (w == m_DZKOTHG_MusicPlay || w == m_DZKOTHG_MusicNext)
+		else if (w == m_DZKOTHG_MusicPrevious || w == m_DZKOTHG_MusicPlay || w == m_DZKOTHG_MusicNext || w == m_DZKOTHG_MusicMute)
 			DZKOTHG_SetMusicControlState(w, "hover");
 		else if (w == m_PrevCharacter)
 			DZKOTHG_SetMenuImage("prev_img", "DeutschZ_MenuMusic_V2_Test/gui/menu_assets/arrows/19_arrow_left_hover.paa");
@@ -389,7 +457,7 @@ modded class MainMenu
 		else if (w == m_DZKOTHG_NavProfile)
 			DZKOTHG_SetNavIcon(w, "profile", true);
 		else if (w == m_DZKOTHG_NavExit)
-			DZKOTHG_SetMenuImage("dz_nav_exit_icon", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_power_hover.paa");
+			DZKOTHG_SetMenuImage("dz_nav_exit_icon", DZMV2_UIAssets.Icon("power", true));
 
 		return super.OnMouseEnter(w, x, y);
 	}
@@ -405,14 +473,14 @@ modded class MainMenu
 		else if (w == m_DZKOTHG_VoteButton)
 			DZKOTHG_SetMainButtonState(w, "normal");
 		else if (w == m_SettingsButton)
-			DZKOTHG_SetMenuImage("settings_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_settings_normal.paa");
+			DZKOTHG_SetMenuImage("settings_image", DZMV2_UIAssets.Icon("options", false));
 		else if (w == m_Exit)
-			DZKOTHG_SetMenuImage("exit_image", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_power_normal.paa");
+			DZKOTHG_SetMenuImage("exit_image", DZMV2_UIAssets.Icon("power", false));
 		else if (w == m_DZKOTHG_DiscordButton)
 			DZKOTHG_SetMainButtonState(w, "normal");
 		else if (w == m_MessageButton)
 			DZKOTHG_SetMainButtonState(w, "normal");
-		else if (w == m_DZKOTHG_MusicPlay || w == m_DZKOTHG_MusicNext)
+		else if (w == m_DZKOTHG_MusicPrevious || w == m_DZKOTHG_MusicPlay || w == m_DZKOTHG_MusicNext || w == m_DZKOTHG_MusicMute)
 			DZKOTHG_SetMusicControlState(w, "normal");
 		else if (w == m_PrevCharacter)
 			DZKOTHG_SetMenuImage("prev_img", "DeutschZ_MenuMusic_V2_Test/gui/menu_assets/arrows/19_arrow_left_normal.paa");
@@ -435,7 +503,7 @@ modded class MainMenu
 		else if (w == m_DZKOTHG_NavProfile)
 			DZKOTHG_SetNavIcon(w, "profile", false);
 		else if (w == m_DZKOTHG_NavExit)
-			DZKOTHG_SetMenuImage("dz_nav_exit_icon", "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_power_normal.paa");
+			DZKOTHG_SetMenuImage("dz_nav_exit_icon", DZMV2_UIAssets.Icon("power", false));
 
 		return super.OnMouseLeave(w, enterW, x, y);
 	}
@@ -565,15 +633,39 @@ modded class MainMenu
 			return true;
 		}
 
+		if (w == m_DZKOTHG_MusicPrevious)
+		{
+			DynamicMusicPlayer previousPlayer = DZKOTHG_GetMusicPlayer();
+			if (previousPlayer)
+				previousPlayer.DZMV2_PlayPrevious();
+			DZKOTHG_UpdateMusicUi();
+			return true;
+		}
+
 		if (w == m_DZKOTHG_MusicPlay)
 		{
-			DZKOTHG_RequestMenuMusic(false);
+			DynamicMusicPlayer playPlayer = DZKOTHG_GetMusicPlayer();
+			if (playPlayer)
+				playPlayer.DZMV2_TogglePause();
+			DZKOTHG_UpdateMusicUi();
 			return true;
 		}
 
 		if (w == m_DZKOTHG_MusicNext)
 		{
-			DZKOTHG_RequestMenuMusic(true);
+			DynamicMusicPlayer nextPlayer = DZKOTHG_GetMusicPlayer();
+			if (nextPlayer)
+				nextPlayer.DZMV2_PlayNext();
+			DZKOTHG_UpdateMusicUi();
+			return true;
+		}
+
+		if (w == m_DZKOTHG_MusicMute)
+		{
+			DynamicMusicPlayer mutePlayer = DZKOTHG_GetMusicPlayer();
+			if (mutePlayer)
+				mutePlayer.DZMV2_ToggleMute();
+			DZKOTHG_UpdateMusicUi();
 			return true;
 		}
 
@@ -642,7 +734,7 @@ modded class MainMenu
 		if (w == m_Play || w == m_ChooseServer || w == m_CustomizeCharacter || w == m_TutorialButton || w == m_MessageButton || w == m_SettingsButton)
 			return true;
 
-		if (w == m_DZKOTHG_VoteButton || w == m_DZKOTHG_DiscordButton || w == m_Exit || w == m_PlayVideo || w == m_Feedback || w == m_DZKOTHG_MusicPlay || w == m_DZKOTHG_MusicNext)
+		if (w == m_DZKOTHG_VoteButton || w == m_DZKOTHG_DiscordButton || w == m_Exit || w == m_PlayVideo || w == m_Feedback || w == m_DZKOTHG_MusicPrevious || w == m_DZKOTHG_MusicPlay || w == m_DZKOTHG_MusicNext || w == m_DZKOTHG_MusicMute)
 			return true;
 
 		if (w == m_NewsMain || w == m_NewsSec1 || w == m_NewsSec2 || w == m_PrevCharacter || w == m_NextCharacter)
