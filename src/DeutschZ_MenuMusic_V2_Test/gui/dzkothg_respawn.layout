@@ -1,0 +1,282 @@
+FrameWidgetClass DZSPAWN_Root {
+ position 0 0
+ size 1 1
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ priority 960
+ {
+  ImageWidgetClass DZSPAWN_Map {
+   visible 0
+   ignorepointer 1
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/chernarusplus_dark_2048.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  PanelWidgetClass DZSPAWN_Darkener {
+   ignorepointer 1
+   color 0 0 0 0.82
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style blank
+  }
+  ImageWidgetClass DZSPAWN_OuterFrame {
+   visible 0
+   ignorepointer 1
+   position 0 0
+   size 1 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/02_frames/deutschz_map_frame_2048_transparent.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass DZSPAWN_TitlePanel {
+   ignorepointer 1
+   position 0.025 0.022
+   size 0.62 0.09
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/03_spawnselection_panels/top_title_spawnselection.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass DZSPAWN_Title {
+   ignorepointer 1
+   position 0.040 0.030
+   size 0.55 0.042
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text "DEUTSCHZ RESPAWN"
+   font "gui/fonts/sdf_MetronBook30"
+   "text halign" left
+   "text valign" center
+   color 0.94 0.96 0.92 1
+  }
+  TextWidgetClass DZSPAWN_Subtitle {
+   ignorepointer 1
+   position 0.040 0.073
+   size 0.58 0.024
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text "SERVER WAEHLT DEN SICHEREN SPAWN  |  KEINE FAKE-MAP"
+   font "gui/fonts/sdf_MetronBook18"
+   "text halign" left
+   "text valign" center
+   color 0.52 0.94 0.08 1
+  }
+  ImageWidgetClass DZSPAWN_LeftPanel {
+   ignorepointer 1
+   position 0.025 0.12
+   size 0.23 0.68
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/03_spawnselection_panels/spawnselection_left_panel_blank.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass DZSPAWN_LeftTitle {
+   ignorepointer 1
+   position 0.043 0.135
+   size 0.19 0.036
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text "SPAWNSELECTION"
+   font "gui/fonts/sdf_MetronBook24"
+   "text halign" left
+   "text valign" center
+   color 0.52 0.94 0.08 1
+  }
+  TextWidgetClass DZSPAWN_LeftHint {
+   ignorepointer 1
+   position 0.043 0.172
+   size 0.19 0.025
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   text "Waehle eine Zone."
+   font "gui/fonts/sdf_MetronBook18"
+   "text halign" left
+   "text valign" center
+   color 0.82 0.85 0.78 1
+  }
+  ButtonWidgetClass spawn_mode_random {
+   userID 201
+   position 0.045 0.215
+   size 0.19 0.060
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Empty
+   {
+    ImageWidgetClass spawn_mode_random_image { ignorepointer 1 position 0 0 size 1 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/02_buttons_text/button_wide_empty_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    ImageWidgetClass spawn_mode_random_icon { ignorepointer 1 position 0.04 0.20 size 0.12 0.60 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/07_icons/icon_random_green_256.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    TextWidgetClass spawn_mode_random_label { ignorepointer 1 position 0.20 0 size 0.75 1 text "ZUFALL" font "gui/fonts/sdf_MetronBook24" "text halign" center "text valign" center color 0.52 0.94 0.08 1 }
+   }
+  }
+  ButtonWidgetClass spawn_mode_coast {
+   userID 202
+   position 0.045 0.282
+   size 0.19 0.060
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Empty
+   {
+    ImageWidgetClass spawn_mode_coast_image { ignorepointer 1 position 0 0 size 1 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/02_buttons_text/button_wide_empty_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    ImageWidgetClass spawn_mode_coast_icon { ignorepointer 1 position 0.04 0.20 size 0.12 0.60 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/07_icons/icon_coast_green_256.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    TextWidgetClass spawn_mode_coast_label { ignorepointer 1 position 0.20 0 size 0.75 1 text "KUESTE" font "gui/fonts/sdf_MetronBook24" "text halign" center "text valign" center color 0.52 0.94 0.08 1 }
+   }
+  }
+  ButtonWidgetClass spawn_mode_inland {
+   userID 203
+   position 0.045 0.349
+   size 0.19 0.060
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Empty
+   {
+    ImageWidgetClass spawn_mode_inland_image { ignorepointer 1 position 0 0 size 1 1 color 0.45 0.45 0.45 0.75 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/02_buttons_text/button_wide_empty_disabled.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    ImageWidgetClass spawn_mode_inland_icon { ignorepointer 1 position 0.04 0.20 size 0.12 0.60 color 0.45 0.45 0.45 0.75 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/07_icons/icon_inland_green_256.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    TextWidgetClass spawn_mode_inland_label { ignorepointer 1 position 0.20 0 size 0.75 1 text "INLAND" font "gui/fonts/sdf_MetronBook24" "text halign" center "text valign" center color 0.48 0.52 0.44 1 }
+   }
+  }
+  ButtonWidgetClass spawn_mode_trader {
+   userID 204
+   position 0.045 0.416
+   size 0.19 0.060
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Empty
+   {
+    ImageWidgetClass spawn_mode_trader_image { ignorepointer 1 position 0 0 size 1 1 color 0.45 0.45 0.45 0.75 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/02_buttons_text/button_wide_empty_disabled.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    ImageWidgetClass spawn_mode_trader_icon { ignorepointer 1 position 0.04 0.20 size 0.12 0.60 color 0.45 0.45 0.45 0.75 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/07_icons/icon_trader_green_256.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    TextWidgetClass spawn_mode_trader_label { ignorepointer 1 position 0.20 0 size 0.75 1 text "TRADER" font "gui/fonts/sdf_MetronBook24" "text halign" center "text valign" center color 0.48 0.52 0.44 1 }
+   }
+  }
+  ButtonWidgetClass spawn_mode_safe {
+   userID 205
+   position 0.045 0.483
+   size 0.19 0.060
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Empty
+   {
+    ImageWidgetClass spawn_mode_safe_image { ignorepointer 1 position 0 0 size 1 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/02_buttons_text/button_wide_empty_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    ImageWidgetClass spawn_mode_safe_icon { ignorepointer 1 position 0.04 0.20 size 0.12 0.60 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/07_icons/icon_safe_green_256.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    TextWidgetClass spawn_mode_safe_label { ignorepointer 1 position 0.20 0 size 0.75 1 text "SAFE RANDOM" font "gui/fonts/sdf_MetronBook24" "text halign" center "text valign" center color 0.52 0.94 0.08 1 }
+   }
+  }
+  ButtonWidgetClass spawn_loadout {
+   userID 206
+   position 0.045 0.550
+   size 0.19 0.052
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Empty
+   {
+    ImageWidgetClass spawn_loadout_image { ignorepointer 1 position 0 0 size 1 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/02_buttons_text/button_wide_empty_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    TextWidgetClass spawn_loadout_label { ignorepointer 1 position 0 0 size 1 1 text "AUSRUESTUNG: BASIC" font "gui/fonts/sdf_MetronBook18" "text halign" center "text valign" center color 0.82 0.90 0.76 1 }
+   }
+  }
+  TextWidgetClass DZSPAWN_ModeLabel { ignorepointer 1 position 0.047 0.625 size 0.18 0.022 text "MODUS" font "gui/fonts/sdf_MetronBook18" color 0.52 0.94 0.08 1 }
+  TextWidgetClass DZSPAWN_ModeValue { ignorepointer 1 position 0.047 0.648 size 0.18 0.028 text "SAFE_RANDOM" font "gui/fonts/sdf_MetronBook18" color 0.82 0.85 0.78 1 }
+  TextWidgetClass DZSPAWN_CooldownLabel { ignorepointer 1 position 0.047 0.684 size 0.18 0.022 text "COOLDOWN" font "gui/fonts/sdf_MetronBook18" color 0.52 0.94 0.08 1 }
+  TextWidgetClass DZSPAWN_CooldownValue { ignorepointer 1 position 0.047 0.707 size 0.18 0.028 text "BEREIT" font "gui/fonts/sdf_MetronBook18" color 0.82 0.85 0.78 1 }
+  TextWidgetClass DZSPAWN_StatusLabel { ignorepointer 1 position 0.047 0.743 size 0.18 0.022 text "STATUS" font "gui/fonts/sdf_MetronBook18" color 0.52 0.94 0.08 1 }
+  TextWidgetClass DZSPAWN_StatusValue { ignorepointer 1 position 0.047 0.766 size 0.18 0.028 text "BEREIT" font "gui/fonts/sdf_MetronBook18" color 0.82 0.85 0.78 1 }
+
+  ImageWidgetClass DZSPAWN_MarkerWest { visible 0 ignorepointer 1 position 0.30 0.66 size 0.035 0.062 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/06_markers/marker_coast_normal_64.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+  ImageWidgetClass DZSPAWN_MarkerSouth { visible 0 ignorepointer 1 position 0.47 0.70 size 0.035 0.062 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/06_markers/marker_coast_normal_64.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+  ImageWidgetClass DZSPAWN_MarkerEast { visible 0 ignorepointer 1 position 0.73 0.50 size 0.035 0.062 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/06_markers/marker_coast_normal_64.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+  ImageWidgetClass DZSPAWN_MarkerNorthEast { visible 0 ignorepointer 1 position 0.78 0.23 size 0.035 0.062 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/06_markers/marker_coast_normal_64.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+
+  ImageWidgetClass DZSPAWN_RightPanel {
+   ignorepointer 1
+   position 0.72 0.12
+   size 0.25 0.45
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/03_spawnselection_panels/spawnselection_right_info_panel_blank.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass DZSPAWN_InfoTitle { ignorepointer 1 position 0.745 0.135 size 0.20 0.040 text "SPAWN INFO" font "gui/fonts/sdf_MetronBook30" "text halign" center "text valign" center color 0.52 0.94 0.08 1 }
+  TextWidgetClass DZSPAWN_InfoName { ignorepointer 1 position 0.745 0.190 size 0.20 0.035 text "Expansion Coast Pool" font "gui/fonts/sdf_MetronBook24" "text halign" left "text valign" center color 0.94 0.96 0.92 1 }
+  TextWidgetClass DZSPAWN_InfoMode { ignorepointer 1 position 0.745 0.250 size 0.20 0.030 text "ZONE                         SAFE" font "gui/fonts/sdf_MetronBook18" "text halign" left "text valign" center color 0.78 0.85 0.72 1 }
+  TextWidgetClass DZSPAWN_InfoCoords { ignorepointer 1 position 0.745 0.295 size 0.20 0.030 text "POSITION       SERVER WAEHLT" font "gui/fonts/sdf_MetronBook18" "text halign" left "text valign" center color 0.78 0.85 0.72 1 }
+  TextWidgetClass DZSPAWN_InfoRisk { ignorepointer 1 position 0.745 0.340 size 0.20 0.030 text "VALIDIERUNG                  AKTIV" font "gui/fonts/sdf_MetronBook18" "text halign" left "text valign" center color 0.78 0.85 0.72 1 }
+  MultilineTextWidgetClass DZSPAWN_InfoHint { ignorepointer 1 position 0.745 0.395 size 0.20 0.075 text "Keine Client-Koordinaten. Wasser, Events, Trader und Spielerabstand werden serverseitig geprueft." font "gui/fonts/sdf_MetronBook18" "text halign" left "text valign" top color 0.88 0.90 0.84 1 }
+  ButtonWidgetClass respawn_button_custom {
+   userID 101
+   position 0.750 0.490
+   size 0.19 0.060
+   style Empty
+   {
+    ImageWidgetClass respawn_button_custom_image { ignorepointer 1 position 0 0 size 1 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/02_buttons_text/button_wide_empty_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    ImageWidgetClass respawn_button_custom_icon { ignorepointer 1 position 0.04 0.18 size 0.12 0.64 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/07_icons/icon_spawn_green_256.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    TextWidgetClass respawn_button_custom_label { ignorepointer 1 position 0.18 0 size 0.78 1 text "SPAWN WAEHLEN" font "gui/fonts/sdf_MetronBook24" "text halign" center "text valign" center color 0.52 0.94 0.08 1 }
+   }
+  }
+  ButtonWidgetClass respawn_button_random { visible 0 userID 102 position 0 0 size 0.01 0.01 style Empty }
+  ImageWidgetClass DZSPAWN_BottomBar { ignorepointer 1 position 0.14 0.88 size 0.72 0.095 image0 "DeutschZ_MenuMusic_V2_Test/gui/spawnselection_v1/03_spawnselection_panels/spawnselection_bottom_bar_blank.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+  TextWidgetClass DZSPAWN_BottomTitle { ignorepointer 1 position 0.17 0.900 size 0.66 0.026 text "DEUTSCHZ SPAWNSYSTEM  |  SERVER WAEHLT POSITION" font "gui/fonts/sdf_MetronBook24" "text halign" center "text valign" center color 0.94 0.96 0.92 1 }
+  TextWidgetClass DZSPAWN_BottomSub { ignorepointer 1 position 0.17 0.934 size 0.66 0.022 text "Wassercheck  |  Eventblock  |  Trader-Abstand  |  Spieler-Abstand" font "gui/fonts/sdf_MetronBook18" "text halign" center "text valign" center color 0.52 0.94 0.08 1 }
+  ButtonWidgetClass respawn_button_cancel {
+   userID 2
+   position 0.865 0.900
+   size 0.10 0.055
+   style Empty
+   {
+    ImageWidgetClass respawn_button_cancel_image { ignorepointer 1 position 0 0 size 1 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/02_buttons_text/button_small_empty_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
+    TextWidgetClass respawn_button_cancel_label { ignorepointer 1 position 0 0 size 1 1 text "HAUPTMENUE" font "gui/fonts/sdf_MetronBook18" "text halign" center "text valign" center color 0.82 0.85 0.78 1 }
+   }
+  }
+  FrameWidgetClass menu_details_tooltip {
+   visible 0
+   position 0 0
+   size 0.01 0.01
+   {
+    TextWidgetClass menu_details_label { text "" }
+    RichTextWidgetClass menu_details_tooltip_content { text "" }
+   }
+  }
+ }
+}

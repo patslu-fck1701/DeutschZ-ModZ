@@ -16,7 +16,7 @@ class CfgMods
 		dir = "DeutschZ_UiAdminZ";
 		name = "DeutschZ UiAdminZ";
 		author = "DeutschZ";
-		version = "1.0.0-admin-lite";
+		version = "2.0.0-admin-pro-shell";
 		type = "mod";
 		dependencies[] = {"Game", "World", "Mission"};
 		class defs

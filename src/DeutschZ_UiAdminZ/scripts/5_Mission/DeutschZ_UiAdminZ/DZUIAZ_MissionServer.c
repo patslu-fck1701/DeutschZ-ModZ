@@ -2,7 +2,9 @@ modded class MissionServer
 {
 	void MissionServer()
 	{
-		DZUIAZ_Settings settings = DZUIAZ_SettingsLoader.Load();
-		DZUIAZ_Log.Write("INFO", "Admin Lite initialized. Enabled=" + settings.Enabled.ToString() + ". Eventmods remain optional.");
+		DZUIAZ_ServerState.Initialize();
+		DZUIAZ_Settings settings = DZUIAZ_ServerState.Settings;
+		if (settings)
+			DZUIAZ_Log.Write("INFO", "UiAdminZ initialized. Enabled=" + settings.Enabled.ToString() + " ProDevelopmentEnabled=" + settings.ProDevelopmentEnabled.ToString() + ". Eventmods remain optional.");
 	}
 }

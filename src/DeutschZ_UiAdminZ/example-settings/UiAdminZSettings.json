@@ -1,4 +1,9 @@
 {
   "Enabled": true,
-  "AuditLogEnabled": true
+  "AuditLogEnabled": true,
+  "ProDevelopmentEnabled": false,
+  "RequestRateLimitMilliseconds": 1000,
+  "AdminSteamIds": [
+    "76561199819501556"
+  ]
 }

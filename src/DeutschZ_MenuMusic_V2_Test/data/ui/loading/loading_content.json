@@ -1,0 +1,48 @@
+{
+  "SlideshowSeconds": 8.0,
+  "LogoPath": "DeutschZ_MenuMusic_V2_Test/gui/menu_assets/logos/Logo_Dark.paa",
+  "HintIconPath": "DeutschZ_MenuMusic_V2_Test/gui/menu_assets/icons/icon_status_ca.paa",
+  "Screens": [
+    "DeutschZ_MenuMusic_V2_Test/data/ui/loading/loading_0.paa",
+    "DeutschZ_MenuMusic_V2_Test/data/ui/loading/loading_1.paa",
+    "DeutschZ_MenuMusic_V2_Test/data/ui/loading/loading_2.paa",
+    "DeutschZ_MenuMusic_V2_Test/data/ui/loading/loading_3.paa",
+    "DeutschZ_MenuMusic_V2_Test/data/ui/loading/loading_4.paa",
+    "DeutschZ_MenuMusic_V2_Test/data/ui/loading/loading_5.paa",
+    "DeutschZ_MenuMusic_V2_Test/data/ui/loading/loading_6.paa"
+  ],
+  "LoadingEntries": [
+    {"Category": "JOKE", "Text": "Wenn der Loot leer ist, war der Nachbar nur schneller."},
+    {"Category": "JOKE", "Text": "Ein Auto ohne Reifen bleibt ein emotionales Investment."},
+    {"Category": "JOKE", "Text": "Wenn es klickt, war es hoffentlich nur die Tür."},
+    {"Category": "JOKE", "Text": "Der perfekte Base-Plan beginnt mit: nur kurz provisorisch."},
+    {"Category": "REGEL", "Text": "Fairplay, kein Exploit und kein Hacking."},
+    {"Category": "REGEL", "Text": "Respektiere andere Spieler und die Eventregeln."},
+    {"Category": "REGEL", "Text": "Kein Base Raid ausserhalb der festgelegten Zeiten."},
+    {"Category": "EVENT", "Text": "KOTH startet am markierten Fahnenmast. Halte die Zone."},
+    {"Category": "EVENT", "Text": "KOTH: 300 Sekunden halten, Wellen bei 0, 20, 40, 60 und 80 Prozent."},
+    {"Category": "EVENT", "Text": "ConvoyZ: Die Blackbox muss 90 Sekunden lang gehackt werden."},
+    {"Category": "EVENT", "Text": "BattlegroundZ, CriminalZ und EclipseZ erweitern die DeutschZ-Eventkette."},
+    {"Category": "TIPP", "Text": "Erst nachladen, dann Held spielen."},
+    {"Category": "TIPP", "Text": "Plane Fluchtweg und Deckung, bevor du ein Event startest."},
+    {"Category": "TIPP", "Text": "Ein voller Tank ersetzt keinen guten Plan, hilft aber."},
+    {"Category": "TIPP", "Text": "Marker, Rauchfarbe und Progressbar zeigen den Eventstatus."}
+  ],
+  "ServerMessages": [
+    "DeutschZ verbindet dich mit Chernarus.",
+    "Events werden serverautoritativ gesteuert.",
+    "Discord: discord.gg/FHzZ7BykFk",
+    "Website: project23947.websitepublisher.ai",
+    "Fairplay. Kein Cheat. Kein Exploit.",
+    "KOTH, ConvoyZ, BattlegroundZ, CriminalZ und EclipseZ warten auf dich."
+  ],
+  "MenuNews": [
+    {"Title": "DEUTSCHZ LIVE", "Body": "GUNZ | HELIZ | TRADERZ\n193.135.10.126:20076"},
+    {"Title": "KOTH INFECTED SIEGE", "Body": "300 Sekunden Capture und Wellen bei 0, 20, 40, 60 und 80 Prozent."},
+    {"Title": "CONVOYZ BLACKBOX", "Body": "90 Sekunden Hackdauer. Bleib an der Blackbox und sichere den DataCore."},
+    {"Title": "EVENTZ", "Body": "BATTLEGROUNDZ | CRIMINALZ | ECLIPSEZ\nNeue Systeme werden serverseitig und im Live-Test geprueft."},
+    {"Title": "D-MARKZ", "Body": "DeutschZ Waehrung: 1 und 2 als Muenzen, 5 bis 500 als Scheine."},
+    {"Title": "COMMUNITY", "Body": "Discord, Website und GitHub erreichst du direkt ueber das Menue."},
+    {"Title": "FAIRPLAY", "Body": "Kein Cheat. Kein Exploit. Respektiere Spieler und Regeln."}
+  ]
+}

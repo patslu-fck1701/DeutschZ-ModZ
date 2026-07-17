@@ -1,51 +1,98 @@
 # CODEX HANDOFF CURRENT
 
-Synchronisiert: 17.07.2026 02:05 CEST
+Synchronisiert: 17.07.2026 05:36 CEST
 
-## KotHZ Free 1.0.3 Settings Preserve
+## MenuZ V2
 
-- Restartschutz: gueltige `KotHZSettings.json` und `KotHZLocations.json` werden nur geladen und nicht mehr bei jedem Serverstart neu geschrieben.
-- Neuerzeugung erfolgt nur, wenn die jeweilige Datei fehlt oder nicht lesbar ist. Vor der Neuerzeugung einer defekten Datei bleibt eine unveraenderte `*.corrupt.backup.json` erhalten.
-- Standard-Admin: Steam-ID `76561199819501556` ist im Code-Default und in der ausgelieferten Beispielkonfiguration eingetragen.
-- Restart-Nachweis: zwei echte Serverstarts mit identischem SHA-256 `D8FE894865A623A4A5BB0D4DB96438EC7FC386EF533F8E86F100547EF95B1302`, identischem Zeitstempel und erhaltener Admin-ID.
+- Produkt: `DeutschZ_MenuMusic_V2_Test`
+- Source: `E:\DeutschZ\DeutschZ-ModZ\src\DeutschZ_MenuMusic_V2_Test`
+- Ausgabe: `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic_V2_Test`
+- V1 `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic`: unveraendert, 282/282 Dateien und 0 SHA-256-Abweichungen.
+- Zielreferenz: `E:\DeutschZ\DeutschZ-ModZ\docs\MenuZ_V2\menuz_v2_target_reference.png`
+- 1.612 Production-Kit-Dateien inventarisiert; 138 benoetigte Assets ausgewaehlt und 138/138 als PAA konvertiert.
+- 11 OGG-Tracks, Zufallsstart, Wiederholungsschutz und Lautstaerkegrenze 0.66 aktiv.
+- Config: `$profile:DeutschZ-System/DeutschZ_MenuZ/MenuZSettings.json`
+- Log: `$profile:DeutschZ-System/LogZ/DeutschZ_MenuZ/MenuZ.log`
+- Clean Build: PASS, 423 PBO-Dateien, 141.959.025 Byte.
+- Signatur: PASS mit `DeutschZ.bikey`.
+- DayZ Labs `deutschz_menuz_v2_compile`: Missionstart und mehr als 2 Minuten stabil, PASS.
+- DayZ Labs `deutschz_menuz_v2_with_uiadmin`: Missionstart und mehr als 2 Minuten stabil, PASS.
+- Client-/Sichttest: OFFEN.
 
-## KotHZ Free 1.0.2 Gameplayfix
+## UiAdminZ Admin Lite + Pro Shell
 
-- Musik: Standard und serverseitiges Maximum `0.45`; Empfaenger ausschliesslich lebende Spieler im Eventradius. Stop bei Radiusverlassen, Abbruch, Ende, Cleanup und Missionende. Client ersetzt eine laufende Instanz vor jedem Start.
-- Assets: neue Flaggen-, RewardChest- und FireworksLauncher-PAA bytegleich aus Patricks Quellen uebernommen. Selections: Flagge `camo`, SeaChest `camoGround`, Launcher `camo` und `placing`.
-- Gewinn: genau ein Vanilla-`FireworksLauncher` als `DZKOTHF_FireworksLauncher`, lokaler Mast-Offset `[3,0,0]`; RewardChest `[-3,0,0]`. Spawn, Start und Cleanup wurden im DayZ-Labs-Test protokolliert.
-- Standorte: 11 konfigurierbare Kandidaten in `KotHZLocations.json`; echte serverseitige Zufallsauswahl, direkter Repeat wird vermieden. `Persistence/location_rotation.json` speichert nur letzten Index und Namen.
-- Fuenf echte Starts: `NWAF -> Pustoshka Military -> YRAP -> Krasnostav Airfield -> Tri-Kresta`; beim letzten Start wurde ein Repeat aktiv vermieden.
+- Produkt: `DeutschZ_UiAdminZ`
+- Source: `E:\DeutschZ\DeutschZ-ModZ\src\DeutschZ_UiAdminZ`
+- Ausgabe: `E:\DeutschZ\DeutschZServer\@DeutschZ_UiAdminZ`
+- Assetquelle unveraendert: `C:\Users\patsl\Downloads\DeutschZ_EventAdmin_UI_Addon`
+- 15 Panel-PNGs und 15 Button-State-PNGs proportional auf transparente POT-Canvas vorbereitet und 30/30 als PAA konvertiert.
+- 60 bereits vorhandene Icon-PAAs selektiv uebernommen. Finale PBO enthaelt 102 Dateien und keine generierten PNG-Zwischenstufen.
+- A-F-Architektur umgesetzt: Header, Sidebar, Dashboard/Eventliste, Free/Pro/Lizenz, Eventeditor, Live-Karte/Logs/Pro.
+- F7-Authentifizierung ist von KotHZ getrennt. UiAdminZ laeuft ohne Eventmod und zeigt dann `EVENTMOD NICHT GELADEN`.
+- Eigene RPC-ID `24873`, Protokoll v2, Steam64-Validierung, Identity-Abgleich, Rate-Limit und Auditlog serverseitig.
+- Defaultadmin: `76561199819501556`; Adminliste wird nicht an Clients uebertragen.
+- Eventaktionen benutzen weiterhin Adapter-RPC `24872` und werden vom Eventmod erneut serverseitig validiert.
+- Input-Sperre ueber DayZ-Menue-Excludes; F7 und ESC schliessen und geben Input wieder frei.
+- Gueltige Settings werden nicht ueberschrieben. Fehlende Settings werden einmalig erzeugt; defekte Settings vor Regeneration gesichert.
+- Config: `$profile:DeutschZ-System/DeutschZ_UiAdminZ/UiAdminZSettings.json`
+- Log: `$profile:DeutschZ-System/LogZ/DeutschZ_UiAdminZ/UiAdminZ.log`
+- Preflight: PASS, 0 Fehler, 1 bekannte Windows-Gross-/Kleinschreibwarnung.
+- Clean Build: PASS, PBO 2.394.016 Byte.
+- PBO-Inhaltspruefung: PASS, Layout/Scripts/90 ausgewaehlte PAAs vorhanden.
+- Signatur: PASS mit `DeutschZ.bikey`.
+- DayZ Labs `deutschz_uiadmin_only`: Missionstart, Script-Compile und mehr als 2 Minuten stabil, PASS.
+- DayZ Labs `deutschz_kothz_free_with_uiadmin`: Missionstart, Script-Compile, Eventstart bis ACTIVE und mehr als 2 Minuten stabil, PASS.
+- Frische Scriptlogs: keine Compile-, Exception- oder Null-Pointer-Fehler der Produkte.
+- Sichtbarer F7-/ESC-/Input-/Layouttest: OFFEN und durch Patrick erforderlich.
 
-## Nachweise
+## Sicherheitsstatus
 
-- Settings-Restarttest: zwei echte Starts im Preset `kothz_free_compile`; SHA-256 und Zeitstempel der gueltigen Config blieben bytegenau unveraendert, die Standard-Admin-ID blieb enthalten.
-- Defekt-Test: absichtlich unlesbare JSON wurde als `KotHZSettings.corrupt.backup.json` bytegetreu gesichert und danach mit gueltigen Defaults samt Standard-Admin-ID neu erzeugt; das isolierte Testprofil wurde anschliessend sauber wiederhergestellt.
-- Frische Logs: `script_2026-07-17_02-01-20.log` und `DayZServer_x64_2026-07-17_02-01-09.RPT`; Script-Compile und Missionstart ohne KotHZ-Fehler.
-- Preflight und Clean Build: PASS
-- PBO-Inhalt: drei PAAs, Locations-Script und acht Musiktracks vorhanden
-- Signatur: `DeutschZ.bikey` / `.pbo.DeutschZ.bisign` PASS
-- Script-Compile und Missionstart: PASS
-- Gewinn-Testhook nur im lokalen Testpreset: `ACTIVE -> CAPTURE_COMPLETE -> REWARD -> CLEANUP -> IDLE`, RewardChest sowie `FIREWORK SPAWNED`, `FIREWORK STARTED`, `FIREWORK CLEANED` PASS. Testhook anschliessend aus Mission entfernt.
-- Sichtbarer Clienttest fuer Texturen, Lautstaerke und Feuerwerk bleibt erforderlich.
+- ADMIN LITE SERVERAUTORITATIV: JA
+- PRO SHELL TECHNISCH VORBEREITET: JA
+- PRO SECURITY FINAL: NEIN
+- LICENSECORE BLOCKED: JA
+- PRO STANDARDMAESSIG GESPERRT: JA
+- `ProDevelopmentEnabled` ist kein Lizenznachweis und erteilt keine Serverrechte.
 
-## Ausgabe
+## Uebertragene Dateien
 
-- `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_Free`
-- Config: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZSettings.json`
-- Locations: `$profile:DeutschZ-System/DeutschZ_KotHZ/KotHZLocations.json`
-- History: `$profile:DeutschZ-System/DeutschZ_KotHZ/Persistence/location_rotation.json`
-- Log: `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ/KotHZ.log`
+`E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic_V2_Test`:
 
-Uebertragene Dateien:
-
-- `Addons/DeutschZ_KotHZ_Free.pbo`
-- `Addons/DeutschZ_KotHZ_Free.pbo.DeutschZ.bisign`
+- `Addons/DeutschZ_MenuMusic_V2_Test.pbo`
+- `Addons/DeutschZ_MenuMusic_V2_Test.pbo.DeutschZ.bisign`
 - `keys/DeutschZ.bikey`
 - `mod.cpp`
 - `meta.cpp`
-- `Settings/KotHZSettings.json`
-- `Settings/KotHZLocations.json`
+- `Settings/MenuZSettings.json`
 - `TESTANLEITUNG.md`
+- `preflight-report.txt`
 
-Build: PASS. Signatur: PASS. Servertest: PASS. Gameplaytest fuer den Settings-Restartschutz nicht erforderlich; sichtbare Gameplay-Resttests aus 1.0.2 bleiben bestehen.
+`E:\DeutschZ\DeutschZServer\@DeutschZ_UiAdminZ`:
+
+- `Addons/DeutschZ_UiAdminZ.pbo`
+- `Addons/DeutschZ_UiAdminZ.pbo.DeutschZ.bisign`
+- `keys/DeutschZ.bikey`
+- `mod.cpp`
+- `meta.cpp`
+- `Settings/UiAdminZSettings.json`
+- `TESTANLEITUNG.md`
+- `preflight-report.txt`
+
+## Installation und Test
+
+1. MenuZ V1 deaktivieren; V1 und V2 nie gleichzeitig laden.
+2. `@DeutschZ_MenuMusic_V2_Test` auf Client und Server laden und `docs/MenuZ_V2/MENUZ_V2_TESTPLAN.md` abarbeiten.
+3. `@DeutschZ_UiAdminZ` auf Client und Server laden; optional `@DeutschZ_KotHZ_Free` fuer den Adaptertest.
+4. `docs/UiAdminZ/UIADMINZ_PRO_TESTPLAN.md` abarbeiten.
+5. Erst nach Patricks Screenshots und Inputtest eine visuelle Freigabe erteilen.
+
+## Abschlussstatus
+
+- MENUZ V2 BUILD READY: JA
+- MENUZ V2 SERVER TEST READY: JA
+- MENUZ V2 VISUAL READY: NEIN
+- UIADMINZ BUILD READY: JA
+- UIADMINZ SERVER TEST READY: JA
+- UIADMINZ VISUAL READY: NEIN
+- AUSGABE AKTUELL: JA
+- CLIENTTEST ERFORDERLICH: JA

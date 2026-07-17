@@ -1,0 +1,10 @@
+name = "DeutschZ Menu Music V2 Test";
+picture = "";
+logo = "";
+logoSmall = "";
+logoOver = "";
+tooltip = "DeutschZ Menu Music V2 Test";
+overview = "Separate DeutschZ MenuZ V2 client test build using the UI Production Kit.";
+action = "";
+author = "DeutschZ";
+version = "2.0.0-test";

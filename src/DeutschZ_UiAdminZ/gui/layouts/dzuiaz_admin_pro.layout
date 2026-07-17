@@ -1,0 +1,273 @@
+FrameWidgetClass DZUIAZ_Root {
+ visible 1
+ clipchildren 0
+ color 1 1 1 1
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ priority 9500
+ {
+  PanelWidgetClass DZUIAZ_Dimmer {
+   visible 1
+   color 0 0 0 0.82
+   position 0 0
+   size 1 1
+   style rover_sim_colorable
+  }
+  WindowWidgetClass DZUIAZ_Window {
+   visible 1
+   color 1 1 1 1
+   position 0.01 0.015
+   size 0.98 0.97
+   halign center_ref
+   valign center_ref
+   style rover_sim_black
+   {
+    ImageWidgetClass DZUIAZ_HeaderArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.14 0.01
+     size 0.53 0.075
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/panels/admin_header.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass DZUIAZ_Brand {
+     visible 1
+     color 0.56 0.95 0.03 1
+     position 0.015 0.018
+     size 0.25 0.045
+     text "DEUTSCHZ EVENT ADMIN"
+     font "gui/fonts/sdf_MetronBook24"
+    }
+    TextWidgetClass DZUIAZ_HeaderStatus {
+     visible 1
+     color 0.82 0.88 0.82 1
+     position 0.165 0.026
+     size 0.46 0.035
+     text "SERVER ONLINE | EVENTMOD WIRD GEPRUEFT | ADMIN"
+     font "gui/fonts/sdf_MetronBook18"
+    }
+    ButtonWidgetClass DZUIAZ_Close {
+     visible 1
+     position 0.64 0.018
+     size 0.035 0.045
+     text "X"
+    }
+    ImageWidgetClass DZUIAZ_SidebarArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.01 0.09
+     size 0.125 0.87
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/panels/admin_sidebar.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass DZUIAZ_SidebarText {
+     visible 1
+     color 0.82 0.88 0.82 1
+     position 0.026 0.12
+     size 0.10 0.69
+     text "DASHBOARD\n\nEVENTS\n\nEVENT ERSTELLEN\n\nVORLAGEN\n\nZEITPLAN\n\nZONEN & POSITIONEN\n\nBELOHNUNGEN\n\nBENACHRICHTIGUNGEN\n\nLIVE-UEBERSICHT\n\nLOGS\n\nEINSTELLUNGEN\n\nLIZENZ"
+     font "gui/fonts/sdf_MetronBook14"
+     "text valign" top
+    }
+    ImageWidgetClass DZUIAZ_DashboardArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.14 0.09
+     size 0.525 0.39
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/panels/dashboard_main.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass DZUIAZ_DashboardTitle {
+     visible 1
+     color 0.56 0.95 0.03 1
+     position 0.155 0.105
+     size 0.22 0.035
+     text "DASHBOARD / EVENTLISTE"
+     font "gui/fonts/sdf_MetronBook18"
+    }
+    TextWidgetClass DZUIAZ_Status {
+     visible 1
+     color 0.92 0.94 0.92 1
+     position 0.16 0.16
+     size 0.47 0.045
+     text "EVENTMOD NICHT GELADEN"
+     font "gui/fonts/sdf_MetronBook18"
+    }
+    TextWidgetClass DZUIAZ_Details {
+     visible 1
+     color 0.78 0.84 0.78 1
+     position 0.16 0.215
+     size 0.27 0.15
+     text "KEINE DATEN"
+     font "gui/fonts/sdf_MetronBook16"
+     "text valign" top
+    }
+    TextWidgetClass DZUIAZ_Result {
+     visible 1
+     color 0.88 0.70 0.12 1
+     position 0.44 0.215
+     size 0.19 0.15
+     text "BEREIT"
+     font "gui/fonts/sdf_MetronBook16"
+     "text valign" top
+    }
+    ImageWidgetClass DZUIAZ_StartArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.16 0.38
+     size 0.14 0.055
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/buttons/event_starten_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    ButtonWidgetClass DZUIAZ_Start {
+     visible 1
+     color 1 1 1 0.02
+     position 0.16 0.38
+     size 0.14 0.055
+     text ""
+    }
+    ImageWidgetClass DZUIAZ_StopArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.31 0.38
+     size 0.14 0.055
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/buttons/event_stoppen_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    ButtonWidgetClass DZUIAZ_Stop {
+     visible 1
+     color 1 1 1 0.02
+     position 0.31 0.38
+     size 0.14 0.055
+     text ""
+    }
+    ButtonWidgetClass DZUIAZ_Refresh {
+     visible 1
+     position 0.46 0.38
+     size 0.15 0.055
+     text "AKTUALISIEREN"
+    }
+    ImageWidgetClass DZUIAZ_LicenseArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.675 0.01
+     size 0.315 0.47
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/panels/license_compare.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass DZUIAZ_LicenseTitle {
+     visible 1
+     color 0.56 0.95 0.03 1
+     position 0.695 0.03
+     size 0.27 0.035
+     text "FREE / PRO / LIZENZ"
+     font "gui/fonts/sdf_MetronBook18"
+    }
+    TextWidgetClass DZUIAZ_LicenseInfo {
+     visible 1
+     color 0.84 0.88 0.84 1
+     position 0.70 0.09
+     size 0.25 0.31
+     text "FREE AKTIV\nStatus, Start, Stop und Diagnose\n\nPRO GESPERRT\nLicenseCore nicht implementiert\nKeine Lizenzdaten vorhanden\n\nDev-Flag: AUS"
+     font "gui/fonts/sdf_MetronBook16"
+     "text valign" top
+    }
+    ImageWidgetClass DZUIAZ_EditorArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.14 0.49
+     size 0.525 0.47
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/panels/event_editor_main.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass DZUIAZ_EditorTitle {
+     visible 1
+     color 0.88 0.60 0.10 1
+     position 0.155 0.51
+     size 0.30 0.035
+     text "EVENT EDITOR - PRO VORBEREITET"
+     font "gui/fonts/sdf_MetronBook18"
+    }
+    TextWidgetClass DZUIAZ_EditorTabs {
+     visible 1
+     color 0.78 0.84 0.78 1
+     position 0.16 0.565
+     size 0.47 0.04
+     text "ALLGEMEIN | POSITION & ZONE | SPAWNS | BELOHNUNGEN | ZEITPLAN | ERWEITERT"
+     font "gui/fonts/sdf_MetronBook14"
+    }
+    TextWidgetClass DZUIAZ_EditorInfo {
+     visible 1
+     color 0.72 0.78 0.72 1
+     position 0.16 0.63
+     size 0.47 0.23
+     text "Keine erfundenen Eventdaten.\nEditorfelder sind sichtbar vorbereitet, aber serverseitiges Speichern bleibt gesperrt,\nbis eine stabile API und LicenseCore vorhanden sind.\n\nADMIN-LITE AKTIONEN BLEIBEN SERVERAUTORITATIV."
+     font "gui/fonts/sdf_MetronBook16"
+     "text valign" top
+    }
+    ImageWidgetClass DZUIAZ_MapArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.675 0.49
+     size 0.155 0.31
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/panels/map_preview.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    ImageWidgetClass DZUIAZ_LogsArt {
+     visible 1
+     ignorepointer 1
+     color 1 1 1 1
+     position 0.835 0.49
+     size 0.155 0.31
+     image0 "DeutschZ_UiAdminZ/gui/admin_pack/panels/live_logs.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass DZUIAZ_ProAreaInfo {
+     visible 1
+     color 0.78 0.84 0.78 1
+     position 0.695 0.82
+     size 0.27 0.10
+     text "LIVE-KARTE / LOGS / PRO\nGESPERRT - KEINE DATEN"
+     font "gui/fonts/sdf_MetronBook16"
+     "text valign" top
+    }
+    TextWidgetClass DZUIAZ_Help {
+     visible 1
+     color 0.54 0.62 0.54 1
+     position 0.015 0.91
+     size 0.11 0.04
+     text "F7 / ESC SCHLIESST"
+     font "gui/fonts/sdf_MetronBook14"
+    }
+   }
+  }
+ }
+}

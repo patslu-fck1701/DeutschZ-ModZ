@@ -57,9 +57,8 @@ modded class MissionGameplay
 		PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
 		if (!player) return;
 		ScriptRPC rpc = new ScriptRPC;
-		rpc.Write(DZUIAZ_Constants.RPC_PROTOCOL_VERSION);
-		rpc.Write(DZUIAZ_AdminAction.STATUS);
-		rpc.Send(player, DZUIAZ_Constants.RPC_ADMIN, true, null);
+		rpc.Write(DZUIAZ_Constants.UI_RPC_PROTOCOL_VERSION);
+		rpc.Send(player, DZUIAZ_Constants.RPC_UIADMIN, true, null);
 	}
 
 	protected void DZUIAZ_ShowDenied()
