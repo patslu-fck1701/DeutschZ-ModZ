@@ -15,6 +15,13 @@ Vier PBOs, vier BISIGNs, ein öffentlicher ESMods-Key, `mod.cpp`, `meta.cpp`, ei
 offene Beispielkonfiguration und eine Konfigurations-README. Keine offene
 Lizenzdatei und kein offener Quellcode.
 
+Der später geprüfte Ordner
+`C:\Users\patsl\Desktop\@DeutschZ_ShootingZ` enthält keine eigenständige
+DeutschZ-Version: Alle vier PBOs sind per SHA-256 bytegleich mit den Workshop-
+PBOs. Zwei Unterordner enthalten bereits entpackt wirkende Config-/Script- und
+Animationsartefakte derselben Fremddateien. Diese Inhalte wurden wegen der
+unveränderten Rechtebasis nicht gelesen oder übernommen.
+
 ## 3. Abhängigkeiten
 
 Der Autor behauptet keine zusätzlichen Abhängigkeiten; der sichtbare Root-Patch

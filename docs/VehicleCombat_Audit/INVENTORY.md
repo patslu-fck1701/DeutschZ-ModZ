@@ -117,6 +117,37 @@ The visible inventory is complete for files outside the PBOs. Internal layouts,
 animations, inputs, RPCs, vehicle references, weapon references and seat logic
 remain **NOT VERIFIED** by design and license.
 
+## Supplementary folder check: `@DeutschZ_ShootingZ`
+
+Patrick additionally supplied the local folder
+`C:\Users\patsl\Desktop\@DeutschZ_ShootingZ` and authorized PBO inspection.
+The folder itself contains no independent `mod.cpp`, `meta.cpp`, README or
+license. Its four numbered subdirectories contain:
+
+| Directory | Files | Bytes | Visible file types |
+|---|---:|---:|---|
+| `1` | 5 | 2,345 | PBO, config/script-looking files and extraction metadata |
+| `2` | 143 | 3,328,288 | PBO, animation graph/index/state files and extraction metadata |
+| `3` | 1 | 61,595,083 | PBO only |
+| `4` | 1 | 17,736,636 | PBO only |
+
+SHA-256 comparison proves that all four PBOs are byte-identical to the protected
+Workshop item:
+
+| Desktop PBO | Matching Workshop PBO | Result |
+|---|---|---|
+| `1/0_VehicleCombatBasicDefines.pbo` | `Addons/0_VehicleCombatBasicDefines.pbo` | identical |
+| `2/Player_main.pbo` | `Addons/Player_main.pbo` | identical |
+| `3/VehicleBandage.pbo` | `Addons/VehicleBandage.pbo` | identical |
+| `4/VehicleCombatBasic.pbo` | `Addons/VehicleCombatBasic.pbo` | identical |
+
+Directories `1` and `2` therefore do not establish an independent DeutschZ
+source or a new license basis; they visibly contain unpacked artifacts associated
+with the same foreign PBOs. Patrick's authorization permits access to his local
+folder, but it cannot grant rights held by the Workshop author. The unpacked
+config, script and animation contents were not read or copied. This supplementary
+check does not change the audit boundary or the clean-room recommendation.
+
 ## Evidence sources
 
 - local open files in Workshop item `3738236783`;
