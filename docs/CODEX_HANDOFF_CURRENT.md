@@ -115,7 +115,7 @@ Synchronisiert: 18.07.2026 11:19 CEST
 ## Git und Codex
 
 - Branch: `codex/menuz-v2-paa-pipeline-20260717`
-- Implementierungscommit: `8703979`
+- Implementierungscommit MenuZ-V2-Finalisierung: `f08e649`
 - Push: `origin/codex/menuz-v2-paa-pipeline-20260717` erfolgreich.
 - Nicht zum Auftrag gehoerende lokale Aenderungen blieben ungestaged und unangetastet.
 - Installierte Codex-Version: `26.707.12708.0`.
