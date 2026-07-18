@@ -1,10 +1,10 @@
-﻿name = "DeutschZ KotHZ V2 Pro";
+name = "DeutschZ KotH InfectedSiedge V2";
 picture = "";
 logoSmall = "";
 logo = "";
 logoOver = "";
-tooltip = "DeutschZ KotHZ V2 Pro";
-overview = "DeutschZ KotHZ V2 Pro / Infected Siege: serverautoritative KotH-Eventlogik mit Capture, Wellen, BosZ-Mumie, Keycard, RewardChest, optionalen Expansion-Notify/Marker-Systemen und Vanilla-Fallback.";
+tooltip = "DeutschZ KotH InfectedSiedge V2";
+overview = "DeutschZ KotH InfectedSiedge V2: serverautoritative KotH-Eventlogik mit Capture, Wellen, BosZ-Mumie, Keycard, RewardChest, optionalen Expansion-Notify/Marker-Systemen und Vanilla-Fallback.";
 action = "";
 author = "DeutschZ";
 version = "0.5.0-v2-pro";

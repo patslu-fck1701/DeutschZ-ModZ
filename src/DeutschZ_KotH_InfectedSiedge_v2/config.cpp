@@ -1,6 +1,6 @@
-﻿class CfgPatches
+class CfgPatches
 {
-	class DeutschZ_KotHZ_V2_Pro
+	class DeutschZ_KotH_InfectedSiedge_v2
 	{
 		units[] =
 		{
@@ -42,7 +42,7 @@ class CfgSoundShaders
 {
 	class DZKOTH_EventMusic_SoundShader
 	{
-		samples[] = {{"\DeutschZ_KotHZ_V2_Pro\sounds\dzkoth_anthem", 1}};
+		samples[] = {{"\DeutschZ_KotH_InfectedSiedge_v2\sounds\dzkoth_anthem", 1}};
 		volume = 0.45;
 		radius = 100;
 		range = 100;
@@ -64,10 +64,10 @@ class CfgSoundSets
 
 class CfgMods
 {
-	class DeutschZ_KotHZ_V2_Pro
+	class DeutschZ_KotH_InfectedSiedge_v2
 	{
-		dir = "DeutschZ_KotHZ_V2_Pro";
-		name = "DeutschZ KotHZ V2 Pro";
+		dir = "DeutschZ_KotH_InfectedSiedge_v2";
+		name = "DeutschZ KotH InfectedSiedge V2";
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
@@ -86,7 +86,7 @@ class CfgMods
 				value = "";
 				files[] =
 				{
-					"DeutschZ_KotHZ_V2_Pro/scripts/3_Game"
+					"DeutschZ_KotH_InfectedSiedge_v2/scripts/3_Game"
 				};
 			};
 			class worldScriptModule
@@ -94,7 +94,7 @@ class CfgMods
 				value = "";
 				files[] =
 				{
-					"DeutschZ_KotHZ_V2_Pro/scripts/4_World"
+					"DeutschZ_KotH_InfectedSiedge_v2/scripts/4_World"
 				};
 			};
 			class missionScriptModule
@@ -102,7 +102,7 @@ class CfgMods
 				value = "";
 				files[] =
 				{
-					"DeutschZ_KotHZ_V2_Pro/scripts/5_Mission"
+					"DeutschZ_KotH_InfectedSiedge_v2/scripts/5_Mission"
 				};
 			};
 		};
@@ -131,7 +131,7 @@ class CfgVehicles
 		descriptionShort = "DeutschZ Lagerfass mit 500 Plaetzen.";
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_barrel_green_co.paa"
+			"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_barrel_green_co.paa"
 		};
 		itemSize[] = {10, 15};
 		weight = 10000;
@@ -150,8 +150,8 @@ class CfgVehicles
 		descriptionShort = "DeutschZ Feuerwerkswerfer mit 25-m-Nebelsignal.";
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_fireworkslauncher_co.paa",
-			"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_fireworkslauncher_co.paa"
+			"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_fireworkslauncher_co.paa",
+			"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_fireworkslauncher_co.paa"
 		};
 	};
 
@@ -163,7 +163,7 @@ class CfgVehicles
 		hiddenSelections[] = {"zbytek"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln_loot_paper_co.paa"
+			"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_regeln_loot_paper_co.paa"
 		};
 		class DamageSystem
 		{
@@ -174,11 +174,11 @@ class CfgVehicles
 					hitpoints = 15;
 					healthLevels[] =
 					{
-						{1, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}},
-						{0.7, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}},
-						{0.5, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}},
-						{0.3, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}},
-						{0, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}}
+						{1, {"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_regeln.rvmat"}},
+						{0.7, {"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_regeln.rvmat"}},
+						{0.5, {"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_regeln.rvmat"}},
+						{0.3, {"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_regeln.rvmat"}},
+						{0, {"DeutschZ_KotH_InfectedSiedge_v2\data\items\deutschz_regeln.rvmat"}}
 					};
 				};
 			};
@@ -198,7 +198,7 @@ class CfgVehicles
 		hiddenSelections[] = {"camoGround"};
 		hiddenSelectionsTextures[] =
 		{
-			"\DeutschZ_KotHZ_V2_Pro\data\textures\infectedsiedge\KothZ_FREE_sea_chest_co.paa"
+			"\DeutschZ_KotH_InfectedSiedge_v2\data\textures\infectedsiedge\KothZ_FREE_sea_chest_co.paa"
 		};
 		class Cargo
 		{
@@ -222,7 +222,7 @@ class CfgVehicles
 		hiddenSelections[] = {"camoGround"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KotHZ_V2_Pro\data\textures\infectedsiedge\KOTH_sea_chest_co.paa"
+			"DeutschZ_KotH_InfectedSiedge_v2\data\textures\infectedsiedge\KOTH_sea_chest_co.paa"
 		};
 	};
 
@@ -234,7 +234,7 @@ class CfgVehicles
 		hiddenSelections[] = {"component01"};
 		hiddenSelectionsTextures[] =
 		{
-			"\DeutschZ_KotHZ_V2_Pro\data\textures\infectedsiedge\DeutschZxKOTHZ_punchedcard_co.paa"
+			"\DeutschZ_KotH_InfectedSiedge_v2\data\textures\infectedsiedge\DeutschZxKOTHZ_punchedcard_co.paa"
 		};
 	};
 
@@ -391,7 +391,7 @@ class CfgVehicles
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KotHZ_V2_Pro\data\textures\infectedsiedge\KothZ_FREE_flag_dayz_co.paa"
+			"DeutschZ_KotH_InfectedSiedge_v2\data\textures\infectedsiedge\KothZ_FREE_flag_dayz_co.paa"
 		};
 	};
 };

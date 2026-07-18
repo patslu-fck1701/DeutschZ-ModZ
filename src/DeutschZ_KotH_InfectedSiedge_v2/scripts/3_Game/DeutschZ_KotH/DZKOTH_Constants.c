@@ -1,28 +1,28 @@
-﻿class DZKOTH_Const
+class DZKOTH_Const
 {
 	static const string VERSION = "0.5.0-v2-pro";
 	static const string LOG_PREFIX = "[DeutschZ_KotH] ";
-	static const string MOD_PREFIX = "DeutschZ_KotHZ_V2_Pro";
-	static const string PROFILE_NAME = "DeutschZ_KotHZ_V2_Pro";
+	static const string MOD_PREFIX = "DeutschZ_KotH_InfectedSiedge_v2";
+	static const string PROFILE_NAME = "DeutschZ_KotH_InfectedSiedge_v2";
 
-	static const string CONFIG_JSON = "DeutschZ_KotHZ_V2_Pro/data/dzkoth_config.json";
-	static const string LOCATIONS_JSON = "DeutschZ_KotHZ_V2_Pro/data/dzkoth_locations.json";
-	static const string WAVES_JSON = "DeutschZ_KotHZ_V2_Pro/data/dzkoth_waves.json";
-	static const string LOOT_JSON = "DeutschZ_KotHZ_V2_Pro/data/dzkoth_loot.json";
+	static const string CONFIG_JSON = "DeutschZ_KotH_InfectedSiedge_v2/data/dzkoth_config.json";
+	static const string LOCATIONS_JSON = "DeutschZ_KotH_InfectedSiedge_v2/data/dzkoth_locations.json";
+	static const string WAVES_JSON = "DeutschZ_KotH_InfectedSiedge_v2/data/dzkoth_waves.json";
+	static const string LOOT_JSON = "DeutschZ_KotH_InfectedSiedge_v2/data/dzkoth_loot.json";
 
-	static const string PROFILE_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro";
-	static const string PROFILE_CONFIG_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro";
-	static const string PROFILE_DATA_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Data";
-	static const string PROFILE_RUNTIME_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Runtime";
-	static const string PROFILE_PERSISTENCE_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Persistence";
-	static const string PROFILE_LOG_DIR = "$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ_V2_Pro";
-	static const string PROFILE_LOG_FILE = "$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ_V2_Pro/KotHZ.log";
+	static const string PROFILE_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2";
+	static const string PROFILE_CONFIG_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2";
+	static const string PROFILE_DATA_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Data";
+	static const string PROFILE_RUNTIME_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Runtime";
+	static const string PROFILE_PERSISTENCE_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Persistence";
+	static const string PROFILE_LOG_DIR = "$profile:DeutschZ-System/LogZ/DeutschZ_KotH_InfectedSiedge_v2";
+	static const string PROFILE_LOG_FILE = "$profile:DeutschZ-System/LogZ/DeutschZ_KotH_InfectedSiedge_v2/KotHZ.log";
 	static const string PROFILE_MIGRATION_LOG = "$profile:DeutschZ-System/LogZ/DeutschZ_Main_Settings/profile_migration.log";
-	static const string PROFILE_STATE_JSON = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Runtime/state.json";
-	static const string PROFILE_LOCATION_ROTATION_JSON = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/KotHZLocationRotation.json";
-	static const string PROFILE_KOTH_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro";
-	static const string PROFILE_KOTH_CONFIG_JSON = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/KotHZSettings.json";
-	static const string PROFILE_GROUPS_JSON = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Persistence/groups.json";
+	static const string PROFILE_STATE_JSON = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Runtime/state.json";
+	static const string PROFILE_LOCATION_ROTATION_JSON = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/KotHZLocationRotation.json";
+	static const string PROFILE_KOTH_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2";
+	static const string PROFILE_KOTH_CONFIG_JSON = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/KotHZSettings.json";
+	static const string PROFILE_GROUPS_JSON = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Persistence/groups.json";
 
 	static const string MAIN_MARKER_UID = "DZKOTH_MAIN_EVENT";
 	static const string BOSS_NAME = "BosZ Zombie";
@@ -34,7 +34,7 @@
 	static const string FLAGPOLE_CLASSNAME = "DZKOTH_EventFlagpole";
 	static const string FLAG_CLASSNAME = "DZKOTH_EventFlag";
 	static const string MARKER_ICON_NAME = "Skull 1";
-	static const string MARKER_ICON_PATH = "\\dz\\gear\\navigation\\data\\map_tree_ca.paa";
+	static const string MARKER_ICON_PATH = "dz/gear/navigation/data/map_tree_ca.paa";
 	static const string ADMIN_COMMAND_PREFIX = "!dzkoth";
 	static const string ADMIN_COMMAND_PREFIX_ALT = "/dzkoth";
 }
@@ -60,7 +60,6 @@ class DZKOTH_ProfilePaths
 		EnsureDirectory(DZKOTH_Const.PROFILE_LOG_DIR);
 
 		MigrateFile("$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Config/KotHConfig.json", DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON);
-		MigrateFile("$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Config/KotHConfig.json", DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON);
 		MigrateFile("$profile:KotH/KotHConfig.json", DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON);
 		MigrateFile("$profile:DZKOTH/state.json", DZKOTH_Const.PROFILE_STATE_JSON);
 		MigrateFile("$profile:DZEventVanilla/groups.json", DZKOTH_Const.PROFILE_GROUPS_JSON);

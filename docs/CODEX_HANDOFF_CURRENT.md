@@ -1,6 +1,33 @@
 # CODEX HANDOFF CURRENT
 
-Synchronisiert: 18.07.2026 11:19 CEST
+Synchronisiert: 19.07.2026 00:40 CEST
+
+## KotH InfectedSiedge v2 / Pro Crashfix
+
+- Produkt: @DeutschZ_KotH_InfectedSiedge_v2
+- Source: E:\DeutschZ\DeutschZ-ModZ\src\DeutschZ_KotH_InfectedSiedge_v2
+- Ausgabe: E:\DeutschZ\DeutschZServer\@DeutschZ_KotH_InfectedSiedge_v2
+- Core-Ausgabe: E:\DeutschZ\DeutschZServer\@DeutschZ_only_core
+- Ursache Live-Crash: falscher Neuaufbau unter DeutschZ_KotHZ_V2_Pro; dadurch falscher PBO-Prefix/Scriptpfad und Compilefehler quoted string not closed ... dzev_rpcs.c.
+- Korrektur: echter Produktname/PBO-Prefix wieder DeutschZ_KotH_InfectedSiedge_v2; falsche DeutschZ_KotHZ_V2_Pro-PBO aus @DeutschZ_only_core entfernt und nach E:\DeutschZ\_CodexBackups\aborted_kothz_v2_pro_rebuild_20260718_235038\removed_from_only_core verschoben.
+- PBO: DeutschZ_KotH_InfectedSiedge_v2.pbo
+- BISIGN: DeutschZ_KotH_InfectedSiedge_v2.pbo.DeutschZ.bisign
+- BIKEY: DeutschZ.bikey
+- Build: PASS, AddonBuilder erfolgreich, PBO 17.840.689 Byte.
+- Signatur: PASS mit C:\Users\patsl\DayZProjects\keys\DeutschZ.bikey.
+- PBO-Inhaltspruefung: PASS; Prefix DeutschZ_KotH_InfectedSiedge_v2\; keine DeutschZ_KotHZ_V2_Pro-Referenz im extrahierten PBO gefunden.
+- Lokaler Server-Compiletest: PASS bis Missionstart mit temp @DeutschZ_only_core; keine Script-Compilefehler, kein quoted string, kein CParser.
+- Uebertragen nach Ausgabe: mod.cpp, meta.cpp, PBO, BISIGN, BIKEY, TESTANLEITUNG_KotH_InfectedSiedge_v2.txt.
+- @DeutschZ_only_core aktualisiert: PBO, BISIGN, BIKEY, TESTANLEITUNG_KotH_InfectedSiedge_v2.txt.
+- Gameplaytest: OFFEN / Patrick erforderlich.
+- Live-FTP: NICHT ausgefuehrt; Freigabe/Approval erforderlich.
+
+## Aktuelle Testschritte KotH Pro
+
+1. Live-Server mit @DeutschZ_only_core starten.
+2. Pruefen, dass kein Compilefehler aus DeutschZ_KotH_InfectedSiedge_v2/scripts/3_Game/dzevent/dzev_rpcs.c mehr auftritt.
+3. Danach Infected-Siedge Event im Spiel sichtbar testen.
+4. Bei Fehlern frische script_*.log, DayZServer_x64_*.RPT und Crashlog liefern.
 
 ## MenuZ V2
 
@@ -221,3 +248,4 @@ Uebertragene Dateien:
 - SERVERSTART GEPRUEFT: NEIN
 - GAMEPLAY RETEST REQUIRED: JA
 - BEKANNTER REST: echter Live-/Gameplaytest steht aus.
+

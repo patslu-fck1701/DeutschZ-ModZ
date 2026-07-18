@@ -1,4 +1,4 @@
-﻿class DZEV_ClientProgressHud
+class DZEV_ClientProgressHud
 {
 	protected static const float MUSIC_FULL_VOLUME_RADIUS = 25.0;
 	protected static const float MUSIC_MAX_DISTANCE = 100.0;
@@ -217,7 +217,7 @@
 		if (m_Root || !GetGame() || GetGame().IsDedicatedServer() || !GetGame().GetWorkspace())
 			return;
 
-		m_Root = GetGame().GetWorkspace().CreateWidgets("DeutschZ_KotHZ_V2_Pro/gui/layouts/dzevent/dzev_progress.layout");
+		m_Root = GetGame().GetWorkspace().CreateWidgets("DeutschZ_KotH_InfectedSiedge_v2/gui/layouts/dzevent/dzev_progress.layout");
 		if (!m_Root)
 			return;
 

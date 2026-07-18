@@ -1,4 +1,4 @@
-﻿class DZEV_RPCIds
+class DZEV_RPCIds
 {
 	static const int MARKER_SYNC = 531200;
 	static const int PROGRESS_SYNC = 531201;
