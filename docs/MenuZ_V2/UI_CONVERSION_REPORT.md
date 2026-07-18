@@ -6,4 +6,3 @@
 - Originale verändert: NEIN
 - Verfahren: transparente RGBA-Power-of-Two-Canvas, proportional hochskaliert und zentriert, ohne Verzerrung oder Cropping
 - Nächster Schritt: automatisierte ImageToPAA-Konvertierung aller ausgewählten V2-PNGs
-- ImageToPAA: 138/138 erfolgreich

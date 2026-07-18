@@ -39,13 +39,13 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_left_panel {
    ignorepointer 1
-   position 72 54
-   size 452 904
+   position 50 28
+   size 470 900
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/panels/main_left_normal.paa"
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/panels/main_left_compact_normal.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
@@ -67,8 +67,8 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_logo {
    ignorepointer 1
-   position 158 94
-   size 300 300
+   position 150 72
+   size 270 270
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -79,6 +79,7 @@ FrameWidgetClass main_menu_root {
    "stretch mode" stretch_w_h
   }
   ImageWidgetClass dz_emblem {
+   visible 0
    ignorepointer 1
    position 76 76
    size 92 92
@@ -93,8 +94,8 @@ FrameWidgetClass main_menu_root {
   }
   TextWidgetClass dz_tagline_text {
    ignorepointer 1
-   position 82 402
-   size 452 28
+   position 70 384
+   size 430 28
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -108,8 +109,8 @@ FrameWidgetClass main_menu_root {
   }
   MultilineTextWidgetClass dz_description_body {
    ignorepointer 1
-   position 82 434
-   size 452 42
+   position 70 418
+   size 430 52
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -123,13 +124,13 @@ FrameWidgetClass main_menu_root {
   }
   TextWidgetClass dz_status_text {
    ignorepointer 1
-   position 78 480
-   size 460 24
+   position 70 478
+   size 430 24
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   text "ONLINE | 193.135.10.126:20076"
+   text "SERVER | 193.135.10.126:20076"
    font "gui/fonts/sdf_MetronBook18"
    "exact text" 1
    "text halign" center
@@ -137,7 +138,7 @@ FrameWidgetClass main_menu_root {
    color 0.65 0.95 0.20 1
   }
   ButtonWidgetClass play {
-   position 98 510
+   position 75 512
    size 420 105
    hexactpos 1
    vexactpos 1
@@ -162,7 +163,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass choose_server {
-   position 108 620
+   position 85 620
    size 400 50
    hexactpos 1
    vexactpos 1
@@ -202,7 +203,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass customize_character {
-   position 108 680
+   position 85 680
    size 400 50
    hexactpos 1
    vexactpos 1
@@ -242,7 +243,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass custom_button1 {
-   position 108 740
+   position 85 740
    size 400 50
    hexactpos 1
    vexactpos 1
@@ -282,6 +283,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass settings_button {
+   visible 0
    position 324 802
    size 82 70
    hexactpos 1
@@ -307,6 +309,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass exit_button {
+   visible 0
    position 426 802
    size 82 70
    hexactpos 1
@@ -332,8 +335,8 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass custom_button2 {
-   position 76 874
-   size 224 56
+   position 75 842
+   size 210 64
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -357,8 +360,8 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass message_button {
-   position 316 874
-   size 224 56
+   position 290 842
+   size 210 64
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -488,26 +491,26 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_news_panel {
    ignorepointer 1
-   position 1346 66
-   size 520 260
+   position 1420 28
+   size 450 300
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/panels/news_normal.paa"
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_right_info_blank_520x230_darker.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
   }
   TextWidgetClass dz_news_title {
    ignorepointer 1
-   position 1382 88
-   size 448 32
+   position 1450 50
+   size 390 32
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   text "SERVERSTATUS"
+   text "NEWS"
    font "gui/fonts/sdf_MetronBook24"
    "exact text" 1
    "text halign" center
@@ -516,8 +519,8 @@ FrameWidgetClass main_menu_root {
   }
   TextWidgetClass dz_news_meta {
    ignorepointer 1
-   position 1384 123
-   size 444 18
+   position 1450 90
+   size 390 18
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -531,8 +534,8 @@ FrameWidgetClass main_menu_root {
   }
   MultilineTextWidgetClass dz_news_body {
    ignorepointer 1
-   position 1384 149
-   size 444 116
+   position 1450 120
+   size 390 174
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -546,8 +549,8 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_stats_panel {
    ignorepointer 1
-   position 1346 320
-   size 520 300
+   position 1420 345
+   size 450 250
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -560,8 +563,8 @@ FrameWidgetClass main_menu_root {
   FrameWidgetClass character_stats_root {
    visible 1
    ignorepointer 1
-   position 1384 352
-   size 444 232
+   position 1450 360
+   size 390 220
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -570,7 +573,7 @@ FrameWidgetClass main_menu_root {
     TextWidgetClass stats_title {
      ignorepointer 1
      position 0 0
-     size 432 34
+     size 390 34
      hexactpos 1
      vexactpos 1
      hexactsize 1
@@ -584,7 +587,7 @@ FrameWidgetClass main_menu_root {
     PanelWidgetClass TimeSurvived {
      ignorepointer 1
      position 0 46
-     size 432 28
+     size 390 28
      hexactpos 1
      vexactpos 1
      hexactsize 1
@@ -594,7 +597,7 @@ FrameWidgetClass main_menu_root {
       TextWidgetClass TimeSurvivedLabel {
        ignorepointer 1
        position 0 0
-       size 240 28
+       size 220 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -607,8 +610,8 @@ FrameWidgetClass main_menu_root {
       }
       TextWidgetClass TimeSurvivedValue {
        ignorepointer 1
-       position 248 0
-       size 184 28
+       position 224 0
+       size 166 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -624,7 +627,7 @@ FrameWidgetClass main_menu_root {
     PanelWidgetClass PlayersKilled {
      ignorepointer 1
      position 0 82
-     size 432 28
+     size 390 28
      hexactpos 1
      vexactpos 1
      hexactsize 1
@@ -634,7 +637,7 @@ FrameWidgetClass main_menu_root {
       TextWidgetClass PlayersKilledLabel {
        ignorepointer 1
        position 0 0
-       size 240 28
+       size 220 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -647,8 +650,8 @@ FrameWidgetClass main_menu_root {
       }
       TextWidgetClass PlayersKilledValue {
        ignorepointer 1
-       position 248 0
-       size 184 28
+       position 224 0
+       size 166 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -664,7 +667,7 @@ FrameWidgetClass main_menu_root {
     PanelWidgetClass InfectedKilled {
      ignorepointer 1
      position 0 118
-     size 432 28
+     size 390 28
      hexactpos 1
      vexactpos 1
      hexactsize 1
@@ -674,7 +677,7 @@ FrameWidgetClass main_menu_root {
       TextWidgetClass InfectedKilledLabel {
        ignorepointer 1
        position 0 0
-       size 240 28
+       size 220 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -687,8 +690,8 @@ FrameWidgetClass main_menu_root {
       }
       TextWidgetClass InfectedKilledValue {
        ignorepointer 1
-       position 248 0
-       size 184 28
+       position 224 0
+       size 166 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -704,7 +707,7 @@ FrameWidgetClass main_menu_root {
     PanelWidgetClass DistanceTraveled {
      ignorepointer 1
      position 0 154
-     size 432 28
+     size 390 28
      hexactpos 1
      vexactpos 1
      hexactsize 1
@@ -714,7 +717,7 @@ FrameWidgetClass main_menu_root {
       TextWidgetClass DistanceTraveledLabel {
        ignorepointer 1
        position 0 0
-       size 240 28
+       size 220 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -727,8 +730,8 @@ FrameWidgetClass main_menu_root {
       }
       TextWidgetClass DistanceTraveledValue {
        ignorepointer 1
-       position 248 0
-       size 184 28
+       position 224 0
+       size 166 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -744,7 +747,7 @@ FrameWidgetClass main_menu_root {
     PanelWidgetClass LongRangeShot {
      ignorepointer 1
      position 0 190
-     size 432 28
+     size 390 28
      hexactpos 1
      vexactpos 1
      hexactsize 1
@@ -754,7 +757,7 @@ FrameWidgetClass main_menu_root {
       TextWidgetClass LongRangeShotLabel {
        ignorepointer 1
        position 0 0
-       size 240 28
+       size 220 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -767,8 +770,8 @@ FrameWidgetClass main_menu_root {
       }
       TextWidgetClass LongRangeShotValue {
        ignorepointer 1
-       position 248 0
-       size 184 28
+       position 224 0
+       size 166 28
        hexactpos 1
        vexactpos 1
        hexactsize 1
@@ -785,21 +788,21 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_events_panel {
    ignorepointer 1
-   position 1286 634
-   size 600 300
+   position 540 640
+   size 820 280
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/panels/events_4_cards_normal.paa"
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_events_container_blank_600x285_darker.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
   }
   TextWidgetClass dz_events_title {
    ignorepointer 1
-   position 1334 654
-   size 504 32
+   position 600 654
+   size 700 32
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -813,21 +816,8 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_event_koth {
    ignorepointer 1
-   position 1298 694
-   size 144 144
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
-   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/event_cards/kothz_normal.paa"
-   mode blend
-   "src alpha" 1
-   "stretch mode" stretch_w_h
-  }
-  ImageWidgetClass dz_event_convoy {
-   ignorepointer 1
-   position 1444 694
-   size 144 144
+   position 570 692
+   size 170 214
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -837,15 +827,28 @@ FrameWidgetClass main_menu_root {
    "src alpha" 1
    "stretch mode" stretch_w_h
   }
-  ImageWidgetClass dz_event_groundzero {
+  ImageWidgetClass dz_event_convoy {
    ignorepointer 1
-   position 1590 694
-   size 144 144
+   position 770 692
+   size 170 214
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/event_cards/groundzero_normal.paa"
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/event_cards/kothz_normal.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass dz_event_groundzero {
+   ignorepointer 1
+   position 970 692
+   size 170 214
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/event_cards/airdropz_normal.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
@@ -853,18 +856,19 @@ FrameWidgetClass main_menu_root {
   ImageWidgetClass dz_event_operation {
    visible 1
    ignorepointer 1
-   position 1736 694
-   size 144 144
+   position 1170 692
+   size 170 214
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/event_cards/operation_deutschz_normal.paa"
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/event_cards/crashz_normal.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
   }
   ImageWidgetClass dz_online_badge {
+   visible 0
    ignorepointer 1
    position 1578 928
    size 246 66
@@ -879,8 +883,8 @@ FrameWidgetClass main_menu_root {
   }
   ImageWidgetClass dz_music_panel {
    ignorepointer 1
-   position 660 790
-   size 600 150
+   position 1420 615
+   size 450 180
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -892,8 +896,8 @@ FrameWidgetClass main_menu_root {
   }
   TextWidgetClass dz_music_title {
    ignorepointer 1
-   position 730 824
-   size 330 30
+   position 1450 670
+   size 300 30
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -906,7 +910,7 @@ FrameWidgetClass main_menu_root {
    color 0.85 1 0.58 1
   }
   ButtonWidgetClass dz_music_play {
-   position 1074 814
+   position 1695 700
    size 54 54
    hexactpos 1
    vexactpos 1
@@ -930,7 +934,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_music_next {
-   position 1138 814
+   position 1755 700
    size 54 54
    hexactpos 1
    vexactpos 1
@@ -953,36 +957,58 @@ FrameWidgetClass main_menu_root {
     }
    }
   }
-  ImageWidgetClass dz_music_prev_disabled {
-   ignorepointer 1
-   position 1010 814
+  ButtonWidgetClass dz_music_prev {
+   position 1635 700
    size 54 54
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/music/prev_disabled.paa"
-   mode blend
-   "src alpha" 1
-   "stretch mode" stretch_w_h
+   style Empty
+   {
+    ImageWidgetClass dz_music_prev_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/music/prev_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
   }
-  ImageWidgetClass dz_music_volume_disabled {
-   ignorepointer 1
-   position 1202 814
+  ButtonWidgetClass dz_music_volume {
+   position 1815 700
    size 54 54
    hexactpos 1
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/music/volume_disabled.paa"
-   mode blend
-   "src alpha" 1
-   "stretch mode" stretch_w_h
+   style Empty
+   {
+    ImageWidgetClass dz_music_volume_image {
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     hexactpos 1
+     vexactpos 1
+     hexactsize 0
+     vexactsize 0
+     image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/music/volume_normal.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+   }
   }
   ImageWidgetClass dz_bottom_nav_panel {
    ignorepointer 1
-   position 535 942
-   size 900 112
+   position 310 930
+   size 1300 132
    hexactpos 1
    vexactpos 1
    hexactsize 1
@@ -992,8 +1018,21 @@ FrameWidgetClass main_menu_root {
    "src alpha" 1
    "stretch mode" stretch_w_h
   }
+  ImageWidgetClass dz_nav_z_logo {
+   ignorepointer 1
+   position 830 938
+   size 100 112
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   image0 "DeutschZ_MenuMusic_V2_Test/gui/menu_assets/logos/01_logo_z_icon.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
   ButtonWidgetClass dz_nav_home {
-   position 558 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 330 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_home_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_home_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_home_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
@@ -1001,7 +1040,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_nav_server {
-   position 654 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 450 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_server_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_server_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_server_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
@@ -1009,7 +1048,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_nav_rules {
-   position 846 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 690 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_rules_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_rules_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_rules_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
@@ -1017,7 +1056,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_nav_support {
-   position 1038 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 1070 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_support_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_support_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_support_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
@@ -1025,7 +1064,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_nav_events {
-   position 750 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 570 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_events_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_events_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_events_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
@@ -1033,7 +1072,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_nav_shop {
-   position 942 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 950 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_shop_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_shop_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_shop_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
@@ -1041,7 +1080,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_nav_settings {
-   position 1230 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 1310 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_settings_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_settings_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_settings_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
@@ -1049,7 +1088,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_nav_profile {
-   position 1134 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 1190 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_profile_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_profile_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_profile_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
@@ -1057,7 +1096,7 @@ FrameWidgetClass main_menu_root {
    }
   }
   ButtonWidgetClass dz_nav_exit {
-   position 1326 950 size 88 94 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+   position 1430 948 size 96 100 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
    {
     ImageWidgetClass dz_nav_exit_frame { ignorepointer 1 position 0 0 size 88 88 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/darkglass_v1/01_panels_blank/panel_square_blank_128x128.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }
     ImageWidgetClass dz_nav_exit_icon { ignorepointer 1 position 25 8 size 38 38 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 image0 "DeutschZ_MenuMusic_V2_Test/gui/v2_kit/icons/nav_power_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h }

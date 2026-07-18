@@ -26,7 +26,7 @@ STATES = (
 # Only the assets used by the V2 layout or its implemented interaction states
 # enter the PBO. Download originals remain untouched.
 SELECTED: dict[str, str] = {
-    "01_PANELS/Main_Left_normal.png": "panels/main_left_normal.png",
+    "01_PANELS/Main_Left_Compact_normal.png": "panels/main_left_compact_normal.png",
     "01_PANELS/News_normal.png": "panels/news_normal.png",
     "01_PANELS/Character_Stats_normal.png": "panels/character_stats_normal.png",
     "01_PANELS/Events_4_Cards_normal.png": "panels/events_4_cards_normal.png",
@@ -42,7 +42,7 @@ for icon in ("home", "server", "rules", "support", "events", "shop", "settings",
     for state in ("normal", "hover", "pressed", "disabled", "active"):
         SELECTED[f"03_ICONS/Navigation/{icon}_{state}.png"] = f"icons/nav_{icon}_{state}.png"
 
-for event in ("KOTHZ", "CONVOYZ", "GROUNDZERO", "OPERATION_DEUTSCHZ"):
+for event in ("KOTHZ", "CONVOYZ", "AIRDROPZ", "CRASHZ"):
     for state in ("normal", "hover", "pressed", "selected", "disabled", "locked", "active", "warning"):
         SELECTED[f"04_EVENT_CARDS/{event}_{state}.png"] = f"event_cards/{event.lower()}_{state}.png"
 

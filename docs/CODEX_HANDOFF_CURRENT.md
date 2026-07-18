@@ -1,6 +1,6 @@
 # CODEX HANDOFF CURRENT
 
-Synchronisiert: 17.07.2026 05:36 CEST
+Synchronisiert: 18.07.2026 11:19 CEST
 
 ## MenuZ V2
 
@@ -10,14 +10,23 @@ Synchronisiert: 17.07.2026 05:36 CEST
 - V1 `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic`: unveraendert, 282/282 Dateien und 0 SHA-256-Abweichungen.
 - Zielreferenz: `E:\DeutschZ\DeutschZ-ModZ\docs\MenuZ_V2\menuz_v2_target_reference.png`
 - 1.612 Production-Kit-Dateien inventarisiert; 138 benoetigte Assets ausgewaehlt und 138/138 als PAA konvertiert.
+- Layout auf die Zielreferenz zurueckgefuehrt: kompaktes linkes Panel, freie Spielerfigur, rechte News/Statistik/Musik-Spalte, Eventkarten unten Mitte und durchgehende Navigation mit rotem DeutschZ-Z.
+- Aktive Eventkarten: ConvoyZ, KotHZ, AirdropZ und HeliCrashZ. GroundZero/Operation sind nicht mehr aktiv referenziert.
+- Musiksteuerung: Previous, Pause/Resume, Next und Mute sind echte Buttons; Mute wird beim Verlassen des Menues sicher zurueckgesetzt.
 - 11 OGG-Tracks, Zufallsstart, Wiederholungsschutz und Lautstaerkegrenze 0.66 aktiv.
 - Config: `$profile:DeutschZ-System/DeutschZ_MenuZ/MenuZSettings.json`
 - Log: `$profile:DeutschZ-System/LogZ/DeutschZ_MenuZ/MenuZ.log`
-- Clean Build: PASS, 423 PBO-Dateien, 141.959.025 Byte.
+- Preflight: PASS, 0 Fehler, 1 bekannte Windows-Gross-/Kleinschreibwarnung.
+- Clean Build: PASS, 423 PBO-Dateien, 141.865.272 Byte, SHA-256 `414562A1E5A41A16E0D8D6F5E009DD973A38EFDF053056B61CD76302B0C6D5F6`.
 - Signatur: PASS mit `DeutschZ.bikey`.
-- DayZ Labs `deutschz_menuz_v2_compile`: Missionstart und mehr als 2 Minuten stabil, PASS.
+- BISIGN SHA-256: `2DC91BA6F2C2EB82EFF9A2EBE131048236C96F7CB75B9629E827AD7626A4B1AF`; `DSCheckSignatures`: PASS.
+- DayZ Labs `deutschz_menuz_v2_compile`: Script-Compile, Missionstart und mehr als 2 Minuten stabil, PASS am 18.07.2026.
+- Frische Script-/RPT-Pruefung: 0 relevante MenuZ-Fehler.
 - DayZ Labs `deutschz_menuz_v2_with_uiadmin`: Missionstart und mehr als 2 Minuten stabil, PASS.
-- Client-/Sichttest: OFFEN.
+- Eigenstaendiges Testpaket atomar nach `E:\DeutschZ\DeutschZServer\@DeutschZ_MenuMusic_V2_Test` synchronisiert; 1/1 Menu-PBO, Quell-/Zielhash identisch.
+- `@DeutschZ_only_core` enthaelt genau eine Menu-PBO: `DeutschZ_MenuMusic_V2_Test.pbo`; diese wurde hashgleich ersetzt. `mod.cpp`, `meta.cpp` und alle anderen Core-Dateien blieben unveraendert.
+- Vorheriger Core-Stand: `E:\DeutschZ\_CodexBackups\@DeutschZ_only_core_before_MenuZV2_20260718_111933`.
+- Client-/Sichttest des neuen Layouts: OFFEN und durch Patrick erforderlich.
 
 ## UiAdminZ Admin Lite + Pro Shell
 
@@ -66,6 +75,12 @@ Synchronisiert: 17.07.2026 05:36 CEST
 - `Settings/MenuZSettings.json`
 - `TESTANLEITUNG.md`
 - `preflight-report.txt`
+
+`E:\DeutschZ\DeutschZServer\@DeutschZ_only_core` (selektiv aktualisiert):
+
+- `Addons/DeutschZ_MenuMusic_V2_Test.pbo`
+- `Addons/DeutschZ_MenuMusic_V2_Test.pbo.DeutschZ.bisign`
+- `keys/DeutschZ.bikey`
 
 `E:\DeutschZ\DeutschZServer\@DeutschZ_UiAdminZ`:
 
