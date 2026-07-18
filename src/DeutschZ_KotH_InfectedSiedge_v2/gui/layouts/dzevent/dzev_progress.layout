@@ -1,4 +1,4 @@
-FrameWidgetClass DZEV_ProgressRoot {
+﻿FrameWidgetClass DZEV_ProgressRoot {
  visible 0
  position 0.01 0.105
  size 0.17 0.065
@@ -29,7 +29,7 @@ FrameWidgetClass DZEV_ProgressRoot {
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   image0 "DeutschZ_KOTH_InfectedSiege/data/ui/dzkoth_status_darkglass.paa"
+   image0 "DeutschZ_KotHZ_V2_Pro/data/ui/dzkoth_status_darkglass.paa"
    mode blend
    "src alpha" 1
    "stretch mode" stretch_w_h
@@ -51,7 +51,7 @@ FrameWidgetClass DZEV_ProgressRoot {
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   image0 "DeutschZ_KOTH_InfectedSiege/data/ui/dzkoth_logo_dark.paa"
+   image0 "DeutschZ_KotHZ_V2_Pro/data/ui/dzkoth_logo_dark.paa"
    mode blend
    "src alpha" 1
    "stretch mode" 1

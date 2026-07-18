@@ -120,3 +120,77 @@ Synchronisiert: 18.07.2026 11:19 CEST
 - Nicht zum Auftrag gehoerende lokale Aenderungen blieben ungestaged und unangetastet.
 - Installierte Codex-Version: `26.707.12708.0`.
 - Microsoft-Store-/winget-Updatepruefung: kein neueres Upgrade verfuegbar; installierter Stand ist aktuell laut Storequelle.
+## 2026-07-18 20:06 - DeutschZ KotHZ V2 Pro / Infected Siege
+
+Aktueller Stand: `DeutschZ_KotHZ_V2_Pro` ist der normale Infected-Siege-/V2-Pro-Zweig. KotHZ Free wurde in diesem Abschluss nicht veraendert.
+
+### Technische Aenderungen
+
+- Produkt-/PBO-Prefix auf `DeutschZ_KotHZ_V2_Pro` umgestellt.
+- Config-/Logpfade nach DeutschZ-Konvention:
+  - Config: `$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/KotHZSettings.json`
+  - Logs: `$profile:DeutschZ-System/LogZ/DeutschZ_KotHZ_V2_Pro/KotHZ.log`
+- Gueltige Settings werden nicht bei jedem Serverrestart ueberschrieben. Defaults werden nur erzeugt, wenn die Config fehlt; defekte JSON wird gesichert und durch sichere Defaults ersetzt.
+- Standard-Admin hinterlegt: `76561199819501556`.
+- Eventstart bleibt direkt, ohne Terminal/KOTHGate.
+- Standortauswahl ist zufaellig; bei mehreren Standorten wird direkte Wiederholung nach Moeglichkeit vermieden.
+- Musik:
+  - `MusicVolume = 0.45`
+  - `MusicRadius = 100.0`
+  - serverseitig und clientseitig auf maximal 100 m / 45 Prozent begrenzt.
+- Pro/Infected-Siege-Ablauf:
+  - Capture fuehrt in die Boss-/Siege-Phase.
+  - Reward/Firework werden nicht direkt bei Capture, sondern nach Boss-Abschluss erzeugt.
+  - Arena-Cleanup nach Boss-Abschluss entfernt Gegner/Marker, laesst RewardChest/Mast/roten Smoke bis Final-Cleanup bestehen.
+- Neue aktive Texturen:
+  - `data/textures/infectedsiedge/KothZ_FREE_flag_dayz_co.paa`
+  - `data/textures/infectedsiedge/KothZ_FREE_sea_chest_co.paa`
+  - `data/items/deutschz_fireworkslauncher_co.paa`
+- `DZKOTH_RewardBarrel` bleibt nur noch als versteckte Altklasse (`scope=0`); aktive Rewardklasse ist `DZKOTH_RewardChest`.
+- KOTHGate/Terminal/ParkingMeter/pc.paa-Altlasten wurden nicht wiederhergestellt.
+
+### Build-/Signaturstatus
+
+- Clean Build: PASS
+- PBO: `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_V2_Pro\Addons\DeutschZ_KotHZ_V2_Pro.pbo`
+- PBO-Groesse: 17.831.551 Byte
+- PBO-Inhaltspruefung: PASS, Prefix `DeutschZ_KotHZ_V2_Pro\`, 67 Dateien.
+- BISIGN: `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_V2_Pro\Addons\DeutschZ_KotHZ_V2_Pro.pbo.DeutschZ.bisign`
+- BIKEY: `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_V2_Pro\Keys\DeutschZ.bikey`
+- Signaturpruefung: PASS (`DSCheckSignatures`: BISIGN OK)
+- DayZ-Labs-/Missionstart: NICHT ausgefuehrt in diesem reduzierten Abschluss.
+- Gameplaytest: Patrick erforderlich.
+
+### Ausgabe
+
+Letzter aktualisierter Ausgabeordner:
+
+`E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_V2_Pro`
+
+Uebertragene Dateien:
+
+- `Addons/DeutschZ_KotHZ_V2_Pro.pbo`
+- `Addons/DeutschZ_KotHZ_V2_Pro.pbo.DeutschZ.bisign`
+- `Keys/DeutschZ.bikey`
+- `mod.cpp`
+- `meta.cpp`
+- `Docs/TESTANLEITUNG_KotHZ_V2_Pro.txt`
+
+### Testschritte fuer Patrick
+
+1. `@DeutschZ_KotHZ_V2_Pro` laden.
+2. Pruefen, dass kein Terminal/KOTHGate benoetigt wird.
+3. Mehrere Eventstarts pruefen: Standort soll zufaellig sein, VMC darf vorkommen, aber nicht starr wiederholt werden.
+4. Musik im Eventradius pruefen: hoerbar nur ca. 100 m, maximal 45 Prozent.
+5. Pro-Ablauf pruefen: Capture -> Boss/Infected-Siege -> Boss-Ende -> RewardChest/Feuerwerk.
+6. Flagge, RewardChest und Feuerwerkslauncher optisch pruefen.
+7. Bei Fehlern frische `RPT`, `script.log`, Eventposition und beobachteten State liefern.
+
+### Abschlussstatus
+
+- KOTHZ V2 PRO / INFECTED SIEGE BUILD READY: JA
+- AUSGABE AKTUELL: JA
+- SIGNATUR GEPRUEFT: JA
+- SERVERSTART GEPRUEFT: NEIN
+- GAMEPLAY RETEST REQUIRED: JA
+- BEKANNTER REST: echter Live-/Gameplaytest steht aus.

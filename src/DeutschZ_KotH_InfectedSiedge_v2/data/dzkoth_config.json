@@ -1,4 +1,4 @@
-{
+﻿{
     "Enabled":  1,
     "DebugMode":  1,
     "UseExpansionNotify":  true,
@@ -6,7 +6,6 @@
     "EventName":  "DeutschZ KotH",
     "CaptureRadius":  25,
     "CaptureTimeSeconds":  300,
-    "ChestActionDurationSeconds":  60,
     "ZombieCount":  5,
     "ZombieSpawnRadius":  15.0,
     "MarkerName":  "DeutschZ KotH",
@@ -29,17 +28,21 @@
     "GlobalKeycardAnnouncement":  true,
     "PermanentTracking":  false,
     "DebugCommandsEnabled":  true,
-    "RequireTerminalHackBeforeCapture":  false,
-    "TerminalHackSeconds":  60,
-    "TerminalHackDecayEnabled":  false,
-    "TerminalHackDecayPerSecond":  0.5,
+    "StartMode":  "DIRECT",
+    "MusicEnabled":  true,
+    "MusicVolume":  0.45,
+    "MusicRadius":  100,
+    "FireworkEnabled":  true,
+    "FireworkDurationSeconds":  30,
+    "VictoryPhaseSeconds":  60,
+    "ProDevelopmentEnabled":  true,
+    "LicenseCoreRequired":  false,
     "AdminUIDs":  [
-                      "76561199819501556",
-                      "KId676nm-HhEmsBOdgv02VHFwD-JMQS76IJ1bVe3kYI="
+                      "76561199819501556"
                   ],
     "RewardDespawnMinutes":  10,
     "RewardMinimumItems":  24,
-    "ProgressHudRadius":  500,
+    "ProgressHudRadius":  120,
     "BossSpawnMinDistance":  8,
     "BossSpawnMaxDistance":  12
 }

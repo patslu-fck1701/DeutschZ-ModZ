@@ -9,7 +9,6 @@ class DZKOTH_EventInstance
 	protected ref DZKOTH_BossManager m_Boss;
 	protected ref DZKOTH_LootManager m_Loot;
 	protected ref DZKOTH_KeycardTracker m_KeycardTracker;
-	protected ref DZKOTH_TerminalHackManager m_TerminalHack;
 	protected ref array<EntityAI> m_RewardFireworks;
 	protected DZKOTH_CaptureZone m_Trigger;
 	protected int m_State;
@@ -41,7 +40,6 @@ class DZKOTH_EventInstance
 		m_Boss = new DZKOTH_BossManager;
 		m_Loot = new DZKOTH_LootManager;
 		m_KeycardTracker = new DZKOTH_KeycardTracker;
-		m_TerminalHack = new DZKOTH_TerminalHackManager;
 		m_RewardFireworks = new array<EntityAI>;
 		m_State = DZKOTH_States.INACTIVE;
 		m_CaptureExpansionPartyId = -1;
@@ -67,8 +65,8 @@ class DZKOTH_EventInstance
 		m_Smoke.Setup(m_Location.GetFlagPosition(), m_Location.GetFlagOrientation());
 		m_Smoke.SetReady();
 		m_Smoke.SetFlagRaiseProgress(0.0);
-
 		m_State = DZKOTH_States.WAITING_FOR_PLAYER;
+
 		m_Markers.ShowReady(m_Location);
 		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH wurde aktiviert.", "Betrete die Zone und halte den Mast.", 10.0);
 		StartTick();
@@ -94,7 +92,6 @@ class DZKOTH_EventInstance
 		if (!player)
 			return;
 
-		CancelTerminalHack(player);
 		RemovePlayerInside(player);
 		DZKOTH_ServerRPC.SendHud(player, DZKOTH_ProgressModes.HIDE, "", 0.0, 0.0);
 	}
@@ -105,16 +102,14 @@ class DZKOTH_EventInstance
 
 		if (m_State == DZKOTH_States.ZOMBIE_PREPHASE)
 			TickZombiePrephase();
-		else if (m_State == DZKOTH_States.WAITING_FOR_TERMINAL_HACK)
-			BroadcastChestHudToOnlinePlayers();
-		else if (m_State == DZKOTH_States.TERMINAL_HACK_ACTIVE)
-			TickTerminalHack();
 		else if (m_State == DZKOTH_States.WAITING_FOR_PLAYER)
 			BroadcastCaptureReadyHudToNearbyPlayers();
 		else if (m_State == DZKOTH_States.CAPTURING)
 			TickCapture();
 		else if (m_State == DZKOTH_States.BOSS_ACTIVE && m_Boss)
 			TickBossPhase();
+		else if (m_State == DZKOTH_States.REWARD_ACTIVE)
+			TickKeycardPhase();
 	}
 
 	void SyncStateToPlayer(PlayerBase player)
@@ -127,10 +122,6 @@ class DZKOTH_EventInstance
 		if (m_State == DZKOTH_States.ZOMBIE_PREPHASE)
 		{
 			SendZombieHud(player);
-		}
-		else if (m_State == DZKOTH_States.WAITING_FOR_TERMINAL_HACK || m_State == DZKOTH_States.TERMINAL_HACK_ACTIVE)
-		{
-			SyncTerminalHudToPlayer(player);
 		}
 		else if (IsCaptureState())
 		{
@@ -190,7 +181,7 @@ class DZKOTH_EventInstance
 
 	void CleanupEvent(bool returnToReady = false)
 	{
-		bool notifyAbort = m_State != DZKOTH_States.INACTIVE && m_State != DZKOTH_States.COMPLETED && m_State != DZKOTH_States.REWARD_ACTIVE;
+		bool notifyAbort = m_State != DZKOTH_States.INACTIVE && m_State != DZKOTH_States.COMPLETED && m_State != DZKOTH_States.REWARD_ACTIVE && m_State != DZKOTH_States.KEYCARD_TAKEN;
 		if (notifyAbort)
 			DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH", "Event abgebrochen.", 7.0);
 
@@ -216,8 +207,6 @@ class DZKOTH_EventInstance
 			m_Boss.Cleanup();
 		if (m_Loot)
 			m_Loot.Cleanup();
-		if (m_TerminalHack)
-			m_TerminalHack.Cleanup();
 		if (m_KeycardTracker)
 			m_KeycardTracker.Reset();
 		CleanupRewardFireworks();
@@ -264,51 +253,16 @@ class DZKOTH_EventInstance
 		return m_CaptureProgress;
 	}
 
-	float GetTerminalHackProgress()
-	{
-		if (!m_TerminalHack || !m_Config || !m_Config.Main)
-			return 0.0;
-
-		return m_TerminalHack.GetProgressPercent(m_Config.Main);
-	}
-
 	void DebugForceBoss()
 	{
 		DZKOTH_Utils.Warn("ForceBoss maps to KotH completion in the current Vybor KotH flow.");
 		CompleteCapturePhase();
 	}
 
-	void DebugForceTerminalHack()
-	{
-		if (!m_TerminalHack)
-			return;
-
-		if (m_State == DZKOTH_States.ZOMBIE_PREPHASE)
-			OnZombiePrephaseComplete();
-
-		m_TerminalHack.ForceComplete(this);
-		DZKOTH_Utils.Log("Admin debug: chest action forced.");
-	}
-
-	void DebugSetTerminalHack(float progress)
-	{
-		if (!m_TerminalHack || !m_Config || !m_Config.Main)
-			return;
-
-		if (m_State == DZKOTH_States.ZOMBIE_PREPHASE)
-			OnZombiePrephaseComplete();
-
-		m_TerminalHack.SetProgressPercent(progress, m_Config.Main);
-		if (progress >= 100.0)
-			m_TerminalHack.ForceComplete(this);
-		else
-			SyncTerminalHudToPlayersInside();
-	}
-
 	void DebugSetProgress(float progress)
 	{
 		if (m_State < DZKOTH_States.WAITING_FOR_PLAYER)
-			DebugForceTerminalHack();
+			ActivateCaptureGate(null);
 
 		if (m_State == DZKOTH_States.WAITING_FOR_PLAYER)
 			ActivateCaptureGate(null);
@@ -328,11 +282,8 @@ class DZKOTH_EventInstance
 		if (!IsValidPlayer(player))
 			return false;
 
-		if (m_State == DZKOTH_States.ZOMBIE_PREPHASE)
-			OnZombiePrephaseComplete();
-
 		if (m_State < DZKOTH_States.WAITING_FOR_PLAYER)
-			DebugForceTerminalHack();
+			ActivateCaptureGate(player);
 
 		AddPlayerInside(player);
 		if (m_State == DZKOTH_States.WAITING_FOR_PLAYER)
@@ -348,66 +299,6 @@ class DZKOTH_EventInstance
 		}
 
 		return false;
-	}
-
-	bool BeginTerminalHack(PlayerBase player, Object terminal)
-	{
-		if (!RequiresTerminalHack())
-			return false;
-
-		if (m_State != DZKOTH_States.WAITING_FOR_TERMINAL_HACK)
-			return false;
-
-		if (!m_TerminalHack.Begin(player, terminal, m_Config.Main))
-			return false;
-
-		m_State = DZKOTH_States.TERMINAL_HACK_ACTIVE;
-		StartTick();
-		SyncTerminalHudToPlayersInside();
-		return true;
-	}
-
-	bool CancelTerminalHack(PlayerBase player, Object terminal = null)
-	{
-		if (!m_TerminalHack || m_State != DZKOTH_States.TERMINAL_HACK_ACTIVE)
-			return false;
-
-		if (!m_TerminalHack.Cancel(player, terminal))
-			return false;
-
-		m_State = DZKOTH_States.WAITING_FOR_TERMINAL_HACK;
-		BroadcastChestHudToOnlinePlayers();
-		return true;
-	}
-
-	bool StartTerminalHack(PlayerBase player, Object terminal)
-	{
-		if (!RequiresTerminalHack())
-			return false;
-
-		if (m_State != DZKOTH_States.TERMINAL_HACK_ACTIVE)
-			return false;
-
-		if (!m_TerminalHack.CompleteFromAction(player, terminal, m_Config.Main))
-			return false;
-
-		m_State = DZKOTH_States.TERMINAL_HACK_COMPLETE;
-		DZKOTH_ServerRPC.BroadcastHud(m_PlayersInside, DZKOTH_ProgressModes.CAPTURE, "Kiste wird aufgebrochen: 100%", 100.0, 100.0);
-		OnTerminalHackComplete(player);
-		return true;
-	}
-
-	void OnTerminalHackComplete(PlayerBase hacker)
-	{
-		if (!RequiresTerminalHack())
-			return;
-
-		if (m_State >= DZKOTH_States.WAITING_FOR_PLAYER)
-			return;
-
-		m_State = DZKOTH_States.TERMINAL_HACK_COMPLETE;
-		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), "Fahnenmast aktiviert.", "Halte die Stellung und hisse die Flagge.", 5.0);
-		ActivateCaptureGate(hacker);
 	}
 
 	protected void StartZombiePrephase()
@@ -456,23 +347,15 @@ class DZKOTH_EventInstance
 		if (m_State != DZKOTH_States.ZOMBIE_PREPHASE)
 			return;
 
-		m_State = DZKOTH_States.WAITING_FOR_TERMINAL_HACK;
-		m_TerminalHack.SetActionUnlocked(true);
-		DZKOTH_Utils.Log("Chest action unlocked");
-		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), m_Config.Main.EventName, "Zone gesichert. Hacke die Versorgungskiste, um den Fahnenmast zu aktivieren.", 5.0);
-		BroadcastChestHudToOnlinePlayers();
+		DZKOTH_Utils.Log("Zombie prephase complete; capture mast activated directly.");
+		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(CollectPlayersInHudRange(), m_Config.Main.EventName, "Zone gesichert. Der Fahnenmast ist aktiv.", 5.0);
+		ActivateCaptureGate(null);
 	}
 
 	protected void BeginCapture(PlayerBase starter)
 	{
 		if (!IsValidPlayer(starter))
 			return;
-
-		if (RequiresTerminalHack() && m_State < DZKOTH_States.WAITING_FOR_PLAYER)
-		{
-			DZKOTH_ServerRPC.SendPlayerUIMessage(starter, m_Config.Main.EventName, "Kiste zuerst aufbrechen.", 4.0);
-			return;
-		}
 
 		ResetCapture();
 		m_State = DZKOTH_States.CAPTURING;
@@ -527,28 +410,6 @@ class DZKOTH_EventInstance
 		}
 
 		BroadcastCaptureReadyHudToOnlinePlayers();
-	}
-
-	protected void TickTerminalHack()
-	{
-		if (!m_TerminalHack || !m_Config || !m_Config.Main)
-			return;
-
-		float delta = m_Config.Main.TickSeconds;
-		if (delta <= 0.0)
-			delta = 1.0;
-
-		if (m_TerminalHack.Tick(delta, this, m_Config.Main))
-			return;
-
-		if (!m_TerminalHack.IsActive())
-		{
-			m_State = DZKOTH_States.WAITING_FOR_TERMINAL_HACK;
-			BroadcastChestHudToOnlinePlayers();
-			return;
-		}
-
-		SyncTerminalHudToPlayersInside();
 	}
 
 	protected void TickCapture()
@@ -621,8 +482,8 @@ class DZKOTH_EventInstance
 		DZKOTH_ServerRPC.BroadcastWarning("DeutschZ KotH", "Capture abgeschlossen. BosZ Zombie betritt gleich die Zone.", 10.0);
 
 		DZKOTH_Utils.Log("Capture complete; boss phase scheduled.");
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(SpawnRewardFireworks, 5000, false, m_Location.GetFlagPosition());
-		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(StartBossPhaseAfterCapture, 10000, false);
+		if (GetGame())
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(StartBossPhaseAfterCapture, 10000, false);
 	}
 
 	protected void StartBossPhaseAfterCapture()
@@ -668,11 +529,6 @@ class DZKOTH_EventInstance
 	protected bool IsCaptureState()
 	{
 		return m_State == DZKOTH_States.CAPTURING;
-	}
-
-	protected bool RequiresTerminalHack()
-	{
-		return m_Config && m_Config.Main && m_Config.Main.RequireTerminalHackBeforeCapture;
 	}
 
 	protected float GetCaptureRadius()
@@ -782,24 +638,28 @@ class DZKOTH_EventInstance
 
 	protected void SpawnRewardFireworks(vector center)
 	{
-		if (!GetGame())
+		if (!GetGame() || !m_Config || !m_Config.Main || !m_Config.Main.FireworkEnabled)
 			return;
 
-		for (int i = 0; i < 3; i++)
+		vector pos = center + Vector(3.0, 0, 0);
+		pos = DZKOTH_Utils.Grounded(pos);
+		Object object = GetGame().CreateObjectEx(DZKOTH_Const.FIREWORKS_BATTERY_CLASSNAME, pos, ECE_PLACE_ON_SURFACE);
+		EntityAI battery = EntityAI.Cast(object);
+		if (!battery)
 		{
-			float angle = (2.094395 * i) + Math.RandomFloatInclusive(-0.25, 0.25);
-			vector pos = center + Vector(Math.Cos(angle) * 15.0, 0, Math.Sin(angle) * 15.0);
-			pos = DZKOTH_Utils.Grounded(pos);
-			Object object = GetGame().CreateObjectEx(DZKOTH_Const.FIREWORKS_BATTERY_CLASSNAME, pos, ECE_PLACE_ON_SURFACE);
-			EntityAI battery = EntityAI.Cast(object);
-			if (battery)
-			{
-				m_RewardFireworks.Insert(battery);
-				battery.SetOrientation(Vector(Math.RandomFloatInclusive(0.0, 359.0), 0, 0));
-				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(IgniteRewardFirework, 1200 + (i * 700), false, battery);
-				GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupRewardFirework, 120000, false, battery);
-			}
+			DZKOTH_Utils.Warn("FIREWORK SPAWN FAILED at " + pos.ToString());
+			return;
 		}
+
+		m_RewardFireworks.Insert(battery);
+		battery.SetOrientation(Vector(Math.RandomFloatInclusive(0.0, 359.0), 0, 0));
+		int cleanupMs = m_Config.Main.FireworkDurationSeconds * 1000;
+		if (cleanupMs < 5000)
+			cleanupMs = 30000;
+
+		DZKOTH_Utils.Log("FIREWORK SPAWNED");
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(IgniteRewardFirework, 1200, false, battery);
+		GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupRewardFirework, cleanupMs, false, battery);
 	}
 
 	protected void IgniteRewardFirework(EntityAI battery)
@@ -808,6 +668,7 @@ class DZKOTH_EventInstance
 			return;
 
 		battery.OnIgnitedThis(null);
+		DZKOTH_Utils.Log("FIREWORK STARTED");
 	}
 
 	protected void CleanupRewardFirework(EntityAI battery)
@@ -821,6 +682,8 @@ class DZKOTH_EventInstance
 			if (index >= 0)
 				m_RewardFireworks.Remove(index);
 		}
+
+		DZKOTH_Utils.Log("FIREWORK CLEANED");
 	}
 
 	protected void CleanupRewardFireworks()
@@ -867,7 +730,7 @@ class DZKOTH_EventInstance
 			bossDefeatPosition = m_Boss.GetPosition();
 
 		ref array<PlayerBase> nearbyPlayers = CollectPlayersInHudRange();
-		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(nearbyPlayers, "DeutschZ KotH", "BosZ Mumie erledigt. Das Loot-Fass ist freigegeben.", 8.0);
+		DZKOTH_ServerRPC.BroadcastPlayerUIMessage(nearbyPlayers, "DeutschZ KotH", "BosZ Mumie erledigt. Die Reward Chest ist freigegeben.", 8.0);
 
 		if (m_Smoke)
 			m_Smoke.SetCompleted();
@@ -880,19 +743,20 @@ class DZKOTH_EventInstance
 
 		if (GetGame())
 		{
-			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(Tick);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(ScheduledCleanupEvent);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(CleanupArenaAfterBossDefeat);
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(CleanupArenaAfterBossDefeat, 10000, false);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(SpawnRewardFireworks);
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(SpawnRewardFireworks, 30000, false, m_Location.GetFlagPosition());
 			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(ScheduledCleanupEvent, GetRewardCleanupDelayMs(), false);
 		}
 
-		DZKOTH_Utils.Log("Boss defeated; red smoke active. Arena cleanup scheduled in 10 seconds and full reward cleanup within 10 minutes.");
+		DZKOTH_Utils.Log("Boss defeated; red smoke active. Arena cleanup scheduled in 10 seconds, firework scheduled in 30 seconds and full reward cleanup within 10 minutes.");
 	}
 
 	protected void CleanupArenaAfterBossDefeat()
 	{
-		if (m_State != DZKOTH_States.REWARD_ACTIVE && m_State != DZKOTH_States.BOSS_DEFEATED)
+		if (m_State != DZKOTH_States.REWARD_ACTIVE && m_State != DZKOTH_States.BOSS_DEFEATED && m_State != DZKOTH_States.KEYCARD_TAKEN)
 			return;
 
 		DZKOTH_ServerRPC.BroadcastFXGlobal(DZKOTH_FXIds.CLEAR, m_Location.GetPosition());
@@ -900,15 +764,25 @@ class DZKOTH_EventInstance
 			m_Waves.Cleanup();
 		if (m_Boss)
 			m_Boss.Cleanup();
-		if (m_Smoke)
-			m_Smoke.DeleteFlagpole();
 		if (m_Markers)
 			m_Markers.Remove();
-		if (m_TerminalHack)
-			m_TerminalHack.Cleanup();
-		CleanupRewardFireworks();
 
-		DZKOTH_Utils.Log("Arena cleanup complete; reward barrel, boss remains, loot and keycard preserved.");
+		DZKOTH_Utils.Log("Arena cleanup complete; reward chest, flagpole, red smoke, loot and keycard preserved until final cleanup.");
+	}
+
+	protected void TickKeycardPhase()
+	{
+		if (!m_KeycardTracker || !m_Config || !m_Config.Main)
+			return;
+
+		if (!m_KeycardTracker.Tick(CollectOnlinePlayers(), m_Config.Main.GlobalKeycardAnnouncement))
+			return;
+
+		m_State = DZKOTH_States.KEYCARD_TAKEN;
+		if (GetGame())
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(Tick);
+
+		DZKOTH_Utils.Log("Story keycard pickup registered; permanent tracking remains disabled.");
 	}
 
 	protected int GetRewardCleanupDelayMs()
@@ -1034,7 +908,7 @@ class DZKOTH_EventInstance
 		if (!m_Location)
 			return players;
 
-		float radius = 500.0;
+		float radius = 120.0;
 		if (m_Config && m_Config.Main && m_Config.Main.ProgressHudRadius > 0.0)
 			radius = m_Config.Main.ProgressHudRadius;
 
@@ -1084,16 +958,6 @@ class DZKOTH_EventInstance
 		DZKOTH_ServerRPC.SendHud(player, DZKOTH_ProgressModes.CAPTURE, label, killed, m_ZombieGoal);
 	}
 
-	protected void BroadcastChestHudToOnlinePlayers()
-	{
-		ref array<PlayerBase> onlinePlayers = CollectOnlinePlayers();
-		foreach (PlayerBase player: onlinePlayers)
-		{
-			if (player)
-				SyncTerminalHudToPlayer(player);
-		}
-	}
-
 	protected void BroadcastCaptureReadyHudToOnlinePlayers()
 	{
 		BroadcastCaptureReadyHudToNearbyPlayers();
@@ -1127,41 +991,11 @@ class DZKOTH_EventInstance
 		DZKOTH_ServerRPC.BroadcastHud(CollectPlayersInHudRange(), DZKOTH_ProgressModes.BOSS, "BosZ Mumie", m_Boss.GetHealth(), m_Boss.GetMaxHealth());
 	}
 
-	protected void SyncTerminalHudToPlayersInside()
-	{
-		foreach (PlayerBase player: m_PlayersInside)
-		{
-			if (player)
-				SyncTerminalHudToPlayer(player);
-		}
-	}
-
-	protected void SyncTerminalHudToPlayer(PlayerBase player)
-	{
-		if (!player || !m_TerminalHack || !m_Config || !m_Config.Main)
-			return;
-
-		float progress = m_TerminalHack.GetProgressPercent(m_Config.Main);
-		string label = "Zone gesichert. Kiste vorbereiten.";
-		if (m_State == DZKOTH_States.TERMINAL_HACK_ACTIVE)
-			label = "Kiste wird aufgebrochen: " + Math.Round(progress).ToString() + "%";
-
-		DZKOTH_ServerRPC.SendHud(player, DZKOTH_ProgressModes.CAPTURE, label, progress, 100.0);
-	}
-
 	string GetDebugState()
 	{
 		string text = "state=" + m_State.ToString() + " progress=" + m_CaptureProgress.ToString();
 		text = text + " zombies=" + m_LastZombieKilledCount.ToString() + "/" + m_ZombieGoal.ToString();
-		if (m_TerminalHack && m_Config && m_Config.Main)
-		{
-			text = text + " chestSpawned=" + BoolText(m_TerminalHack.IsSpawned());
-			text = text + " chestUnlocked=" + BoolText(m_TerminalHack.IsActionUnlocked());
-			text = text + " chestActive=" + BoolText(m_TerminalHack.IsActive());
-			text = text + " chestProgress=" + m_TerminalHack.GetProgressPercent(m_Config.Main).ToString();
-			text = text + " chestHacker=" + m_TerminalHack.GetHackerName();
-			text = text + " captureUnlocked=" + BoolText(m_State >= DZKOTH_States.WAITING_FOR_PLAYER);
-		}
+		text = text + " captureUnlocked=" + BoolText(m_State >= DZKOTH_States.WAITING_FOR_PLAYER);
 
 		return text;
 	}

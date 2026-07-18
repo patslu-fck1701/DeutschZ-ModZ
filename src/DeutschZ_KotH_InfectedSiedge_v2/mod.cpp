@@ -1,10 +1,10 @@
-name = "DeutschZ KotH Infected Siege v2";
+﻿name = "DeutschZ KotHZ V2 Pro";
 picture = "";
 logoSmall = "";
 logo = "";
 logoOver = "";
-tooltip = "DeutschZ KotH Infected Siege v2";
-overview = "Server-authoritative Vybor Airfield King of the Hill event with optional Expansion notify and marker support, zombie prephase, SeaChest action, statusbar and vanilla fallback.";
+tooltip = "DeutschZ KotHZ V2 Pro";
+overview = "DeutschZ KotHZ V2 Pro / Infected Siege: serverautoritative KotH-Eventlogik mit Capture, Wellen, BosZ-Mumie, Keycard, RewardChest, optionalen Expansion-Notify/Marker-Systemen und Vanilla-Fallback.";
 action = "";
 author = "DeutschZ";
-version = "0.4.5-eventruntime";
+version = "0.5.0-v2-pro";

@@ -44,11 +44,6 @@ class DZKOTH_AdminDebug
 			ForceBoss();
 			SendAdminReply(player, "ForceBoss ausgefuehrt.");
 		}
-		else if (action == "forceterminalhack" || action == "forcechest")
-		{
-			ForceTerminalHack();
-			SendAdminReply(player, "Kistenaktion erzwungen.");
-		}
 		else if (action == "capture" || action == "teststart" || action == "activate")
 		{
 			if (DZKOTH_EventManager.GetInstance().DebugStartCapture(player))
@@ -78,15 +73,9 @@ class DZKOTH_AdminDebug
 			SetProgress(progress);
 			SendAdminReply(player, "Progress gesetzt auf " + progress.ToString());
 		}
-		else if ((action == "setterminalhack" || action == "setchest") && parts.Count() >= 2)
-		{
-			float terminalProgress = parts.Get(1).ToFloat();
-			SetTerminalHack(terminalProgress);
-			SendAdminReply(player, "Terminalhack gesetzt auf " + terminalProgress.ToString());
-		}
 		else
 		{
-			SendAdminReply(player, "Befehle: state, start [airfield|0], capture, teststart, activate, forcechest, setchest <0-100>, cleanup, stop, setprogress <0-100>");
+			SendAdminReply(player, "Befehle: state, start [airfield|0], capture, teststart, activate, forceboss, cleanup, stop, setprogress <0-100>");
 		}
 	}
 
@@ -96,22 +85,10 @@ class DZKOTH_AdminDebug
 		DZKOTH_Utils.Log("Admin debug: ForceBoss called.");
 	}
 
-	static void ForceTerminalHack()
-	{
-		DZKOTH_EventManager.GetInstance().DebugForceTerminalHack();
-		DZKOTH_Utils.Log("Admin debug: ForceTerminalHack called.");
-	}
-
 	static void SetProgress(float progress)
 	{
 		DZKOTH_EventManager.GetInstance().DebugSetProgress(progress);
 		DZKOTH_Utils.Log("Admin debug: SetProgress " + progress.ToString());
-	}
-
-	static void SetTerminalHack(float progress)
-	{
-		DZKOTH_EventManager.GetInstance().DebugSetTerminalHack(progress);
-		DZKOTH_Utils.Log("Admin debug: SetTerminalHack " + progress.ToString());
 	}
 
 	static void Cleanup()

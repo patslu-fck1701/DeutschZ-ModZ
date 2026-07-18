@@ -7,8 +7,6 @@ modded class PlayerBase
 		if (!GetGame() || !GetGame().IsServer() || !damageResult || !IsAlive())
 			return;
 
-		DZKOTH_EventManager.GetInstance().CancelTerminalHack(this);
-
 		if (!source)
 			return;
 

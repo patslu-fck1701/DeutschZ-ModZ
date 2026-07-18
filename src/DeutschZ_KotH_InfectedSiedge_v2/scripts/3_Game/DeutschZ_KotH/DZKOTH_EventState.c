@@ -3,12 +3,8 @@ class DZKOTH_States
 	static const int INACTIVE = 0;
 	static const int ANNOUNCED = 1;
 	static const int ZOMBIE_PREPHASE = 2;
-	static const int WAITING_FOR_TERMINAL_HACK = 3;
-	static const int WAITING_FOR_CHEST_BREAK = 3;
-	static const int TERMINAL_HACK_ACTIVE = 4;
-	static const int CHEST_BREAK_ACTIVE = 4;
-	static const int TERMINAL_HACK_COMPLETE = 5;
-	static const int CHEST_BREAK_COMPLETE = 5;
+	// Values 3-5 belonged to the removed pre-capture gate flow. They stay
+	// unused so existing numeric state diagnostics keep their historical IDs.
 	static const int WAITING_FOR_PLAYER = 6;
 	static const int CAPTURING = 7;
 	static const int WAVE_ONE_ACTIVE = 8;

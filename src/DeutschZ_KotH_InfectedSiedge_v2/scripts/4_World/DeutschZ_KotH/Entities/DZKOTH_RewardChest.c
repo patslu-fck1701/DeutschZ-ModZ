@@ -1,5 +1,10 @@
-class DZKOTH_RewardBarrel : Barrel_Green
+class DZKOTH_RewardChest : SeaChest
 {
+	override bool IsTakeable()
+	{
+		return false;
+	}
+
 	override bool CanPutInCargo(EntityAI parent)
 	{
 		return false;

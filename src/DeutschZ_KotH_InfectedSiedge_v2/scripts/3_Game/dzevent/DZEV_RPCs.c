@@ -1,4 +1,4 @@
-class DZEV_RPCIds
+﻿class DZEV_RPCIds
 {
 	static const int MARKER_SYNC = 531200;
 	static const int PROGRESS_SYNC = 531201;
@@ -8,8 +8,8 @@ class DZEV_RPCIds
 
 class DZEV_Paths
 {
-	static const string PROFILE_DIR = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2";
-	static const string GROUPS_PATH = "$profile:DeutschZ-System/DeutschZ_KotH_InfectedSiedge_v2/Persistence/groups.json";
+	static const string PROFILE_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro";
+	static const string GROUPS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Persistence/groups.json";
 }
 
 class DZEV_ProgressModes

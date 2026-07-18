@@ -16,4 +16,11 @@ modded class MissionGameplay
 		super.OnUpdate(timeslice);
 		DZEV_ClientProgressRenderer.Get().Update(timeslice);
 	}
+
+	override void OnMissionFinish()
+	{
+		DZEV_ClientProgressHud.Get().StopMusic();
+		DZEV_ClientProgressHud.Get().StopSiren();
+		super.OnMissionFinish();
+	}
 }

@@ -5,6 +5,7 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 	protected int m_DZKOTH_SmokeState;
 	protected int m_DZKOTH_SmokeStateLocal;
 	protected Particle m_DZKOTH_SmokeParticle;
+	protected int m_DZKOTH_FlagReconcilePass;
 
 	void DZKOTH_EventFlagpole()
 	{
@@ -12,6 +13,7 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 		m_DZKOTH_RaisedAmountLocal = -1.0;
 		m_DZKOTH_SmokeState = -1;
 		m_DZKOTH_SmokeStateLocal = -2;
+		m_DZKOTH_FlagReconcilePass = 0;
 		RegisterNetSyncVariableFloat("m_DZKOTH_RaisedAmount");
 		RegisterNetSyncVariableInt("m_DZKOTH_SmokeState");
 
@@ -21,6 +23,9 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 
 	override void EEDelete(EntityAI parent)
 	{
+		if (GetGame())
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).Remove(DZKOTH_ReconcileEventFlag);
+
 		super.EEDelete(parent);
 		DZKOTH_StopSmokeParticle();
 	}
@@ -49,6 +54,16 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 
 		FullyBuild();
 		AnimateFlagEx(1.0);
+		m_DZKOTH_FlagReconcilePass = 0;
+		DZKOTH_ReconcileEventFlag();
+
+		DZKOTH_SetRaisedAmount(0.0);
+	}
+
+	protected void DZKOTH_ReconcileEventFlag()
+	{
+		if (!GetGame() || !GetGame().IsServer() || !GetInventory())
+			return;
 
 		EntityAI current;
 		array<EntityAI> redundantFlags = new array<EntityAI>;
@@ -68,14 +83,46 @@ class DZKOTH_EventFlagpole extends StaticFlagPole
 		foreach (EntityAI redundantFlag: redundantFlags)
 		{
 			if (redundantFlag)
-				redundantFlag.Delete();
+				GetGame().ObjectDelete(redundantFlag);
 		}
 
 		if (!current)
-			current = GetInventory().CreateAttachment(DZKOTH_Const.FLAG_CLASSNAME);
+		{
+			// This is the exact method used by vanilla StaticFlagPole's object
+			// spawner and reliably resolves Material_FPole_Flag.
+			current = GetInventory().CreateInInventory(DZKOTH_Const.FLAG_CLASSNAME);
+		}
 
-		DZKOTH_SetRaisedAmount(0.0);
-		DZKOTH_Utils.Log("Flagpole visual state forced: built=yes flag=" + BoolText(current != null) + " raised=no");
+		// A late inventory/proxy update can detach an older event flag into the
+		// world instead of keeping it in Material_FPole_Flag. Remove only our own
+		// orphaned event-flag class; unrelated player flags remain untouched.
+		array<Object> nearbyObjects = new array<Object>;
+		array<CargoBase> nearbyProxies = new array<CargoBase>;
+		GetGame().GetObjectsAtPosition3D(GetPosition(), 16.0, nearbyObjects, nearbyProxies);
+		foreach (Object nearbyObject: nearbyObjects)
+		{
+			if (nearbyObject && nearbyObject != current && nearbyObject.GetType() == DZKOTH_Const.FLAG_CLASSNAME)
+				GetGame().ObjectDelete(nearbyObject);
+		}
+
+		int flagCount = 0;
+		int currentAttachmentCount = GetInventory().AttachmentCount();
+		for (int countIndex = 0; countIndex < currentAttachmentCount; countIndex++)
+		{
+			EntityAI countAttachment = GetInventory().GetAttachmentFromIndex(countIndex);
+			if (countAttachment && Flag_Base.Cast(countAttachment))
+				flagCount++;
+		}
+
+		AnimateFlagEx(1.0 - Math.Clamp(m_DZKOTH_RaisedAmount, 0.0, 1.0));
+		m_DZKOTH_FlagReconcilePass++;
+		DZKOTH_Utils.Log("Flagpole exact-one reconciliation: pass=" + m_DZKOTH_FlagReconcilePass.ToString() + " flag=" + BoolText(current != null) + " attachmentCount=" + flagCount.ToString());
+
+		// Vanilla and optional territory mods can finish their proxy/attachment
+		// synchronization after the initial spawn. A short bounded retry window
+		// removes those late duplicates without introducing a permanent scan.
+		if (m_DZKOTH_FlagReconcilePass < 4)
+			GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(DZKOTH_ReconcileEventFlag, 750, false);
 	}
 
 	void DZKOTH_DeleteEventFlag()

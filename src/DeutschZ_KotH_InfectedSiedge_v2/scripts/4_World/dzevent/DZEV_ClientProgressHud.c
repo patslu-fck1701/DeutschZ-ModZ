@@ -1,5 +1,10 @@
-class DZEV_ClientProgressHud
+﻿class DZEV_ClientProgressHud
 {
+	protected static const float MUSIC_FULL_VOLUME_RADIUS = 25.0;
+	protected static const float MUSIC_MAX_DISTANCE = 100.0;
+	protected static const float MUSIC_MAX_VOLUME = 0.45;
+	protected static const int MUSIC_DISTANCE_TICK_MS = 500;
+
 	private static ref DZEV_ClientProgressHud s_Instance;
 
 	protected Widget m_Root;
@@ -9,6 +14,8 @@ class DZEV_ClientProgressHud
 	protected Widget m_RedFlash;
 	protected EffectSound m_Music;
 	protected EffectSound m_Siren;
+	protected vector m_MusicPosition;
+	protected bool m_MusicRequested;
 
 	static DZEV_ClientProgressHud Get()
 	{
@@ -69,7 +76,10 @@ class DZEV_ClientProgressHud
 			return;
 
 		StopMusic();
-		m_Music = SEffectManager.PlaySound("DZKOTH_EventMusic_SoundSet", pos, 0, 0, true);
+		m_MusicPosition = pos;
+		m_MusicRequested = true;
+		UpdateMusicAttenuation();
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(UpdateMusicAttenuation, MUSIC_DISTANCE_TICK_MS, true);
 	}
 
 	void PlayEventStart(vector pos)
@@ -104,6 +114,48 @@ class DZEV_ClientProgressHud
 	}
 
 	void StopMusic()
+	{
+		m_MusicRequested = false;
+		m_MusicPosition = vector.Zero;
+		if (GetGame())
+			GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(UpdateMusicAttenuation);
+
+		DestroyMusicEffect();
+	}
+
+	protected void UpdateMusicAttenuation()
+	{
+		if (!m_MusicRequested || !GetGame())
+			return;
+
+		Man localPlayer = GetGame().GetPlayer();
+		if (!localPlayer)
+		{
+			DestroyMusicEffect();
+			return;
+		}
+
+		float distance = vector.Distance(localPlayer.GetPosition(), m_MusicPosition);
+		if (distance > MUSIC_MAX_DISTANCE)
+		{
+			DestroyMusicEffect();
+			return;
+		}
+
+		if (!m_Music)
+			m_Music = SEffectManager.PlaySound("DZKOTH_EventMusic_SoundSet", m_MusicPosition, 0, 0, true);
+
+		if (!m_Music)
+			return;
+
+		float relativeVolume = 1.0;
+		if (distance > MUSIC_FULL_VOLUME_RADIUS)
+			relativeVolume = 1.0 - ((distance - MUSIC_FULL_VOLUME_RADIUS) / (MUSIC_MAX_DISTANCE - MUSIC_FULL_VOLUME_RADIUS));
+
+		m_Music.SetSoundVolume(Math.Clamp(relativeVolume, 0.0, 1.0) * MUSIC_MAX_VOLUME);
+	}
+
+	protected void DestroyMusicEffect()
 	{
 		if (m_Music)
 			SEffectManager.DestroySound(m_Music);
@@ -165,7 +217,7 @@ class DZEV_ClientProgressHud
 		if (m_Root || !GetGame() || GetGame().IsDedicatedServer() || !GetGame().GetWorkspace())
 			return;
 
-		m_Root = GetGame().GetWorkspace().CreateWidgets("DeutschZ_KOTH_InfectedSiege/gui/layouts/dzevent/dzev_progress.layout");
+		m_Root = GetGame().GetWorkspace().CreateWidgets("DeutschZ_KotHZ_V2_Pro/gui/layouts/dzevent/dzev_progress.layout");
 		if (!m_Root)
 			return;
 

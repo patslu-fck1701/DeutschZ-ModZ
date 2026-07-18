@@ -125,12 +125,54 @@ class DZKOTH_EventManager
 
 	protected int SelectAutomaticLocationIndex()
 	{
-		EnsureRotationBag();
-		if (!m_LocationRotation || !m_LocationRotation.RemainingLocationKeys || m_LocationRotation.RemainingLocationKeys.Count() == 0)
+		if (!m_LocationRotation)
+			m_LocationRotation = new DZKOTH_LocationRotationState;
+
+		if (!m_Config || !m_Config.Locations || !m_Config.Locations.Locations || m_Config.Locations.Locations.Count() == 0)
 			return -1;
 
-		string nextKey = m_LocationRotation.RemainingLocationKeys.Get(m_LocationRotation.RemainingLocationKeys.Count() - 1);
-		return FindLocationIndexByKey(nextKey);
+		ref array<int> candidates = new array<int>;
+		ref array<int> repeatSafeCandidates = new array<int>;
+		string lastKey = m_LocationRotation.LastLocationKey;
+
+		for (int i = 0; i < m_Config.Locations.Locations.Count(); i++)
+		{
+			DZKOTH_LocationConfig location = m_Config.Locations.Locations.Get(i);
+			if (!location || !location.IsEnabled())
+				continue;
+
+			candidates.Insert(i);
+			if (GetLocationKey(location) != lastKey)
+				repeatSafeCandidates.Insert(i);
+		}
+
+		if (candidates.Count() == 0)
+			return -1;
+
+		bool repeatAvoided = false;
+		array<int> pickFrom = candidates;
+		if (repeatSafeCandidates.Count() > 0 && candidates.Count() > 1)
+		{
+			pickFrom = repeatSafeCandidates;
+			repeatAvoided = true;
+		}
+
+		int selectedCandidate = Math.RandomInt(0, pickFrom.Count());
+		int selectedIndex = pickFrom.Get(selectedCandidate);
+		DZKOTH_LocationConfig selectedLocation = m_Config.Locations.Locations.Get(selectedIndex);
+
+		DZKOTH_Utils.Log("LOCATION CANDIDATES: " + candidates.Count().ToString());
+		DZKOTH_Utils.Log("LAST LOCATION: " + lastKey);
+		if (selectedLocation)
+			DZKOTH_Utils.Log("SELECTED LOCATION: " + selectedLocation.Name + " / " + selectedIndex.ToString());
+		else
+			DZKOTH_Utils.Log("SELECTED LOCATION: <invalid> / " + selectedIndex.ToString());
+		if (repeatAvoided)
+			DZKOTH_Utils.Log("REPEAT AVOIDED: JA");
+		else
+			DZKOTH_Utils.Log("REPEAT AVOIDED: NEIN");
+
+		return selectedIndex;
 	}
 
 	protected void EnsureRotationBag()
@@ -198,13 +240,11 @@ class DZKOTH_EventManager
 		if (!location)
 			return;
 
-		EnsureRotationBag();
 		string key = GetLocationKey(location);
-		int keyIndex = m_LocationRotation.RemainingLocationKeys.Find(key);
-		if (keyIndex >= 0)
-			m_LocationRotation.RemainingLocationKeys.Remove(keyIndex);
 
 		m_LocationRotation.LastLocationKey = key;
+		if (m_LocationRotation.RemainingLocationKeys)
+			m_LocationRotation.RemainingLocationKeys.Clear();
 		SaveLocationRotation();
 	}
 
@@ -322,32 +362,6 @@ class DZKOTH_EventManager
 			m_Instance.SyncStateToPlayer(player);
 	}
 
-	bool StartTerminalHack(PlayerBase player, Object terminal)
-	{
-		return m_Instance && m_Instance.StartTerminalHack(player, terminal);
-	}
-
-	bool BeginTerminalHack(PlayerBase player, Object terminal)
-	{
-		return m_Instance && m_Instance.BeginTerminalHack(player, terminal);
-	}
-
-	bool CancelTerminalHack(PlayerBase player, Object terminal = null)
-	{
-		return m_Instance && m_Instance.CancelTerminalHack(player, terminal);
-	}
-
-	float GetChestActionDuration()
-	{
-		if (!m_Config || !m_Config.Main)
-			return 60.0;
-
-		if (m_Config.Main.ChestActionDurationSeconds < 1)
-			return 60.0;
-
-		return m_Config.Main.ChestActionDurationSeconds;
-	}
-
 	bool ShouldBlockVehicleZombieContact(Object zombie)
 	{
 		if (!zombie || !m_Instance)
@@ -368,18 +382,6 @@ class DZKOTH_EventManager
 	{
 		if (m_Instance)
 			m_Instance.DebugForceBoss();
-	}
-
-	void DebugForceTerminalHack()
-	{
-		if (m_Instance)
-			m_Instance.DebugForceTerminalHack();
-	}
-
-	void DebugSetTerminalHack(float progress)
-	{
-		if (m_Instance)
-			m_Instance.DebugSetTerminalHack(progress);
 	}
 
 	void DebugSetProgress(float progress)

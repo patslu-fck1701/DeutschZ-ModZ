@@ -29,5 +29,7 @@
         { "ClassName": "Epinephrine", "Chance": 35, "Min": 1, "Max": 1 },
         { "ClassName": "M67Grenade", "Chance": 35, "Min": 1, "Max": 1 }
     ],
-    "BossCorpseLoot": []
+    "BossCorpseLoot": [
+        { "ClassName": "DZKOTH_BattlegroundZ_Keycard", "Chance": 100, "Min": 1, "Max": 1 }
+    ]
 }

@@ -10,7 +10,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [7983.474609, 339.076569, 14649.505859],
       "ChestOrientation": [117, 0, 0],
-      "TerminalPosition": [7983.474609, 339.076569, 14649.505859],
       "BossSpawnPosition": [8015, 0, 14625],
       "RewardCratePosition": [7983.474609, 339.076569, 14649.505859],
       "RewardCrateOrientation": [117, 0, 0]
@@ -25,7 +24,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [4568.382813, 317.974121, 8353.989258],
       "ChestOrientation": [-80.999992, 0, 0],
-      "TerminalPosition": [4568.382813, 317.974121, 8353.989258],
       "BossSpawnPosition": [4568, 0, 8338],
       "RewardCratePosition": [4568.382813, 317.974121, 8353.989258],
       "RewardCrateOrientation": [-80.999992, 0, 0]
@@ -40,7 +38,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [3773.509521, 363.050110, 14812.888672],
       "ChestOrientation": [0, 0, 0],
-      "TerminalPosition": [3773.509521, 363.050110, 14812.888672],
       "BossSpawnPosition": [3796, 0, 14814],
       "RewardCratePosition": [3773.509521, 363.050110, 14812.888672],
       "RewardCrateOrientation": [0, 0, 0]
@@ -55,7 +52,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [2918.307129, 270.252960, 9671.989258],
       "ChestOrientation": [53.999996, 0, 0],
-      "TerminalPosition": [2918.307129, 270.252960, 9671.989258],
       "BossSpawnPosition": [2949, 0, 9692],
       "RewardCratePosition": [2918.307129, 270.252960, 9671.989258],
       "RewardCrateOrientation": [53.999996, 0, 0]
@@ -70,7 +66,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [1099.196533, 182.940308, 7212.189453],
       "ChestOrientation": [133.244720, 0, 0],
-      "TerminalPosition": [1099.196533, 182.940308, 7212.189453],
       "BossSpawnPosition": [1116, 0, 7184],
       "RewardCratePosition": [1099.196533, 182.940308, 7212.189453],
       "RewardCrateOrientation": [133.244720, 0, 0]
@@ -85,7 +80,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [4887.859375, 339.133698, 9429.962891],
       "ChestOrientation": [61.615467, 0, 0],
-      "TerminalPosition": [4887.859375, 339.133698, 9429.962891],
       "BossSpawnPosition": [4920, 0, 9443],
       "RewardCratePosition": [4887.859375, 339.133698, 9429.962891],
       "RewardCrateOrientation": [61.615467, 0, 0]
@@ -100,7 +94,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [313.451447, 294.944000, 9355.622070],
       "ChestOrientation": [117, 0, 0],
-      "TerminalPosition": [313.451447, 294.944000, 9355.622070],
       "BossSpawnPosition": [330, 0, 9327],
       "RewardCratePosition": [313.451447, 294.944000, 9355.622070],
       "RewardCrateOrientation": [117, 0, 0]
@@ -115,7 +108,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [1236.362305, 173.440796, 5861.491699],
       "ChestOrientation": [135.045273, 0, 0],
-      "TerminalPosition": [1236.362305, 173.440796, 5861.491699],
       "BossSpawnPosition": [1260, 0, 5836],
       "RewardCratePosition": [1236.362305, 173.440796, 5861.491699],
       "RewardCrateOrientation": [135.045273, 0, 0]
@@ -130,7 +122,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [9700.262695, 299.153381, 8879.391602],
       "ChestOrientation": [36.000004, 0, 0],
-      "TerminalPosition": [9700.262695, 299.153381, 8879.391602],
       "BossSpawnPosition": [9722, 0, 8903],
       "RewardCratePosition": [9700.262695, 299.153381, 8879.391602],
       "RewardCrateOrientation": [36.000004, 0, 0]
@@ -145,7 +136,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [12141.327148, 140.065903, 12642.984375],
       "ChestOrientation": [18.000002, 0, 0],
-      "TerminalPosition": [12141.327148, 140.065903, 12642.984375],
       "BossSpawnPosition": [12154, 0, 12671],
       "RewardCratePosition": [12141.327148, 140.065903, 12642.984375],
       "RewardCrateOrientation": [18.000002, 0, 0]
@@ -160,7 +150,6 @@
       "FlagOrientation": [0, 0, 0],
       "ChestPosition": [3634.295410, 333.873627, 6927.422363],
       "ChestOrientation": [-135, 0, 0],
-      "TerminalPosition": [3634.295410, 333.873627, 6927.422363],
       "BossSpawnPosition": [3645, 0, 6909],
       "RewardCratePosition": [3634.295410, 333.873627, 6927.422363],
       "RewardCrateOrientation": [-135, 0, 0]

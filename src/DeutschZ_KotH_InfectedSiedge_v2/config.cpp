@@ -1,15 +1,17 @@
-class CfgPatches
+﻿class CfgPatches
 {
-	class DeutschZ_KOTH_InfectedSiege
+	class DeutschZ_KotHZ_V2_Pro
 	{
 		units[] =
 		{
 			"DZKOTH_EventFlagpole",
 			"DZKOTH_EventFlag",
+			"DZKOTH_BattlegroundZ_Keycard",
+			"DZKOTH_BossCorpse",
+			"DZKOTH_RewardChest",
 			"DeutschZ_Barrel_Green",
 			"DeutschZ_FireworksLauncher",
 			"DeutschZ_Regeln",
-			"DZKOTH_RewardBarrel",
 			"DZKOTH_EliteInfected",
 			"DZKOTH_Infected_250",
 			"DZKOTH_Infected_400",
@@ -40,8 +42,10 @@ class CfgSoundShaders
 {
 	class DZKOTH_EventMusic_SoundShader
 	{
-		samples[] = {{"\DeutschZ_KOTH_InfectedSiege\sounds\dzkoth_anthem", 1}};
-		volume = 0.31875;
+		samples[] = {{"\DeutschZ_KotHZ_V2_Pro\sounds\dzkoth_anthem", 1}};
+		volume = 0.45;
+		radius = 25;
+		range = 100;
 	};
 };
 
@@ -52,20 +56,22 @@ class CfgSoundSets
 		soundShaders[] = {"DZKOTH_EventMusic_SoundShader"};
 		volumeFactor = 1;
 		frequencyFactor = 1;
+		// The supplied anthem is stereo. Client code therefore applies the
+		// 25 m / 100 m positional fade and hard cutoff for this 2D sound set.
 		spatial = 0;
 	};
 };
 
 class CfgMods
 {
-	class DeutschZ_KOTH_InfectedSiege
+	class DeutschZ_KotHZ_V2_Pro
 	{
-		dir = "DeutschZ_KOTH_InfectedSiege";
-		name = "DeutschZ K.o.t.H Infected Siege v2";
+		dir = "DeutschZ_KotHZ_V2_Pro";
+		name = "DeutschZ KotHZ V2 Pro";
 		credits = "DeutschZ";
 		author = "DeutschZ";
 		authorID = "";
-		version = "0.4.5-eventruntime";
+		version = "0.5.0-v2-pro";
 		type = "mod";
 		dependencies[] =
 		{
@@ -80,7 +86,7 @@ class CfgMods
 				value = "";
 				files[] =
 				{
-					"DeutschZ_KOTH_InfectedSiege/scripts/3_Game"
+					"DeutschZ_KotHZ_V2_Pro/scripts/3_Game"
 				};
 			};
 			class worldScriptModule
@@ -88,7 +94,7 @@ class CfgMods
 				value = "";
 				files[] =
 				{
-					"DeutschZ_KOTH_InfectedSiege/scripts/4_World"
+					"DeutschZ_KotHZ_V2_Pro/scripts/4_World"
 				};
 			};
 			class missionScriptModule
@@ -96,7 +102,7 @@ class CfgMods
 				value = "";
 				files[] =
 				{
-					"DeutschZ_KOTH_InfectedSiege/scripts/5_Mission"
+					"DeutschZ_KotHZ_V2_Pro/scripts/5_Mission"
 				};
 			};
 		};
@@ -125,7 +131,7 @@ class CfgVehicles
 		descriptionShort = "DeutschZ Lagerfass mit 500 Plaetzen.";
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_barrel_green_co.paa"
+			"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_barrel_green_co.paa"
 		};
 		itemSize[] = {10, 15};
 		weight = 10000;
@@ -144,8 +150,8 @@ class CfgVehicles
 		descriptionShort = "DeutschZ Feuerwerkswerfer mit 25-m-Nebelsignal.";
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_fireworkslauncher_co.paa",
-			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_fireworkslauncher_co.paa"
+			"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_fireworkslauncher_co.paa",
+			"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_fireworkslauncher_co.paa"
 		};
 	};
 
@@ -157,7 +163,7 @@ class CfgVehicles
 		hiddenSelections[] = {"zbytek"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln_loot_paper_co.paa"
+			"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln_loot_paper_co.paa"
 		};
 		class DamageSystem
 		{
@@ -168,11 +174,11 @@ class CfgVehicles
 					hitpoints = 15;
 					healthLevels[] =
 					{
-						{1, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
-						{0.7, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
-						{0.5, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
-						{0.3, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}},
-						{0, {"DeutschZ_KOTH_InfectedSiege\data\items\deutschz_regeln.rvmat"}}
+						{1, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}},
+						{0.7, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}},
+						{0.5, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}},
+						{0.3, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}},
+						{0, {"DeutschZ_KotHZ_V2_Pro\data\items\deutschz_regeln.rvmat"}}
 					};
 				};
 			};
@@ -181,46 +187,54 @@ class CfgVehicles
 
 	class DZKOTH_RewardBarrel : DeutschZ_Barrel_Green
 	{
-		scope = 2;
-		displayName = "DeutschZ KotH Reward Fass";
-		descriptionShort = "Unbewegliches 500-Slot-Reward-Fass des DeutschZ KotH Events.";
+		scope = 0;
 	};
 
-	class DZKOTH_RewardCrate : SeaChest
+	class DZKOTH_RewardChest : SeaChest
 	{
-		scope = 0;
-		displayName = "DeutschZ KotH Belohnungskiste";
-		descriptionShort = "Belohnungskiste nach erfolgreicher KotH-Eroberung.";
-		itemsCargoSize[] = {10,50};
+		scope = 2;
+		displayName = "DeutschZ KotH Reward Chest";
+		descriptionShort = "Unbewegliche 500-Slot-Belohnungskiste des DeutschZ KotH Events.";
 		hiddenSelections[] = {"camoGround"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\KOTH_sea_chest_co.paa"
+			"\DeutschZ_KotHZ_V2_Pro\data\textures\infectedsiedge\KothZ_FREE_sea_chest_co.paa"
 		};
+		class Cargo
+		{
+			itemsCargoSize[] = {10,50};
+			openable = 0;
+			allowOwnedCargoManipulation = 1;
+		};
+	};
+
+	class DZKOTH_RewardCrate : DZKOTH_RewardChest
+	{
+		scope = 0;
 	};
 
 	class DZKOTH_BossCorpse : SeaChest
 	{
-		scope = 0;
+		scope = 2;
 		displayName = "BosZ Remains";
 		descriptionShort = "Searchable remains of the BosZ Zombie. Story items can appear here.";
 		itemsCargoSize[] = {10,50};
 		hiddenSelections[] = {"camoGround"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\KOTH_sea_chest_co.paa"
+			"DeutschZ_KotHZ_V2_Pro\data\textures\infectedsiedge\KOTH_sea_chest_co.paa"
 		};
 	};
 
 	class DZKOTH_BattlegroundZ_Keycard : PunchedCard
 	{
-		scope = 0;
+		scope = 2;
 		displayName = "DeutschZ BattlegroundZ Keycard";
 		descriptionShort = "An unstable story keycard connected to DeutschZ BattlegroundZ.";
 		hiddenSelections[] = {"component01"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\DeutschZxKOTHZ_punchedcard_co.paa"
+			"\DeutschZ_KotHZ_V2_Pro\data\textures\infectedsiedge\DeutschZxKOTHZ_punchedcard_co.paa"
 		};
 	};
 
@@ -369,41 +383,6 @@ class CfgVehicles
 		};
 	};
 
-	class DZKOTH_EventTerminal : GPSReceiver
-	{
-		scope = 0;
-		displayName = "DeutschZ KotH Cardreader";
-		descriptionShort = "Eventterminal. Nach gesicherter Zone 60 Sekunden hacken, um den Fahnenmast zu aktivieren.";
-		hiddenSelections[] =
-		{
-			"gpsreceiver",
-			"grid_1_0",
-			"grid_1_1",
-			"grid_1_2",
-			"grid_2_0",
-			"grid_2_1",
-			"grid_2_2",
-			"alt_0",
-			"alt_1",
-			"alt_2",
-			"alt_3"
-		};
-		hiddenSelectionsTextures[] =
-		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\DeutschZxCardReader_gpsreceiver_co.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa",
-			"dz\gear\navigation\data\GPS_dash_ca.paa"
-		};
-	};
-
 	class DZKOTH_EventFlag : Flag_Base
 	{
 		scope = 2;
@@ -412,7 +391,7 @@ class CfgVehicles
 		hiddenSelections[] = {"camo"};
 		hiddenSelectionsTextures[] =
 		{
-			"DeutschZ_KOTH_InfectedSiege\data\textures\infectedsiedge\KothZFlag_flag_white_co.paa"
+			"DeutschZ_KotHZ_V2_Pro\data\textures\infectedsiedge\KothZ_FREE_flag_dayz_co.paa"
 		};
 	};
 };

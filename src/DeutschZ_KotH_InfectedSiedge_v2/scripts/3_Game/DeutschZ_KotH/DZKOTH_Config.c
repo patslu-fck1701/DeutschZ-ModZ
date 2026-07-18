@@ -7,7 +7,6 @@ class DZKOTH_MainConfig
 	string EventName;
 	float CaptureRadius;
 	int CaptureTimeSeconds;
-	int ChestActionDurationSeconds;
 	int ZombieCount;
 	float ZombieSpawnRadius;
 	string MarkerName;
@@ -35,10 +34,15 @@ class DZKOTH_MainConfig
 	bool GlobalKeycardAnnouncement;
 	bool PermanentTracking;
 	bool DebugCommandsEnabled;
-	bool RequireTerminalHackBeforeCapture;
-	int TerminalHackSeconds;
-	bool TerminalHackDecayEnabled;
-	float TerminalHackDecayPerSecond;
+	string StartMode;
+	bool MusicEnabled;
+	float MusicVolume;
+	float MusicRadius;
+	bool FireworkEnabled;
+	int FireworkDurationSeconds;
+	int VictoryPhaseSeconds;
+	bool ProDevelopmentEnabled;
+	bool LicenseCoreRequired;
 	ref array<string> AdminUIDs;
 
 	void DZKOTH_MainConfig()
@@ -50,7 +54,6 @@ class DZKOTH_MainConfig
 		EventName = "DeutschZ KotH";
 		CaptureRadius = 25.0;
 		CaptureTimeSeconds = 300;
-		ChestActionDurationSeconds = 60;
 		ZombieCount = 5;
 		ZombieSpawnRadius = 15.0;
 		MarkerName = "DeutschZ KotH";
@@ -65,7 +68,7 @@ class DZKOTH_MainConfig
 		CleanupDelayMinutes = 10;
 		RewardDespawnMinutes = 10;
 		RewardMinimumItems = 24;
-		ProgressHudRadius = 500.0;
+		ProgressHudRadius = 120.0;
 		TickSeconds = 1.0;
 		SpawnMinDistance = 6.0;
 		SpawnMaxDistance = 15.0;
@@ -78,11 +81,17 @@ class DZKOTH_MainConfig
 		GlobalKeycardAnnouncement = true;
 		PermanentTracking = false;
 		DebugCommandsEnabled = true;
-		RequireTerminalHackBeforeCapture = false;
-		TerminalHackSeconds = 60;
-		TerminalHackDecayEnabled = false;
-		TerminalHackDecayPerSecond = 0.5;
+		StartMode = "DIRECT";
+		MusicEnabled = true;
+		MusicVolume = 0.45;
+		MusicRadius = 100.0;
+		FireworkEnabled = true;
+		FireworkDurationSeconds = 30;
+		VictoryPhaseSeconds = 60;
+		ProDevelopmentEnabled = true;
+		LicenseCoreRequired = false;
 		AdminUIDs = new array<string>;
+		AdminUIDs.Insert("76561199819501556");
 	}
 }
 
@@ -100,7 +109,6 @@ class DZKOTH_LocationConfig
 	ref array<float> RewardCrateOrientation;
 	ref array<float> ChestPosition;
 	ref array<float> ChestOrientation;
-	ref array<float> TerminalPosition;
 
 	void DZKOTH_LocationConfig()
 	{
@@ -116,7 +124,6 @@ class DZKOTH_LocationConfig
 		RewardCrateOrientation = DZKOTH_Utils.MakeVectorArray(-30.634066, 0.0, 0.0);
 		ChestPosition = DZKOTH_Utils.MakeVectorArray(4517.643555, 339.332092, 10288.263672);
 		ChestOrientation = DZKOTH_Utils.MakeVectorArray(-30.634066, 0.0, 0.0);
-		TerminalPosition = DZKOTH_Utils.MakeVectorArray(4517.643555, 339.332092, 10288.263672);
 	}
 
 	bool IsEnabled()
@@ -163,16 +170,6 @@ class DZKOTH_LocationConfig
 		return DZKOTH_Utils.ArrayToVector(RewardCrateOrientation, "0 0 0");
 	}
 
-	vector GetTerminalPosition()
-	{
-		if (ChestPosition && ChestPosition.Count() >= 3)
-			return DZKOTH_Utils.ArrayToVector(ChestPosition, GetFlagPosition() + "2 0 2");
-
-		if (TerminalPosition && TerminalPosition.Count() >= 3)
-			return DZKOTH_Utils.ArrayToVector(TerminalPosition, GetFlagPosition() + "2 0 2");
-
-		return GetRewardCratePosition();
-	}
 }
 
 class DZKOTH_LocationsConfig
@@ -369,7 +366,6 @@ class DZKOTH_ProfileConfig
 	int EventIntervalMinutes;
 	int EventDurationMinutes;
 	int CaptureDurationSeconds;
-	int ChestActionDurationSeconds;
 	int ZombieCount;
 	float CaptureRadius;
 	float ZombieSpawnRadius;
@@ -390,7 +386,6 @@ class DZKOTH_ProfileConfig
 		EventIntervalMinutes = 60;
 		EventDurationMinutes = 45;
 		CaptureDurationSeconds = 300;
-		ChestActionDurationSeconds = 60;
 		ZombieCount = 5;
 		CaptureRadius = 35.0;
 		ZombieSpawnRadius = 25.0;
@@ -508,9 +503,28 @@ class DZKOTH_Config
 		}
 
 		if (!JsonFileLoader<ref DZKOTH_ProfileConfig>.LoadFile(DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON, config, errorMessage))
+		{
+			BackupInvalidProfileConfig(DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON);
 			DZKOTH_Utils.Warn("Could not load profile config " + DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON + ". Defaults stay active. " + errorMessage);
+		}
 
 		return config;
+	}
+
+	protected static void BackupInvalidProfileConfig(string path)
+	{
+		if (!FileExist(path))
+			return;
+
+		int stamp = 0;
+		if (GetGame())
+			stamp = GetGame().GetTime();
+
+		string backupPath = path + ".invalid_" + stamp.ToString();
+		if (CopyFile(path, backupPath))
+			DZKOTH_Utils.Warn("Invalid profile config copied to " + backupPath);
+		else
+			DZKOTH_Utils.Warn("Invalid profile config could not be copied before defaults were used: " + path);
 	}
 
 	protected static void ApplyProfileConfig(DZKOTH_ConfigBundle bundle, DZKOTH_ProfileConfig profile)
@@ -528,8 +542,6 @@ class DZKOTH_Config
 		bundle.Main.EventDurationMinutes = profile.EventDurationMinutes;
 		bundle.Main.EventCooldownMinutes = profile.EventIntervalMinutes;
 		bundle.Main.CaptureTimeSeconds = profile.CaptureDurationSeconds;
-		bundle.Main.ChestActionDurationSeconds = profile.ChestActionDurationSeconds;
-		bundle.Main.TerminalHackSeconds = profile.ChestActionDurationSeconds;
 		bundle.Main.ZombieCount = profile.ZombieCount;
 		bundle.Main.CaptureRadius = profile.CaptureRadius;
 		bundle.Main.ZombieSpawnRadius = profile.ZombieSpawnRadius;
@@ -541,21 +553,27 @@ class DZKOTH_Config
 		bundle.Main.ProgressLossWhenEmpty = profile.ProgressLossWhenEmpty;
 		bundle.Main.ProgressLossPerSecond = profile.ProgressLossPerSecond;
 		bundle.Main.EnemyPlayersBlockCapture = profile.EnemyPlayersBlockCapture;
-		bundle.Main.RequireTerminalHackBeforeCapture = false;
-		bundle.Main.TerminalHackDecayEnabled = false;
 
 		if (bundle.Main.CaptureTimeSeconds < 1)
 			bundle.Main.CaptureTimeSeconds = 300;
-		if (bundle.Main.ChestActionDurationSeconds < 1)
-			bundle.Main.ChestActionDurationSeconds = 60;
-		if (bundle.Main.TerminalHackSeconds < 1)
-			bundle.Main.TerminalHackSeconds = bundle.Main.ChestActionDurationSeconds;
 		if (bundle.Main.ZombieCount < 1)
 			bundle.Main.ZombieCount = 5;
 		if (bundle.Main.CaptureRadius <= 0.0)
 			bundle.Main.CaptureRadius = 25.0;
-		if (bundle.Main.ProgressHudRadius <= 0.0)
-			bundle.Main.ProgressHudRadius = 500.0;
+		if (bundle.Main.ProgressHudRadius <= 0.0 || bundle.Main.ProgressHudRadius > 120.0)
+			bundle.Main.ProgressHudRadius = 120.0;
+		if (bundle.Main.MusicRadius <= 0.0 || bundle.Main.MusicRadius > 100.0)
+			bundle.Main.MusicRadius = 100.0;
+		if (bundle.Main.MusicVolume < 0.0)
+			bundle.Main.MusicVolume = 0.0;
+		if (bundle.Main.MusicVolume > 0.45)
+			bundle.Main.MusicVolume = 0.45;
+		if (bundle.Main.FireworkDurationSeconds < 5)
+			bundle.Main.FireworkDurationSeconds = 30;
+		if (bundle.Main.VictoryPhaseSeconds < 10)
+			bundle.Main.VictoryPhaseSeconds = 60;
+		if (bundle.Main.StartMode == "")
+			bundle.Main.StartMode = "DIRECT";
 		if (bundle.Main.RewardDespawnMinutes < 1)
 			bundle.Main.RewardDespawnMinutes = 10;
 		if (bundle.Main.RewardMinimumItems < 12)
@@ -606,7 +624,6 @@ class DZKOTH_Config
 			location.ChestOrientation = profileLocation.ChestOrientation;
 			location.RewardCratePosition = profileLocation.ChestPosition;
 			location.RewardCrateOrientation = profileLocation.ChestOrientation;
-			location.TerminalPosition = profileLocation.ChestPosition;
 			bundle.Locations.Locations.Insert(location);
 		}
 

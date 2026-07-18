@@ -18,7 +18,6 @@ class DZKOTH_LootManager
 		if (m_RewardCrate)
 		{
 			m_RewardCrate.SetOrientation(location.GetRewardCrateOrientation());
-			OpenRewardBarrelForCargo(m_RewardCrate);
 			DZKOTH_Utils.Log("Reward crate spawned at " + m_RewardCrate.GetPosition().ToString() + " orientation " + location.GetRewardCrateOrientation().ToString());
 		}
 
@@ -53,7 +52,6 @@ class DZKOTH_LootManager
 		if (m_RewardCrate)
 		{
 			m_RewardCrate.SetOrientation(location.GetRewardCrateOrientation());
-			OpenRewardBarrelForCargo(m_RewardCrate);
 			DZKOTH_Utils.Log("Reward crate spawned at " + m_RewardCrate.GetPosition().ToString() + " orientation " + location.GetRewardCrateOrientation().ToString());
 		}
 
@@ -68,18 +66,6 @@ class DZKOTH_LootManager
 		LogRewardContents(m_RewardCrate);
 
 		ScheduleRewardCleanup(mainConfig);
-	}
-
-	protected void OpenRewardBarrelForCargo(EntityAI container)
-	{
-		Barrel_ColorBase barrel = Barrel_ColorBase.Cast(container);
-		if (!barrel)
-			return;
-
-		if (!barrel.IsOpen())
-			barrel.Open();
-
-		DZKOTH_Utils.Log("Reward barrel cargo state open=" + barrel.IsOpen().ToString());
 	}
 
 	void Cleanup()
@@ -154,13 +140,13 @@ class DZKOTH_LootManager
 		EntityAI container = EntityAI.Cast(GetGame().CreateObjectEx(type, pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
 		if (!container && type == DZKOTH_Const.REWARD_CRATE_CLASSNAME)
 		{
-			DZKOTH_Utils.Warn("Primary reward barrel failed. Retrying DeutschZ_Barrel_Green.");
-			container = EntityAI.Cast(GetGame().CreateObjectEx("DeutschZ_Barrel_Green", pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
+			DZKOTH_Utils.Warn("Primary reward chest failed. Retrying vanilla SeaChest.");
+			container = EntityAI.Cast(GetGame().CreateObjectEx("SeaChest", pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
 		}
-		if (!container && type == DZKOTH_Const.REWARD_CRATE_CLASSNAME)
+		if (!container && type == DZKOTH_Const.BOSS_CORPSE_CLASSNAME)
 		{
-			DZKOTH_Utils.Warn("DeutschZ reward barrel fallback failed. Retrying Barrel_Green.");
-			container = EntityAI.Cast(GetGame().CreateObjectEx("Barrel_Green", pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
+			DZKOTH_Utils.Warn("DeutschZ boss remains failed. Retrying vanilla SeaChest so the story keycard is not lost.");
+			container = EntityAI.Cast(GetGame().CreateObjectEx("SeaChest", pos, ECE_CREATEPHYSICS | ECE_PLACE_ON_SURFACE));
 		}
 		if (!container)
 			DZKOTH_Utils.Warn("Could not spawn loot container " + type + " at " + pos.ToString());
@@ -290,9 +276,9 @@ class DZKOTH_LootManager
 
 		int finalCount = CountInventoryItems(container);
 		if (finalCount < minimumItems)
-			DZKOTH_Utils.Warn("Reward barrel minimum volume not reached: " + finalCount.ToString() + "/" + minimumItems.ToString());
+			DZKOTH_Utils.Warn("Reward chest minimum volume not reached: " + finalCount.ToString() + "/" + minimumItems.ToString());
 		else
-			DZKOTH_Utils.Log("Reward barrel minimum volume reached: " + finalCount.ToString() + " items with per-class duplicate caps.");
+			DZKOTH_Utils.Log("Reward chest minimum volume reached: " + finalCount.ToString() + " items with per-class duplicate caps.");
 	}
 
 	protected int GetRewardMinimumItems(DZKOTH_MainConfig mainConfig)
@@ -347,7 +333,7 @@ class DZKOTH_LootManager
 	{
 		if (!container)
 		{
-			DZKOTH_Utils.Error("DeutschZ reward barrel was not created.");
+			DZKOTH_Utils.Error("DeutschZ reward chest was not created.");
 			return;
 		}
 
@@ -359,7 +345,7 @@ class DZKOTH_LootManager
 				DZKOTH_Utils.Log("Reward content class=" + item.GetType());
 		}
 
-		DZKOTH_Utils.Log("DeutschZ reward barrel contains " + CountInventoryItems(container).ToString() + " inventory items.");
+		DZKOTH_Utils.Log("DeutschZ reward chest contains " + CountInventoryItems(container).ToString() + " inventory items.");
 	}
 
 	protected int GetEntryCount(DZKOTH_LootEntry entry)

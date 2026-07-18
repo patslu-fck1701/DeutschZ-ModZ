@@ -1,4 +1,4 @@
-class DZEV_ClientProgressRenderer
+﻿class DZEV_ClientProgressRenderer
 {
 	protected static ref DZEV_ClientProgressRenderer s_Instance;
 	protected Widget m_Root;
@@ -83,9 +83,9 @@ class DZEV_ClientProgressRenderer
 		if (m_Root || !GetGame() || !GetGame().GetWorkspace())
 			return;
 
-		m_Root = GetGame().GetWorkspace().CreateWidgets("DeutschZ_KOTH_InfectedSiege/gui/layouts/dzevent/dzev_progress.layout");
+		m_Root = GetGame().GetWorkspace().CreateWidgets("DeutschZ_KotHZ_V2_Pro/gui/layouts/dzevent/dzev_progress.layout");
 		if (!m_Root)
-			m_Root = GetGame().GetWorkspace().CreateWidgets("deutschz_koth_infectedsiedge_v2/gui/layouts/dzevent/dzev_progress.layout");
+			m_Root = GetGame().GetWorkspace().CreateWidgets("DeutschZ_KotHZ_V2_Pro/gui/layouts/dzevent/dzev_progress.layout");
 
 		if (!m_Root)
 		{
