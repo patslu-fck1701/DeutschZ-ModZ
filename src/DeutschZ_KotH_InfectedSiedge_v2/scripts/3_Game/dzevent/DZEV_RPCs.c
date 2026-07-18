@@ -6,12 +6,6 @@
 	static const int CLIENT_READY = 531203;
 }
 
-class DZEV_Paths
-{
-	static const string PROFILE_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro";
-	static const string GROUPS_PATH = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Persistence/groups.json";
-}
-
 class DZEV_ProgressModes
 {
 	static const int HIDE = 0;

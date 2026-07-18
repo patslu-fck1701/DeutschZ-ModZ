@@ -44,7 +44,7 @@ class CfgSoundShaders
 	{
 		samples[] = {{"\DeutschZ_KotHZ_V2_Pro\sounds\dzkoth_anthem", 1}};
 		volume = 0.45;
-		radius = 25;
+		radius = 100;
 		range = 100;
 	};
 };
@@ -57,7 +57,7 @@ class CfgSoundSets
 		volumeFactor = 1;
 		frequencyFactor = 1;
 		// The supplied anthem is stereo. Client code therefore applies the
-		// 25 m / 100 m positional fade and hard cutoff for this 2D sound set.
+		// 100 m positional fade and hard cutoff for this 2D sound set.
 		spatial = 0;
 	};
 };

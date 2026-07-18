@@ -22,6 +22,7 @@
 	static const string PROFILE_LOCATION_ROTATION_JSON = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/KotHZLocationRotation.json";
 	static const string PROFILE_KOTH_DIR = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro";
 	static const string PROFILE_KOTH_CONFIG_JSON = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/KotHZSettings.json";
+	static const string PROFILE_GROUPS_JSON = "$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Persistence/groups.json";
 
 	static const string MAIN_MARKER_UID = "DZKOTH_MAIN_EVENT";
 	static const string BOSS_NAME = "BosZ Zombie";
@@ -62,7 +63,7 @@ class DZKOTH_ProfilePaths
 		MigrateFile("$profile:DeutschZ-System/DeutschZ_KotHZ_V2_Pro/Config/KotHConfig.json", DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON);
 		MigrateFile("$profile:KotH/KotHConfig.json", DZKOTH_Const.PROFILE_KOTH_CONFIG_JSON);
 		MigrateFile("$profile:DZKOTH/state.json", DZKOTH_Const.PROFILE_STATE_JSON);
-		MigrateFile("$profile:DZEventVanilla/groups.json", DZEV_Paths.GROUPS_PATH);
+		MigrateFile("$profile:DZEventVanilla/groups.json", DZKOTH_Const.PROFILE_GROUPS_JSON);
 	}
 
 	static void MigrateFile(string oldPath, string newPath)

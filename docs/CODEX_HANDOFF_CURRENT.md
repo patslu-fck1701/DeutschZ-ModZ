@@ -124,6 +124,33 @@ Synchronisiert: 18.07.2026 11:19 CEST
 
 Aktueller Stand: `DeutschZ_KotHZ_V2_Pro` ist der normale Infected-Siege-/V2-Pro-Zweig. KotHZ Free wurde in diesem Abschluss nicht veraendert.
 
+### 2026-07-18 21:40 - Live-Compile-Hotfix
+
+Live-Crash:
+
+- `Can't compile "Game" script module`
+- Parser meldete `quoted string not closed`, Modul `DeutschZ_KotHZ_V2_Pro/scripts/3_Game/dzevent/dzev_rpcs.c`.
+
+Hotfix:
+
+- `DZEV_RPCs.c` entschlackt; `DZEV_Paths` und alle `$profile:`-Pfadstrings aus dieser RPC-ID-Datei entfernt.
+- Gruppenpersistenz nutzt jetzt `DZKOTH_Const.PROFILE_GROUPS_JSON`.
+- `CfgSoundShaders.radius` passend zum gewuenschten Musikradius auf `100` gesetzt.
+- Hotfix-PBO neu gebaut und signiert.
+- PBO-Inhaltspruefung: Prefix `DeutschZ_KotHZ_V2_Pro\`, `dzev_rpcs.c` im PBO enthaelt keine quoted strings mehr.
+- Signaturpruefung: PASS (`DSCheckSignatures`: BISIGN OK).
+- Aktualisierte Ziele:
+  - `E:\DeutschZ\DeutschZServer\@DeutschZ_KotHZ_V2_Pro`
+  - `E:\DeutschZ\DeutschZServer\@DeutschZ_only_core`
+
+Neuer PBO-Hash:
+
+- `ED2C0BE7543966CA8D81BDFE119414A3FF8F07373B7EC20B077A8A3E3B9993CC`
+
+OFFEN:
+
+- Lokaler DayZServer-Compiletest konnte auf diesem Rechner nicht abgeschlossen werden, weil `DayZServer_x64.exe` sofort ohne RPT/Scriptlog beendet. Live-Retest mit dem neuen PBO ist erforderlich.
+
 ### Technische Aenderungen
 
 - Produkt-/PBO-Prefix auf `DeutschZ_KotHZ_V2_Pro` umgestellt.
