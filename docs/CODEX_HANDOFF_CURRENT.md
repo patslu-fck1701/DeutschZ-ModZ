@@ -29,6 +29,40 @@ Synchronisiert: 19.07.2026 00:40 CEST
 3. Danach Infected-Siedge Event im Spiel sichtbar testen.
 4. Bei Fehlern frische script_*.log, DayZServer_x64_*.RPT und Crashlog liefern.
 
+## ArbeitszeitZ iOS App Zwischenstand
+
+- Zeitpunkt: 19.07.2026 02:08 CEST
+- Projektordner: E:\DeutschZ\ArbeitszeitZ_iOS
+- Status: Quell-/Architekturstand erstellt, echter iOS-Build auf diesem Windows-System blockiert.
+- Build-Blocker BESTAETIGT: `xcodebuild`, `swift` und `swiftc` sind auf diesem Rechner nicht verfuegbar.
+- Erstellt:
+  - `Package.swift`
+  - `README.md`
+  - `Sources/ArbeitszeitZDomain/*`
+  - `Sources/ArbeitszeitZData/*`
+  - `Sources/ArbeitszeitZSystem/*`
+  - `Sources/ArbeitszeitZExport/*`
+  - `Sources/ArbeitszeitZApp/*`
+  - `Sources/ArbeitszeitZIntents/*`
+  - `Sources/ArbeitszeitZWidget/*`
+  - `Tests/ArbeitszeitZDomainTests/*`
+  - `docs/ARCHITECTURE.md`
+  - `docs/BUILD_BLOCKERS.md`
+  - `docs/TESTPLAN.md`
+- Inhalt:
+  - Domainmodelle fuer Arbeitgeber, Arbeitsorte und Arbeitszeit-Sessions.
+  - Service gegen parallele aktive Sessions.
+  - Standort-Matching mit Radius-/Genauigkeitspruefung.
+  - CSV-Export.
+  - SwiftUI/App-Intents/WidgetKit Referenz-Sources.
+  - Unit-Test-Geruest.
+- Validierung hier:
+  - Dateibestand: PASS.
+  - Secret-/Token-Scan: PASS, keine Tokens/Passwoerter gefunden.
+  - Echte Swift-/Xcode-Kompilierung: NICHT MOEGLICH auf Windows.
+- Naechster notwendiger Schritt:
+  - Auf macOS mit Xcode oeffnen, echte App-/Widget-/Intents-Targets anlegen und `swift test` beziehungsweise Xcode Build ausfuehren.
+
 ## MenuZ V2
 
 - Produkt: `DeutschZ_MenuMusic_V2_Test`
@@ -248,4 +282,56 @@ Uebertragene Dateien:
 - SERVERSTART GEPRUEFT: NEIN
 - GAMEPLAY RETEST REQUIRED: JA
 - BEKANNTER REST: echter Live-/Gameplaytest steht aus.
+
+---
+
+## Korrektur und Abschlussstand 2026-07-19
+
+### Produktkorrektur
+
+Die produktive Pro-/Infected-Siege-Version bleibt unveraendert benannt:
+
+`@DeutschZ_KotH_InfectedSiedge_v2`
+
+Der zwischenzeitlich dokumentierte Produktname `@DeutschZ_KotHZ_V2_Pro` ist nicht der freigegebene aktive Produktname und darf nicht als Ersatzprodukt verwendet werden.
+
+### Gepruefter Build und Ausgabe
+
+- Aktiver PBO: `E:\DeutschZ\DeutschZServer\@DeutschZ_only_core\addons\DeutschZ_KotH_InfectedSiedge_v2.pbo`
+- PBO-Groesse: 17.840.689 Byte
+- BISIGN: `E:\DeutschZ\DeutschZServer\@DeutschZ_only_core\addons\DeutschZ_KotH_InfectedSiedge_v2.pbo.DeutschZ.bisign`
+- BIKEY: `E:\DeutschZ\DeutschZServer\@DeutschZ_only_core\keys\DeutschZ.bikey`
+- Build/Signatur: PASS
+- Git-Branch: `codex/kothz-v2-pro-finalization-20260718`
+- Commit: `56a7c86`
+
+### FTP-Deployment
+
+- Freigabe-/Request-ID: `REQ-FDE6EB`
+- FTP-Ziel: `/gameserver/@DeutschZ_only_core/`
+- Status: SUCCESS
+- Uebertragen: PBO, BISIGN und oeffentlicher BIKEY
+- Bytevergleich lokal/remote: PASS fuer alle drei Dateien
+- Ergebnis wurde in Discord `bot-logs` gemeldet.
+- Discord-Kanal-IDs wurden nach der Guild-Neustrukturierung auf die aktuell vorhandenen Kanaele korrigiert.
+- Der Live-Server wurde in diesem Schritt nicht automatisch gestartet; echter Live-/Gameplaytest bleibt Patrick-Aufgabe.
+
+### Codex-Audit und Sicherungspaket
+
+- Audit: `E:\DeutschZ\DeutschZ-ModZ\DeutschZ-System\Codex-Audit`
+- Desktop-Paket: `C:\Users\patsl\Desktop\DeutschZ_Codex_Skills_Plugins_Agents_2026-07-19.zip`
+- ZIP-Eintraege: 5.002
+- ZIP-SHA-256: `ACAB6EE13D72AEFDBD4B51D0CC25E0530EEBB5D2132E915B0948593BFC33BEEF`
+- Enthalten: 48 lokale Skilldefinitionen, 152 Plugin-Skilldefinitionen, Plugin-Pakete, relevante AGENTS-Dateien, Rules, Automationsdefinitionen und 13 Auditdateien.
+- Sicherheitspruefung: PASS; keine `.env`, Auth-Datei, privaten Schluessel, Zertifikate, Tokens, Sitzungen, Logs oder Datenbanken enthalten.
+
+### Aktueller Status
+
+- KOTH INFECTED SIEGE BUILD READY: JA
+- ONLY_CORE AUSGABE AKTUELL: JA
+- FTP-UPLOAD: ERFOLGREICH
+- REMOTE-DATEIPRUEFUNG: PASS
+- CODEX-AUDIT: ERSTELLT
+- SKILLS/PLUGINS/AGENTS-ZIP: ERSTELLT UND GEPRUEFT
+- LIVE-/GAMEPLAYTEST: PATRICK_REQUIRED
 
