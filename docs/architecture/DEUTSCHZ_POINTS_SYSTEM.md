@@ -1,4 +1,4 @@
-# DeutschZ Points – Architektur- und Codex-Auftrag v1.0
+# DeutschZ Points – Architektur- und Codex-Auftrag v1.1
 
 ## Ziel
 Baue das DeutschZ-Punktesystem als dritte, klar getrennte Wirtschaft neben Expansion-Euro (Green Mountain) und US-Dollar (fahrender Schwarzmarkt). Punkte sind die Endgame-/Aktivitätswährung. Sie dürfen Euro oder Dollar nicht ersetzen.
@@ -108,11 +108,13 @@ Es gilt zwingend: Nicht jeder Stopp verkauft alle Punktewaren.
 Jeder Stopp hat einen eigenen konfigurierbaren Warenpool; pro Händlerumlauf wird daraus nur ein Teilbestand angeboten.
 
 Vorgesehene Schwerpunkte:
-- Sinistok: FOG-Pouches und kleinere Sonderausrüstung
-- Topolniki: NVGs und 400-/450-Slot-Rucksäcke
-- Novaya: obere Schutzwesten und .338-Waffen
-- Nordroute: .338/.50 Magazine + Munition, .50 Beowulf, 500-Slot-Rucksäcke
-- Novomirovsk: M82-Familie, Anzio und absolute Spitzenware
+- Sinistok: kleine und mittlere FOG-Pouches (20/30/48 Slots) sowie kleinere Sonderausrüstung
+- Topolniki: mittlere FOG-Pouches (30/48/64 Slots), NVGs und 400-/450-Slot-Rucksäcke
+- Novaya: mittlere/große FOG-Pouches (48/64/80 Slots), obere Schutzwesten und .338-Waffen
+- Nordroute: große FOG-Pouches (64/80/100 Slots), .338/.50 Magazine + Munition, .50 Beowulf und 500-Slot-Rucksäcke
+- Novomirovsk: sehr seltene 80-/100-Slot-Pouches, M82-Familie, Anzio und absolute Spitzenware
+
+Pouches sind damit ebenfalls stoppspezifisch. Eine 100-Slot-Pouch darf nicht schon am ersten Halt verfügbar sein.
 
 Der existierende Dollarhandel am LKW bleibt parallel bestehen.
 Punkteware muss am aktiven Stopp sichtbar/kaufbar sein, Dollarware weiterhin wie bisher.
@@ -126,7 +128,12 @@ Beispiel-Limits pro Umlauf als Ausgangspunkt, konfigurierbar:
 - 450-Slot-Rucksack 1-2
 - Top-Schutzweste 1-2
 - NVG 2-4
-- Pouches mehrere
+- 20-Slot-Pouches: 4-8 pro vollständigem Umlauf
+- 30-Slot-Pouches: 3-6 pro vollständigem Umlauf
+- 48-Slot-Pouches: 2-5 pro vollständigem Umlauf
+- 64-Slot-Pouches: 1-3 pro vollständigem Umlauf
+- 80-Slot-Pouches: 0-2 pro vollständigem Umlauf
+- 100-Slot-Pouches: 0-1 pro vollständigem Umlauf
 
 Optionales Lieferprofil pro Umlauf:
 - Standard
@@ -152,15 +159,90 @@ Für jede eingeschränkte Waffe automatisch die komplette Versorgungskette erfas
 
 Keine andere Waffenmod beschränken.
 
-## FOG-Pouches
-Alle echten FOG-Pouches, die nach effektivem FOG Override zusätzlichen Cargo-/Inventarplatz liefern:
+## FOG-Pouches – Rebalance statt pauschal 100 Slots
+Ausgangsverdacht: Im aktuellen FOG Override wurden viele oder alle Cargo-Pouches pauschal auf 100 Slots gesetzt. Codex muss das zuerst anhand der realen Override-Klassen bestätigen. Nicht von der Annahme ausgehen, dass wirklich jede Pouch betroffen ist.
+
+### Audit vor Änderung
+Für jede FOG-Pouch-Familie erfassen:
+- ClassName der Basis-/Familienklasse
+- alle Farb-/Camo-Varianten
+- ungeänderte/originale FOG-Cargogröße, soweit aus der installierten Mod/Config ermittelbar
+- aktuelle effektive Cargogröße nach FOG Override
+- `itemSize[]` (Platz, den die Pouch selbst als Item benötigt)
+- `itemsCargoSize[]` (interner Stauraum)
+- zulässige Attachment-Slots / Träger
+- wie viele Pouches dieser Familie in einem legitimen getragenen Loadout gleichzeitig nutzbar sind
+
+WICHTIG: `itemSize[]` und `itemsCargoSize[]` nicht verwechseln. Für dieses Rebalance wird primär der interne Cargo geändert. Item-Footprint, Attachment-Slots und Kompatibilität bleiben grundsätzlich unverändert, außer der Audit zeigt einen separaten Fehler und die Änderung wird dokumentiert.
+
+### Familienbildung
+Farb-/Camo-Varianten desselben Pouch-Modells sind genau EINE Familie und müssen dieselbe Cargogröße, denselben Punktepreis und dieselbe Warenstufe bekommen.
+
+### Zielstaffel
+Es gibt nur folgende erlaubte interne Cargo-Stufen:
+- Tier P1 = 20 Slots, bevorzugt 4x5
+- Tier P2 = 30 Slots, bevorzugt 5x6
+- Tier P3 = 48 Slots, bevorzugt 6x8
+- Tier P4 = 64 Slots, bevorzugt 8x8
+- Tier P5 = 80 Slots, bevorzugt 8x10
+- Tier P6 = 100 Slots, bevorzugt 10x10
+
+Keine normale FOG-Pouch darf nach diesem Rebalance mehr als 100 interne Slots haben.
+
+### Wie Codex die Tier-Zuordnung bestimmt
+1. Zuerst die ursprüngliche FOG-Cargogröße der Familie vor unserem Override als wichtigste Größenreferenz verwenden.
+2. Familien nach ursprünglicher Cargo-Fläche (Breite x Höhe) sortieren.
+3. Falls mehrere Familien ursprünglich gleich groß sind, tatsächliche Modell-/Funktionsgröße als Tie-Breaker nutzen: kleine Admin-/IFAK-/Utility-Pouches unten, Belly/Dangler/GP in der Mitte, sichtbar große Sustainment-/Mehrzweck-Pouches oben.
+4. Die Verteilung soll die ursprünglichen Größenverhältnisse wieder sichtbar machen; nicht wieder alle Familien in dasselbe Tier drücken.
+5. 100 Slots sind ausschließlich für die größte Spitzengruppe vorgesehen, nicht als Standardwert.
+6. Wenn Originalwerte wegen Vererbung nicht eindeutig auslesbar sind, die gesamte Vererbungskette bis zur wirksamen Basisklasse dokumentieren; keine ClassNames oder Werte raten.
+
+### Gesamtinventar-Budget
+Nach der ersten Tier-Zuordnung muss Codex für alle relevanten Westen/Belt-/Gear-Kombinationen berechnen, wie viel zusätzlicher Cargo durch gleichzeitig angehängte Pouches möglich ist.
+
+Ziel:
+- typischer voll ausgerüsteter Pouch-Aufbau: ungefähr 120-180 zusätzliche Slots
+- harte Obergrenze im ersten Entwurf: 200 zusätzliche Pouch-Slots gleichzeitig
+
+Wenn eine legitime Kombination über 200 kommt:
+- zuerst die Tier-Zuordnung der beteiligten Pouch-Familien nach unten korrigieren
+- Attachment-Slots NICHT einfach entfernen
+- keine Gear-Kompatibilität still verändern
+- Ausnahme nur dokumentiert und vor Live-Deployment ausdrücklich freigeben
+
+### Schutz gegen Inventar-Multiplikation
+Codex muss testen, ob gefüllte Cargo-Pouches rekursiv in anderen Pouches/Containern verschachtelt werden können und dadurch praktisch unbegrenzt Inventar entsteht.
+Falls ein echter Verschachtelungs-Exploit besteht, eine saubere server-/configseitige Sperre implementieren und testen. Niemals beim Verschieben Inhalte kommentarlos löschen.
+
+### Marktregel
+Alle echten FOG-Cargo-Pouches:
 - kein normaler CE-/Mapspawn
 - kein normaler Euro-/Dollar-Kauf
 - Punktekauf erlaubt
 - bestehende Eventbelohnungen unverändert
+- PvP-/Spielerbeute erlaubt
 - normaler Verkauf weiterhin erlaubt
 
-Nicht blind jede Klasse aus einer Datei namens POUCHES sperren; echte Funktion/Cargo prüfen.
+### Punktepreise pro Pouch-Tier
+- 20 Slots = 60 Punkte
+- 30 Slots = 90 Punkte
+- 48 Slots = 140 Punkte
+- 64 Slots = 190 Punkte
+- 80 Slots = 245 Punkte
+- 100 Slots = 320 Punkte
+
+Die Preise steigen bewusst überproportional, weil Pouches zusätzlichen Stauraum zu bereits getragener Ausrüstung addieren.
+
+### Verfügbarkeit pro Händlerumlauf
+- 20 Slots: 4-8 Stück
+- 30 Slots: 3-6 Stück
+- 48 Slots: 2-5 Stück
+- 64 Slots: 1-3 Stück
+- 80 Slots: 0-2 Stück
+- 100 Slots: 0-1 Stück
+
+100-Slot-Pouches dürfen pro vollständigem Händlerumlauf höchstens einmal vorhanden sein und nur in den High-End-Stop-Pools Nordroute/Novomirovsk auftauchen.
+Nicht blind jede Klasse aus einer Datei namens POUCHES sperren; echte Cargo-Funktion prüfen.
 
 ## FOG-Rucksäcke
 Bestehenden FOG Override prüfen.
@@ -200,16 +282,18 @@ Alle echten Nachtsichtgeräte/NVGs:
 
 Wichtig: Nicht durch globales Löschen eines ClassNames versehentlich Eventloot oder Verkauf entfernen. Bezugswege getrennt behandeln.
 
-## Preisrahmen v1
+## Preisrahmen v1.1
 Preise konfigurierbar halten; dies sind Startwerte:
-- kleine FOG-Pouch: 75
-- mittlere FOG-Pouch: 100
-- große FOG-Pouch: 125
-- extrem große FOG-Pouch: 150
+- FOG-Pouch 20 Slots: 60
+- FOG-Pouch 30 Slots: 90
+- FOG-Pouch 48 Slots: 140
+- FOG-Pouch 64 Slots: 190
+- FOG-Pouch 80 Slots: 245
+- FOG-Pouch 100 Slots: 320
 - NVG: 200-250
-- 400-Slot-Rucksack: 225
-- 450-Slot-Rucksack: 275
-- 500-Slot-Rucksack: 350
+- 400-Slot-Rucksack: 350
+- 450-Slot-Rucksack: 425
+- 500-Slot-Rucksack: 525
 - Top-25%-Schutzweste: 275-375
 - .338 Munition: 35-50
 - .338 Magazin: 50
@@ -255,6 +339,11 @@ Alle Balancewerte auslagerbar, mindestens:
 - Infected-Zuordnungen
 - RestrictedWeapons/Ammo/Magazines
 - RestrictedPouches
+- PouchTierDefinitions [20,30,48,64,80,100]
+- PouchFamilyAssignments
+- PouchTierPrices [60,90,140,190,245,320]
+- PouchTierLoopStockLimits
+- MaxSimultaneousPouchCargo = 200
 - RestrictedBackpacks
 - RestrictedArmor
 - RestrictedNVGs
@@ -286,7 +375,7 @@ Mindestens folgende Tests dokumentieren:
 7. Marken sind bei Tod lootbar.
 8. Vote 1/2/3 eines Tages gibt 5/10/25.
 9. Vote 4+ gibt 0 direkte Punkte, zählt aber Monatsranking.
-10. Tageswechsel funktioniert korrekt.
+10. Tageswechsel funktioniert mit Europe/Berlin korrekt, inklusive Sommer-/Winterzeit-Grenze.
 11. Monatswechsel vergibt 75/50/25 nur einmal und löscht Guthaben nicht.
 12. Wiederholtes API-Polling erzeugt keine Doppelgutschrift.
 13. API-Ausfall stoppt nicht den Server; Retry ohne Datenkorruption.
@@ -294,23 +383,31 @@ Mindestens folgende Tests dokumentieren:
 15. Unzugeordnete Voter landen in Pending statt falscher Gutschrift.
 16. Nur Morty’s + Anzio Waffen betroffen.
 17. Waffe/Magazin/Munition/Munitionsbox konsistent eingeschränkt.
-18. FOG-Pouches nach effektivem Cargo korrekt erkannt.
-19. FOG-Rucksackstaffel 100-500 logisch und Varianten konsistent.
-20. Nur 400/450/500-Slot-Rucksäcke Punkteware.
-21. Stärkste 25 % FOG-Westen korrekt aus Override abgeleitet.
-22. Helme unverändert.
-23. NVGs nur per Punkte kaufbar, aber Eventloot/Verkauf bleibt.
-24. Beschränkte Items spawnen nicht normal in CE.
-25. Beschränkte Items sind nicht normal für Euro/Dollar kaufbar.
-26. Beschränkte Items können weiter verkauft werden.
-27. KOTH/Courier/RAVEN/AI Convoy und sonstige bestehende Eventlootquellen bleiben unverändert.
-28. Jeder Schwarzmarkt-Stopp zeigt nur seinen eigenen Punktewarenpool.
-29. Nicht jedes Pool-Item muss pro Umlauf verfügbar sein.
-30. Ausverkaufte rare Ware respawnt nicht durch Restart.
-31. Neuer vollständiger Umlauf erzeugt genau einmal neuen Bestand.
-32. Courier: genau 1 Geld-Entity mit Quantity 250 und Gesamtwert 25.000.
-33. RPT/Logs nach Test frei von neuen Crash-/Error-Spam.
-34. Regressionstest des bestehenden EventSchedulers und mobilen Schwarzmarkts.
+18. FOG-Pouches werden nach Familien gruppiert; Farbvarianten zählen nicht als eigene Familie.
+19. Originale FOG-Cargogröße und aktueller Override werden pro Pouch-Familie dokumentiert; eine vorhandene 100-Slot-Pauschalisierung wird eindeutig sichtbar.
+20. Nach Rebalance existieren nur die Pouch-Cargostufen 20/30/48/64/80/100.
+21. Alle Varianten einer Pouch-Familie erhalten exakt dieselbe Cargostufe und denselben Punktepreis.
+22. `itemSize[]`, Attachment-Slots und Kompatibilität bleiben unverändert, sofern keine separat dokumentierte Korrektur nötig ist.
+23. Ein legitimer voll ausgerüsteter Pouch-Aufbau liegt ideal bei 120-180 und überschreitet im ersten Entwurf nicht 200 zusätzliche Pouch-Slots.
+24. Gefüllte Pouches können nicht als rekursiver Inventar-Multiplikations-Exploit genutzt werden; Fix verursacht keinen Item-/Inhaltsverlust.
+25. Pouch-Tier, Punktepreis, Stop-Pool und Bestandslimit stimmen für jede Familie überein.
+26. 100-Slot-Pouches erscheinen nur Nordroute/Novomirovsk und höchstens 0-1 pro vollständigem Händlerumlauf.
+27. FOG-Rucksackstaffel 100-500 ist logisch und Varianten sind konsistent.
+28. Nur 400/450/500-Slot-Rucksäcke sind Punkteware.
+29. Stärkste 25 % FOG-Westen werden korrekt aus dem effektiven Override abgeleitet.
+30. Helme bleiben unverändert.
+31. NVGs sind nur per Punkte kaufbar, aber Eventloot/Verkauf bleibt.
+32. Beschränkte Items spawnen nicht normal in CE.
+33. Beschränkte Items sind nicht normal für Euro/Dollar kaufbar.
+34. Beschränkte Items können weiter verkauft werden.
+35. KOTH/Courier/RAVEN/AI Convoy und sonstige bestehende Eventlootquellen bleiben unverändert.
+36. Jeder Schwarzmarkt-Stopp zeigt nur seinen eigenen Punktewarenpool, einschließlich korrekter Pouch-Tiers.
+37. Nicht jedes Pool-Item muss pro Umlauf verfügbar sein.
+38. Ausverkaufte rare Ware respawnt nicht durch Restart.
+39. Neuer vollständiger Umlauf erzeugt genau einmal neuen Bestand.
+40. Courier: genau 1 Geld-Entity mit Quantity 250 und Gesamtwert 25.000.
+41. RPT/Logs nach Test sind frei von neuem Crash-/Error-Spam.
+42. Regressionstest des bestehenden EventSchedulers und mobilen Schwarzmarkts besteht.
 
 ## Ergebnislieferung
 Codex liefert:
@@ -320,6 +417,7 @@ Codex liefert:
 - Morty’s/Anzio Kaliber-/Magazin-/Ammo-Matrix
 - FOG-Rucksackliste mit alten/neuen effektiven Slots
 - FOG-Westenranking und markierte Top 25 %
+- FOG-Pouch-Audit mit Originalgröße, bisherigem Override, neuem Tier, effektivem Cargo, gleichzeitig nutzbarer Anzahl und maximalem Zusatzcargo
 - NVG-/Pouch-Liste
 - Stop-/Warenpool-Matrix für Sinistok, Topolniki, Novaya, Nordroute, Novomirovsk
 - finale Preis-/Bestandsconfig
