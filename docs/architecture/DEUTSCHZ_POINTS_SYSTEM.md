@@ -1,4 +1,4 @@
-# DeutschZ Points – Architektur- und Codex-Auftrag v1.1
+# DeutschZ Points – Architektur- und Codex-Auftrag v1.2
 
 ## Ziel
 Baue das DeutschZ-Punktesystem als dritte, klar getrennte Wirtschaft neben Expansion-Euro (Green Mountain) und US-Dollar (fahrender Schwarzmarkt). Punkte sind die Endgame-/Aktivitätswährung. Sie dürfen Euro oder Dollar nicht ersetzen.
@@ -364,50 +364,57 @@ Top-Games-Token nur in serverseitiger Profil-/Secret-Konfiguration, niemals im R
 - docs/architecture für Systemvertrag, docs/testing für Tests.
 - Bestehende Source aus dem vorbereiteten DeutschZ-Points-Paket nur als Ausgangspunkt behandeln und gegen den aktuellen Serverstand prüfen; nicht blind übernehmen.
 
-## Tests / Abnahme
-Mindestens folgende Tests dokumentieren:
-1. Source/PBO kompiliert ohne Scriptfehler.
-2. JSON/XML/CSV/Stringtable valide.
-3. Jede Wertmarkenklasse spawnt korrekt und zeigt deutschen Namen/Wert.
-4. Bunker-/Papier-/Feuer-Missbrauch der Wertmarke nicht möglich.
-5. Stadt/Farm/Hunting/Police/Military/Mumie erzeugen den richtigen Wert.
-6. Kill allein vergibt keine Punkte; erst Einlösen.
-7. Marken sind bei Tod lootbar.
-8. Vote 1/2/3 eines Tages gibt 5/10/25.
-9. Vote 4+ gibt 0 direkte Punkte, zählt aber Monatsranking.
-10. Tageswechsel funktioniert mit Europe/Berlin korrekt, inklusive Sommer-/Winterzeit-Grenze.
-11. Monatswechsel vergibt 75/50/25 nur einmal und löscht Guthaben nicht.
-12. Wiederholtes API-Polling erzeugt keine Doppelgutschrift.
-13. API-Ausfall stoppt nicht den Server; Retry ohne Datenkorruption.
-14. Serverrestart erhält Guthaben, Vote-Snapshot, Händlerbestand und Rotation.
-15. Unzugeordnete Voter landen in Pending statt falscher Gutschrift.
-16. Nur Morty’s + Anzio Waffen betroffen.
-17. Waffe/Magazin/Munition/Munitionsbox konsistent eingeschränkt.
-18. FOG-Pouches werden nach Familien gruppiert; Farbvarianten zählen nicht als eigene Familie.
-19. Originale FOG-Cargogröße und aktueller Override werden pro Pouch-Familie dokumentiert; eine vorhandene 100-Slot-Pauschalisierung wird eindeutig sichtbar.
-20. Nach Rebalance existieren nur die Pouch-Cargostufen 20/30/48/64/80/100.
-21. Alle Varianten einer Pouch-Familie erhalten exakt dieselbe Cargostufe und denselben Punktepreis.
-22. `itemSize[]`, Attachment-Slots und Kompatibilität bleiben unverändert, sofern keine separat dokumentierte Korrektur nötig ist.
-23. Ein legitimer voll ausgerüsteter Pouch-Aufbau liegt ideal bei 120-180 und überschreitet im ersten Entwurf nicht 200 zusätzliche Pouch-Slots.
-24. Gefüllte Pouches können nicht als rekursiver Inventar-Multiplikations-Exploit genutzt werden; Fix verursacht keinen Item-/Inhaltsverlust.
-25. Pouch-Tier, Punktepreis, Stop-Pool und Bestandslimit stimmen für jede Familie überein.
-26. 100-Slot-Pouches erscheinen nur Nordroute/Novomirovsk und höchstens 0-1 pro vollständigem Händlerumlauf.
-27. FOG-Rucksackstaffel 100-500 ist logisch und Varianten sind konsistent.
-28. Nur 400/450/500-Slot-Rucksäcke sind Punkteware.
-29. Stärkste 25 % FOG-Westen werden korrekt aus dem effektiven Override abgeleitet.
-30. Helme bleiben unverändert.
-31. NVGs sind nur per Punkte kaufbar, aber Eventloot/Verkauf bleibt.
-32. Beschränkte Items spawnen nicht normal in CE.
-33. Beschränkte Items sind nicht normal für Euro/Dollar kaufbar.
-34. Beschränkte Items können weiter verkauft werden.
-35. KOTH/Courier/RAVEN/AI Convoy und sonstige bestehende Eventlootquellen bleiben unverändert.
-36. Jeder Schwarzmarkt-Stopp zeigt nur seinen eigenen Punktewarenpool, einschließlich korrekter Pouch-Tiers.
-37. Nicht jedes Pool-Item muss pro Umlauf verfügbar sein.
-38. Ausverkaufte rare Ware respawnt nicht durch Restart.
-39. Neuer vollständiger Umlauf erzeugt genau einmal neuen Bestand.
-40. Courier: genau 1 Geld-Entity mit Quantity 250 und Gesamtwert 25.000.
-41. RPT/Logs nach Test sind frei von neuem Crash-/Error-Spam.
-42. Regressionstest des bestehenden EventSchedulers und mobilen Schwarzmarkts besteht.
+## Build-, Compile-, Signier- und Übergabe-Workflow für Codex
+
+Dieser Abschnitt ist verbindlich. Codex führt in diesem Auftrag **keinen Live-Server-Test** durch.
+
+### Testumfang von Codex
+Codex testet ausschließlich bis zur erfolgreichen lokalen Kompilierung / Paketierung:
+1. alle von diesem Auftrag geänderten DayZ-Sourcen kompilieren;
+2. relevante PBOs neu bauen;
+3. geänderte JSON/XML/CSV/Stringtable-Dateien auf Syntax-/Buildfehler prüfen, soweit dies zum Build gehört;
+4. Compile-/Buildfehler vollständig beheben;
+5. erst wenn der vollständige Build ohne relevante Script-/Compilefehler bestanden ist, mit Signierung und Austausch fortfahren.
+
+Ein erfolgreicher Compile ist das Gate. Solange der Compile nicht bestanden ist, dürfen keine neuen Build-Artefakte in den bekannten Workshop-Arbeitsordner übernommen werden.
+
+### Nach bestandenem Compile
+Nach erfolgreichem Compile soll Codex:
+1. die finalen PBO-Artefakte aus dem erfolgreichen Build verwenden;
+2. mit dem ihm bereits bekannten, bestehenden DeutschZ-Signierschlüssel signieren;
+3. den privaten Signierschlüssel niemals in GitHub, Dokumentation, Website, Logs oder Ausgabedateien kopieren;
+4. nur die erzeugten signierten Mod-Artefakte / Signaturdateien verwenden;
+5. im ihm bereits bekannten lokalen Workshop-Arbeitsordner die betroffenen bisherigen Build-Dateien gezielt durch die neuen, erfolgreich kompilierten und signierten Dateien ersetzen;
+6. keine fremden oder unveränderten Workshop-Dateien pauschal löschen;
+7. vor dem Austausch eine lokale Rollback-Kopie der zu ersetzenden Build-Artefakte anlegen, sofern der bekannte Workflow das bereits vorsieht;
+8. nach dem Kopieren Dateinamen, Größe/Hash bzw. Zeitstempel und vorhandene Signaturdateien gegen den erfolgreichen Build prüfen.
+
+### Danach zwingend STOP
+Codex führt danach **nicht** aus:
+- keinen Steam-Workshop-Upload;
+- kein Publish/Update zu Steam;
+- keinen Serverstart;
+- keinen Serverrestart;
+- keinen RCON-Restart;
+- keinen Live-Gameplay-Test;
+- keinen Test gegen den produktiven Server;
+- keine Behauptung, dass das System live oder im Spiel funktionsfähig ist.
+
+Der manuelle Ablauf nach Codex lautet:
+**Codex: ändern -> compile/build -> signieren -> im bekannten Workshop-Arbeitsordner austauschen -> STOP.**
+Danach übernimmt der Serverbetreiber:
+**Steam-Workshop-Upload -> Serverrestart -> vorhandener automatischer Steam-Update-Ablauf -> Live-Prüfung.**
+
+### Was Codex am Ende melden muss
+- Compile: PASS oder FAIL;
+- welche PBOs/Build-Artefakte erzeugt wurden;
+- welche Artefakte signiert wurden;
+- welche Dateien im bekannten Workshop-Arbeitsordner ersetzt wurden;
+- ob die Signaturdateien vorhanden sind;
+- ob ein Rollback-Bestand vorhanden ist;
+- offene Warnungen oder Punkte, die erst nach Steam-Upload/Serverrestart geprüft werden können.
+
+Keine Pfade oder Key-Namen unnötig in öffentliche Dokumentation übernehmen. Der bereits bekannte lokale Ordner und Signierschlüssel sollen direkt aus der vorhandenen Codex-/Projektumgebung verwendet werden.
 
 ## Ergebnislieferung
 Codex liefert:
@@ -422,10 +429,20 @@ Codex liefert:
 - Stop-/Warenpool-Matrix für Sinistok, Topolniki, Novaya, Nordroute, Novomirovsk
 - finale Preis-/Bestandsconfig
 - Courier-Fix
-- Testprotokoll
-- relevante RPT-Auszüge
+- Compile-/Buildprotokoll
+- Liste der erzeugten und signierten PBO-/Signaturartefakte
+- Liste der im bekannten Workshop-Arbeitsordner ersetzten Dateien
 - Rollback-Hinweise
-- keine Aussage "fertig/live", bevor die Tests tatsächlich bestanden sind.
+- Liste der Punkte, die erst nach manuellem Steam-Upload und Serverrestart geprüft werden können
+- keine Aussage "fertig/live", nur weil der Compile bestanden ist.
 
-## Abnahmekriterium
-Das System ist erst abnahmebereit, wenn Punkte aus Zombies und Votes persistent funktionieren, der mobile Schwarzmarkt je Stopp unterschiedliche begrenzte Punkteware anbietet, Euro/Dollar-Handel erhalten bleibt, Eventloot nicht beschädigt wurde, beschränkte Items nicht normal kaufbar/spawnbar sind, Verkauf weiterhin funktioniert und der Courier-Koffer nachweislich nur einen Stack mit 250 Scheinen enthält.
+## Übergabekriterium für Codex
+Codex' Arbeitsschritt ist für die Übergabe abgeschlossen, wenn:
+- der vollständige relevante Build/Compile PASS ist;
+- die benötigten PBOs erfolgreich erzeugt wurden;
+- die neuen Build-Artefakte mit dem bestehenden bekannten Signierschlüssel signiert wurden;
+- die betroffenen Dateien im bekannten Workshop-Arbeitsordner gezielt ausgetauscht wurden;
+- der Austausch und die Signaturdateien kontrolliert wurden;
+- eine klare Compile-/Austausch-Zusammenfassung vorliegt.
+
+Das ist ausdrücklich **keine Live-Abnahme**. Steam-Workshop-Upload und Serverrestart führt der Serverbetreiber anschließend selbst aus. Erst danach kann die tatsächliche Ingame-Funktion geprüft werden.
