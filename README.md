@@ -25,12 +25,14 @@ The current local ModZ source is imported onto this clean baseline deliberately;
 
 ## Snapshot 02.10.2026 · 20:00
 
-Aktueller angelieferter Source-Stand: **Source_Stand_02.10.2026_20_00_Uhr.zip**.
+Aktueller angelieferter Source-Stand besteht aus **zwei zusammengehörenden Archiven**, weil HUDZ wegen der Dateigröße separat hochgeladen werden musste:
 
-- **Wichtig:** `deutschz_hudz` ist in diesem Archiv **nicht enthalten**. HUDZ wird wegen seiner Größe separat geführt.
-- Enthalten: **1.489 Dateien**, davon **305 Code-/Text-/Konfigurationsdateien**.
-- Vollständiges Archiv inkl. eigener Binär-/Audio-/Texture-Assets: privates Google-Drive-Backup.
-- Zusätzlich liegt dort `DeutschZ_Source_Code_2026-10-02_ohne_HUDZ.zip` als kompakter Code-/Konfigurationsstand ohne große Binärassets.
+- `Source_Stand_02.10.2026_20_00_Uhr.zip` — Haupt-Source
+- `deutschz_hudz.zip` — **Bestandteil desselben Source-Stands**, nur technisch separat übertragen
+- Der Snapshot 02.10.2026 · 20:00 gilt erst mit **beiden** Archiven als vollständig.
+- Haupt-Source: **1.489 Dateien**, davon **305 Code-/Text-/Konfigurationsdateien**.
+- Vollständiger Projektstand inkl. HUDZ: persistent gemeinsam unter `/DeutschZ/Snapshots/2026-10-02/` gesichert.
+- `DeutschZ_Source_Code_2026-10-02_ohne_HUDZ.zip` bleibt nur ein kompakter abgeleiteter Code-/Konfigurationsstand; er ist **nicht** der vollständige Source-Snapshot.
 - SHA-256 vollständiger Source-ZIP: `58dd14a134205457f6b53e187782e5a6a245b19e49a08b8cc23703617ea52280`
 - SHA-256 Code-only-ZIP: `aeb754c359237ccc59965b59117fa6420118b465c8bdea927da3c8f57c941f42`
 - Backup-Ordner: https://drive.google.com/drive/folders/1tRdKCTIK7XHR2Vqjg9AiJfDv2xTtiYun
