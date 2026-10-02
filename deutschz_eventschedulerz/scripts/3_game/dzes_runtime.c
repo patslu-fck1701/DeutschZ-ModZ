@@ -2,7 +2,7 @@ enum DZES_Phase { CANDIDATE, QUEUED, SCHEDULED, RESERVED, STARTING, ACTIVE, COMP
 
 class DZES_State
 {
- int Version = 2;
+ int Version = 3;
  string EventId;
  string ProviderId;
  string StartedUTC;
@@ -22,6 +22,7 @@ class DZES_State
  int CourierSkipped;
  int RavenSkipped;
  int ConvoySkipped;
+ int RotationIndex;
 }
 
 class DZES_Status
@@ -133,6 +134,7 @@ class DZES_Scheduler
  protected static ref map<string, int> s_ProviderGeneration = new map<string, int>;
  protected static ref map<string, int> s_ProviderFirstSeen = new map<string, int>;
  protected static int s_NextProviderGeneration = 1;
+ protected static ref array<string> s_MajorRotation = {"KOTH","COURIER","RAVEN","CONVOY"};
 
  // Runtime safety:
  // 3 min without heartbeat -> request cleanup.
@@ -214,7 +216,7 @@ class DZES_Scheduler
   int nowUTC = ExpansionStatic.GetTimestamp(true);
   if (FileExist(ROOT + "/state.json"))
   {
-   if (!JsonFileLoader<DZES_State>.LoadFile(ROOT + "/state.json", s_State, error) || !s_State || (s_State.Version != 1 && s_State.Version != 2))
+   if (!JsonFileLoader<DZES_State>.LoadFile(ROOT + "/state.json", s_State, error) || !s_State || (s_State.Version < 1 || s_State.Version > 3))
    {
     s_StorageFailed = true;
     s_Ready = true;
@@ -223,10 +225,11 @@ class DZES_Scheduler
    }
 
    loadedState = true;
-   if (s_State.Version == 1)
+   if (s_State.Version < 3)
    {
-    s_State.Version = 2;
-    Print("[EventSchedulerZ] STATE_MIGRATED version=2");
+    s_State.RotationIndex = ResolveRotationIndex(s_State);
+    s_State.Version = 3;
+    Print("[EventSchedulerZ] STATE_MIGRATED version=3 rotationIndex=" + s_State.RotationIndex.ToString());
    }
 
    if (s_State.EventId != "" && s_State.ProviderId != "")
@@ -239,6 +242,7 @@ class DZES_Scheduler
     int recoveryCourierSkipped = s_State.CourierSkipped;
     int recoveryRavenSkipped = s_State.RavenSkipped;
     int recoveryConvoySkipped = s_State.ConvoySkipped;
+    int recoveryRotationIndex = s_State.RotationIndex;
     Print("[EventSchedulerZ] RESTART_RECOVERY owner=" + recoveryOwner + " oldEvent=" + s_State.EventId);
     if (!ArchiveCurrent("RESTART_RECOVERY"))
     {
@@ -252,6 +256,7 @@ class DZES_Scheduler
     s_State.CourierSkipped = recoveryCourierSkipped;
     s_State.RavenSkipped = recoveryRavenSkipped;
     s_State.ConvoySkipped = recoveryConvoySkipped;
+    s_State.RotationIndex = recoveryRotationIndex;
     s_State.NextEvent = recoveryOwner;
     s_State.NextEventAt = now + STARTUP_GRACE_MS;
     s_State.NextEventAtUTCSeconds = nowUTC + STARTUP_GRACE_MS / 1000;
@@ -351,6 +356,7 @@ class DZES_Scheduler
   int oldCourierSkipped = s_State.CourierSkipped;
   int oldRavenSkipped = s_State.RavenSkipped;
   int oldConvoySkipped = s_State.ConvoySkipped;
+  int oldRotationIndex = s_State.RotationIndex;
 
   if (!ArchiveCurrent(reason))
   {
@@ -376,6 +382,7 @@ class DZES_Scheduler
   s_State.CourierSkipped = oldCourierSkipped;
   s_State.RavenSkipped = oldRavenSkipped;
   s_State.ConvoySkipped = oldConvoySkipped;
+  s_State.RotationIndex = NextRotationIndex(oldOwner, oldRotationIndex);
   s_State.Phase = DZES_Phase.SLOT_RELEASE;
   s_State.NextEventAt = GetGame().GetTime() + cooldownMs;
   s_State.NextEventAtUTCSeconds = ExpansionStatic.GetTimestamp(true) + Math.Ceil(cooldownMs / 1000.0);
@@ -387,6 +394,7 @@ class DZES_Scheduler
 
    Print("[EventSchedulerZ] EVENT RELEASED event=" + oldOwner + " run=" + oldEvent + " reason=" + reason);
    Print("[EventSchedulerZ] SLOT_RELEASE " + reason + " " + oldEvent + " owner=" + oldOwner);
+  Print("[EventSchedulerZ] ROTATION_ADVANCE from=" + oldOwner + " to=" + RotationOwner(s_State.RotationIndex) + " index=" + s_State.RotationIndex.ToString());
   Print("[EventSchedulerZ] NEXT_EVENT_AT in=" + Math.Ceil(cooldownMs / 1000.0).ToString() + "s");
   return Save();
  }
@@ -440,6 +448,52 @@ class DZES_Scheduler
   GetYearMonthDayUTC(year, month, day);
   GetHourMinuteSecondUTC(hour, minute, second);
   return RestartDistanceUTC(year, month, day, hour, minute, second);
+ }
+
+ protected static int RotationIndexOf(string owner)
+ {
+  if (!s_MajorRotation || owner == "") return -1;
+  return s_MajorRotation.Find(owner);
+ }
+
+ protected static string RotationOwner(int index)
+ {
+  if (!s_MajorRotation || s_MajorRotation.Count() == 0) return "";
+  int safeIndex = index;
+  if (safeIndex < 0) safeIndex = 0;
+  if (safeIndex >= s_MajorRotation.Count()) safeIndex = s_MajorRotation.Count() - 1;
+  return s_MajorRotation[safeIndex];
+ }
+
+ protected static int ResolveRotationIndex(DZES_State state)
+ {
+  if (!state) return 0;
+  int index = RotationIndexOf(state.NextEvent);
+  if (index >= 0) return index;
+  index = RotationIndexOf(state.ProviderId);
+  if (index >= 0) return index;
+  index = RotationIndexOf(state.LastEvent);
+  if (index >= 0)
+  {
+   index++;
+   if (index >= s_MajorRotation.Count()) index = 0;
+   return index;
+  }
+  return 0;
+ }
+
+ protected static int NextRotationIndex(string completedOwner, int currentIndex)
+ {
+  int index = RotationIndexOf(completedOwner);
+  if (index < 0)
+  {
+   index = currentIndex;
+   if (index < 0) index = 0;
+   if (index >= s_MajorRotation.Count()) index = s_MajorRotation.Count() - 1;
+  }
+  index++;
+  if (index >= s_MajorRotation.Count()) index = 0;
+  return index;
  }
 
  static bool TryAcquire(string owner, int durationSeconds = 1800, int priority = 0, string reason = "Standardrotation")
@@ -545,6 +599,7 @@ class DZES_Scheduler
   int nextCourierSkipped = s_State.CourierSkipped;
   int nextRavenSkipped = s_State.RavenSkipped;
   int nextConvoySkipped = s_State.ConvoySkipped;
+  int rotationIndex = s_State.RotationIndex;
 
   s_Queue.RemoveItem(owner);
   s_LastRequest.Remove(owner);
@@ -558,6 +613,7 @@ class DZES_Scheduler
   s_State.CourierSkipped = nextCourierSkipped;
   s_State.RavenSkipped = nextRavenSkipped;
   s_State.ConvoySkipped = nextConvoySkipped;
+  s_State.RotationIndex = rotationIndex;
 
   int year, month, day, hour, minute, second;
   GetYearMonthDayUTC(year, month, day);
@@ -866,23 +922,9 @@ class DZES_Scheduler
  {
   if (!s_Queue || s_Queue.Count() == 0)
    return "";
-
-  string selected = "";
-  int highest = -2147483647;
-
-  // Queue array order supplies FIFO for equal priorities.
- foreach (string queued : s_Queue)
- {
-   int p = EffectivePriority(queued);
-
-   if (selected == "" || p > highest)
-   {
-    highest = p;
-    selected = queued;
-   }
-  }
-
- return selected;
+  string expected = RotationOwner(s_State.RotationIndex);
+  if (s_Queue.Find(expected) >= 0) return expected;
+  return "";
 }
 
  protected static int BasePriority(string owner)
@@ -964,8 +1006,7 @@ class DZES_Scheduler
    Print("[EventSchedulerZ] [SCHEDULER] Candidate " + candidate + ": base=" + BasePriority(candidate).ToString() + " storyBonus=" + StoryBonus(candidate).ToString() + " waitBonus=" + WaitBonus(candidate).ToString() + " starvationBonus=" + StarvationBonus(candidate).ToString() + " kothBonus=" + PreferenceBonus(candidate).ToString() + " repeatPenalty=" + RepeatPenalty(candidate).ToString() + " effective=" + EffectivePriority(candidate).ToString());
   }
   Print("[EventSchedulerZ] [SCHEDULER] LAST_EVENT=" + s_State.LastEvent + " CURRENT_OWNER=" + s_State.ProviderId + " QUEUE_SIZE=" + s_Queue.Count().ToString());
-  if (selected == s_State.LastEvent && s_Queue.Count() == 1)
-   Print("[EventSchedulerZ] REPEAT_ALLOWED event=" + selected + " reason=no_other_startable_candidate");
+  Print("[EventSchedulerZ] ROTATION current=" + RotationOwner(s_State.RotationIndex) + " index=" + s_State.RotationIndex.ToString());
   Print("[EventSchedulerZ] [SCHEDULER] SELECTED event=" + selected + " reason=" + reason);
  }
 
@@ -1010,7 +1051,8 @@ class DZES_Scheduler
    int scheduledGeneration;
    s_ProviderGeneration.Find(selected, scheduledGeneration);
    s_State.ScheduledProviderGeneration = scheduledGeneration;
-   LogSelection(selected, "highest_effective_priority");
+   LogSelection(selected, "fixed_rotation");
+   Print("[EventSchedulerZ] PROGRESS_CHECK owner=" + selected + " priority=" + BasePriority(selected).ToString() + " detail=" + SelectionReason(selected));
    int year, month, day, hour, minute, second;
    GetYearMonthDayUTC(year, month, day);
    GetHourMinuteSecondUTC(hour, minute, second);
@@ -1116,22 +1158,11 @@ class DZES_Scheduler
    if (!providerReady && now > s_State.NextEventAt + providerTimeout)
    {
     Print("[EventSchedulerZ] SCHEDULE_DEFERRED owner=" + staleOwner + " reason=provider_not_ready grace=" + (providerTimeout / 1000).ToString());
-    if (!providerFound || now - scheduledLastRequest > providerTimeout)
-    {
-     s_Queue.RemoveItem(staleOwner);
-     s_LastRequest.Remove(staleOwner);
-     s_Priority.Remove(staleOwner);
-     s_QueuedSince.Remove(staleOwner);
-     s_SelectionReason.Remove(staleOwner);
-    }
-    s_State.NextEvent = "";
-    s_State.NextEventAt = 0;
-    s_State.NextEventAtUTCSeconds = 0;
-    s_State.NextEventAtUTC = "";
-    s_State.RecoveryPolicy = "";
-    s_State.ScheduledProviderGeneration = 0;
-    s_State.Phase = DZES_Phase.CANDIDATE;
-    s_PlanningOpenAt = now + s_Settings.ProviderCollectionSeconds * 1000;
+    s_State.NextEventAt = now + retryInterval;
+    s_State.NextEventAtUTCSeconds = ExpansionStatic.GetTimestamp(true) + retryInterval / 1000;
+    s_State.RecoveryPolicy = "WAITING_FOR_ROTATION_PROVIDER";
+    s_State.Phase = DZES_Phase.SCHEDULED;
+    Print("[EventSchedulerZ] ROTATION_HELD owner=" + staleOwner + " reason=provider_not_ready retryIn=" + (retryInterval / 1000).ToString());
     Save();
    }
   }

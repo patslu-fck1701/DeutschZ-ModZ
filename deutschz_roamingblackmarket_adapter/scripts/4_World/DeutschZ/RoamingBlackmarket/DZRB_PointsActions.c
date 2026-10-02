@@ -46,43 +46,26 @@ class DZRB_ActionRedeemPointTokens : ActionInteractBase
 
 			if (value > 0)
 			{
-				total += value;
+				int quantity = Math.Round(entity.GetQuantity());
+				if (quantity < 1)
+					quantity = 1;
+
+				total += value * quantity;
 				tokens.Insert(entity);
 			}
 		}
 
 		if (total <= 0)
 		{
-			NotificationSystem.SendNotificationToPlayerIdentityExtended(
-				player.GetIdentity(),
-				5,
-				"DeutschZ Points",
-				"Du hast keine Wertmarken dabei."
-			);
+			player.MessageStatus("DeutschZ Points: Du hast keine Wertmarken dabei.");
 			return;
 		}
 
-		string transactionID =
-			"TOKEN-"
-			+ player.GetIdentity().GetPlainId()
-			+ "-"
-			+ ExpansionStatic.GetTimestamp(true).ToString()
-			+ "-"
-			+ GetGame().GetTime().ToString();
+		string transactionID = "TOKEN-" + player.GetIdentity().GetPlainId() + "-" + ExpansionStatic.GetTimestamp(true).ToString() + "-" + GetGame().GetTime().ToString();
 
-		if (!DZPoints_Service.Credit(
-			player.GetIdentity().GetPlainId(),
-			total,
-			"TOKEN",
-			transactionID
-		))
+		if (!DZPoints_Service.Credit(player.GetIdentity().GetPlainId(), total, "TOKEN", transactionID))
 		{
-			NotificationSystem.SendNotificationToPlayerIdentityExtended(
-				player.GetIdentity(),
-				6,
-				"DeutschZ Points",
-				"Einloesung fehlgeschlagen. Deine Marken wurden nicht entfernt."
-			);
+			player.MessageStatus("DeutschZ Points: Einloesung fehlgeschlagen. Deine Marken wurden nicht entfernt.");
 			return;
 		}
 
@@ -91,23 +74,9 @@ class DZRB_ActionRedeemPointTokens : ActionInteractBase
 			GetGame().ObjectDelete(token);
 		}
 
-		NotificationSystem.SendNotificationToPlayerIdentityExtended(
-			player.GetIdentity(),
-			7,
-			"DeutschZ Points",
-			total.ToString() + " Points gutgeschrieben."
-		);
+		player.MessageStatus("DeutschZ Points: " + total.ToString() + " Points gutgeschrieben.");
 
-		Print(
-			"[DeutschZ PointsZ] TOKENS_REDEEMED player="
-			+ player.GetIdentity().GetPlainId()
-			+ " entities="
-			+ tokens.Count().ToString()
-			+ " points="
-			+ total.ToString()
-			+ " tx="
-			+ transactionID
-		);
+		Print("[DeutschZ PointsZ] TOKENS_REDEEMED player=" + player.GetIdentity().GetPlainId() + " entities=" + tokens.Count().ToString() + " points=" + total.ToString() + " tx=" + transactionID);
 	}
 }
 

@@ -35,11 +35,13 @@ class CfgVehicles
 		model="\DZ\gear\consumables\PunchedCard.p3d";
 		itemSize[]={1,1};
 		weight=5;
-		canBeSplit=0;
+		canBeSplit=1;
 		isMeleeWeapon=0;
-		varQuantityInit=0;
+		quantityBar=1;
+		varQuantityInit=1;
 		varQuantityMin=0;
-		varQuantityMax=0;
+		varQuantityMax=50;
+		varQuantityDestroyOnMin=1;
 		inventorySlot[]={};
 	};
 	class DeutschZ_Token_1: DeutschZ_Token_Base {scope=2; displayName="$STR_DZPOINTS_TOKEN_1"; descriptionShort="$STR_DZPOINTS_TOKEN_DESC_1";};

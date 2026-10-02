@@ -248,14 +248,32 @@ modded class DZKOTHF_EventController
 }
 modded class AIConvoyManager
 {
- protected AIConvoyEventParams m_DZES_PendingParams;
- protected bool m_DZES_RetryScheduled;
+ protected bool m_DZES_ProviderPollStarted;
 
- // The foreign manager's advance-warning timer is not an authority anymore.
- // It may prepare a real event, but only EventSchedulerZ may announce/start it.
- override void AnnouncePending()
+ // Replace the foreign mod's autonomous first/repeat scheduler with a provider
+ // heartbeat. It may prepare a candidate, but only a central lease can launch it.
+ override protected void ScheduleNext(int seconds)
  {
-  StartEvent();
+  if (!GetGame()) return;
+  GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(DZES_ProviderTick);
+  GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(DZES_ProviderTick,10000,true);
+  if (!m_DZES_ProviderPollStarted)
+  {
+   m_DZES_ProviderPollStarted=true;
+   Print("[EventSchedulerZ] AUTOSTART_BLOCKED owner=CONVOY reason=scheduler_managed providerPoll=10s");
+  }
+ }
+
+ protected void DZES_ProviderTick()
+ {
+  if (m_ActiveEvent || (g_deutschz_aiconvoyz_controller && g_deutschz_aiconvoyz_controller.DZES_HasEncounter()))
+  {
+   DZES_Scheduler.Renew("CONVOY");
+   return;
+  }
+  AIConvoyEventParams params=AssembleEvent();
+  if (!params) return;
+  LaunchEvent(params);
  }
 
  override void NotifyConvoyAdvance(AIConvoyEventParams params, int seconds)
@@ -275,10 +293,9 @@ modded class AIConvoyManager
   }
   if(!DZES_Scheduler.TryAcquire("CONVOY",2400,DZES_Progression.PriorityFor("CONVOY",reason),reason))
   {
-   DZES_QueueRetry(params);
+   Print("[EventSchedulerZ] START_DEFERRED owner=CONVOY reason=rotation_or_slot_not_ready retryIn=10");
    return false;
   }
-  DZES_CancelRetry();
   DZES_Scheduler.Transition("CONVOY",DZES_Phase.STARTING);
   bool started=super.LaunchEvent(params);
   if(!started) { DZES_Scheduler.Transition("CONVOY",DZES_Phase.CLEANUP); DZES_Scheduler.FinishCleanup("CONVOY"); }
@@ -289,26 +306,6 @@ modded class AIConvoyManager
    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(DZES_Heartbeat,30000,true);
   }
   return started;
- }
- protected void DZES_QueueRetry(AIConvoyEventParams params)
- {
-  m_DZES_PendingParams=params;
-  if(m_DZES_RetryScheduled) return;
-  m_DZES_RetryScheduled=true;
-  GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(DZES_RetryQueuedLaunch,10000,false);
- }
- protected void DZES_RetryQueuedLaunch()
- {
-  m_DZES_RetryScheduled=false;
-  AIConvoyEventParams pending=m_DZES_PendingParams;
-  if(!pending || m_ActiveEvent) { m_DZES_PendingParams=null; return; }
-  LaunchEvent(pending);
- }
- protected void DZES_CancelRetry()
- {
-  GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(DZES_RetryQueuedLaunch);
-  m_DZES_RetryScheduled=false;
-  m_DZES_PendingParams=null;
  }
  protected void DZES_Heartbeat()
  {
@@ -328,7 +325,6 @@ modded class AIConvoyManager
   DZES_Scheduler.Transition("CONVOY",DZES_Phase.COMPLETED);
   DZES_Scheduler.Transition("CONVOY",DZES_Phase.CLEANUP);
   DZES_Scheduler.FinishCleanup("CONVOY");
-  DZES_CancelRetry();
   GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(DZES_Heartbeat);
  }
 }
