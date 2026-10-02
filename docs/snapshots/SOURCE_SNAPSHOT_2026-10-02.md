@@ -57,7 +57,7 @@ Persistenter vollständiger Source-Snapshot:
 Dort liegen **Haupt-Source und HUDZ gemeinsam** als zwei Dateien desselben Snapshots.
 
 Privater Google-Drive-Ordner für den bisherigen Server-/Source-Backupstand:
-https://drive.google.com/drive/folders/1tRdKCTIK7XHR2Vqjg9AiJfDv2xTtiYun
+[privat gespeichert]
 
 Der Drive-Connector akzeptiert das 466-MB-HUDZ-Archiv nicht als Einzelupload. Deshalb ist HUDZ im persistenten Snapshot gesichert und in dieser Versionsdokumentation ausdrücklich dem Source-Stand zugeordnet.
 

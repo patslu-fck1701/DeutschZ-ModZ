@@ -1,0 +1,58 @@
+# DeutschZ ModZ - local/secrets/runtime exclusions
+
+# Secrets / credentials / private signing material
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.biprivatekey
+*steamlogin*
+*credential*
+*credentials*
+*password*
+*secret*
+secrets/
+private/
+keys/private/
+
+# Runtime / server state
+profiles/
+storage_*/
+logs/
+*.log
+*.rpt
+crash_*.log
+
+# DayZ build outputs / signed binaries
+*.pbo
+*.bisign
+*.bikey
+build/
+dist/
+packed/
+workshop/
+
+# Local/editor/cache
+.vscode/
+.idea/
+.vs/
+__pycache__/
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# Backups / archives are not source by default
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+
+# Explicit source snapshots stored through Git LFS
+!snapshots/
+!snapshots/source/
+!snapshots/source/*.zip

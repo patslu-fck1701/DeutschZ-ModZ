@@ -1,5 +1,7 @@
 # DeutschZ ModZ
 
+> **Proprietary / private project source.** This repository is not an open-source distribution. Viewing access does not grant permission to copy, redistribute, republish, sell, repackage, or reuse DeutschZ source code or assets.
+
 Canonical source repository for the currently developed DeutschZ-owned DayZ mods.
 
 ## Structure
@@ -35,11 +37,11 @@ Aktueller angelieferter Source-Stand besteht aus **zwei zusammengehörenden Arch
 - `DeutschZ_Source_Code_2026-10-02_ohne_HUDZ.zip` bleibt nur ein kompakter abgeleiteter Code-/Konfigurationsstand; er ist **nicht** der vollständige Source-Snapshot.
 - SHA-256 vollständiger Source-ZIP: `58dd14a134205457f6b53e187782e5a6a245b19e49a08b8cc23703617ea52280`
 - SHA-256 Code-only-ZIP: `aeb754c359237ccc59965b59117fa6420118b465c8bdea927da3c8f57c941f42`
-- Backup-Ordner: https://drive.google.com/drive/folders/1tRdKCTIK7XHR2Vqjg9AiJfDv2xTtiYun
+- Vollbackup: privat gespeichert; kein öffentlicher Backup-Link im Repository.
 
 Erfasste Source-Module:
 
 `FogOverRide`, `deutschz_afkz`, `deutschz_aiconvoyz`, `deutschz_airdropz`, `deutschz_atmraidez`, `deutschz_battlegroundz`, `deutschz_courierz`, `deutschz_eventschedulerz`, `deutschz_fuelz`, `deutschz_king_of_the_hillz`, `deutschz_minimapz`, `deutschz_operation_deutschz`, `deutschz_pointsz`, `deutschz_propertyz`, `deutschz_propertyz_breaching`, `deutschz_radiomissionz`, `deutschz_realisticz`, `deutschz_roamingblackmarket_adapter`, `deutschz_toxicz`, `deutschz_warningz`, `deutschz_welcomez`.
 
-Der vollständige Binärstand wird bewusst nicht als Git-Blob gespiegelt; Git bleibt für lesbaren Quellcode, Struktur, Doku und nachvollziehbare Versionsstände zuständig. Große Assets und vollständige Snapshot-ZIPs liegen im versionierten Backup.
+Große Source-Snapshots werden nur an der dafür vorgesehenen Stelle `snapshots/source/` über Git LFS geführt. Private Schlüssel, Zugangsdaten, Live-Runtime-Daten und sonstige Geheimnisse bleiben grundsätzlich außerhalb von GitHub.
 
