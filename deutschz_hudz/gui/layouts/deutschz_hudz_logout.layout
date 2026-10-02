@@ -1,0 +1,85 @@
+FrameWidgetClass dzpvpui_logout_root
+{
+ visible 1 ignorepointer 0 position 0 0 size 1 1 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0 priority 1000
+ {
+  PanelWidgetClass dzpvpui_logout_panel
+  {
+   style DayZDefaultPanel ignorepointer 1 position 0.325 0.3925 size 0.350 0.215
+   hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0 color 0.012 0.015 0.020 0.88
+  }
+  PanelWidgetClass dzpvpui_logout_accent
+  {
+   style DayZDefaultPanel ignorepointer 1 position 0.325 0.3925 size 0.0035 0.215
+   hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0 color 0.41 0.86 0.00 1
+  }
+  ImageWidgetClass dzpvpui_logout_emblem
+  {
+   ignorepointer 1 position 0.341 0.427 size 0.047 0.093 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+   image0 "deutschz_hudz/gui/icons/loading_emblem_deutschz_shield.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect
+  }
+  TextWidgetClass dzpvpui_logout_title
+  {
+   ignorepointer 1 position 0.397 0.411 size 0.255 0.034 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+   text "DEUTSCHZ // VERBINDUNG WIRD GETRENNT" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 16
+   "text valign" center color 0.96 0.96 0.94 1
+  }
+  TextWidgetClass txtLogoutTime
+  {
+   ignorepointer 1 position 0.397 0.447 size 0.255 0.050 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+   text "VERLASSEN IN -- SEKUNDEN" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 23
+   "text valign" center color 0.41 0.86 0.00 1
+  }
+  TextWidgetClass txtDescription
+  {
+   ignorepointer 1 position 0.397 0.499 size 0.255 0.032 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+   text "Der Charakter bleibt waehrend des Countdowns auf dem Server." font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 14
+   "text valign" center color 0.82 0.84 0.86 1
+  }
+  TextWidgetClass dzpvpui_logout_joke
+  {
+   ignorepointer 1 position 0.397 0.532 size 0.142 0.036 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+   text "Bis gleich. Wir wissen beide, dass du wiederkommst." font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 12
+   "text valign" center wrap 1 color 0.96 0.96 0.94 1
+  }
+  ButtonWidgetClass bLogoutNow
+  {
+   ignorepointer 0 priority 990 position 0.543 0.538 size 0.052 0.032 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0 style Empty "no focus" 0
+   {
+    ImageWidgetClass dzpvpui_logout_now_image
+    {
+     ignorepointer 1 position 0 0 size 1 1 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+     image0 "deutschz_hudz/gui/menu_green1/component_set/buttons/wide_red/wide_red_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h
+    }
+    TextWidgetClass dzpvpui_logout_now_label
+    {
+     ignorepointer 1 position 0 0 size 1 1 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+     text "JETZT" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 12 "text halign" center "text valign" center color 1 0.90 0.88 1
+    }
+   }
+  }
+  ButtonWidgetClass bCancel
+  {
+   ignorepointer 0 priority 990 position 0.599 0.538 size 0.053 0.032 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0 style Empty "no focus" 0
+   {
+    ImageWidgetClass dzpvpui_logout_cancel_image
+    {
+     ignorepointer 1 position 0 0 size 1 1 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+     image0 "deutschz_hudz/gui/menu_green1/component_set/buttons/wide/button_wide_normal.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h
+    }
+    TextWidgetClass dzpvpui_logout_cancel_label
+    {
+     ignorepointer 1 position 0 0 size 1 1 hexactpos 0 vexactpos 0 hexactsize 0 vexactsize 0
+     text "ABBRECHEN" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 11 "text halign" center "text valign" center color 0.88 1 0.68 1
+    }
+   }
+  }
+  ButtonWidgetClass bCancelConsole
+  {
+   visible 0 ignorepointer 1 position 0 0 size 1 1 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style Empty
+  }
+  PanelWidgetClass toolbar_bg
+  {
+   visible 0 ignorepointer 1 position 0 0 size 1 1 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 style blank
+  }
+ }
+}

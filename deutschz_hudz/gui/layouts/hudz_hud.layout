@@ -1,0 +1,72 @@
+FrameWidgetClass dzpvpui_root
+{
+ position 0 0 size 1 1 ignorepointer 1
+ {
+  PanelWidgetClass dzpvpui_weapon_panel
+  {
+   position 0.012 0.805 size 0.292 0.180 color 0.003 0.010 0.006 0.90 priority 20 ignorepointer 1
+   {
+    ImageWidgetClass weapon_top { position 0.018 0.025 size 0.964 0.012 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 ignorepointer 1 }
+    ImageWidgetClass weapon_bottom { position 0.018 0.963 size 0.964 0.012 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 ignorepointer 1 }
+    ImageWidgetClass weapon_left { position 0.008 0.055 size 0.009 0.880 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 ignorepointer 1 }
+    ImageWidgetClass weapon_right { position 0.983 0.055 size 0.009 0.880 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 ignorepointer 1 }
+    TextWidgetClass weapon_dot { position 0.055 0.135 size 0.075 0.220 text "●" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 34 color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_weapon_name { position 0.145 0.100 size 0.485 0.260 text "KEINE WAFFE" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 23 color 0.18 1 0.12 1 "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_weapon_mode { position 0.655 0.105 size 0.295 0.200 text "-" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 15 color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_weapon_zeroing { position 0.655 0.305 size 0.295 0.190 text "-- M" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 15 color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_weapon_ammo { position 0.055 0.445 size 0.310 0.200 text "[--/--]" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 18 color 0.18 1 0.12 1 "text valign" center ignorepointer 1 }
+    TextWidgetClass stamina_title { position 0.055 0.690 size 0.250 0.120 text "AUSDAUER" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 13 color 0.94 0.95 0.93 1 "text valign" center ignorepointer 1 }
+    ProgressBarWidgetClass dzpvpui_stamina_bar { position 0.055 0.845 size 0.720 0.065 style Quantity current 0 color 0.18 1 0.12 1 ignorepointer 1 }
+    TextWidgetClass dzpvpui_status_stamina { position 0.790 0.770 size 0.170 0.160 text "AUS --%" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 14 color 0.94 0.95 0.93 1 "text halign" center "text valign" center ignorepointer 1 }
+   }
+  }
+  PanelWidgetClass dzpvpui_quickbar
+  {
+   position 0.307 0.904 size 0.398 0.086 color 0.003 0.010 0.006 0.88 priority 20 ignorepointer 1
+   {
+    ImageWidgetClass qb_top { position 0.015 0.02 size 0.970 0.025 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 ignorepointer 1 }
+    ImageWidgetClass qb_bottom { position 0.015 0.955 size 0.970 0.025 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 ignorepointer 1 }
+    ImageWidgetClass qb_emblem { position 0.455 0.01 size 0.090 0.98 image0 "deutschz_hudz/gui/icons/hudz2026/a_emblem_round_clean.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect color 1 1 1 1 priority 30 ignorepointer 1 }
+    TextWidgetClass dzpvpui_q0 { position 0.00 0.05 size 0.095 0.90 text "1. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q1 { position 0.10 0.05 size 0.095 0.90 text "2. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q2 { position 0.20 0.05 size 0.095 0.90 text "3. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q3 { position 0.30 0.05 size 0.095 0.90 text "4. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q4 { position 0.40 0.05 size 0.095 0.90 text "5. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q5 { position 0.505 0.05 size 0.095 0.90 text "6. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q6 { position 0.605 0.05 size 0.095 0.90 text "7. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q7 { position 0.705 0.05 size 0.095 0.90 text "8. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q8 { position 0.805 0.05 size 0.095 0.90 text "9. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_q9 { position 0.905 0.05 size 0.095 0.90 text "0. --" font "gui/fonts/sdf_MetronBook18" color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+   }
+  }
+  PanelWidgetClass dzpvpui_status_stack
+  {
+   position 0.718 0.662 size 0.282 0.338 color 0.003 0.010 0.006 0.90 priority 20 ignorepointer 1
+   {
+    ImageWidgetClass frame_top { position 0 0 size 1 0.010 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.18 1 0.12 1 ignorepointer 1 }
+    ImageWidgetClass frame_left { position 0 0 size 0.007 1 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.18 1 0.12 1 ignorepointer 1 }
+    ImageWidgetClass frame_right { position 0.993 0 size 0.007 1 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.18 1 0.12 1 ignorepointer 1 }
+    ImageWidgetClass frame_bottom { position 0 0.990 size 1 0.010 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.18 1 0.12 1 ignorepointer 1 }
+    ImageWidgetClass hud_logo { position 0.025 0.035 size 0.245 0.330 image0 "deutschz_hudz/gui/icons/hudz2026/a_logo_gold_clean.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect color 1 1 1 1 priority 30 ignorepointer 1 }
+    ImageWidgetClass hud_header { position 0.280 0.025 size 0.680 0.190 image0 "deutschz_hudz/gui/icons/hudz2026/a_deutschz_header_clean.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect color 1 1 1 1 priority 30 ignorepointer 1 }
+    TextWidgetClass dzpvpui_group { position 0.285 0.205 size 0.665 0.075 text "SOLO" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 15 color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_balance { position 0.220 0.280 size 0.730 0.075 text "GRUPPE: --   PRIVAT: --" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 14 color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_restart { position 0.275 0.355 size 0.675 0.065 text "NAECHSTER RESTART --:--" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 13 color 1 0.15 0.10 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass music_title { position 0.065 0.455 size 0.870 0.050 text "DeutschZ - Musikplayer" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 15 color 0.92 0.94 0.90 1 "text halign" center "text valign" center ignorepointer 1 }
+    TextWidgetClass dzpvpui_music { position 0.065 0.505 size 0.870 0.075 text "Titel wird geladen" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 13 color 0.18 1 0.12 1 "text halign" center "text valign" center ignorepointer 1 }
+    PanelWidgetClass dzpvpui_status_panel
+    {
+     position 0.020 0.655 size 0.960 0.150 color 0.005 0.012 0.008 0.92 ignorepointer 1
+     {
+      TextWidgetClass dzpvpui_status_water { position 0.00 0 size 0.25 1 text "WASSER --%" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 13 color 0.15 0.65 1 1 "text halign" center "text valign" center ignorepointer 1 }
+      TextWidgetClass dzpvpui_status_energy { position 0.25 0 size 0.25 1 text "ESSEN --%" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 13 color 1 0.80 0.10 1 "text halign" center "text valign" center ignorepointer 1 }
+      TextWidgetClass dzpvpui_status_blood { position 0.50 0 size 0.25 1 text "BLUT --%" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 13 color 1 0.12 0.10 1 "text halign" center "text valign" center ignorepointer 1 }
+      TextWidgetClass dzpvpui_status_health { position 0.75 0 size 0.25 1 text "HP --%" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 13 color 1 0.22 0.28 1 "text halign" center "text valign" center ignorepointer 1 }
+     }
+    }
+    TextWidgetClass hud_fight { position 0.035 0.830 size 0.930 0.125 text "FIGHT   -   SURVIVE   -   DOMINATE" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 19 color 0.95 0.95 0.93 1 "text halign" center "text valign" center priority 30 ignorepointer 1 }
+   }
+  }
+  FrameWidgetClass dzpvpui_crosshair_frame { position 0.4955 0.492 size 0.009 0.016 priority 100 ignorepointer 1 { ImageWidgetClass dzpvpui_crosshair_shadow { position -0.08 -0.08 size 1.16 1.16 image0 "deutschz_hudz/gui/icons/crosshair/crosshair_dot.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h color 0 0 0 0.96 priority 1 ignorepointer 1 } ImageWidgetClass dzpvpui_crosshair_image { position 0 0 size 1 1 image0 "deutschz_hudz/gui/icons/crosshair/crosshair_dot.paa" mode blend "src alpha" 1 "stretch mode" stretch_w_h color 1 0.07 0.04 1 priority 2 ignorepointer 1 } } }
+ }
+}

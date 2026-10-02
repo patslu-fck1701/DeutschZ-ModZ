@@ -1,0 +1,21 @@
+ImageWidgetClass DZMiniMapZExpansionMarker {
+ visible 0
+ ignorepointer 1
+ position 0 0
+ size 20 20
+ halign left_ref
+ valign top_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ priority 95
+ image0 "set:expansion_notification_iconset image:icon_marker"
+ mode blend
+ "src alpha" 1
+ "no wrap" 1
+ stretch 1
+ filter 1
+ nocache 0
+ pivot 0 0
+}

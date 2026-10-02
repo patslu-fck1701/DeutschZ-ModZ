@@ -1,0 +1,19 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.txt$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "product",
+            "value": "dayz ugc"
+        },
+        {
+            "name": "prefix",
+            "value": "DeutschZ\\ReadyModZ\\Source\\deutschz_roamingblackmarket_adapter"
+        }
+    ]
+}

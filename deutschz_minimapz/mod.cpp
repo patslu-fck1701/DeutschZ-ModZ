@@ -1,0 +1,10 @@
+name = "DeutschZ MiniMapZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ MiniMapZ";
+overview = "Clientseitige drehbare MiniMap fuer DeutschZ. Bedienung mit Strg+N.";
+action = "";
+author = "DeutschZ";
+version = "2.0.0";

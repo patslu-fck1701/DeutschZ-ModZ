@@ -1,0 +1,165 @@
+{
+  "Version": 5,
+  "PricePerLiter": 5,
+  "LivePriceEnabled": true,
+  "TankerkoenigApiKey": "",
+  "LivePriceLatitude": 52.520008,
+  "LivePriceLongitude": 13.404954,
+  "LivePriceRadiusKm": 25,
+  "LiveFuelType": "e10",
+  "LivePriceMultiplier": 1,
+  "InteractionDistance": 3,
+  "VehicleRange": 20,
+  "FuelShopClassname": "Land_FuelStation_Build",
+  "NPCClassname": "DZ_FuelZ_NPC",
+  "NPCLocalOffset": "-1.458551 -1.537858 -1.251150",
+  "NPCRelativeYaw": 182.122833,
+  "CurrencyClassnames": [
+    "ExpansionBanknoteEuro"
+  ],
+  "CurrencyValues": [
+    100
+  ],
+  "Stations": [
+    {
+      "BuildingPosition": "300.600555 296.574921 9399.578125",
+      "Position": "",
+      "Orientation": "",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "1121.985229 7.177962 2417.455566",
+      "Position": "1120.208130 5.603887 2417.623047",
+      "Orientation": "144 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "2701.584473 212.615799 5599.729004",
+      "Position": "2702.624756 211.061478 5601.134277",
+      "Orientation": "-98.999985 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "3000.457520 344.119537 7482.815430",
+      "Position": "3000.142822 342.572113 7484.609863",
+      "Orientation": "-144 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "3031.052734 211.179871 12656.985352",
+      "Position": "3032.011963 209.627945 12658.302734",
+      "Orientation": "-107.999992 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "3668.298828 313.144897 9002.197266",
+      "Position": "3667.948486 311.554626 9003.751953",
+      "Orientation": "-161.999985 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "4349.941895 178.404449 13085.363281",
+      "Position": "4349.487305 176.862640 13086.927734",
+      "Orientation": "-143.999985 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "4394.242188 340.575195 10820.508789",
+      "Position": "4394.512207 339.004730 10822.007813",
+      "Orientation": "-125.999992 0 0",
+      "PlaceBuilding": true,
+      "BuildingOrientation": "63.110371 0 0"
+    },
+    {
+      "BuildingPosition": "4726.754395 283.438812 6389.692871",
+      "Position": "",
+      "Orientation": "",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "5862.750000 10.833452 2212.286377",
+      "Position": "5860.993652 9.258333 2213.143311",
+      "Orientation": "152.999985 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "5857.977051 279.267883 10116.846680",
+      "Position": "",
+      "Orientation": "",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "6874.834473 8.880091 3094.625000",
+      "Position": "6872.729004 7.306866 3094.652100",
+      "Orientation": "125.999992 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "7470.551270 122.652611 12659.392578",
+      "Position": "7468.937012 121.088470 12659.026367",
+      "Orientation": "125.999992 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "9518.679688 7.212095 2003.847534",
+      "Position": "9519.614258 5.645594 2005.373291",
+      "Orientation": "-90 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "10119.334961 231.165192 5199.791016",
+      "Position": "",
+      "Orientation": "",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "10442.137695 224.715897 8884.391602",
+      "Position": "",
+      "Orientation": "",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "10750.474609 145.989441 10782.383789",
+      "Position": "",
+      "Orientation": "",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "12978.325195 7.710056 10079.391602",
+      "Position": "12977.201172 6.165229 10078.000977",
+      "Orientation": "78.898048 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "13369.897461 6.213018 6611.593262",
+      "Position": "13369.409180 4.618965 6610.030762",
+      "Orientation": "63 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    },
+    {
+      "BuildingPosition": "13574.409180 35.871765 13304.538086",
+      "Position": "13576.019531 34.299641 13305.074219",
+      "Orientation": "-53.999996 0 0",
+      "PlaceBuilding": false,
+      "BuildingOrientation": ""
+    }
+  ]
+}

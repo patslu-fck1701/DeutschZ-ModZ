@@ -1,0 +1,10 @@
+name = "DeutschZ ATM RaideZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ ATM RaideZ";
+overview = "Serverautoritativer ATM-Raub fuer vorhandene DayZ Expansion ATMs mit Adminmenue, Alarmen, Markern, Cooldowns und austauschbarer Auszahlung.";
+action = "";
+author = "DeutschZ";
+version = "0.1.8";

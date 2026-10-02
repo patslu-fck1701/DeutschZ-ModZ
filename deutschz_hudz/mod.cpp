@@ -1,0 +1,10 @@
+name = "DeutschZ HUDZ";
+picture = "";
+logo = "";
+logoSmall = "";
+logoOver = "";
+tooltip = "DeutschZ HUDZ";
+overview = "Minimales DeutschZ PvP HUD mit Leaderboard, Crosshair, Restart-Countdown und Musikplayer.";
+action = "";
+author = "DeutschZ";
+version = "1.0.0";

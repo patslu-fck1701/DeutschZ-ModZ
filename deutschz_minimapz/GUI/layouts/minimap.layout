@@ -1,0 +1,114 @@
+FrameWidgetClass DZMiniMapZRoot {
+ visible 1
+ ignorepointer 1
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass DZMiniMapZFrame {
+   visible 1
+   ignorepointer 1
+   clipchildren 1
+   color 0.0235 0.0824 0.0314 0.82
+   position 0.020 0.030
+   size 260 260
+   halign right_ref
+   valign top_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 1
+   vexactsize 1
+   style rover_sim_colorable
+   {
+    FrameWidgetClass DZMiniMapZRotator {
+     visible 0
+     ignorepointer 1
+     clipchildren 0
+     position -830 -830
+     size 1920 1920
+     halign left_ref
+     valign top_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     priority 20
+     {
+      ImageWidgetClass DZMiniMapZFullMap {
+       visible 1
+       ignorepointer 1
+       position 0 0
+       size 4096 4096
+       halign left_ref
+       valign top_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       priority 1
+      }
+     }
+    }
+    MapWidgetClass DZMiniMapZMap1080 {
+     visible 1
+     ignorepointer 1
+     position -0.207 -0.207
+     size 1.414 1.414
+     halign left_ref
+     valign top_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     priority 10
+    }
+    MapWidgetClass DZMiniMapZMap1440 {
+     visible 0
+     ignorepointer 1
+     position -54 -54
+     size 368 368
+     halign left_ref
+     valign top_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     priority 11
+    }
+    PanelWidgetClass DZMiniMapZColorFilter {
+     visible 1
+     ignorepointer 1
+     position 0 0
+     size 1 1
+     halign left_ref
+     valign top_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     color 0.070 0.095 0.045 0.12
+     style rover_sim_colorable
+     priority 90
+    }
+    CanvasWidgetClass DZMiniMapZPlayerArrow {
+     visible 1
+     ignorepointer 1
+     position 120 114
+     size 20 28
+     halign left_ref
+     valign top_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     priority 100
+    }
+   }
+  }
+ }
+}

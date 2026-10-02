@@ -1,0 +1,35 @@
+FrameWidgetClass OwnedHouseMarkerRoot {
+ ignorepointer 1
+ position 0 0
+ size 200 36
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ {
+  PanelWidgetClass OwnedHouseMarkerLine {
+   ignorepointer 1
+   color 0.408 0.863 0 0.9
+   position 65 0
+   size 70 3
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+  }
+  TextWidgetClass OwnedHouseMarkerText {
+   ignorepointer 1
+   position 0 5
+   size 200 28
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   font "gui/fonts/metron16"
+   color 0.408 0.863 0 1
+   text "MEIN HAUS"
+   "text halign" center
+   "text valign" center
+  }
+ }
+}

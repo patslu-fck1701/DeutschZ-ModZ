@@ -1,0 +1,10 @@
+name = "DeutschZ FuelZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ FuelZ";
+overview = "Tankstellen-NPC mit mengenabhaengigem Benzinverkauf und Volltanken-Option.";
+action = "";
+author = "DeutschZ";
+version = "0.1.2";

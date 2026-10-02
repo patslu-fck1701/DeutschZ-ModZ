@@ -1,0 +1,6 @@
+//<'FogOverRide.pbo' properties via Mikero's dos tools, dll version 9.45>
+mikero=DePbo.dll.9.90;
+prefix=Projects\FogOverRide;
+version=25012808;
+//PboType=Arma Addon;
+//</properties>

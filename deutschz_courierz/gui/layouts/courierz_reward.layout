@@ -1,0 +1,54 @@
+FrameWidgetClass CourierZRewardRoot
+{
+	name "CourierZRewardRoot"
+	position 0.27 0.20
+	size 0.46 0.60
+	visible 1
+	priority 9500
+	{
+		PanelWidgetClass CourierZRewardPanel
+		{
+			position 0 0
+			size 1 1
+			color 0.025 0.030 0.028 0.96
+			style rover_sim_colorable
+			{
+				PanelWidgetClass CourierZTopLine { position 0 0 size 1 0.008 color 1.0 0.82 0.0 1 style rover_sim_colorable ignorepointer 1 }
+				TextWidgetClass CourierZTitle
+				{
+					position 0.06 0.05
+					size 0.88 0.10
+					text "DEINE BELOHNUNG"
+					font "gui/fonts/sdf_MetronBook24"
+					color 1.0 0.84 0.18 1
+					"text halign" center
+					ignorepointer 1
+				}
+				TextWidgetClass CourierZText
+				{
+					position 0.08 0.16
+					size 0.84 0.11
+					text "Waehle deine Belohnung."
+					font "gui/fonts/sdf_MetronBook18"
+					color 0.88 0.90 0.86 1
+					"text halign" center
+					ignorepointer 1
+				}
+				ButtonWidgetClass CourierZKeep { position 0.08 0.31 size 0.84 0.10 text "1  Koffer behalten" color 0.09 0.10 0.09 0.95 font "gui/fonts/sdf_MetronBook18" }
+				ButtonWidgetClass CourierZMoney { position 0.08 0.43 size 0.84 0.10 text "2  1.250.000 Cash" color 0.09 0.10 0.09 0.95 font "gui/fonts/sdf_MetronBook18" }
+				ButtonWidgetClass CourierZItem { position 0.08 0.55 size 0.84 0.10 text "3  Geheimer Gegenstand" color 0.09 0.10 0.09 0.95 font "gui/fonts/sdf_MetronBook18" }
+				ButtonWidgetClass CourierZHint { position 0.08 0.67 size 0.84 0.10 text "4  Geheime Nachricht" color 0.09 0.10 0.09 0.95 font "gui/fonts/sdf_MetronBook18" }
+				TextWidgetClass CourierZWarning
+				{
+					position 0.08 0.82
+					size 0.84 0.08
+					text "Deine Auswahl ist endgueltig."
+					font "gui/fonts/sdf_MetronBook18"
+					color 0.72 0.74 0.70 1
+					"text halign" center
+					ignorepointer 1
+				}
+			}
+		}
+	}
+}

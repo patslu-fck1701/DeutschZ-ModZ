@@ -1,0 +1,10 @@
+name = "DeutschZ WarningZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ WarningZ";
+overview = "Akustische DeutschZ Warnungen fuer Willkommen, Restart, Safezone, Logout und Tod.";
+action = "";
+author = "DeutschZ";
+version = "2.0.0";

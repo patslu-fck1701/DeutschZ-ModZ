@@ -1,0 +1,61 @@
+class DZBGZ_CardReader : GPSReceiver
+{
+	override void EEInit()
+	{
+		super.EEInit();
+		if (GetGame() && GetGame().IsServer())
+			SetAllowDamage(false);
+	}
+
+	override void SetActions()
+	{
+		super.SetActions();
+		AddAction(ActionDZBGZ_UseCardReader);
+	}
+
+	override bool CanPutIntoHands(EntityAI parent)
+	{
+		return false;
+	}
+
+	override bool CanPutInCargo(EntityAI parent)
+	{
+		return false;
+	}
+}
+
+class ActionDZBGZ_UseCardReader : ActionInteractBase
+{
+	void ActionDZBGZ_UseCardReader()
+	{
+		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
+		m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
+		m_Text = "Battleground-Einsatz authentifizieren";
+	}
+
+	override void CreateConditionComponents()
+	{
+		m_ConditionTarget = new CCTCursor(UAMaxDistances.SMALL);
+		m_ConditionItem = new CCINone;
+	}
+
+	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
+	{
+		if (!player || !target)
+			return false;
+
+		if (!player.IsAlive() || player.IsUnconscious())
+			return false;
+
+		Object object = target.GetObject();
+		return DZBGZ_CardReader.Cast(object) != null;
+	}
+
+	override void OnExecuteServer(ActionData action_data)
+	{
+		if (!action_data || !action_data.m_Player || !action_data.m_Target)
+			return;
+
+		DZBGZ_EventManager.GetInstance().TryActivateReader(action_data.m_Player, action_data.m_Target.GetObject());
+	}
+}

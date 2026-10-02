@@ -1,0 +1,10 @@
+{
+  "config_version": 1,
+  "restart_interval_minutes": 240,
+  "restart_offset_minutes": 0,
+  "welcome_delay_seconds": 8,
+  "enable_welcome": true,
+  "enable_restart15min": true,
+  "enable_restart2min": true,
+  "enable_safezonewarning": true
+}

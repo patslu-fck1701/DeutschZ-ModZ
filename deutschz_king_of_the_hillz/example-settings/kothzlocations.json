@@ -1,0 +1,424 @@
+{
+  "Locations": [
+    {
+      "Enabled": true,
+      "Name": "Myshkino Military",
+      "Position": [
+        1178.5272216796875,
+        184.5636749267578,
+        7184.0009765625
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Tisy Military",
+      "Position": [
+        1669.0849609375,
+        451.84576416015625,
+        14175.8525390625
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 40.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Tisy Airfield",
+      "Position": [
+        1061.66162109375,
+        454.3735046386719,
+        14635.0673828125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 40.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Grozowny (Küste)",
+      "Position": [
+        3680.819580078125,
+        363.6822509765625,
+        14819.65625
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 25.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Novaya Komando Zentrale",
+      "Position": [
+        4344.966796875,
+        214.68692016601562,
+        13947.35546875
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Balota Airfield (Küste)",
+      "Position": [
+        5089.1474609375,
+        9.475587844848633,
+        2357.3876953125
+      ],
+      "Orientation": [
+        62.799774169921875,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 30.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Grozovny Military",
+      "Position": [
+        3771.81591796875,
+        362.5239562988281,
+        14822.8564453125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Gorka Military",
+      "Position": [
+        9711.21875,
+        298.7942810058594,
+        8888.484375
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Mountain Air Base",
+      "Position": [
+        567.1431884765625,
+        280.7483825683594,
+        8150.26123046875
+      ],
+      "Orientation": [
+        109.95205688476562,
+        -2.801387071609497,
+        -1.0164560079574585
+      ],
+      "CaptureRadius": 40.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Radio Zenith",
+      "Position": [
+        8229.3955078125,
+        469.85223388671875,
+        9026.9765625
+      ],
+      "Orientation": [
+        62.799781799316406,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Lopatino Military (Helicrash)",
+      "Position": [
+        2936.863525390625,
+        270.87701416015625,
+        9680.298828125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Downed Helicopter",
+      "Position": [
+        144.31199645996094,
+        319.5580139160156,
+        8073.8369140625
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "CaptureRadius": 25.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Skalisty Komando Zentrale",
+      "Position": [
+        13895.150390625,
+        31.665937423706055,
+        2939.197021484375
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "LunaPark (Küste)",
+      "Position": [
+        11324.7763671875,
+        1.6912319660186768,
+        2249.175048828125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 25.0
+    },
+    {
+      "Enabled": true,
+      "Name": "NWAF Komando Zentrale",
+      "Position": [
+        4206.18603515625,
+        339.1709899902344,
+        10765.4833984375
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 40.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Outpost01",
+      "Position": [
+        130.17198181152344,
+        195.24867248535156,
+        6677.341796875
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Severograd Krater (Küste) #2",
+      "Position": [
+        8664.78125,
+        106.53219604492188,
+        13278.7470703125
+      ],
+      "Orientation": [
+        0.0,
+        -1.7658989429473877,
+        -0.0
+      ],
+      "CaptureRadius": 30.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Kamensk Military",
+      "Position": [
+        7997.52197265625,
+        339.32781982421875,
+        14635.4501953125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Pulkovo Military",
+      "Position": [
+        5315.33203125,
+        306.85418701171875,
+        5515.7275390625
+      ],
+      "Orientation": [
+        0.3560490012168884,
+        -3.680191993713379,
+        -5.088397979736328
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Myshkino Komando Zentrale",
+      "Position": [
+        1754.822632,
+        289.957794,
+        7701.331055
+      ],
+      "Orientation": [
+        11.759870,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Severograd Krater (Küste)",
+      "Position": [
+        8631.748046875,
+        120.07128143310547,
+        13453.712890625
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 30.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Krasnostav Airfield",
+      "Position": [
+        12162.1328125,
+        140.07872009277344,
+        12505.953125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 40.0
+    },
+    {
+      "Enabled": true,
+      "Name": "VMC Military #2",
+      "Position": [
+        4639.1376953125,
+        321.0888977050781,
+        8381.3876953125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "VMC Military",
+      "Position": [
+        4552.908203125,
+        318.3016662597656,
+        8350.9951171875
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Tisy Radio Station",
+      "Position": [
+        554.0906372070312,
+        502.26019287109375,
+        13635.07421875
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "NWAF Zeltstadt",
+      "Position": [
+        4253.6357421875,
+        338.89434814453125,
+        11089.9248046875
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 40.0
+    },
+    {
+      "Enabled": true,
+      "Name": "Lopatino Military",
+      "Position": [
+        2928.781005859375,
+        271.0169677734375,
+        9681.5361328125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    },
+    {
+      "Enabled": true,
+      "Name": "YRAP Military Bahnhof",
+      "Position": [
+        1244.5438232421875,
+        173.0406494140625,
+        5850.44189453125
+      ],
+      "Orientation": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "CaptureRadius": 35.0
+    }
+  ]
+}

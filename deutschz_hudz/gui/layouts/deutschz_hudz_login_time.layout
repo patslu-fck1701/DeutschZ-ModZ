@@ -1,0 +1,179 @@
+FrameWidgetClass DZPVPUI_LoginRoot
+{
+    position 0 0
+    size 1 1
+    hexactpos 0
+    vexactpos 0
+    hexactsize 0
+    vexactsize 0
+    {
+        ImageWidgetClass DZPVPUI_LoginBackground
+        {
+            position 0 0
+            size 1 1
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            image0 "deutschz_hudz/gui/loading/loading_0.paa"
+            mode blend
+            "src alpha" 1
+            "stretch mode" stretch_w_h
+            ignorepointer 1
+        }
+        PanelWidgetClass DZPVPUI_LoginBottomCover
+        {
+            style DayZDefaultPanel
+            position 0 0.755
+            size 1 0.245
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0.01 0.012 0.014 0.82
+            visible 0
+            ignorepointer 1
+        }
+        PanelWidgetClass DZPVPUI_LoginPanel
+        {
+            style DayZDefaultPanel
+            position 0.325 0.3925
+            size 0.350 0.215
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0.012 0.015 0.020 0.88
+            {
+                PanelWidgetClass DZPVPUI_LoginAccent
+                {
+                    style DayZDefaultPanel
+                    position 0 0
+                    size 0.010 1
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    color 0.41 0.86 0.00 1
+                    ignorepointer 1
+                }
+                ImageWidgetClass DZPVPUI_LoginEmblem
+                {
+                    position 0.045 0.160
+                    size 0.135 0.430
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    image0 "deutschz_hudz/gui/icons/loading_emblem_deutschz_shield.paa"
+                    mode blend
+                    "src alpha" 1
+                    "stretch mode" stretch_w_h
+                    ignorepointer 1
+                }
+                TextWidgetClass DZPVPUI_LoginBrand
+                {
+                    position 0.205 0.115
+                    size 0.745 0.150
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text "DEUTSCHZ // VERBINDUNG"
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    "exact text size" 16
+                    color 0.96 0.96 0.94 1
+                    "text valign" center
+                    ignorepointer 1
+                }
+                TextWidgetClass txtLabel
+                {
+                    position 0.205 0.295
+                    size 0.745 0.225
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text "VERBINDUNG WIRD HERGESTELLT"
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    "exact text size" 23
+                    color 0.41 0.86 0.00 1
+                    "text valign" center
+                }
+                MultilineTextWidgetClass txtDescription
+                {
+                    position 0.205 0.515
+                    size 0.745 0.235
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text ""
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    "exact text size" 15
+                    color 0.82 0.84 0.86 1
+                    wrap 1
+                    ignorepointer 1
+                }
+                TextWidgetClass DZPVPUI_LoginJoke
+                {
+                    position 0.205 0.735
+                    size 0.500 0.145
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text "VERBINDUNGSHINWEIS WIRD GELADEN"
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    "exact text size" 13
+                    color 0.96 0.96 0.94 1
+                    "text valign" center
+                    wrap 1
+                    ignorepointer 1
+                }
+                ButtonWidgetClass btnLeave
+                {
+                    position 0.730 0.790
+                    size 0.220 0.130
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    userID 1
+                    style EmptyHighlight
+                    text "ABBRECHEN"
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    "exact text size" 11
+                    color 0.41 0.86 0.00 1
+                }
+            }
+        }
+        PanelWidgetClass DZPVPUI_LoginBottomAccent
+        {
+            style DayZDefaultPanel
+            position 0 0.985
+            size 1 0.004
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0.41 0.86 0.00 1
+            ignorepointer 1
+        }
+        WrapSpacerWidgetClass notification_root
+        {
+            visible 0
+            position 0 0
+            size 0 0
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+        }
+    }
+}

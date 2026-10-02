@@ -1,0 +1,28 @@
+FrameWidgetClass DZPVPUI_LeaderboardRoot
+{
+ position 0.278 0.108 size 0.455 0.514 visible 0 priority 900 ignorepointer 1
+ {
+  PanelWidgetClass bg { position 0 0 size 1 1 color 0.003 0.010 0.006 0.96 priority 1 ignorepointer 1 }
+  ImageWidgetClass outer_top { position 0.025 0.015 size 0.950 0.009 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 priority 20 ignorepointer 1 }
+  ImageWidgetClass outer_bottom { position 0.025 0.976 size 0.950 0.009 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 priority 20 ignorepointer 1 }
+  ImageWidgetClass outer_left { position 0.015 0.035 size 0.008 0.930 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 priority 20 ignorepointer 1 }
+  ImageWidgetClass outer_right { position 0.977 0.035 size 0.008 0.930 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.41 0.86 0 1 priority 20 ignorepointer 1 }
+  ImageWidgetClass inner_top { position 0.040 0.040 size 0.920 0.004 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.70 0.52 0.12 0.85 priority 20 ignorepointer 1 }
+  ImageWidgetClass inner_bottom { position 0.040 0.950 size 0.920 0.004 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.70 0.52 0.12 0.85 priority 20 ignorepointer 1 }
+  ImageWidgetClass logo_crown { position 0.070 0.045 size 0.180 0.180 image0 "deutschz_hudz/gui/icons/hudz2026/a_crown_clean.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect priority 30 ignorepointer 1 }
+  ImageWidgetClass header_logo { position 0.275 0.035 size 0.450 0.150 image0 "deutschz_hudz/gui/icons/hudz2026/a_deutschz_header_clean.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect priority 30 ignorepointer 1 }
+  ImageWidgetClass round_logo { position 0.805 0.055 size 0.120 0.145 image0 "deutschz_hudz/gui/icons/hudz2026/a_emblem_round_clean.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect priority 30 ignorepointer 1 }
+  TextWidgetClass DZPVPUI_LeaderboardTitle { position 0.280 0.170 size 0.440 0.055 text "DeutschZ Leaderboard" font "gui/fonts/sdf_MetronBook24" "exact text" 1 "exact text size" 18 color 0.18 1 0.12 1 "text halign" center "text valign" center priority 35 ignorepointer 1 }
+  TextWidgetClass headers { position 0.065 0.235 size 0.870 0.050 text "RANG       SPIELER             PVP KILLS        PVE KILLS        TODE        GESAMT" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 13 color 0.88 0.90 0.86 1 "text halign" center "text valign" center priority 35 ignorepointer 1 }
+  ImageWidgetClass header_line { position 0.055 0.285 size 0.890 0.004 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.18 1 0.12 1 priority 25 ignorepointer 1 }
+  PanelWidgetClass winner_bg { position 0.045 0.298 size 0.910 0.095 color 0.025 0.060 0.025 0.95 priority 10 ignorepointer 1 }
+  ImageWidgetClass winner_top { position 0.045 0.298 size 0.910 0.007 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.38 1 0.02 1 priority 25 ignorepointer 1 }
+  ImageWidgetClass winner_bottom { position 0.045 0.386 size 0.910 0.007 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.38 1 0.02 1 priority 25 ignorepointer 1 }
+  ImageWidgetClass winner_left { position 0.045 0.298 size 0.008 0.095 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.38 1 0.02 1 priority 25 ignorepointer 1 }
+  ImageWidgetClass winner_right { position 0.947 0.298 size 0.008 0.095 image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" color 0.38 1 0.02 1 priority 25 ignorepointer 1 }
+  ImageWidgetClass DZPVPUI_LeaderboardCrown { position 0.055 0.300 size 0.105 0.090 image0 "deutschz_hudz/gui/icons/hudz2026/a_crown_clean.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect priority 80 ignorepointer 1 }
+  TextWidgetClass DZPVPUI_LeaderboardWinnerText { position 0.160 0.305 size 0.780 0.080 text "" font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 16 color 0.18 1 0.12 1 "text valign" center "text halign" left priority 40 ignorepointer 1 }
+  MultilineTextWidgetClass DZPVPUI_LeaderboardText { position 0.065 0.415 size 0.870 0.465 text "DATEN WERDEN GELADEN..." font "gui/fonts/sdf_MetronBook18" "exact text" 1 "exact text size" 15 color 0.88 0.92 0.86 1 "text valign" top "text halign" left priority 35 ignorepointer 1 }
+  ImageWidgetClass footer_logo { position 0.455 0.835 size 0.090 0.110 image0 "deutschz_hudz/gui/icons/hudz2026/a_logo_gold_clean.paa" mode blend "src alpha" 1 "stretch mode" keep_aspect priority 30 ignorepointer 1 }
+ }
+}
