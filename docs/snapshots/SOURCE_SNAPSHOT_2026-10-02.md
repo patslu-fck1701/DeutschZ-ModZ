@@ -4,7 +4,16 @@
 
 Dieser Snapshot dokumentiert den vom Live-Projekt angelieferten Source-Stand vom 02.10.2026 um 20:00 Uhr.
 
-**HUDZ ist nicht Bestandteil dieses ZIPs.** `deutschz_hudz` wird aufgrund seiner Größe separat gesichert und versioniert.
+**HUDZ ist Bestandteil dieses Source-Stands.** Es wurde lediglich wegen seiner Größe als eigenes Archiv `deutschz_hudz.zip` hochgeladen. Der Snapshot ist daher als **ein gemeinsamer Stand aus Haupt-Source + HUDZ** zu verstehen.
+
+## Vollständiger Source-Stand
+
+Der Snapshot besteht aus:
+
+1. `Source_Stand_02.10.2026_20_00_Uhr.zip` — Haupt-Source
+2. `deutschz_hudz.zip` — HUDZ-Source, wegen Größe technisch separat
+
+Beide gehören fachlich zum selben Stand vom **02.10.2026 · 20:00**.
 
 ## Prüfsummen
 
@@ -42,10 +51,15 @@ Dieser Snapshot dokumentiert den vom Live-Projekt angelieferten Source-Stand vom
 
 ## Backup
 
-Privater Google-Drive-Ordner:
+Persistenter vollständiger Source-Snapshot:
+`/DeutschZ/Snapshots/2026-10-02/`
+
+Dort liegen **Haupt-Source und HUDZ gemeinsam** als zwei Dateien desselben Snapshots.
+
+Privater Google-Drive-Ordner für den bisherigen Server-/Source-Backupstand:
 https://drive.google.com/drive/folders/1tRdKCTIK7XHR2Vqjg9AiJfDv2xTtiYun
 
-Die großen Original-ZIPs liegen dort verlustfrei in Teilarchiven plus `SHA256SUMS.txt`; zusätzlich ist der kompakte Code-only-Stand als einzelnes ZIP vorhanden.
+Der Drive-Connector akzeptiert das 466-MB-HUDZ-Archiv nicht als Einzelupload. Deshalb ist HUDZ im persistenten Snapshot gesichert und in dieser Versionsdokumentation ausdrücklich dem Source-Stand zugeordnet.
 
 ## Signing
 
