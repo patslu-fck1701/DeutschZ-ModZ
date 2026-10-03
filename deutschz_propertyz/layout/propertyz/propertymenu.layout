@@ -1,0 +1,220 @@
+FrameWidgetClass DZPPropertyRoot {
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass Window {
+   color 0.03 0.04 0.05 0.72
+   position 0 0
+   size 620 390
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style DayZDefaultPanel
+   {
+    ImageWidgetClass DeutschZWordmark {
+     priority 1
+     ignorepointer 1
+     position 95 10
+     size 430 72
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     image0 "deutschz_propertyz/Data/UI/a_schrifftzug_clean.paa"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
+    }
+    TextWidgetClass Title {
+     position 35 76
+     size 550 42
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     font "gui/fonts/metron28"
+     color 0.408 0.863 0 1
+     text "PropertyZ"
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass Status {
+     position 35 122
+     size 550 44
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     font "gui/fonts/metron16"
+     text "Immobiliendaten werden geladen ..."
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass SumLabel {
+     position 80 182
+     size 150 48
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     font "gui/fonts/metron18"
+     color 0.82 0.84 0.82 1
+     text "Summe"
+     "text halign" right
+     "text valign" center
+    }
+    TextWidgetClass Price {
+     position 245 174
+     size 295 64
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     font "gui/fonts/metron32"
+     color 0.408 0.863 0 1
+     "text halign" left
+     "text valign" center
+    }
+    ButtonWidgetClass BuyButton {
+     position 20 325
+     size 112 45
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     font "gui/fonts/metron16"
+     text "Haus kaufen"
+    }
+    ButtonWidgetClass SellButton {
+     position 137 325
+     size 112 45
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     font "gui/fonts/metron16"
+     text "Haus verkaufen"
+    }
+    ButtonWidgetClass LockButton {
+     position 254 325
+     size 112 45
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     font "gui/fonts/metron16"
+     text "Türen verwalten"
+    }
+    ButtonWidgetClass CloseButton {
+     position 371 325
+     size 112 45
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     font "gui/fonts/metron16"
+     text "Schließen"
+    }
+    PanelWidgetClass SellConfirmation {
+     visible 0
+     priority 20
+     position 20 165
+     size 580 150
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     color 0.03 0.04 0.05 1
+     style DayZDefaultPanel
+     {
+      TextWidgetClass SellQuestion {
+       position 10 10
+       size 560 45
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/metron18"
+       text "Haus wirklich verkaufen?"
+       "text halign" center
+       "text valign" center
+      }
+      ButtonWidgetClass CancelSellButton {
+       position 25 75
+       size 245 45
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/metron16"
+       text "Abbrechen"
+      }
+      ButtonWidgetClass ConfirmSellButton {
+       position 310 75
+       size 245 45
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       font "gui/fonts/metron16"
+       text "Ja, Haus verkaufen"
+      }
+     }
+    }
+    PanelWidgetClass BorderTop {
+     priority 1
+     ignorepointer 1
+     color 0.408 0.863 0 1
+     position 0 0
+     size 620 8
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    PanelWidgetClass BorderBottom {
+     priority 1
+     ignorepointer 1
+     color 0.408 0.863 0 1
+     position 0 382
+     size 620 8
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    PanelWidgetClass BorderLeft {
+     priority 1
+     ignorepointer 1
+     color 0.408 0.863 0 1
+     position 0 0
+     size 8 390
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+    PanelWidgetClass BorderRight {
+     priority 1
+     ignorepointer 1
+     color 0.408 0.863 0 1
+     position 612 0
+     size 8 390
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+    }
+   }
+  }
+ }
+}

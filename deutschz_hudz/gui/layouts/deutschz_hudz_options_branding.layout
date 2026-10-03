@@ -1,0 +1,180 @@
+FrameWidgetClass DZPVPUI_OptionsBranding
+{
+ position 0 0
+ size 1 1
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ priority 0
+ ignorepointer 1
+ {
+  ImageWidgetClass DZPVPUI_OptionsMainGlass
+  {
+   position 0.030 0.055
+   size 0.675 0.855
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 0
+   ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 0.010 0.022 0.014 0.74
+  }
+  ImageWidgetClass DZPVPUI_OptionsTopLine
+  {
+   position 0.030 0.055
+   size 0.675 0.004
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 2
+   ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 0.24 1.00 0.18 1
+  }
+  ImageWidgetClass DZPVPUI_OptionsLeftLine
+  {
+   position 0.030 0.055
+   size 0.003 0.855
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 2
+   ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 0.24 1.00 0.18 1
+  }
+  ImageWidgetClass DZPVPUI_OptionsBottomLine
+  {
+   position 0.030 0.906
+   size 0.675 0.004
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 2
+   ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 0.24 1.00 0.18 1
+  }
+  ImageWidgetClass DZPVPUI_OptionsRightLine
+  {
+   position 0.702 0.055 size 0.003 0.855 priority 2 ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" mode blend "src alpha" 1 "stretch mode" stretch_w_h
+   color 0.24 1.00 0.18 1
+  }
+  ImageWidgetClass DZPVPUI_OptionsActionGlass
+  {
+   position 0.735 0.675
+   size 0.215 0.235
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 0
+   ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 0.010 0.022 0.014 0.82
+  }
+  ImageWidgetClass DZPVPUI_OptionsActionTop
+  {
+   position 0.735 0.675
+   size 0.215 0.004
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 2
+   ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 0.24 1.00 0.18 1
+  }
+  ImageWidgetClass DZPVPUI_OptionsActionBottom
+  {
+   position 0.735 0.906 size 0.215 0.004 priority 2 ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" mode blend "src alpha" 1 "stretch mode" stretch_w_h
+   color 0.24 1.00 0.18 1
+  }
+  ImageWidgetClass DZPVPUI_OptionsActionLeft
+  {
+   position 0.735 0.675 size 0.003 0.235 priority 2 ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" mode blend "src alpha" 1 "stretch mode" stretch_w_h
+   color 0.24 1.00 0.18 1
+  }
+  ImageWidgetClass DZPVPUI_OptionsActionRight
+  {
+   position 0.947 0.675 size 0.003 0.235 priority 2 ignorepointer 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)" mode blend "src alpha" 1 "stretch mode" stretch_w_h
+   color 0.24 1.00 0.18 1
+  }
+  ImageWidgetClass DZPVPUI_OptionsShield
+  {
+   position 0.958 0.064
+   size 0.032 0.060
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 3
+   ignorepointer 1
+   image0 "deutschz_hudz/gui/icons/leaderboard/deutschz_shield_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" keep_aspect
+  }
+  TextWidgetClass DZPVPUI_OptionsTitle
+  {
+   position 0.390 0.070
+   size 0.285 0.060
+   priority 50
+   ignorepointer 1
+   text "DEUTSCHZ // OPTIONEN"
+   font "gui/fonts/sdf_MetronBook42"
+   "exact text" 1
+   "exact text size" 30
+   "text halign" right
+   "text valign" center
+   color 0.24 1.00 0.18 1
+  }
+  TextWidgetClass DZPVPUI_OptionsSubtitle
+  {
+   position 0.735 0.135
+   size 0.190 0.030
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   priority 3
+   ignorepointer 1
+   text "SYSTEMKONFIGURATION // DEUTSCHZ"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 12
+   "text halign" right
+   "text valign" center
+   color 0.78 0.90 0.73 1
+  }
+ }
+}

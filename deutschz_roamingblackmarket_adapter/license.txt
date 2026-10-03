@@ -1,0 +1,31 @@
+DeutschZ Roaming Blackmarket Adapter
+Copyright (c) 2026 DeutschZ. All rights reserved.
+
+This software and its source code are proprietary to DeutschZ.
+
+PERMITTED
+- Installing and running an officially distributed build on an authorized
+  DayZ server.
+- Editing the JSON configuration and route files created in the server profile.
+- Creating original route files for use with an authorized installation.
+
+NOT PERMITTED WITHOUT PRIOR WRITTEN PERMISSION FROM DEUTSCHZ
+- Copying, publishing, redistributing, re-uploading, selling, sublicensing,
+  repacking, decompiling or reverse engineering this software or its source.
+- Modifying or creating derivative works from the packaged PBO or source code.
+- Removing or altering copyright, attribution or license notices.
+- Using this source code or substantial parts of it in another mod or product.
+
+THIRD-PARTY COMPONENTS
+This package interoperates with DayZ and DayZ Expansion.
+Those products are not included in this source package and remain subject to
+their respective authors' licenses and terms. No license to any third-party
+code, assets, trademarks or other materials is granted by this file.
+
+NO WARRANTY
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. TO THE MAXIMUM EXTENT PERMITTED BY LAW, DEUTSCHZ SHALL NOT BE LIABLE
+FOR ANY CLAIM, DAMAGE OR OTHER LIABILITY ARISING FROM ITS USE.
+
+DayZ and related marks belong to their respective owners. This project is not
+affiliated with or endorsed by Bohemia Interactive.

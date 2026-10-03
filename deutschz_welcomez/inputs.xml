@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modded_inputs>
+  <inputs>
+    <actions><input name="UADZWelcomeZBook" loc="DeutschZ-Buch / Player-Hub" /></actions>
+    <sorting name="deutschz_welcomez" loc="DEUTSCHZ"><input name="UADZWelcomeZBook" /></sorting>
+  </inputs>
+  <preset><input name="UADZWelcomeZBook"><btn name="kB" /></input></preset>
+</modded_inputs>

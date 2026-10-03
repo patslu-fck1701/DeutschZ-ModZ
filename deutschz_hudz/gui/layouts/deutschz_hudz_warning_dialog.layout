@@ -1,0 +1,134 @@
+FrameWidgetClass DZPVPUI_WarningRoot
+{
+    position 0 0
+    size 1 1
+    hexactpos 0
+    vexactpos 0
+    hexactsize 0
+    vexactsize 0
+    ignorepointer 0
+    priority 1000
+    {
+        PanelWidgetClass DZPVPUI_WarningDim
+        {
+            position 0 0
+            size 1 1
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0 0 0 0.18
+            ignorepointer 1
+        }
+        ImageWidgetClass DZPVPUI_WarningPanel
+        {
+            position 560 395
+            size 800 244
+            hexactpos 1
+            vexactpos 1
+            hexactsize 1
+            vexactsize 1
+            image0 "deutschz_hudz/gui/menu_green1/asset_pack/panels/panel_solid_black_co.paa"
+            mode blend
+            "src alpha" 1
+            "stretch mode" stretch_w_h
+            color 1 1 1 0.92
+            ignorepointer 1
+        }
+        PanelWidgetClass DZPVPUI_WarningTop { style blank ignorepointer 1 position 560 395 size 800 4 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 color 0.23 0.44 0.09 0.96 }
+        PanelWidgetClass DZPVPUI_WarningBottom { style blank ignorepointer 1 position 560 635 size 800 4 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 color 0.23 0.44 0.09 0.96 }
+        PanelWidgetClass DZPVPUI_WarningLeft { style blank ignorepointer 1 position 560 395 size 4 244 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 color 0.23 0.44 0.09 0.96 }
+        PanelWidgetClass DZPVPUI_WarningRight { style blank ignorepointer 1 position 1356 395 size 4 244 hexactpos 1 vexactpos 1 hexactsize 1 vexactsize 1 color 0.23 0.44 0.09 0.96 }
+        PanelWidgetClass DZPVPUI_WarningSeparator
+        {
+            style blank
+            ignorepointer 1
+            position 560 458
+            size 800 2
+            hexactpos 1
+            vexactpos 1
+            hexactsize 1
+            vexactsize 1
+            color 0.41 0.86 0.00 0.86
+        }
+        TextWidgetClass DZPVPUI_WarningTitle
+        {
+            position 590 407
+            size 740 42
+            hexactpos 1
+            vexactpos 1
+            hexactsize 1
+            vexactsize 1
+            text "DEUTSCHZ // WARNUNG"
+            font "gui/fonts/sdf_MetronBook30"
+            "exact text" 1
+            "exact text size" 25
+            "text halign" center
+            "text valign" center
+            color 0.41 0.86 0.00 1
+            ignorepointer 1
+        }
+        TextWidgetClass DZPVPUI_WarningText
+        {
+            position 610 474
+            size 700 78
+            hexactpos 1
+            vexactpos 1
+            hexactsize 1
+            vexactsize 1
+            text ""
+            font "gui/fonts/sdf_MetronBook24"
+            "exact text" 1
+            "exact text size" 20
+            "text halign" center
+            "text valign" center
+            color 0.94 0.96 0.92 1
+            ignorepointer 1
+        }
+        ButtonWidgetClass DZPVPUI_WarningOK
+        {
+            position 795 568
+            size 330 62
+            hexactpos 1
+            vexactpos 1
+            hexactsize 1
+            vexactsize 1
+            style Empty
+            "no focus" 0
+            priority 9995
+            {
+                ImageWidgetClass DZPVPUI_WarningOKImage
+                {
+                    position 0 0
+                    size 1 1
+                    hexactpos 1
+                    vexactpos 1
+                    hexactsize 0
+                    vexactsize 0
+                    image0 "deutschz_hudz/gui/menu_green1/component_set/buttons/wide/button_wide_normal.paa"
+                    mode blend
+                    "src alpha" 1
+                    "stretch mode" stretch_w_h
+                    ignorepointer 1
+                }
+                TextWidgetClass DZPVPUI_WarningOKLabel
+                {
+                    position 20 10
+                    size 290 42
+                    hexactpos 1
+                    vexactpos 1
+                    hexactsize 1
+                    vexactsize 1
+                    text "OK"
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    "exact text size" 19
+                    "text halign" center
+                    "text valign" center
+                    color 0.88 1 0.68 1
+                    ignorepointer 1
+                }
+            }
+        }
+    }
+}

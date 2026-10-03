@@ -1,0 +1,28 @@
+DeutschZ Roaming Blackmarket Adapter - Third-Party Notices
+
+Runtime dependencies
+--------------------
+
+1. DayZ
+   Owner: Bohemia Interactive a.s.
+   Use is governed by Bohemia Interactive's applicable game, server and modding
+   terms. DayZ code and assets are not redistributed in this source package.
+
+2. Dabs Framework
+   Owner: its respective author(s) and contributors.
+   Required as an external runtime dependency by the Expansion script stack.
+   Dabs Framework code and assets are not included or relicensed here.
+
+3. DayZ Expansion and DayZ Expansion Licensed
+   Owner: DayZ Expansion project and its contributors.
+   Used as an external runtime dependency for navigation/marker integration.
+   DayZ Expansion code and assets are not included or relicensed here.
+
+Original implementation
+-----------------------
+
+The driving controller, state machine, persistence schema and route format were
+developed independently for DeutschZ.
+
+This notice documents technical boundaries and is not a replacement for the
+license terms supplied by each third-party project.

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<modded_inputs>
+    <inputs>
+        <actions>
+            <input name="UADZMiniMapZToggle" loc="DeutschZ MiniMapZ: Strg+N" visible="true" />
+            <input name="UADZMiniMapZZoomIn" loc="DeutschZ MiniMapZ: Hineinzoomen" visible="false" />
+            <input name="UADZMiniMapZZoomOut" loc="DeutschZ MiniMapZ: Herauszoomen" visible="false" />
+        </actions>
+    </inputs>
+    <preset>
+        <input name="UADZMiniMapZToggle">
+            <btn name="kLControl">
+                <btn name="kN" />
+            </btn>
+        </input>
+        <input name="UADZMiniMapZZoomIn">
+            <btn name="mWheelUp" />
+        </input>
+        <input name="UADZMiniMapZZoomOut">
+            <btn name="mWheelDown" />
+        </input>
+    </preset>
+</modded_inputs>

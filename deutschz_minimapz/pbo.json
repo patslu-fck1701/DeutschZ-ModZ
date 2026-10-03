@@ -1,0 +1,20 @@
+{
+    "compress": {
+        "exclude": [
+        ],
+        "include": [
+            "\\.txt$",
+            "\\.xml$"
+        ]
+    },
+    "headers": [
+        {
+            "name": "product",
+            "value": "dayz ugc"
+        },
+        {
+            "name": "prefix",
+            "value": "deutschz_minimapz"
+        }
+    ]
+}

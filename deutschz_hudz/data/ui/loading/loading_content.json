@@ -1,0 +1,22 @@
+{
+    "SlideshowSeconds": 8.0,
+    "LogoPath": "deutschz_hudz/gui/menu_green1/darkglass_v1/08_logos/logo_deutschz_dark_original_512.paa",
+    "HintIconPath": "deutschz_hudz/gui/menu_green1/menu_assets/icons/icon_status_ca.paa",
+    "Screens": [],
+    "LoadingEntries": [],
+    "ServerMessages": [
+        "Dein Abenteuer wird geladen",
+        "Verbindung zu DeutschZ wird hergestellt",
+        "Deine Story wird nicht geschrieben. Du machst sie."
+    ],
+    "MenuNews": [
+        {
+            "Title": "COMMUNITY UPDATE",
+            "Body": "DeutschZ Own HudZ und das neue Interface werden aktuell im Live-Test geprueft."
+        },
+        {
+            "Title": "EVENTSYSTEME",
+            "Body": "KotHZ, ConvoyZ und weitere DeutschZ-Systeme werden serverseitig und in Live-Tests weiterentwickelt."
+        }
+    ]
+}

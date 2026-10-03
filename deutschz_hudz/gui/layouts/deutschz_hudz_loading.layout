@@ -1,0 +1,248 @@
+FrameWidgetClass DZPVPUI_LoadingRoot
+{
+    position 0 0
+    size 1 1
+    hexactpos 0
+    vexactpos 0
+    hexactsize 0
+    vexactsize 0
+    ignorepointer 1
+    {
+        ImageWidgetClass DZPVPUI_LoadingBackground
+        {
+            position 0 0
+            size 1 1
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            image0 "deutschz_hudz/gui/loading/loading_0.paa"
+            mode blend
+            "src alpha" 1
+            "stretch mode" stretch_w_h
+            ignorepointer 1
+        }
+        PanelWidgetClass DZPVPUI_LoadingBottomBacking
+        {
+            style blank
+            position 0 0.770
+            size 1 0.230
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0.005 0.007 0.008 0.96
+            visible 1
+            ignorepointer 1
+        }
+        ImageWidgetClass DZPVPUI_LoadingBottomCover
+        {
+            position 0 0.770
+            size 1 0.230
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 1 1 1 0.94
+            visible 1
+            image0 "deutschz_hudz/gui/menu_green1/asset_pack/panels/panel_solid_black_co.paa"
+            mode blend
+            "src alpha" 1
+            "stretch mode" stretch_w_h
+            ignorepointer 1
+        }
+        TextWidgetClass DZPVPUI_LoadingCommunityTicker
+        {
+            priority 9998
+            position 0.01 0.744
+            size 0.98 0.030
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            text "- DeutschZ - GunZ | HeliZ | TraderZ - discord.gg/FHzZ7BykFk - DEIN DAYZ SERVER #1 -     - DeutschZ - GunZ | HeliZ | TraderZ - discord.gg/FHzZ7BykFk - DEIN DAYZ SERVER #1 -"
+            font "gui/fonts/sdf_MetronBook18"
+            "exact text" 1
+            "exact text size" 20
+            color 0.18 1 0.12 1
+            "text halign" center
+            "text valign" center
+            ignorepointer 1
+        }
+        PanelWidgetClass DZPVPUI_LoadingPanel
+        {
+            style DayZDefaultPanel
+            position 0.145 0.755
+            size 0.710 0.225
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0 0 0 0
+            ignorepointer 1
+            {
+                ImageWidgetClass DZPVPUI_LoadingShield
+                {
+                    position 0.035 0.05
+                    size 0.17 0.42
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    image0 "deutschz_hudz/gui/icons/deutschz_shield.paa"
+                    mode blend
+                    "src alpha" 1
+                    "stretch mode" stretch_w_h
+                    visible 0
+                    ignorepointer 1
+                }
+                PanelWidgetClass DZPVPUI_HintDecorationCover
+                {
+                    position 0.05 0.18
+                    size 0.90 0.40
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    color 0 0 0 0
+                    visible 0
+                    ignorepointer 1
+                }
+                ImageWidgetClass DZPVPUI_LoadingWordmark
+                {
+                    position 0.31 0.18
+                    size 0.38 0.16
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    image0 "deutschz_hudz/gui/icons/loading_wordmark_deutschz.paa"
+                    mode blend
+                    "src alpha" 1
+                    "stretch mode" stretch_w_h
+                    ignorepointer 1
+                }
+                TextWidgetClass DZPVPUI_LoadingJokeTitle
+                {
+                    position 0.08 0.34
+                    size 0.84 0.17
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text "DEUTSCHZ JOKES"
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    "exact text size" 38
+                    color 0.18 1 0.12 1
+                    "text halign" center
+                    "text valign" center
+                    ignorepointer 1
+                }
+                TextWidgetClass DZPVPUI_LoadingJokeText
+                {
+                    position 0.04 0.51
+                    size 0.92 0.18
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text "Wenn der Loot leer ist, war der Nachbar nur schneller."
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    "exact text size" 28
+                    color 1 1 1 1
+                    "text halign" center
+                    "text valign" center
+                    wrap 1
+                    ignorepointer 1
+                }
+                TextWidgetClass DZPVPUI_LoadingStatus
+                {
+                    position 0.08 0.72
+                    size 0.84 0.12
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text "VERBINDUNG WIRD HERGESTELLT"
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    color 0.92 0.08 0.06 1
+                    "text halign" center
+                    "text valign" center
+                    ignorepointer 1
+                }
+                TextWidgetClass DZPVPUI_LoadingProgressText
+                {
+                    position 0.86 0.79
+                    size 0.10 0.10
+                    hexactpos 0
+                    vexactpos 0
+                    hexactsize 0
+                    vexactsize 0
+                    text "0%"
+                    font "gui/fonts/sdf_MetronBook24"
+                    "exact text" 1
+                    color 0.94 0.94 0.92 1
+                    "text halign" center
+                    "text valign" center
+                    ignorepointer 1
+                }
+            }
+        }
+        PanelWidgetClass DZPVPUI_LoadingAccent
+        {
+            position 0 0.985
+            size 1 0.004
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0.18 1 0.12 1
+            ignorepointer 1
+        }
+        ProgressBarWidgetClass DZPVPUI_LoadingBar
+        {
+            position 0 0.989
+            size 1 0.020
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            color 0.18 1 0.12 1
+            current 0
+            ignorepointer 1
+        }
+        ImageWidgetClass DZPVPUI_LoadingEmblemLeft
+        {
+            priority 1
+            position 0.025 0.785
+            size 0.105 0.180
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            image0 "deutschz_hudz/gui/icons/loading_emblem_deutschz_shield.paa"
+            mode blend
+            "src alpha" 1
+            "stretch mode" stretch_w_h
+            ignorepointer 1
+        }
+        ImageWidgetClass DZPVPUI_LoadingEmblemRight
+        {
+            priority 1
+            position 0.870 0.785
+            size 0.105 0.180
+            hexactpos 0
+            vexactpos 0
+            hexactsize 0
+            vexactsize 0
+            image0 "deutschz_hudz/gui/icons/loading_emblem_deutschz_eagle.paa"
+            mode blend
+            "src alpha" 1
+            "stretch mode" stretch_w_h
+            ignorepointer 1
+        }
+    }
+}

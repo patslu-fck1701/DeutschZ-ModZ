@@ -1,0 +1,258 @@
+{
+    "Version": 3,
+    "DebugMode": 0,
+    "General": {
+        "Enabled": 1,
+        "EnableGlobalNotifications": 1,
+        "EnablePersonalNotifications": 1,
+        "EnableExpansionMarkers": 1,
+        "PreventParallelRaidOnSameATM": 1,
+        "PersistCooldowns": 1,
+        "AllowAdminWhenListEmpty": 0,
+        "AdminUIDs": []
+    },
+    "Raid": {
+        "Phase1HackSeconds": 180,
+        "Phase2GuardSeconds": 720,
+        "RequiredRadiusMeters": 20.0,
+        "ATMCooldownSeconds": 7200,
+        "PlayerCooldownSeconds": 7200,
+        "RequiredTool": "DZATM_RobTool",
+        "AcceptAnyCrowbar": 1,
+        "RequireToolInHands": 1,
+        "DestroyToolOnSuccess": 1,
+        "DamageToolOnFail": 1,
+        "ToolDamageOnFail": 5.0,
+        "EnableSiren": 1,
+        "EnableMapMarker": 1,
+        "EnableRedSmoke": 1,
+        "EnableGreenSmokeOnSuccess": 1,
+        "RedSmokeClass": "M18SmokeGrenade_Red",
+        "GreenSmokeClass": "M18SmokeGrenade_Green",
+        "EffectHeightMeters": 1.5,
+        "EnableBlinkLight": 1,
+        "BlinkIntervalSeconds": 0.75,
+        "BlinkRadiusMeters": 20.0,
+        "BlinkBrightness": 8.0,
+        "RewardProvider": "PhysicalCurrency",
+        "PayoutCurrencyClass": "ExpansionBanknoteEuro",
+        "PayoutUnitValue": 100,
+        "PayoutMinAmount": 50000,
+        "PayoutMaxAmount": 200000
+    },
+    "Spawns": {
+        "Enabled": 1,
+        "ATMClass": "ExpansionATM_2",
+        "ReuseRadiusMeters": 2.0,
+        "ATMs": [
+            {
+                "Enabled": 1,
+                "Position": [
+                    2671.698486,
+                    205.659073,
+                    5290.393066
+                ],
+                "Orientation": [
+                    12.30373,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    3048.137695,
+                    304.109772,
+                    7980.731445
+                ],
+                "Orientation": [
+                    -55.780781,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    3085.295898,
+                    209.175995,
+                    12672.470703
+                ],
+                "Orientation": [
+                    80.266129,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    3841.386475,
+                    311.367584,
+                    8873.330078
+                ],
+                "Orientation": [
+                    116.048309,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    5664.817871,
+                    64.439514,
+                    2435.434082
+                ],
+                "Orientation": [
+                    -178.914734,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    6048.077148,
+                    301.057587,
+                    7841.287109
+                ],
+                "Orientation": [
+                    -129.817108,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    6073.935547,
+                    52.976711,
+                    3437.264893
+                ],
+                "Orientation": [
+                    -0.637233,
+                    -0.217462,
+                    0.996062
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    6384.567871,
+                    15.683525,
+                    2860.328369
+                ],
+                "Orientation": [
+                    92.993843,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    6522.647949,
+                    61.760174,
+                    3624.875244
+                ],
+                "Orientation": [
+                    92.797661,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    9541.625977,
+                    84.323975,
+                    13661.754883
+                ],
+                "Orientation": [
+                    -114.418518,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    10429.598633,
+                    6.247161,
+                    2373.250488
+                ],
+                "Orientation": [
+                    55.489651,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    10681.12207,
+                    211.194153,
+                    8012.73584
+                ],
+                "Orientation": [
+                    -144.92308,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    11132.894531,
+                    199.239899,
+                    12294.167969
+                ],
+                "Orientation": [
+                    31.540527,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    11847.361328,
+                    33.506332,
+                    14354.948242
+                ],
+                "Orientation": [
+                    86.680527,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    12023.482422,
+                    54.188873,
+                    9153.021484
+                ],
+                "Orientation": [
+                    -134.065735,
+                    0.0,
+                    -0.0
+                ]
+            },
+            {
+                "Enabled": 1,
+                "Position": [
+                    12114.365234,
+                    12.331938,
+                    9770.633789
+                ],
+                "Orientation": [
+                    12.870724,
+                    0.0,
+                    -0.0
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,511 @@
+FrameWidgetClass DZWelcomeRoot
+{
+ name "DZWelcomeRoot"
+ position 0.18 0.10
+ size 0.64 0.80
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ priority 100
+ {
+  ImageWidgetClass Background
+  {
+   name "Background"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.006 0.008
+   size 0.988 0.984
+   color 0.018 0.026 0.020 0.97
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 1
+   ignorepointer 1
+  }
+  ImageWidgetClass GoldLogo
+  {
+   name "GoldLogo"
+   position 0.035 0.018
+   size 0.09 0.13
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "deutschz_welcomez/gui/images/deutschz_gold_logo_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 1 1 1 0.98
+   priority 60
+   ignorepointer 1
+  }
+  ImageWidgetClass Wordmark
+  {
+   name "Wordmark"
+   position 0.31 -0.03
+   size 0.38 0.28
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "deutschz_welcomez/gui/images/deutschz_wordmark_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 1 1 1 1
+   priority 60
+   ignorepointer 1
+  }
+  ImageWidgetClass EagleEmblem
+  {
+   name "EagleEmblem"
+   position 0.875 0.018
+   size 0.09 0.13
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "deutschz_welcomez/gui/images/deutschz_eagle_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 1 1 1 0.95
+   priority 60
+   ignorepointer 1
+  }
+  ImageWidgetClass EagleWatermark
+  {
+   name "EagleWatermark"
+   position 0.36 0.37
+   size 0.28 0.47
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "deutschz_welcomez/gui/images/deutschz_eagle_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 0.48 0.35 0.10 0.12
+   priority 2
+   ignorepointer 1
+  }
+  ImageWidgetClass FightFooter
+  {
+   name "FightFooter"
+   position 0.34 0.64
+   size 0.32 0.50
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   image0 "deutschz_welcomez/gui/images/deutschz_fight_ca.paa"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+   color 1 1 1 0.9
+   priority 60
+   ignorepointer 1
+  }
+  ImageWidgetClass BorderTop
+  {
+   name "BorderTop"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 1 0.008
+   color 0.12 1 0.05 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 90
+   ignorepointer 1
+  }
+  ImageWidgetClass BorderBottom
+  {
+   name "BorderBottom"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0.992
+   size 1 0.008
+   color 0.12 1 0.05 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 90
+   ignorepointer 1
+  }
+  ImageWidgetClass BorderLeft
+  {
+   name "BorderLeft"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0 0
+   size 0.006 1
+   color 0.12 1 0.05 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 90
+   ignorepointer 1
+  }
+  ImageWidgetClass BorderRight
+  {
+   name "BorderRight"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.994 0
+   size 0.006 1
+   color 0.12 1 0.05 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 90
+   ignorepointer 1
+  }
+  TextWidgetClass Brand
+  {
+   name "Brand"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.32 0.104
+   size 0.36 0.032
+   text "DEIN DAYZ SERVER NR. 1"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 16
+   color 1 0.12 0.12 1
+   "text halign" center
+   "text valign" center
+   priority 50
+   ignorepointer 1
+  }
+  TextWidgetClass Heading
+  {
+   name "Heading"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.68 0.078
+   size 0.20 0.055
+   text "DEUTSCHZ PLAYER-HUB"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 17
+   color 1 1 1 1
+   "text halign" center
+   "text valign" center
+   priority 50
+   ignorepointer 1
+  }
+  ImageWidgetClass Line1
+  {
+   name "Line1"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.04 0.145
+   size 0.92 0.003
+   color 0.12 1 0.05 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 20
+   ignorepointer 1
+  }
+  TextWidgetClass StatusLabel
+  {
+   name "StatusLabel"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.055 0.16
+   size 0.43 0.038
+   text "AKTUELLER STATUS"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 18
+   color 0.12 1 0.05 1
+   priority 50
+   ignorepointer 1
+  }
+  MultilineTextWidgetClass StatusText
+  {
+   name "StatusText"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.055 0.202
+   size 0.43 0.09
+   text "Status wird geladen"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 18
+   color 1 1 1 1
+   wrap 1
+   priority 50
+   ignorepointer 1
+  }
+  TextWidgetClass NextLabel
+  {
+   name "NextLabel"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.515 0.16
+   size 0.43 0.038
+   text "DEIN NÄCHSTER SCHRITT"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 18
+   color 0.12 1 0.05 1
+   priority 50
+   ignorepointer 1
+  }
+  MultilineTextWidgetClass NextText
+  {
+   name "NextText"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.515 0.202
+   size 0.43 0.12
+   text "Nächstes Ziel wird geladen"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 16
+   color 1 1 1 1
+   wrap 1
+   priority 50
+   ignorepointer 1
+  }
+  ImageWidgetClass Line2
+  {
+   name "Line2"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.04 0.33
+   size 0.92 0.003
+   color 0.22 0.28 0.23 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 20
+   ignorepointer 1
+  }
+  TextWidgetClass EventStatusText
+  {
+   name "EventStatusText"
+   position 0.055 0.34
+   size 0.89 0.04
+   text "LIVE EVENTS: EVENTSTATUS NICHT VERFÜGBAR"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 17
+   color 0.30 1 0.14 1
+   priority 50
+   ignorepointer 1
+  }
+  TextWidgetClass EventNextText
+  {
+   name "EventNextText"
+   position 0.055 0.38
+   size 0.89 0.04
+   text "KEIN MAJOR EVENT GEPLANT"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 16
+   color 0.94 0.97 0.94 1
+   priority 50
+   ignorepointer 1
+  }
+  MultilineTextWidgetClass StoryStatusText
+  {
+   name "StoryStatusText"
+   position 0.515 0.34
+   size 0.43 0.09
+   text "STORYEVENT: KEINES AKTIV"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 15
+   color 1 0.72 0.20 1
+   wrap 1
+   priority 51
+   ignorepointer 1
+  }
+  TextWidgetClass ProgressLabel
+  {
+   name "ProgressLabel"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.055 0.35
+   size 0.32 0.038
+   text "FORTSCHRITT"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 18
+   color 0.12 1 0.05 1
+   priority 50
+   ignorepointer 1
+  }
+  MultilineTextWidgetClass ProgressText
+  {
+   name "ProgressText"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.055 0.395
+   size 0.32 0.39
+   text "→ King of the HillZ"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 17
+   color 0.92 0.96 0.92 1
+   wrap 1
+   priority 50
+   ignorepointer 1
+  }
+  ImageWidgetClass Divider
+  {
+   name "Divider"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.39 0.35
+   size 0.002 0.44
+   color 0.22 0.28 0.23 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 20
+   ignorepointer 1
+  }
+  MultilineTextWidgetClass DetailText
+  {
+   name "DetailText"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.415 0.35
+   size 0.53 0.44
+   text "RADIO MISSIONZ: 89,5 MHz\nDEUTSCHZ-BUCH: [ B ]"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 16
+   color 0.94 0.97 0.94 1
+   wrap 1
+   priority 50
+   ignorepointer 1
+  }
+  ImageWidgetClass KeyPanel
+  {
+   name "KeyPanel"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.055 0.81
+   size 0.30 0.085
+   color 0.05 0.14 0.07 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 3
+   ignorepointer 1
+  }
+  TextWidgetClass KeyText
+  {
+   name "KeyText"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.055 0.81
+   size 0.30 0.085
+   text "[ B ]  DEUTSCHZ-BUCH"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 20
+   color 0.30 1 0.14 1
+   "text halign" center
+   "text valign" center
+   priority 50
+   ignorepointer 1
+  }
+  ImageWidgetClass RadioPanel
+  {
+   name "RadioPanel"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.37 0.81
+   size 0.30 0.085
+   color 0.05 0.14 0.07 1
+   image0 "#(argb,8,8,3)color(1,1,1,1.0,co)"
+   priority 3
+   ignorepointer 1
+  }
+  TextWidgetClass RadioText
+  {
+   name "RadioText"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.37 0.81
+   size 0.30 0.085
+   text "89,5 MHz  RADIO"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 20
+   color 0.30 1 0.14 1
+   "text halign" center
+   "text valign" center
+   priority 50
+   ignorepointer 1
+  }
+  ButtonWidgetClass CloseButton
+  {
+   name "CloseButton"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.70 0.81
+   size 0.25 0.085
+   text ""
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   color 0.12 0.95 0.05 1
+   priority 95
+  }
+  TextWidgetClass CloseButtonText
+  {
+   name "CloseButtonText"
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   position 0.70 0.81
+   size 0.25 0.085
+   text "MUSIK WEITER"
+   font "gui/fonts/sdf_MetronBook24"
+   "exact text" 1
+   "exact text size" 17
+   color 1 1 1 1
+   "text halign" center
+   "text valign" center
+   priority 96
+   ignorepointer 1
+  }
+ }
+}

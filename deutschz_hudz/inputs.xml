@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modded_inputs>
+  <inputs>
+    <actions>
+      <input name="UADZPVPUILeaderboard" loc="DeutschZ HUDZ: Leaderboard" />
+      <input name="UADZPVPUIToggleHud" loc="DeutschZ HUDZ: HUD ein/aus" />
+      <input name="UADZPVPUIToggleCrosshair" loc="DeutschZ HUDZ: Fadenkreuz ein/aus" />
+      <input name="UADZPVPUICrosshairSize" loc="DZ-HUD: Fadenkreuzform (Dot/Cross/Holo)" />
+      <input name="UADZPVPUICrosshairColor" loc="DZ-HUD: Fadenkreuzfarbe / halten fuer Groesse" />
+      <input name="UADZPVPUIMusicPlay" loc="DeutschZ HUDZ: Musik Play/Pause" />
+      <input name="UADZPVPUIMusicNext" loc="DeutschZ HUDZ: Naechster Titel" />
+      <input name="UADZPVPUIMusicVolume" loc="DeutschZ HUDZ: Lautstaerke" />
+    </actions>
+    <sorting name="deutschz_hudz" loc="DZ-HUD">
+      <input name="UADZPVPUILeaderboard"/><input name="UADZPVPUIToggleHud"/>
+      <input name="UADZPVPUIToggleCrosshair"/><input name="UADZPVPUICrosshairSize"/>
+      <input name="UADZPVPUICrosshairColor"/><input name="UADZPVPUIMusicPlay"/>
+      <input name="UADZPVPUIMusicNext"/><input name="UADZPVPUIMusicVolume"/>
+    </sorting>
+  </inputs>
+  <preset>
+    <input name="UADZPVPUILeaderboard"><btn name="kF5"/></input>
+    <input name="UADZPVPUIToggleHud"><btn name="kF6"/></input>
+    <input name="UADZPVPUIToggleCrosshair"><btn name="kF7"/></input>
+    <input name="UADZPVPUICrosshairSize"><btn name="kF8"/></input>
+    <input name="UADZPVPUICrosshairColor"><btn name="kF9"/></input>
+    <input name="UADZPVPUIMusicPlay"><btn name="kF10"/></input>
+    <input name="UADZPVPUIMusicNext"><btn name="kF11"/></input>
+    <input name="UADZPVPUIMusicVolume"><btn name="kF12"/></input>
+  </preset>
+</modded_inputs>

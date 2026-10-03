@@ -1,0 +1,10 @@
+name = "DeutschZ King of the HillZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ King of the HillZ";
+overview = "Das vollstaendige DeutschZ King-of-the-Hill PvPvE-Event mit Infizierten-KI, Wellen, Boss, Musik, Markern und Belohnungen.";
+action = "";
+author = "DeutschZ / fck1701";
+version = "2.0.0";

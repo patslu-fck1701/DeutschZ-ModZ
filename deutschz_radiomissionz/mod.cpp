@@ -1,0 +1,10 @@
+name = "DeutschZ RadioMissionZ";
+picture = "";
+logoSmall = "";
+logo = "";
+logoOver = "";
+tooltip = "DeutschZ RadioMissionZ";
+overview = "Dynamische, serverautoritativ gesteuerte Funkmissionen auf 89.5 MHz fuer DeutschZ.";
+action = "https://discord.gg/FHzZ7BykFk";
+author = "DeutschZ";
+version = "2.0.0-story";

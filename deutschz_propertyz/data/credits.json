@@ -1,0 +1,14 @@
+{
+  "Project": "DeutschZ PropertyZ",
+  "Status": "Source refactor / backend adapter pending",
+  "DeutschZ": {
+    "Adaptation": "DeutschZ"
+  },
+  "UpstreamSource": {
+    "Developers": [
+      "TheBuster",
+      "Sense"
+    ],
+    "Note": "Attribution retained because this source package is derived from the supplied TBRealEstate client source."
+  }
+}
