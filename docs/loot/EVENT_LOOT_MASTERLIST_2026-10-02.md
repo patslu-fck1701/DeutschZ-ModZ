@@ -13,7 +13,7 @@ Geprüfte Primärdateien:
 - `AIConvoy/Vehicles/M1025.json`
 
 ## Bewertungsregel
-`nominal=0` ist **kein automatischer Eventloot-Schalter**. Entscheidend sind CE-Spawn, Seltenheit, vorhandene Eventverwendung, Waffenrolle und bestehende Balance. KOTH ist die Balance-Referenz. Gute Eventkisten kombinieren SPECIAL + HYBRID + sinnvollen MAP/CE-Füllloot.
+`nominal=0` ist in der verbindlichen DeutschZ-Konfiguration **Event-/Special-Loot**: diese Klassen sollen nicht regulär über die Map-/Central-Economy spawnen, sondern ausschließlich über Events/Spezialausgaben in Umlauf kommen. Für die konkrete Zuordnung zu RAVEN, KOTH, AIConvoyZ usw. werden zusätzlich Seltenheit, Waffenrolle, vorhandene Eventverwendung und Balance herangezogen. KOTH ist die Balance-Referenz. Gute Eventkisten kombinieren EVENT/SPECIAL mit passenden HYBRID- und MAP/CE-Ergänzungen.
 
 ## EVENT / SPECIAL
 | Klasse | CE / Beleg | Verwendung / Rolle |
@@ -59,7 +59,7 @@ Pistolen: `TTC_P320` 42, `TTC_Glock17` 66, `TTC_M9_Custom` 33, `TTC_M9` 99, `TTC
 Jagd/Historisch: `TTC_MAS36` 63, `TTC_kar98k` 63, `TTC_LeeEnfield` 22, `TTC_M1Garand` 42, `TTC_AVS36` 22, `TTC_M1903` 22, `TTC_SVT40` 42, `TTC_STG44` 42, `TTC_Winchester1873` 124, `TTC_Mossberg` 42.
 
 ## FOG – Event Gear
-FOG umfasst im geprüften Stand über 1.400 CE-Einträge, mehrere hundert nominal 0. Auch hier gilt: nominal 0 ≠ automatisch Eventloot.
+FOG umfasst im geprüften Stand über 1.400 CE-Einträge, mehrere hundert nominal 0. Auch hier gilt für DeutschZ: **nominal 0 = Event-/Special-Loot, kein regulärer Mapspawn**. Welcher konkrete Eventpool die jeweilige FOG-Klasse erhält, wird nach Rolle, Stil und Balance entschieden.
 
 Bereits durch KOTH gestützte Hauptgruppen:
 - Helm: `FOG_Helmet_Airframe_OD` + passende Airframe-/Helmvarianten.
