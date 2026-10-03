@@ -118,6 +118,9 @@ Die vorhandene Live-Logauswertung vom 30.09.2026 belegt, dass RAVEN/AirdropZ gru
 - Story-Dokument liegt im erfolgreichen Drop; Texturstatus ist technisch korrekt dokumentiert.
 
 
+## Verknüpfte Loot-Basis
+Verbindliche IST-Masterliste: [`docs/loot/EVENT_LOOT_MASTERLIST_2026-10-02.md`](../loot/EVENT_LOOT_MASTERLIST_2026-10-02.md), basierend auf `Server_Stand_02.10.2026_20_00_Uhr.zip`. Sie liefert reale TTC-/FOG-/CE-/KOTH-/AIConvoy-Kandidaten; diese RAVEN-Spezifikation definiert darauf aufbauend das Soll.
+
 ## Ergänzung: Hack-, Loot- & Ausrüstungssystem
 
 ### Hack-Ergebnis
