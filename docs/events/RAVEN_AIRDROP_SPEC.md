@@ -116,3 +116,126 @@ Die vorhandene Live-Logauswertung vom 30.09.2026 belegt, dass RAVEN/AirdropZ gru
 - Hackbeginn startet Bergungstrupp und exakten öffentlichen 3D-Marker.
 - Bergungstrupp-Fraktion ist aus vorhandenem Kanon/Source belegt, nicht geraten.
 - Story-Dokument liegt im erfolgreichen Drop; Texturstatus ist technisch korrekt dokumentiert.
+
+
+## Ergänzung: Hack-, Loot- & Ausrüstungssystem
+
+### Hack-Ergebnis
+Der vollständige erste Hackversuch wird immer bis zum Ende ausgeführt. Erst **nach Abschluss** wird das Ergebnis bestimmt:
+
+- **75 %:** Hack erfolgreich; Airdrop wird freigegeben.
+- **25 %:** Hack fehlgeschlagen; Airdrop bleibt verschlossen und der Spieler muss den **vollständigen Hackvorgang erneut** durchführen.
+
+Bergungstrupp und exakter öffentlicher 3D-Marker werden bereits beim **Start des ersten Hacks** ausgelöst und bei einem Fehlschlag nicht zurückgenommen. Dadurch kostet der Fehlschlag reale Zeit unter erhöhtem AI-/Zombie-/PvP-Risiko.
+
+Für weitere Versuche ist vor der Implementierung die bestehende Hack-Source zu prüfen; insbesondere darf nicht geraten werden, ob nur der erste Versuch probabilistisch ist oder jeder Folgeversuch erneut würfelt. Verbindlich festgelegt ist zunächst die 75/25-Entscheidung des ersten vollständig ausgeführten Versuchs und der vollständige Wiederholungshack nach Fehlschlag.
+
+### Loot-Grundregel
+RAVEN erhält **keinen frei erfundenen neuen High-End-Lootpool**. Balance-Referenz ist der bestehende **King-of-the-Hill-Loot**.
+
+Konkrete Classnames werden ausschließlich aus realen DeutschZ-Server-/Source-Dateien, `types.xml`, vorhandenen Eventkonfigurationen und installierten Mods übernommen.
+
+Waffen:
+- primär vorhandene Mortys-Weapons-Classnames mit Präfix `TTC_`
+- keine unnötige Rückkehr zu Vanilla-Waffen, wenn eine vorgesehene TTC-Variante existiert
+- stärkere Sniper/Long-Range-Waffen gesondert gegen KOTH-Balance prüfen
+
+Hochwertige taktische Ausrüstung:
+- primär Forward Operator Gear / FOG
+- Kleidung, Westen/Plattenträger, Helme, Ghillies/Tarnung, Taschen und taktische Ausrüstung
+- FOG-Classnames niemals raten
+
+### `types.xml` als Datenquelle
+`nominal = 0` ist ein **Prüfhinweis**, kein automatisches Eventloot-Kriterium.
+
+Für jedes Kandidatenitem sind mindestens zu erfassen:
+- Classname
+- Mod-Zugehörigkeit
+- Kategorie
+- nominal
+- min
+- relevante flags
+- bestehende Eventkonfiguration
+- KOTH-Zugehörigkeit
+- bestehende Spezialloot-Pools
+- tatsächlicher Spawn-/Eventstatus
+
+Ziel ist eine zentrale Masterliste:
+
+**Classname → Mod → Kategorie → Nominal → Event → Spawnstatus**
+
+### RAVEN RECON
+Schwerpunkt: Aufklärung, Tarnung, Long Range.
+
+Kandidatenkategorien:
+- TTC Sniper/Long-Range
+- passende Magazine und Munition
+- hochwertige Optik
+- passende Attachments/Schalldämpfer
+- FOG Ghillie/Tarnkleidung/taktische Ausrüstung
+- optional NVG
+- kleine medizinische Versorgung
+
+Konkrete Waffen erst nach Source-/`types.xml`-Audit auswählen.
+
+### RAVEN ASSAULT
+Schwerpunkt: direkter militärischer Kampf.
+
+Kandidatenkategorien:
+- TTC Assault Rifle
+- mehrere passende Magazine
+- Munition
+- Optik, Griffe, Mündungs-/Waffen-Attachments
+- FOG Weste/Plattenträger
+- FOG Helm
+- taktische Kleidung
+- optional NVG
+- medizinische Grundversorgung
+
+### RAVEN NBC / SURVIVAL / MEDICAL
+Schwerpunkt: Toxic-/NBC-Schutz, Survival und Medizin; **keine außergewöhnliche High-End-Hauptwaffe**.
+
+Kandidaten:
+- vorhandene DeutschZ-/ToxicZ-ABC-Komplettausrüstung
+- Maske
+- Schutzanzug
+- Handschuhe
+- Stiefel
+- Kopfschutz
+- ungefähr 3 Filter
+- Verbände, Blut-/Infusionsmaterial, Medikamente und Survival-Ausrüstung
+- normale TTC-Sekundärwaffe, z. B. vorhandene Pistolen-/Shotgun-Kategorie
+- passende Magazine/Munition
+
+Beim Source-Audit zugleich den bekannten Darstellungsfehler des speziellen NBC-/ABC-Anzugs prüfen: aktuell offenbar weiß. Realen Classname, Textur-/Materialreferenzen und Ursache belegen, nicht raten.
+
+### Variabilität
+Recon, Assault und NBC sind **thematische Schwerpunkte, keine starren Kisten**. Passende Cross-Pool-Items sind erlaubt, solange Charakter und KOTH-basierte Gesamtbalance erhalten bleiben.
+
+### Balance
+KOTH bleibt die Referenz. RAVEN soll nicht pauschal mehr oder stärkeren Loot ausschütten. Sein Mehrwert entsteht aus:
+- thematischen Dropklassen
+- RAVEN-spezifischer Zusammenstellung
+- Hackzeit
+- 25-%-Fehlschlagrisiko beim ersten vollständigen Hack
+- stärkeren Zombies
+- Bergungstrupp
+- öffentlichem exaktem 3D-Marker ab Hackbeginn
+- daraus entstehendem PvP-Risiko
+
+### Eventloot-Masteraudit
+Mortys / `TTC_*` aufteilen in:
+Pistolen, SMGs, Assault Rifles, Battle Rifles, DMRs, Sniper, Shotguns, LMGs, Spezialwaffen.
+
+FOG aufteilen in:
+Kleidung, Westen/Plattenträger, Helme, Ghillies, Tarnung, Taschen, taktische Ausrüstung.
+
+Zusätzlich:
+NVGs, Optiken, Magazine, Munition, Attachments, Medizin, ABC/NBC, Filter.
+
+Audit-Reihenfolge:
+1. Welche Items haben `nominal = 0`?
+2. Welche davon sind tatsächlich Event-/Spezialloot?
+3. Welche sind bereits in KOTH?
+4. Welche hochwertigen TTC-/FOG-Items fehlen dort?
+5. Erst daraus RAVEN Recon/Assault/NBC-Pools erzeugen.
