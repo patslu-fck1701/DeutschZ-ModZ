@@ -44,7 +44,7 @@ class CfgVehicles
     class Paper;
     class PersonalRadio;
     class SeaChest;
-    class ElectronicRepairKit;
+    class GPSReceiver;
     class NBCJacketGray;
     class NBCPantsGray;
     class NBCHoodGray;
@@ -57,7 +57,7 @@ class CfgVehicles
     class DZToxicZ_MorozovFile: DZToxicZ_DamagedDocument { displayName="Akte Dr. Viktor Morozov"; descriptionShort="Projektleitung T-17. Status: VERSTORBEN. Todesdatum: 14 Tage vor Transportbeginn."; };
     class DZToxicZ_AudioRecorder: PersonalRadio { scope=2; displayName="Beschaedigter Audiorekorder"; descriptionShort="Transport Sieben hat Riffy erreicht. Glauben Sie nicht den offiziellen Berichten."; };
     class DZToxicZ_Blackbox: SeaChest { scope=2; displayName="T-17 Blackbox"; descriptionShort="Verschluesselte Daten von Transport Sieben."; itemsCargoSize[]={10,50}; };
-    class DZToxicZ_DocumentDecoder: ElectronicRepairKit { scope=2; displayName="DeutschZ Document Decoder"; descriptionShort="Decoder fuer verschluesselte DeutschZ-Einsatzdokumente."; };
+    class DZToxicZ_DocumentDecoder: GPSReceiver { scope=2; displayName="DeutschZ Document Decoder"; descriptionShort="Decoder fuer verschluesselte DeutschZ-Einsatzdokumente."; hiddenSelectionsTextures[]={"\\deutschz_aiconvoyz\\data\\document_dekoder_gpsreceiver_co.paa"}; };
     class DZToxicZ_RewardCrate: SeaChest { scope=2; displayName="ToxicZ Belohnung"; descriptionShort="Serverautoritativ freigegebene T-17-Belohnung."; itemsCargoSize[]={10,50}; };
     class DZToxicZ_NBCJacket: NBCJacketGray
     {
