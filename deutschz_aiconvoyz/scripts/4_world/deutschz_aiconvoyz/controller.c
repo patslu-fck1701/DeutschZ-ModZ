@@ -563,17 +563,34 @@ modded class AIConvoyManager
         super.NotifyConvoyStarted(params);
         if (g_deutschz_aiconvoyz_controller)
             g_deutschz_aiconvoyz_controller.OnStarted(params);
+
+        // NotifyConvoyStopped is not part of every AIConvoy release. Poll the
+        // public event state instead so this bridge also works with releases
+        // that predate that manager callback.
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(DeutschZPollConvoyStopped);
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(DeutschZPollConvoyStopped, 1000, true);
     }
 
-    override void NotifyConvoyStopped(vector stopPos)
+    protected void DeutschZPollConvoyStopped()
     {
-        super.NotifyConvoyStopped(stopPos);
+        if (!m_ActiveEvent)
+        {
+            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(DeutschZPollConvoyStopped);
+            return;
+        }
+
+        if (m_ActiveEvent.GetState() != AIConvoyEvent.STATE_STOPPED)
+            return;
+
+        vector stopPos = m_ActiveEvent.GetConvoyCenter();
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(DeutschZPollConvoyStopped);
         if (g_deutschz_aiconvoyz_controller)
             g_deutschz_aiconvoyz_controller.OnStopped(stopPos);
     }
 
     override void OnEventEnded(AIConvoyEvent ev)
     {
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).Remove(DeutschZPollConvoyStopped);
         if (g_deutschz_aiconvoyz_controller)
             g_deutschz_aiconvoyz_controller.OnEnded();
         super.OnEventEnded(ev);
