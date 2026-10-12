@@ -1,0 +1,17 @@
+name: Issue15 offline regression tests
+on:
+  push:
+    paths: ['mods/**', 'tests/**', 'tools/**', 'audit/**', 'deployment/**', '.github/workflows/issue15.yml']
+  pull_request:
+    paths: ['mods/**', 'tests/**', 'tools/**', 'audit/**', 'deployment/**', '.github/workflows/issue15.yml']
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -v
+      - name: Explain validation boundary
+        run: echo 'Offline regression PASS does not prove Enforce compilation or AI gameplay. Operator starts TEST manually.'

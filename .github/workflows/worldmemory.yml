@@ -1,0 +1,16 @@
+name: World Memoriez offline checks
+on:
+  push:
+    paths: ['mods/**', 'tests/**', 'tools/**', 'deployment/**', '.github/workflows/worldmemory.yml']
+  pull_request:
+  workflow_dispatch:
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -v
+      # DayZ's engine compiler is deliberately not claimed by these offline tests.
