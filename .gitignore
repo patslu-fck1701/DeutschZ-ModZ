@@ -56,3 +56,7 @@ Thumbs.db
 !snapshots/
 !snapshots/source/
 !snapshots/source/*.zip
+
+# Checked-in deployment defaults, never runtime state
+!deployment/profiles/
+!deployment/profiles/**
